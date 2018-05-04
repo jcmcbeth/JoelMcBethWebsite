@@ -1,51 +1,16 @@
 body {
-    font-family: consolas;
-    color: Black;
-    margin: 0;
-    background: WhiteSmoke;
     font-size: 11pt;
+    font-family: Consolas;
+    background: WhiteSmoke;
 }
 
-#banner {
-    background: Green;
-    border-bottom: 2px solid black;
+a:active, a:hover {
+    color: green;
 }
 
-#banner > .container {   
-}
-
-.banner-brand {
-    color: White;
-    font-size: 2.5rem;
-    font-weight: Bold;
-    text-transform: uppercase;
-    font-style: italic;
-}
-
-    #banner .banner-brand:focus, #banner .banner-brand:hover {
-        color: white;
-    }
-
-.banner-brand:focus, .banner-brand:hover {
-    text-decoration: none;
-}
-
-#menu {
-    width: 0em;
-    position: relative;
-    left: -6em;
-    float: left;
-    padding-top: 3px;
-    /*width: 9em;
-    margin: 0;
-    padding: 5px 5px 5px 10px;*/
-}
-
-#main-content {
-    background: White;
-    border-left: 1px dashed black;
-    border-bottom: 1px dashed black;
-    border-right: 1px dashed black;
+a {
+    color: Green;
+    text-decoration: None;
 }
 
 h1 {
@@ -73,15 +38,6 @@ h3 {
     font-size: 1em;
 }
 
-a:active, a:hover {
-    color: green;
-}
-
-a {
-    color: Green;
-    text-decoration: None;
-}
-
 pre {
     font-family: courier new, monospace;
 }
@@ -90,12 +46,71 @@ p {
     margin: 0 0 1em 0;
 }
 
-.navigation {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+/*
+    Top Menu
+*/
+#top-nav {
+    background: Green;    
 }
 
-strong {
+#top-nav .navbar-brand {
+    font-size: 2.5rem;
     font-weight: bold;
+    text-transform: uppercase;
+    font-style: italic;
+    padding: 0px;
+}
+
+.navbar-dark .navbar-toggler {
+    color: rgba(255, 255, 255, .75);
+    border-color: rgba(255, 255, 255, 0.75);
+}
+
+.navbar-dark .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.75)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/*
+ * Sidebar
+ */
+.navbar-side {
+    width: 100%;
+    padding: 0;
+    display: block;
+    min-height: 0;
+}
+
+.navbar-side .navbar-collapse {
+    border-top: 2px solid black;
+    padding: 4px 15px;
+    
+}
+
+.navbar-side .navbar-nav {
+    display: block;
+}
+
+.navbar-side .navbar-link {
+    padding: 0;
+}
+
+#side-nav .navbar-nav .nav-link {
+    padding: 0;
+}
+
+@media (min-width: 768px) {
+    .navbar-side .navbar-collapse {
+        display: block !important;
+    }
+}
+
+/*
+ * Content
+ */
+[role="main"] {
+    background: White;
+    border-left: 1px dashed black;
+    border-bottom: 1px dashed black;
+    border-right: 1px dashed black;
+    border-top: 2px solid black;
 }
