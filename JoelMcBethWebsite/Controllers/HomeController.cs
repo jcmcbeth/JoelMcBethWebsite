@@ -12,5 +12,10 @@
         {
             return View();
         }
+
+        public IActionResult Resume()
+        {
+            return View();
+        }
     }
 }

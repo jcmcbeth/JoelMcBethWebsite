@@ -1,0 +1,62 @@
+﻿{
+  "basics": {
+    "name": "Joel McBeth",
+    "label": "Software Engineer",
+    "picture": "",
+    "email": "joel.mcbeth@gmail.com",
+    "phone": "(910) 690-7511",
+    "website": "https://joelmcbeth.com",
+    "summary": "",
+    "location": {
+      "address": "10415 Alexander Martin Ave.",
+      "postalCode": "28277",
+      "city": "Charlotte",
+      "countryCode": "US",
+      "region": "North Carolina"
+    },
+    "profiles": []
+  },
+  "work": [
+    {
+      "company": "Zuercher Technologies",
+      "position": "Quality Assurance Engineer",
+      "website": "https://zuerchertech.com",
+      "startDate": "2012-02",
+      "endDate": "",
+      "summary": "",
+      "highlights": []
+    }
+  ],
+  "volunteer": [],
+  "education": [
+    {
+      "institution": "University of North Carolina at Charlotte",
+      "area": "Computer Science",
+      "studyType": "Bachelor of Science",
+      "startDate": "2004-08",
+      "endDate": "2008-05",
+      "gpa": "3.2",
+      "courses": []
+    },
+    {
+      "institution": "University of North Carolina at Charlotte",
+      "area": "Computer Science",
+      "studyType": "Bachelor of Science",
+      "startDate": "2004-08",
+      "endDate": "2008-05",
+      "gpa": "3.2",
+      "courses": []
+    }
+  ],
+  "awards": [],
+  "publications": [],
+  "skills": [],
+  "languages": [
+    {
+      "language": "English",
+      "fluency": "Native speaker"
+    }
+  ],
+  "interests": [],
+  "references": []
+}
