@@ -50,7 +50,12 @@
   ],
   "awards": [],
   "publications": [],
-  "skills": [],
+  "skills": [
+    {
+      "name": "C#",
+      "level": "Expert"
+    }
+  ],
   "languages": [
     {
       "language": "English",

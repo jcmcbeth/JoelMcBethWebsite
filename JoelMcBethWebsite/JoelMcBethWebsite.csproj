@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="Client\App\app.ts" />
+    <Folder Include="Client\App\" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
