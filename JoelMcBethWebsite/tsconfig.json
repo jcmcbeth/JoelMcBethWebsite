@@ -1,13 +1,13 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
     "noImplicitAny": false,
     "noEmitOnError": true,
     "removeComments": false,
     "sourceMap": true,
-    "moduleResolution": "node",
     "target": "es5",
-    "module": "es2015",
-    "outDir": ".\\wwwroot\\js"    
+    "module": "none",
+    "outDir": ".\\wwwroot\\js"
   },
   "exclude": [
     "node_modules",
