@@ -8,11 +8,22 @@ app.controller('mainCtrl', function ($scope) {
     $scope.text = 'Hello world';
 });
 
-app.config(function ($routeProvider) {
-    $routeProvider.when("/", {
+app.controller('bookCtrl', function ($scope) {
+    $scope.books = [
+        {
+            title: 'Soft Skills: The software developer\'s life manual',
+            authors: ['Sonmez, John']
+        }
+    ]
+});
+
+app.config(function ($routeProvider, $locationProvider) {
+    $locationProvider.html5Mode(true);
+    $routeProvider.when('/', {
         templateUrl: 'home.html'
     })
-    .when("/books", {
-        templateUrl: 'books.html'
+    .when('/books', {
+        templateUrl: 'books.html',
+        controller: 'bookCtrl'
     });
 });
