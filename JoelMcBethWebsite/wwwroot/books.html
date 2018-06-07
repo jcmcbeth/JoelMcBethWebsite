@@ -1,5 +1,10 @@
-﻿<p>
-    <ul>
-        <li ng-repeat="book in books">{{book.title}}</li>
+﻿<h1>Books</h1>
+<p>This is a list of the books in my library and whether I recommend them or not.</p>
+<p>
+    <ul class="list-unstyled">
+        <li ng-repeat="book in books">
+            <div>{{book.title}}</div>
+            <div>by {{book.authors.join(", ")}}</div>
+        </li>
     </ul>
 </p>

@@ -9,7 +9,10 @@ app.controller('mainCtrl', function ($scope) {
 });
 
 app.controller('bookCtrl', function ($scope, bookService) {
-    $scope.books = bookService.getBooks();
+    bookService.getBooks()
+        .then(function (response) {
+            $scope.books = response.data;
+        });
 });
 
 app.controller('resumeCtrl', function ($scope, $http) {
@@ -20,7 +23,7 @@ app.controller('resumeCtrl', function ($scope, $http) {
 });
 
 app.config(function ($routeProvider, $locationProvider) {
-    $locationProvider.html5Mode(true);
+
     $routeProvider.when('/', {
         templateUrl: 'home.html'
     })
@@ -36,11 +39,6 @@ app.config(function ($routeProvider, $locationProvider) {
 
 app.service("bookService", function ($http) {
     this.getBooks = function () {
-        return [
-            {
-                title: 'Soft Skills: The software developer\'s life manual',
-                authors: ['Sonmez, John']
-            }
-        ];
+        return $http.get("/api/books");
     };   
 });
