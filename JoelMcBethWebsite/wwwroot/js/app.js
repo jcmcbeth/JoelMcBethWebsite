@@ -12,6 +12,13 @@ app.controller('bookCtrl', function ($scope, bookService) {
     $scope.books = bookService.getBooks();
 });
 
+app.controller('resumeCtrl', function ($scope, $http) {
+    $http.get("resume.json")
+        .then(function (response) {
+            $scope.resume = response.data;
+        });
+});
+
 app.config(function ($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     $routeProvider.when('/', {
@@ -20,6 +27,10 @@ app.config(function ($routeProvider, $locationProvider) {
     .when('/books', {
         templateUrl: 'books.html',
         controller: 'bookCtrl'
+    })
+    .when("/resume", {
+        templateUrl: 'resume.html',
+        controller: 'resumeCtrl'
     });
 });
 
