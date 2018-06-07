@@ -8,13 +8,8 @@ app.controller('mainCtrl', function ($scope) {
     $scope.text = 'Hello world';
 });
 
-app.controller('bookCtrl', function ($scope) {
-    $scope.books = [
-        {
-            title: 'Soft Skills: The software developer\'s life manual',
-            authors: ['Sonmez, John']
-        }
-    ]
+app.controller('bookCtrl', function ($scope, bookService) {
+    $scope.books = bookService.getBooks();
 });
 
 app.config(function ($routeProvider, $locationProvider) {
@@ -26,4 +21,15 @@ app.config(function ($routeProvider, $locationProvider) {
         templateUrl: 'books.html',
         controller: 'bookCtrl'
     });
+});
+
+app.service("bookService", function ($http) {
+    this.getBooks = function () {
+        return [
+            {
+                title: 'Soft Skills: The software developer\'s life manual',
+                authors: ['Sonmez, John']
+            }
+        ];
+    };   
 });
