@@ -2,7 +2,7 @@
 <p>This is a list of the books in my library and whether I recommend them or not.</p>
 <p>
     <ul class="list-unstyled">
-        <li ng-repeat="book in books">
+        <li ng-repeat="book in vm.books">
             <div>{{book.title}}</div>
             <div>by {{book.authors.join(", ")}}</div>
         </li>
