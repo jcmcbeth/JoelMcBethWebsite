@@ -1,4 +1,5 @@
 ﻿{
+  "awards": [],
   "basics": {
     "name": "Joel McBeth",
     "label": "Software Engineer",
@@ -16,18 +17,6 @@
     },
     "profiles": []
   },
-  "work": [
-    {
-      "company": "Zuercher Technologies",
-      "position": "Quality Assurance Engineer",
-      "website": "https://zuerchertech.com",
-      "startDate": "2012-02",
-      "endDate": "",
-      "summary": "",
-      "highlights": []
-    }
-  ],
-  "volunteer": [],
   "education": [
     {
       "institution": "University of North Carolina at Charlotte",
@@ -48,20 +37,31 @@
       "courses": []
     }
   ],
-  "awards": [],
-  "publications": [],
-  "skills": [
-    {
-      "name": "C#",
-      "level": "Expert"
-    }
-  ],
+  "interests": [],
   "languages": [
     {
       "language": "English",
       "fluency": "Native speaker"
     }
   ],
-  "interests": [],
-  "references": []
+  "publications": [],
+  "references": [],
+  "skills": [
+    {
+      "name": "C#",
+      "level": "Expert"
+    }
+  ],
+  "volunteer": [],
+  "work": [
+    {
+      "company": "Zuercher Technologies",
+      "position": "Quality Assurance Engineer",
+      "website": "https://zuerchertech.com",
+      "startDate": "2012-02",
+      "endDate": "",
+      "summary": "",
+      "highlights": []
+    }
+  ]
 }

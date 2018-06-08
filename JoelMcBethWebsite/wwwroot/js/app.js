@@ -15,7 +15,7 @@
         .module("app")
         .controller("BookController", BookController);
 
-    BookController.$inject = ["BookService"];
+    BookController.$inject = ["bookService"];
 
     function BookController(bookService) {
         var vm = this;
@@ -52,6 +52,31 @@
     }
 })();
 
+// project.controller.js
+
+(function () {
+    angular
+        .module("app")
+        .controller("ProjectController", ProjectController);
+
+    ProjectController.$inject = ["$http", "projectService"];
+
+    function ProjectController($http, projectService) {
+        var vm = this;
+
+        activate();
+
+        function activate() {
+            return projectService.getProjects().then(function (projects) {
+
+                console.log(projects);
+                vm.projects = projects;
+            });
+        }
+    }
+})();
+
+
 // app.routes.js
 
 (function () {
@@ -72,6 +97,11 @@
             templateUrl: "resume.html",
             controller: "ResumeController",
             controllerAs: "vm"
+        })
+        .when("/projects", {
+            templateUrl: "projects.html",
+            controller: "ProjectController",
+            controllerAs: "vm"
         });
     }
 })();
@@ -81,11 +111,11 @@
 (function () {
     angular
         .module("app")
-        .factory("BookService", BookService);
+        .factory("bookService", bookService);
 
-    BookService.$inject = ["$http"];
+    bookService.$inject = ["$http"];
 
-    function BookService($http) {
+    function bookService($http) {
         return {
             getBooks: getBooks
         };
@@ -93,7 +123,31 @@
         function getBooks() {
             return $http.get("/api/books").then(getBooksComplete);
 
-            function getBooksComplete(response) {
+            function getBooksComplete(response) {                
+                return response.data;
+            }
+        }
+    }
+})();
+
+// project.service.js
+
+(function () {
+    angular
+        .module("app")
+        .factory("projectService", projectService);
+
+    projectService.$inject = ["$http"];
+
+    function projectService($http) {
+        return {
+            getProjects: getProjects
+        };
+
+        function getProjects() {
+            return $http.get("/api/projects").then(getProjectsComplete);
+
+            function getProjectsComplete(response) {
                 return response.data;
             }
         }

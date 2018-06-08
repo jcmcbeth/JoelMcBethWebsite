@@ -23,6 +23,15 @@ namespace JoelMcBethWebsite.Controllers
                     Authors = new List<string>()
                     {
                         "John Sonmez"
+                    }                    
+                },
+                new Book()
+                {
+                    Title = "Assembly language Step by Step - Programming with Linux",
+                    Edition = "3rd",
+                    Authors = new List<string>()
+                    {
+                        "Jeff Duntemann"
                     }
                 }
             };
