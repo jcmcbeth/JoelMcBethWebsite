@@ -20,12 +20,46 @@
     function BookController(bookService) {
         var vm = this;
 
+        vm.pageSize = 10;
+        vm.page = 1;
+        vm.pages = [];
+
         activate();
+
+        vm.nextPage = function (page) {
+
+        };
+
+        vm.selectPage = function (page) {
+            console.log("Selecting page " + page);
+            var start = (page - 1) * vm.pageSize;
+
+            vm.pageStartIndex = start;
+            vm.page = page;
+        };
 
         function activate() {
             return bookService.getBooks().then(function (books) {
                 vm.books = books;
+
+                vm.pageStartIndex = 0;
+
+                updatePages();
             });
+        }
+
+        function updatePages() {
+            var count = Math.ceil(vm.books.length / vm.pageSize);
+
+            console.log("Pages: " + count);
+
+            // I couldn't find a simple way to do a repeat over a range of
+            // numbers. I think the easiest way was to just create an array
+            // of the numbers.
+            vm.pages = new Array(count);
+            for (var i = 0; i < count; i++) {
+                vm.pages[i] = i + 1;
+            }
         }
     }
 })();

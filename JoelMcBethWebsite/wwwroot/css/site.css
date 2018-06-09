@@ -114,3 +114,41 @@ p {
     border-right: 1px dashed black;
     border-top: 2px solid black;
 }
+
+/*
+    Input
+*/
+
+.form-control {
+    border-radius: 0;
+    border: 1px solid green;
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: green;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 128, 0, 0.25);
+}
+
+/*
+    Pagination
+*/
+
+.page-link {
+    color: green;
+    border: 0;
+}
+
+.page-link:hover {
+    color: green;
+    text-decoration: underline;
+    background-color: unset;
+    border: 0;
+}
+
+.page-link:focus {
+    z-index: 2;
+    box-shadow: none;
+}
