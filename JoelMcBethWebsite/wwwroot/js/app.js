@@ -15,49 +15,52 @@
         .module("app")
         .controller("BookController", BookController);
 
-    BookController.$inject = ["bookService"];
+    BookController.$inject = ["$scope", "bookService"];
 
-    function BookController(bookService) {
+    function BookController($scope, bookService) {
         var vm = this;
 
         vm.pageSize = 10;
         vm.page = 1;
+        vm.pageCount = 0;
         vm.pages = [];
+
+        $scope.$watch("vm.filterText", function (newValue, oldValue) {
+            if (newValue != oldValue) {
+                vm.page = 1;
+                updateBooks();
+            }
+        });
 
         activate();
 
-        vm.nextPage = function (page) {
-
-        };
-
         vm.selectPage = function (page) {
-            console.log("Selecting page " + page);
-            var start = (page - 1) * vm.pageSize;
+            if (page <= vm.pageCount || page >= 1) {
+                vm.page = page;
 
-            vm.pageStartIndex = start;
-            vm.page = page;
+                updateBooks();
+            }
         };
 
         function activate() {
-            return bookService.getBooks().then(function (books) {
-                vm.books = books;
+            return updateBooks();
+        }
 
-                vm.pageStartIndex = 0;
+        function updateBooks() {
+            return bookService.getBooks(vm.filterText, vm.page, vm.pageSize).then(function (data) {
+                vm.books = data.books;
+                vm.pageCount = data.pagination.pages;
 
                 updatePages();
             });
         }
 
         function updatePages() {
-            var count = Math.ceil(vm.books.length / vm.pageSize);
-
-            console.log("Pages: " + count);
-
             // I couldn't find a simple way to do a repeat over a range of
             // numbers. I think the easiest way was to just create an array
             // of the numbers.
-            vm.pages = new Array(count);
-            for (var i = 0; i < count; i++) {
+            vm.pages = new Array(vm.pageCount);
+            for (var i = 0; i < vm.pageCount; i++) {
                 vm.pages[i] = i + 1;
             }
         }
@@ -154,11 +157,20 @@
             getBooks: getBooks
         };
 
-        function getBooks() {
-            return $http.get("/api/books").then(getBooksComplete);
+        function getBooks(filter, page, pageSize) {
+            return $http.get("/api/books", {
+                params: {
+                    filter: filter,
+                    page: page,
+                    pageSize: pageSize
+                }
+            }).then(getBooksComplete);
 
             function getBooksComplete(response) {                
-                return response.data;
+                return {
+                    books: response.data.data,
+                    pagination: response.data.pagination
+                };
             }
         }
     }

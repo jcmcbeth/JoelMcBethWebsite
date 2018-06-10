@@ -141,6 +141,11 @@ p {
     border: 0;
 }
 
+.page-link.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 .page-link:hover {
     color: green;
     text-decoration: underline;
