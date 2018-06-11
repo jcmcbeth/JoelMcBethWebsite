@@ -11,5 +11,6 @@
         public string Edition { get; set; }
         public string Pages { get; set; }
         public List<string> Authors { get; set; }
+        public string Isbn { get; set; }
     }    
 }

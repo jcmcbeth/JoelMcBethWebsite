@@ -16,11 +16,21 @@ namespace JoelMcBethWebsite.Controllers
         {
             new Book()
             {
+                Title = "Pro AngularJS",
+                Authors = new List<string>()
+                {
+                    "Adam Freeman"
+                },
+                Isbn = "9781430264484"
+            },
+            new Book()
+            {
                 Title = "Soft Skills: The software developer's life manual",
                 Authors = new List<string>()
                 {
                     "John Sonmez"
-                }
+                },
+                Isbn = "9781617292392"
             },
             new Book()
             {
@@ -29,63 +39,75 @@ namespace JoelMcBethWebsite.Controllers
                 Authors = new List<string>()
                 {
                     "Jeff Duntemann"
-                }
+                },
+                Isbn = "9780470497029"
             },
             new Book()
             {
-                Title = "The Expectant Father: The Ultimate Guide for Dads-to-Be"
+                Title = "The Expectant Father: The Ultimate Guide for Dads-to-Be",
+                Isbn = "9780789212139"
             },
             new Book()
             {
-                Title = "Be Prepared"
+                Title = "Be Prepared",
+                Isbn = "9780743251549"
             },
             new Book()
             {
-                Title = "Data Science From Scratch"
+                Title = "Data Science From Scratch",
+                Isbn = "9781491901427"
             },
             new Book()
             {
-                Title = "Clean Code - A Handbook of Agile Software Craftsmanship"
+                Title = "Clean Code - A Handbook of Agile Software Craftsmanship",
+                Isbn = "9780132350884"
             },
             new Book()
             {
-                Title = "American Sign Language Dictionary"
+                Title = "American Sign Language Dictionary",
+                Isbn = "9780062736345"
             },
             new Book()
             {
-                Title = "Modern Cryptography"
+                Title = "Modern Cryptography",
+                Isbn = "9780132887410"
             },
             new Book()
             {
-                Title = "The Pragmatic Programmer"
+                Title = "The Pragmatic Programmer",
+                Isbn = "9780132119177"
             },
             new Book()
             {
-                Title = "Building Wireless Sensor Networks"
+                Title = "Building Wireless Sensor Networks",
+                Isbn = "9780596807733"
             },
             new Book()
             {
-                Title = "Pandemic"
+                Title = "Pandemic",
+                Isbn = "9780765350848"
             },
             new Book()
             {
-                Title = "Assembly Language Step by Step - Programming with Linux"
+                Title = "The Art of Computer Programming - Fundamental Algorithms - Volume 1",
+                Authors = new List<string>()
+                {
+                    "Donald Knuth"
+                },
+                Isbn = "9780201896831"
             },
             new Book()
             {
-                Title = "127 Hours - Between a Rock and a Hard Place"
-            },
-            new Book()
-            {
-                Title = "The Art of Computer Programming - Fundamental Algorithms - Volume 1"
-            },
-            new Book()
-            {
-                Title = "Brownfield Application Development in .NET"
+                Title = "Brownfield Application Development in .NET",
+                Isbn = "978-1933988719"
             },
             new Book()
             {
                 Title = "Prime Obsession"
+            },
+            new Book()
+            {
+                Title = "127 Hours - Between a Rock and a Hard Place",
             },
             new Book()
             {

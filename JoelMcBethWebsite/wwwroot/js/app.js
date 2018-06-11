@@ -20,13 +20,13 @@
     function BookController($scope, bookService) {
         var vm = this;
 
-        vm.pageSize = 10;
+        vm.pageSize = 12;
         vm.page = 1;
         vm.pageCount = 0;
         vm.pages = [];
 
         $scope.$watch("vm.filterText", function (newValue, oldValue) {
-            if (newValue != oldValue) {
+            if (newValue !== oldValue) {
                 vm.page = 1;
                 updateBooks();
             }
