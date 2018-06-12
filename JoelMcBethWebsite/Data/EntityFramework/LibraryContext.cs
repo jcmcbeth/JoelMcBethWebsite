@@ -2,22 +2,24 @@
 {
     using JoelMcBethWebsite.Data.Models;
     using Microsoft.EntityFrameworkCore;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     public class LibraryContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Server=(LocalDB)\MSSQLLocalDB;Database=Library;Trusted_Connection=true");
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Author> Authors { get; set; }
+
+        public LibraryContext(DbContextOptions<LibraryContext> options) :
+            base(options)
+        {            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Book>()
+            modelBuilder.Entity<Book>()                
                 .HasKey(c => c.Isbn);
+
+            modelBuilder.Entity<Author>()
+                .HasMany<Book>();
         }
     }
 }

@@ -11,6 +11,6 @@
         public string Title { get; set; }
         public string Edition { get; set; }
         public string Pages { get; set; }
-        public List<string> Authors { get; set; }        
+        public virtual List<Author> Authors { get; set; }        
     }    
 }

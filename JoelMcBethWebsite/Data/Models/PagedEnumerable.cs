@@ -21,7 +21,7 @@ namespace JoelMcBethWebsite.Data.Models
             set;
         }
 
-        public PagedEnumerable(IEnumerable<T> data, int page, int pageSize = DefaultPageSize)
+        public PagedEnumerable(IEnumerable<T> data, int page = 1, int pageSize = DefaultPageSize)
         {
             int count = data.Count();
 
