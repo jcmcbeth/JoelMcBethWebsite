@@ -15,11 +15,11 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Book>()                
+            modelBuilder.Entity<Book>()
                 .HasKey(c => c.Isbn);
 
-            modelBuilder.Entity<Author>()
-                .HasMany<Book>();
+            modelBuilder.Entity<BookAuthor>()
+                .HasKey(c => new { c.BookId, c.AuthorId });              
         }
     }
 }
