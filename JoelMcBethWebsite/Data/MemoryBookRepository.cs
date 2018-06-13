@@ -22,6 +22,25 @@
                     {
                         FirstName = "John",
                         LastName = "Sonmez"
+                    },
+                    new Author()
+                    {
+                        FirstName = "McBeth",
+                        LastName = "Joel"
+                    }
+                }
+            });
+
+            books.Add(new Book()
+            {
+                Title = "Pro AngularJS",
+                Isbn = "9781430264484",
+                Authors = new List<Author>()
+                {
+                    new Author()
+                    {
+                        FirstName = "Adam",
+                        LastName = "Freeman"
                     }
                 }
             });
