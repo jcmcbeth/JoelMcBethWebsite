@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using JoelMcBethWebsite.Data.EntityFramework;
+    using JoelMcBethWebsite.Data;
     using JoelMcBethWebsite.Data.Models;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
@@ -13,24 +13,17 @@
     [Route("api/Books")]
     public class BookController : Controller
     {
-        private readonly LibraryContext libraryContext;
+        private readonly IBookRepository books;
 
-        public BookController(LibraryContext libraryContext)
+        public BookController(IBookRepository books)
         {
-            this.libraryContext = libraryContext;
+            this.books = books;
         }
 
         [HttpGet]
-        public PagedEnumerable<Book> Get(int? page, int? pageSize, string filter = null)
+        public async Task<PagedEnumerable<Book>> Get(int? page, int? pageSize, string filter = null)
         {
-            var result = this.libraryContext.Books.AsQueryable();
-
-            if (!string.IsNullOrEmpty(filter))
-            {
-                result = result.Where(bk => bk.Title.IndexOf(filter, StringComparison.CurrentCultureIgnoreCase) >= 0);
-            }
-
-            return new PagedEnumerable<Book>(result, page ?? 1, pageSize ?? 10);
+            return await this.books.GetBooksAsync(page ?? 1, pageSize ?? 12, filter);
         }
     }
 }

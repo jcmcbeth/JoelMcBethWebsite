@@ -7,33 +7,22 @@ namespace JoelMcBethWebsite.Data.Models
 {
     public class PagedEnumerable<T>
     {
-        public const int DefaultPageSize = 10;
-
         public IEnumerable<T> Data
         {
             get;
-            set;
+            private set;
         }
 
         public Pagination Pagination
         {
             get;
-            set;
+            private set;
         }
 
-        public PagedEnumerable(IEnumerable<T> data, int page = 1, int pageSize = DefaultPageSize)
+        public PagedEnumerable(IEnumerable<T> data, Pagination pagination)
         {
-            int count = data.Count();
-
-            this.Pagination = new Pagination()
-            {
-                Count = count,
-                Page = page,
-                PageSize = pageSize,
-                Pages = (int)Math.Ceiling(count / (double)pageSize)
-            };
-
-            this.Data = data.Skip((page - 1) * pageSize).Take(pageSize);
+            this.Data = data;
+            this.Pagination = pagination;
         }
     }
 }
