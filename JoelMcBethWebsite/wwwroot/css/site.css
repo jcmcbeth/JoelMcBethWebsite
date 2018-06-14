@@ -113,6 +113,7 @@ p {
     border-bottom: 1px dashed black;
     border-right: 1px dashed black;
     border-top: 2px solid black;
+    padding-bottom: 15px;
 }
 
 /*

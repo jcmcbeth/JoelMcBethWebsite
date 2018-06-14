@@ -7,7 +7,8 @@
 
     function bookService($http) {
         return {
-            getBooks: getBooks
+            getBooks: getBooks,
+            getBookByIsbn13: getBookByIsbn13
         };
 
         function getBooks(filter, page, pageSize) {
@@ -24,6 +25,18 @@
                     books: response.data.data,
                     pagination: response.data.pagination
                 };
+            }
+        }
+
+        function getBookByIsbn13(isbn) {
+            return $http.get("/api/books", {
+                params: {
+                    isbn: isbn
+                }
+            }).then(getBookComplete);
+
+            function getBookComplete(response) {
+                return response.data;
             }
         }
     }

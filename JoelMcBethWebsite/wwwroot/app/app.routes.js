@@ -17,6 +17,12 @@
                 controller: "BookController",
                 controllerAs: "vm"
             })
+            .state("bookDetails", {
+                url: "/books/{isbn}",
+                templateUrl: "app/books/book.details.html",
+                controller: "BookDetailsController",
+                controllerAs: "vm"
+            })
             .state("resume", {
                 url: '/resume',
                 templateUrl: "app/resume/resume.html",

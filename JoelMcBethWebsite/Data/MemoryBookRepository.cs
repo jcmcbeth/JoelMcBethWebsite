@@ -68,7 +68,7 @@
 
             if (!string.IsNullOrEmpty(filter))
             {
-                filteredBooks = filteredBooks.Where(b => b.Authors.Any(a =>
+                filteredBooks = filteredBooks.Where(b => b.Title.IndexOf(filter, StringComparison.CurrentCultureIgnoreCase) >= 0 || b.Authors.Any(a =>
                     a.FirstName.IndexOf(filter, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
                     a.LastName.IndexOf(filter, StringComparison.CurrentCultureIgnoreCase) >= 0));
             }

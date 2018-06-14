@@ -6,14 +6,19 @@
 </div>
 
 <div class="row">
-    <div ng-repeat="book in vm.books" class="col-lg-3 mb-2">
-        <div>
-            <div><strong>{{book.title}}</strong></div>
-            <div ng-show="book.authors.length > 0">by
-                <span ng-repeat="author in book.authors">{{author.firstName}} {{author.lastName}}{{ !$last ? ", " : ""}}</span>
+    <div ng-repeat="book in vm.books" class="col-lg-3">
+        <div class="card">            
+            <div class="card-body">
+                <h5 class="card-title"><strong>{{book.title}}</strong></h5>
+                <div class="card-subtitle text-muted" ng-show="book.authors.length > 0">
+                    by
+                    <span ng-repeat="author in book.authors">{{author.firstName}} {{author.lastName}}{{ !$last ? ", " : ""}}</span>
+                </div>
+                <p><img src="https://books.google.com/books?vid=ISBN{{book.isbn}}&printsec=frontcover&img=1&zoom=1" /></p>
+                <a ui-sref="bookDetails({ isbn: book.isbn  })">Details</a>
+
             </div>
         </div>
-        <div><a href="https://books.google.com/books?vid={{book.isbn}}" target="_blank"><img src="https://books.google.com/books?vid=ISBN{{book.isbn}}&printsec=frontcover&img=1&zoom=1" /></a></div>
     </div>
 </div>
 
