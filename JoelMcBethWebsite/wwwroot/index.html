@@ -28,23 +28,23 @@
                     <h2>Main</h2>
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" ui-sref="home">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#!/projects">Projects</a>
+                            <a class="nav-link" ui-sref="projects">Projects</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#!/books">Books</a>
+                            <a class="nav-link" ui-sref="books">Books</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#!/resume">Resume</a>
+                            <a class="nav-link" ui-sref="resume">Resume</a>
                         </li>
                     </ul>
                 </div>
             </nav>
 
             <main id="main" role="main" class="col-md-10 ml-sm-auto col-lg-11">
-                <ng-view></ng-view>
+                <ui-view></ui-view>
             </main>
         </div>
     </div>
@@ -52,9 +52,8 @@
     <script src="js/jquery-3.3.1.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="js/sammy.js"></script>
     <script src="js/angular.min.js"></script>
-    <script src="js/angular-route.js"></script>
+    <script src="js/angular-ui-router.js"></script>
 
     <script src="app/app.module.js"></script>
     <script src="app/app.routes.js"></script>

@@ -3,24 +3,33 @@
         .module("app")
         .config(configure);
 
-    function configure($routeProvider, $locationProvider) {
-        $routeProvider.when("/", {
-            templateUrl: "app/home/home.html"
-        })
-            .when("/books", {
+    configure.$inject = ["$urlRouterProvider", "$stateProvider", ];
+
+    function configure($urlRouterProvider, $stateProvider) {
+        $stateProvider
+            .state("home", {
+                url: '/',
+                templateUrl: "app/home/home.html"
+            })
+            .state("books", {
+                url: '/books',
                 templateUrl: "app/books/books.html",
                 controller: "BookController",
                 controllerAs: "vm"
             })
-            .when("/resume", {
+            .state("resume", {
+                url: '/resume',
                 templateUrl: "app/resume/resume.html",
                 controller: "ResumeController",
                 controllerAs: "vm"
             })
-            .when("/projects", {
+            .state("projects", {
+                url: '/projects',
                 templateUrl: "app/projects/projects.html",
                 controller: "ProjectController",
                 controllerAs: "vm"
             });
+
+        $urlRouterProvider.otherwise("/");
     }
 })();
