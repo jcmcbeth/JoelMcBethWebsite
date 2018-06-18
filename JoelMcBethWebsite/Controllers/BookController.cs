@@ -21,9 +21,15 @@
         }
 
         [HttpGet]
-        public async Task<PagedEnumerable<Book>> Get(int? page, int? pageSize, string filter = null)
+        public async Task<PagedEnumerable<Book>> GetAllBooks(int? page, int? pageSize, string filter = null)
         {
             return await this.books.GetBooksAsync(page ?? 1, pageSize ?? 12, filter);
+        }
+
+        [HttpGet("{isbn}")]
+        public async Task<Book> GetBook(string isbn)
+        {
+            return await this.books.GetBookByIsbnAsync(isbn);
         }
     }
 }
