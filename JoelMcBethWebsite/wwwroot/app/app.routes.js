@@ -3,7 +3,7 @@
         .module("app")
         .config(configure);
 
-    configure.$inject = ["$urlRouterProvider", "$stateProvider", ];
+    configure.$inject = ["$urlRouterProvider", "$stateProvider" ];
 
     function configure($urlRouterProvider, $stateProvider) {
         $stateProvider
@@ -24,16 +24,21 @@
                 controllerAs: "vm"
             })
             .state("resume", {
-                url: '/resume',
+                url: "/resume",
                 templateUrl: "app/resume/resume.html",
                 controller: "ResumeController",
                 controllerAs: "vm"
             })
             .state("projects", {
-                url: '/projects',
+                url: "/projects",
                 templateUrl: "app/projects/projects.html",
                 controller: "ProjectController",
                 controllerAs: "vm"
+            })
+            .state("login", {
+                url: "/login",
+                templateUrl: "app/account/login.html",
+                controller: "LoginController as vm"
             });
 
         $urlRouterProvider.otherwise("/");

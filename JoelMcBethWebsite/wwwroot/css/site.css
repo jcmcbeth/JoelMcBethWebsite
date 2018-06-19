@@ -1,5 +1,8 @@
-body {
+html {
     font-size: 11pt;
+}
+
+body {
     font-family: Consolas;
     background: WhiteSmoke;
 }
@@ -58,7 +61,7 @@ p {
     font-weight: bold;
     text-transform: uppercase;
     font-style: italic;
-    padding: 0px;
+    padding: 0;
 }
 
 .navbar-dark .navbar-toggler {
@@ -158,3 +161,37 @@ p {
     z-index: 2;
     box-shadow: none;
 }
+
+/**
+    buttons
+*/
+
+.btn {
+    border-radius: unset;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: green;
+    border-color: green;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: darkgreen;
+    border-color: darkgreen;
+}
+
+    .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+        color: #fff;
+        background-color: darkgreen;
+        border-color: darkgreen;
+    }
+
+    .btn-primary:focus, .btn-primary.focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 128, 0, 0.5);
+    }
+
+    .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .show > .btn-primary.dropdown-toggle:focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 128, 0, 0.5);
+    }
