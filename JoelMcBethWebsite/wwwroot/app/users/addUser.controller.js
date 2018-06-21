@@ -5,9 +5,9 @@
         .module("app")
         .controller("AddUserController", AddUserController);
 
-    AddUserController.$inject = ["userService"];
+    AddUserController.$inject = ["userService", "$state"];
 
-    function AddUserController(userService) {
+    function AddUserController(userService, $state) {
         var vm = this;
         vm.addUser = addUser;
         vm.user = null;
@@ -24,7 +24,7 @@
                 .then(addUserComplete);
 
             function addUserComplete() {
-                vm.user = null;
+                $state.go("users");
             }
         }
     }
