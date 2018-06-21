@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using JoelMcBethWebsite.Data;
+    using Microsoft.AspNetCore.Authentication.Cookies;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.EntityFrameworkCore;
@@ -25,8 +26,10 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            //    .AddCookie();
             services.AddTransient<IBookRepository, MemoryBookRepository>();
+            services.AddTransient<IUserRepository, MemoryUserRepository>();
             services.AddMvc();
         }
 
@@ -40,6 +43,7 @@
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            //app.UseAuthentication();
             app.UseMvc();
         }
     }

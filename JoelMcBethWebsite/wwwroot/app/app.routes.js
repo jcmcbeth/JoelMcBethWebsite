@@ -39,6 +39,16 @@
                 url: "/login",
                 templateUrl: "app/account/login.html",
                 controller: "LoginController as vm"
+            })
+            .state("users", {
+                url: "/users",
+                templateUrl: "app/users/users.html",
+                controller: "UsersController as vm"
+            })
+            .state("addUser", {
+                url: "/users/add",
+                templateUrl: "app/users/addUser.html",
+                controller: "AddUserController as vm"
             });
 
         $urlRouterProvider.otherwise("/");
