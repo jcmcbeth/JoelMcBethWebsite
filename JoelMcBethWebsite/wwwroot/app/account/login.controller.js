@@ -5,13 +5,19 @@
         .module("app")
         .controller("LoginController", LoginController);
 
-    LoginController.$inject = [];
+    LoginController.$inject = ["authenticationService"];
 
-    function LoginController() {
+    function LoginController(authenticationService) {
         /* jshint validthis:true */
         var vm = this;
+        vm.login = login;
 
         activate();
+
+        function login() {
+            console.log("Login pressed.");
+            authenticationService.login(vm.email, vm.password);
+        }
 
         function activate() {
         }
