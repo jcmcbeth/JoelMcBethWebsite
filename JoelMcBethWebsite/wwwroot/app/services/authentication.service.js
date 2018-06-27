@@ -5,34 +5,61 @@
         .module("app")
         .factory("authenticationService", authenticationService);
 
-    authenticationService.$inject = ["$http", "$window"];
+    authenticationService.$inject = ["$http", "$window", "$q"];
 
-    function authenticationService($http, $window) {
+    function authenticationService($http, $window, $q) {
+        const baseUrl = "/api/account";
+
         var service = {
+            isAuthenticated: isAuthenticated,
+            getToken: getToken,
             login: login
         };
 
         return service;
 
+        function isAuthenticated() {
+            let token = getToken();
+
+            if (token) {
+                return true;
+            }
+
+            return false;
+        }
+
+        function getToken() {
+            return $window.sessionStorage.getItem("token");
+        }
+
         function login(userName, password) {
+            let deferred = $q.defer();
+            let url = baseUrl + "/login?userName=" + userName + "&password=" + password;
+
+            console.log("Using username " + userName + " and password " + password + ".");
+
             $http({
-                url: "/api/account/login",
+                url: url,
                 method: "POST",
-                data: {
-                    userName: userName,
-                    password: password
-                }
-            }).then(function (response) {
+            }).then(onSuccess, onError);
+
+            function onSuccess(response) {
                 if (response.data.success === true) {
                     let token = response.data.token;
 
                     $window.sessionStorage.setItem("token", token);
 
-                    return true;
+                    deferred.resolve();
                 }
 
-                return false;
-            });
+                deferred.reject("Invalid credentials.");
+            }
+
+            function onError(response) {
+                deferred.reject("An error occurred when attempting to login.");
+            }
+
+            return deferred.promise;
         }
     }
 })();

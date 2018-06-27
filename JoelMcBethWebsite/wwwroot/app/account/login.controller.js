@@ -5,9 +5,9 @@
         .module("app")
         .controller("LoginController", LoginController);
 
-    LoginController.$inject = ["authenticationService"];
+    LoginController.$inject = ["authenticationService", "$state"];
 
-    function LoginController(authenticationService) {
+    function LoginController(authenticationService, $state) {
         /* jshint validthis:true */
         var vm = this;
         vm.login = login;
@@ -16,7 +16,18 @@
 
         function login() {
             console.log("Login pressed.");
-            authenticationService.login(vm.email, vm.password);
+            vm.error = null;
+
+            authenticationService.login(vm.username, vm.password)
+                .then(onLoginSuccess, onLoginFailure);
+
+            function onLoginSuccess() {
+                $state.go("home");
+            }
+
+            function onLoginFailure(error) {
+                vm.error = error;
+            }
         }
 
         function activate() {

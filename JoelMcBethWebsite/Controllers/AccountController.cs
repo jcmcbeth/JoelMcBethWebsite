@@ -15,6 +15,14 @@
         [Route("Login")]
         public LoginResponse Login(string userName, string password)
         {
+            if (userName == "test@test.com" && password != "test")
+            {
+                return new LoginResponse()
+                {
+                    Success = false
+                };
+            }
+
             return new LoginResponse()
             {
                 Success = true,

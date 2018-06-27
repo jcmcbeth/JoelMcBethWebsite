@@ -107,6 +107,11 @@ p {
     }
 }
 
+.alert {
+    border-radius: unset;
+    padding: 0.375rem 0.75rem;
+}
+
 /*
  * Content
  */

@@ -3,9 +3,9 @@
         .module("app")
         .factory('userService', userService);
 
-    userService.$inject = ["$http"];
+    userService.$inject = ["$http", "authenticationService"];
 
-    function userService($http) {
+    function userService($http, authenticationService) {
         var service = {
             getUsers: getUsers,
             addUser: addUser
@@ -18,6 +18,9 @@
                 params: {
                     page: page,
                     pageSize: pageSize
+                },
+                headers: {
+                    Authorization: authenticationService.getToken()
                 }
             }).then(onGetUsersComplete);
 

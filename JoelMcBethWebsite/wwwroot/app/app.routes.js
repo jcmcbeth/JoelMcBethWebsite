@@ -43,12 +43,18 @@
             .state("users", {
                 url: "/users",
                 templateUrl: "app/users/users.html",
-                controller: "UsersController as vm"
+                controller: "UsersController as vm",
+                data: {
+                    requireAuthentication: true
+                }
             })
             .state("addUser", {
                 url: "/users/add",
                 templateUrl: "app/users/addUser.html",
-                controller: "AddUserController as vm"
+                controller: "AddUserController as vm",
+                data: {
+                    requireAuthentication: true
+                }
             });
 
         $urlRouterProvider.otherwise("/");
