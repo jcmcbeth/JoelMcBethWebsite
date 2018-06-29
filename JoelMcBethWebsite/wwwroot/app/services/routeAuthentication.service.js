@@ -23,7 +23,7 @@
 
             const stateService = transition.router.stateService;
             const stateData = transition.to().data;
-            const requireAuthentication = stateData != null && stateData.requireAuthentication;
+            const requireAuthentication = stateData && stateData.requireAuthentication;
             const authenticationService = transition.injector().get("authenticationService");
 
             if (requireAuthentication && authenticationService.isAuthenticated() === false) {

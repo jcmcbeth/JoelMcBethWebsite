@@ -40,7 +40,7 @@
 
             $http({
                 url: url,
-                method: "POST",
+                method: "POST"
             }).then(onSuccess, onError);
 
             function onSuccess(response) {
