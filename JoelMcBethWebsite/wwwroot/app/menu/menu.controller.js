@@ -13,6 +13,7 @@
         activate();
 
         function activate() {
+            vm.menuItems = menuService.getMenuItems();
         }
     }
 })();

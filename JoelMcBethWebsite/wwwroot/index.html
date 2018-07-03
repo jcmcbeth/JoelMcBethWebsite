@@ -23,21 +23,13 @@
     </nav>
     <div class="container-fluid">
         <div class="row">
-            <nav id="side-nav" class="navbar navbar-expand-md navbar-side d-md-block col-md-2 col-lg-1">
+            <nav id="side-nav" class="navbar navbar-expand-md navbar-side d-md-block col-md-2 col-lg-1" ng-controller="MenuController as vm">
                 <div class="collapse navbar-collapse navbar-side-content" id="menu">
                     <h2>Main</h2>
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" ui-sref="home">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" ui-sref="projects">Projects</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" ui-sref="books">Books</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" ui-sref="resume">Resume</a>
+                        <!-- remember to set active, check change log -->
+                        <li class="nav-item" ng-if="!item.hidden" ng-repeat="item in vm.menuItems">
+                            <a class="nav-link" ui-sref="{{item.state}}">{{item.title}}</a>
                         </li>
                     </ul>
                 </div>
