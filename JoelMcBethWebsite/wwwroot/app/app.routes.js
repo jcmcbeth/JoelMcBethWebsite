@@ -40,6 +40,11 @@
                 templateUrl: "app/account/login.html",
                 controller: "LoginController as vm"
             })
+            .state("logout", {
+                url: "/logout",
+                templateUrl: "app/account/logout.html",
+                controller: "LogoutController as vm"
+            })
             .state("users", {
                 url: "/users",
                 templateUrl: "app/users/users.html",

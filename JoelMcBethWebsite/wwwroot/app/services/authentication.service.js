@@ -5,15 +5,16 @@
         .module("app")
         .factory("authenticationService", authenticationService);
 
-    authenticationService.$inject = ["$http", "$window", "$q"];
+    authenticationService.$inject = ["$http", "$window", "$q", "$rootScope"];
 
-    function authenticationService($http, $window, $q) {
+    function authenticationService($http, $window, $q, $rootScope) {
         const baseUrl = "/api/account";
 
         var service = {
             isAuthenticated: isAuthenticated,
             getToken: getToken,
-            login: login
+            login: login,
+            logout: logout
         };
 
         return service;
@@ -49,6 +50,8 @@
 
                     $window.sessionStorage.setItem("token", token);
 
+                    $rootScope.$broadcast("authenticated");
+
                     deferred.resolve();
                 }
 
@@ -60,6 +63,16 @@
             }
 
             return deferred.promise;
+        }
+
+        function logout() {
+            let deferred = $q.defer();
+
+            $window.sessionStorage.removeItem("token");
+            $rootScope.$broadcast("unauthenticated");
+            deferred.resolve();   
+
+            return deferred.promise;             
         }
     }
 })();
