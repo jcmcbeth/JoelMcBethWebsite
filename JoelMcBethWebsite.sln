@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2011
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoelMcBethWebsite", "JoelMcBethWebsite\JoelMcBethWebsite.csproj", "{0496203A-71A6-49E2-8049-0A540CD5FF49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JoelMcBethWebsite", "JoelMcBethWebsite\JoelMcBethWebsite.csproj", "{0496203A-71A6-49E2-8049-0A540CD5FF49}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "JoelMcBethWebsite.Database", "JoelMcBethWebsite.Database\JoelMcBethWebsite.Database.sqlproj", "{C741CFB5-7506-4512-86BC-320E93B71606}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,12 @@ Global
 		{0496203A-71A6-49E2-8049-0A540CD5FF49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0496203A-71A6-49E2-8049-0A540CD5FF49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0496203A-71A6-49E2-8049-0A540CD5FF49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C741CFB5-7506-4512-86BC-320E93B71606}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C741CFB5-7506-4512-86BC-320E93B71606}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C741CFB5-7506-4512-86BC-320E93B71606}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C741CFB5-7506-4512-86BC-320E93B71606}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C741CFB5-7506-4512-86BC-320E93B71606}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C741CFB5-7506-4512-86BC-320E93B71606}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
