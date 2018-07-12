@@ -15,7 +15,7 @@
             books.Add(new Book()
             {
                 Title = "Soft Skills: The software developer's life manual",
-                Isbn = "9781617292392",
+                Isbn13 = "9781617292392",
                 Authors = new List<Author>()
                 {
                     new Author()
@@ -34,7 +34,7 @@
             books.Add(new Book()
             {
                 Title = "Pro AngularJS",
-                Isbn = "9781430264484",
+                Isbn13 = "9781430264484",
                 Authors = new List<Author>()
                 {
                     new Author()
@@ -50,9 +50,9 @@
         {
         }
 
-        public Task<Book> GetBookByIsbnAsync(string isbn)
+        public Task<Book> GetBookByIsbn13Async(string isbn)
         {
-            var result = books.Single(b => b.Isbn == isbn);
+            var result = books.Single(b => b.Isbn13 == isbn);
 
             return Task.FromResult(result);
         }

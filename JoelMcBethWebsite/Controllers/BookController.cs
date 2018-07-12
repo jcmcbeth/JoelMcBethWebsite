@@ -8,9 +8,9 @@
     using JoelMcBethWebsite.Data.Models;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-
+    
     [Produces("application/json")]
-    [Route("api/Books")]
+    //[Route("api/Books")]
     public class BookController : Controller
     {
         private readonly IBookRepository books;
@@ -20,16 +20,16 @@
             this.books = books;
         }
 
-        [HttpGet]
-        public async Task<PagedEnumerable<Book>> GetAllBooks(int? page, int? pageSize, string filter = null)
+        [HttpGet("api/books")]
+        public async Task<PagedEnumerable<Book>> Get(int? page, int? pageSize, string filter = null)
         {
             return await this.books.GetBooksAsync(page ?? 1, pageSize ?? 12, filter);
         }
 
-        [HttpGet("{isbn}")]
-        public async Task<Book> GetBook(string isbn)
+        [HttpGet(@"api/books/{isbn:regex(^\d{{13}}$)}")]
+        public async Task<Book> Get(string isbn)
         {
-            return await this.books.GetBookByIsbnAsync(isbn);
+            return await this.books.GetBookByIsbn13Async(isbn);
         }
     }
 }

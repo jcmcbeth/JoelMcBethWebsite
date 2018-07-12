@@ -15,8 +15,6 @@
         function activate() {
             var isbn = $stateParams.isbn;
 
-            console.log(isbn);
-
             bookService.getBookByIsbn13(isbn).then(function (book) {
                 console.log(book);
                 vm.book = book;

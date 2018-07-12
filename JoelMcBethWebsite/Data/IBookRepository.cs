@@ -8,7 +8,7 @@
 
     public interface IBookRepository
     {
-        Task<Book> GetBookByIsbnAsync(string isbn);
+        Task<Book> GetBookByIsbn13Async(string isbn);
         Task<PagedEnumerable<Book>> GetBooksAsync(int page, int pageSize, string filter);
     }
 }

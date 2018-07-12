@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using JoelMcBethWebsite.Data;
+    using JoelMcBethWebsite.Data.MicrosoftSql;
     using Microsoft.AspNetCore.Authentication.Cookies;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -28,7 +29,7 @@
         {
             //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             //    .AddCookie();
-            services.AddTransient<IBookRepository, MemoryBookRepository>();
+            services.AddTransient<IBookRepository, MicrosoftSqlBookRepository>(s => new MicrosoftSqlBookRepository(@"Data Source=.\SQLEXPRESS;Initial Catalog=JoelMcBethWebsite;Integrated Security=True"));
             services.AddTransient<IUserRepository, MemoryUserRepository>();
             services.AddMvc();
         }

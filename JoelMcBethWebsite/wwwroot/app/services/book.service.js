@@ -29,11 +29,8 @@
         }
 
         function getBookByIsbn13(isbn) {
-            return $http.get("/api/books", {
-                params: {
-                    isbn: isbn
-                }
-            }).then(getBookComplete);
+            var url = "/api/books/" + isbn;
+            return $http.get(url).then(getBookComplete);
 
             function getBookComplete(response) {
                 return response.data;
