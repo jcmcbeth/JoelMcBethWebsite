@@ -17,6 +17,28 @@
             this.connectionString = connectionString;
         }
 
+        public async Task<Book> AddBook(Book book)
+        {
+            var query = @"INSERT INTO [dbo].[Books]
+                            ([Isbn13],
+                             [Title],         
+                             [Edition],
+                             [Pages])
+                          OUTPUT INSERTED.[Id]
+                          VALUES
+                            (@Isbn13,
+			                 @Title,
+			                 @Edition,
+			                 @Pages)";
+
+            using (var connection = new SqlConnection(this.connectionString))
+            {
+                book.Id = await connection.QuerySingleAsync<int>(query, book, commandTimeout: 30);
+            }
+
+            return book;
+        }
+
         public async Task<Book> GetBookByIsbn13Async(string isbn)
         {
             var bookQuery = @"SELECT [Books].[Id]

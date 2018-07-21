@@ -31,5 +31,13 @@
         {
             return await this.books.GetBookByIsbn13Async(isbn);
         }
+
+        [HttpPost("api/books")]
+        public async Task<IActionResult> Post([FromBody]Book book)
+        {
+            var books = await this.books.AddBook(book);
+
+            return this.Ok(books);
+        }
     }
 }

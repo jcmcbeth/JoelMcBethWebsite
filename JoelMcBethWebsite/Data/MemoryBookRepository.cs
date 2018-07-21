@@ -50,6 +50,13 @@
         {
         }
 
+        public Task<Book> AddBook(Book book)
+        {
+            books.Add(book);
+
+            return Task.FromResult(book);
+        }
+
         public Task<Book> GetBookByIsbn13Async(string isbn)
         {
             var result = books.Single(b => b.Isbn13 == isbn);
