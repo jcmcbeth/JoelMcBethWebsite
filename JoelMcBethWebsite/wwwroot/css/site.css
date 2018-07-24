@@ -204,3 +204,11 @@ p {
     .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .show > .btn-primary.dropdown-toggle:focus {
         box-shadow: 0 0 0 0.2rem rgba(0, 128, 0, 0.5);
     }
+
+/*
+    AngularJS
+*/
+
+input[type=text].ng-invalid.ng-dirty {
+    background-color: pink;
+}
