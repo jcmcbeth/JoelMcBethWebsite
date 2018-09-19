@@ -67,6 +67,7 @@
     <None Include="Data\Authors.sql" />
     <Build Include="BookAuthors.sql" />
     <None Include="Data\BookAuthors.sql" />
+    <Build Include="Media.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="JoelMcBethWebsite.Database.refactorlog" />
@@ -76,5 +77,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="JoelMcBethWebsite.Database.publish.xml" />
+    <None Include="Data\Media.sql" />
   </ItemGroup>
 </Project>
