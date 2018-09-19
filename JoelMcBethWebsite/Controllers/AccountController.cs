@@ -1,11 +1,11 @@
 ﻿namespace JoelMcBethWebsite.Controllers
 {
-    using JoelMcBethWebsite.Models;
-    using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using JoelMcBethWebsite.Models;
+    using Microsoft.AspNetCore.Mvc;
 
     [Produces("application/json")]
     [Route("api/account")]

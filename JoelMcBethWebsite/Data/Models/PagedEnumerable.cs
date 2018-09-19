@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace JoelMcBethWebsite.Data.Models
+﻿namespace JoelMcBethWebsite.Data.Models
 {
+    using System.Collections.Generic;
+
     public class PagedEnumerable<T>
     {
+        public PagedEnumerable(IEnumerable<T> data, Pagination pagination)
+        {
+            this.Data = data;
+            this.Pagination = pagination;
+        }
+
         public IEnumerable<T> Data
         {
             get;
@@ -17,12 +20,6 @@ namespace JoelMcBethWebsite.Data.Models
         {
             get;
             private set;
-        }
-
-        public PagedEnumerable(IEnumerable<T> data, Pagination pagination)
-        {
-            this.Data = data;
-            this.Pagination = pagination;
         }
     }
 }
