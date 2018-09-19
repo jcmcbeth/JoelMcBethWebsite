@@ -1,5 +1,8 @@
 ﻿<h1>Books</h1>
 <p>This is a list of the books in my library.</p>
+<ul class="list-unstyled">
+    <li ng-if="::vm.canAdd()"><a ui-sref="addBook">Add Book</a></li>
+</ul>
 
 <div class="form-group">
     <input id="filter" type="text" class="form-control" placeholder="Search" ng-model="vm.filterText" />

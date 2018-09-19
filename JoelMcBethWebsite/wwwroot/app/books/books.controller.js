@@ -3,15 +3,16 @@
         .module("app")
         .controller("BookController", BookController);
 
-    BookController.$inject = ["$scope", "bookService"];
+    BookController.$inject = ["$scope", "bookService", "authenticationService"];
 
-    function BookController($scope, bookService) {
+    function BookController($scope, bookService, authenticationSerivce) {
         var vm = this;
 
         vm.pageSize = 12;
         vm.page = 1;
         vm.pageCount = 0;
         vm.pages = [];
+        vm.canAdd = canAdd;
 
         $scope.$watch("vm.filterText", function (newValue, oldValue) {
             if (newValue !== oldValue) {
@@ -29,6 +30,10 @@
                 updateBooks();
             }
         };
+
+        function canAdd() {
+            return authenticationSerivce.isAuthenticated();
+        }
 
         function activate() {
             return updateBooks();
