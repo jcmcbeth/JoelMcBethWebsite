@@ -1,1 +1,24 @@
-﻿
+﻿<h2>Media Library</h2>
+
+<div class="form-group">
+    <input id="filter" type="text" class="form-control" placeholder="Search" ng-model="vm.filterText" ng-change="search()" />
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Media Type</th>
+            <th>Medium</th>
+            <th>Year</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in vm.media">
+            <th>{{ item.title }}</th>
+            <th>{{ item.mediaType }}</th>
+            <th>{{ item.medium }}</th>
+            <th>{{ item.year}}</th>
+        </tr>
+    </tbody>
+</table>
