@@ -3,8 +3,8 @@
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [Title] NVARCHAR(256) NOT NULL, 
     [Year] SMALLINT NULL, 
-    [MediaType] INT NOT NULL, 
-    [Medium] NVARCHAR(50) NOT NULL
+    [MediaType] TINYINT NOT NULL, 
+    [Medium] TINYINT NOT NULL
 )
 
 GO

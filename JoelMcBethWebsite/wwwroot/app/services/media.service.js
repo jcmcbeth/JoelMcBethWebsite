@@ -3,11 +3,11 @@
 
     angular
         .module("app")
-        .factory("mediaService", factory);
+        .factory("mediaService", mediaService);
 
-    factory.$inject = ["$http"];
+    mediaService.$inject = ["$http"];
 
-    function factory($http) {
+    function mediaService($http) {
         var baseUrl = "/api/media";
 
         return {
@@ -23,7 +23,7 @@
 
             function getMediaComplete(response) {
                 return {
-                    media: response.data.data
+                    media: response.data
                 };
             }
         }

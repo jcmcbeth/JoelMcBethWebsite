@@ -20,7 +20,7 @@
 
         function updateMedia() {
             return mediaService.getMedia(vm.filterText).then(function (data) {
-                vm.media = data.books;
+                vm.media = data.media;
             });
         }
 
