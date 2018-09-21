@@ -21,9 +21,9 @@
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Media>> Get(string search)
+        public async Task<IEnumerable<Media>> Get(string filter)
         {
-            return await this.mediaRepository.GetMediaAsync(search);
+            return await this.mediaRepository.GetMediaAsync(filter);
         }
     }
 }

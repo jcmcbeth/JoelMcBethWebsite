@@ -13,3 +13,4 @@ Post-Deployment Script Template
 :r .\Data\Books.sql
 :r .\Data\Authors.sql
 :r .\Data\BookAuthors.sql
+:r .\Data\Media.sql

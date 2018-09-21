@@ -23,9 +23,15 @@
             },
             {
                 group: "Main",
+                state: "media",
+                title: "Media",
+                visible: true
+            },
+            {
+                group: "Main",
                 state: "books",
                 title: "Books",
-                visible: true,
+                visible: true
             },
             {
                 group: "Main",

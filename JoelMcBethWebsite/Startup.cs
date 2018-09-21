@@ -27,8 +27,12 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IBookRepository, MicrosoftSqlBookRepository>(s => new MicrosoftSqlBookRepository(@"Data Source=.\SQLEXPRESS;Initial Catalog=JoelMcBethWebsite;Integrated Security=True"));
+            var connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=JoelMcBethWebsite;Integrated Security=True";
+
+            services.AddTransient<IBookRepository, MicrosoftSqlBookRepository>(s => new MicrosoftSqlBookRepository(connectionString));
             services.AddTransient<IUserRepository, MemoryUserRepository>();
+            services.AddTransient<IMediaRepository, MicrosoftSqlMediaRepository>(s => new MicrosoftSqlMediaRepository(connectionString));
+
             services.AddMvc();
         }
 

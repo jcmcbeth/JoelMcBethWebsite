@@ -1,6 +1,8 @@
-﻿MERGE INTO [Media] AS [Target]
+﻿SET IDENTITY_INSERT [Media] ON;
+
+MERGE INTO [Media] AS [Target]
 USING (VALUES
-	(1, 'District 9', 'Movie', 'DVD', NULL)
+	(1, 'District 9', 1, 1, NULL)
 ) AS [Source] ([Id], [Title], [MediaType], [Medium], [Year])
 ON
 	([Target].[Id] = [Source].[Id])
@@ -11,7 +13,7 @@ WHEN MATCHED THEN
 		[Medium] = [Source].[Medium],
 		[Year] = [Source].[Year]
 WHEN NOT MATCHED BY TARGET THEN
-	INSERT ([Id], [FirstName], [LastName], [MiddleName])
+	INSERT ([Id], [Title], [MediaType], [Medium], [Year])
 	VALUES (
 		[Source].[Id],
 		[Source].[Title],
@@ -21,3 +23,5 @@ WHEN NOT MATCHED BY TARGET THEN
 	)
 WHEN NOT MATCHED BY SOURCE THEN
 	DELETE;
+
+SET IDENTITY_INSERT [Media] OFF;

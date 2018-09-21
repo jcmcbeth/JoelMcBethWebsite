@@ -13,7 +13,7 @@
 
         public string MediaType { get; set; }
 
-        public string Mediuam { get; set; }
+        public string Medium { get; set; }
 
         public int Year { get; set; }
     }
