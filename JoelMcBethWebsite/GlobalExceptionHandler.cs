@@ -6,6 +6,15 @@
     using Microsoft.AspNetCore.Http;
     using Newtonsoft.Json;
 
+    // Extension method used to add the middleware to the HTTP request pipeline.
+    public static class GlobalExceptionHandlerExtensions
+    {
+        public static IApplicationBuilder UseGlobalExceptionHandler(this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<GlobalExceptionHandler>();
+        }
+    }
+
     // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
     public class GlobalExceptionHandler
     {
@@ -31,15 +40,6 @@
 
                 await httpContext.Response.WriteAsync(result);
             }
-        }
-    }
-
-    // Extension method used to add the middleware to the HTTP request pipeline.
-    public static class GlobalExceptionHandlerExtensions
-    {
-        public static IApplicationBuilder UseGlobalExceptionHandler(this IApplicationBuilder builder)
-        {
-            return builder.UseMiddleware<GlobalExceptionHandler>();
         }
     }
 }

@@ -8,9 +8,8 @@
     using JoelMcBethWebsite.Data.Models;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    
+
     [Produces("application/json")]
-    //[Route("api/Books")]
     public class BookController : Controller
     {
         private readonly IBookRepository books;

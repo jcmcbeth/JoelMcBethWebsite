@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using JoelMcBethWebsite.Data.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
-namespace JoelMcBethWebsite.Controllers
+﻿namespace JoelMcBethWebsite.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using JoelMcBethWebsite.Data.Models;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+
     [Produces("application/json")]
     [Route("api/Projects")]
     public class ProjectController : Controller

@@ -7,6 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JoelMcBethWebsite", "JoelMc
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "JoelMcBethWebsite.Database", "JoelMcBethWebsite.Database\JoelMcBethWebsite.Database.sqlproj", "{C741CFB5-7506-4512-86BC-320E93B71606}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D3108818-CBCB-4DA6-A666-626AAB89FB3B}"
+	ProjectSection(SolutionItems) = preProject
+		JoelMcBethWebsite.ruleset = JoelMcBethWebsite.ruleset
+		stylecop.json = stylecop.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -8,18 +8,18 @@
 
     public class MemoryUserRepository : IUserRepository
     {
-        public static readonly ICollection<User> users = new List<User>();
+        private static readonly ICollection<User> Users = new List<User>();
 
         public Task<User> AddUserAsync(User user)
         {
-            users.Add(user);
+            Users.Add(user);
 
             return Task.FromResult(user);
         }
 
         public Task<User> GetUserByEmailAsync(string email)
         {
-            var user = users.Where(u => u.Email.Equals(email, StringComparison.CurrentCultureIgnoreCase))
+            var user = Users.Where(u => u.Email.Equals(email, StringComparison.CurrentCultureIgnoreCase))
                 .Single();
 
             return Task.FromResult(user);
@@ -27,9 +27,9 @@
 
         public Task<PagedEnumerable<User>> GetUsersAsync(int page, int pageSize)
         {
-            var pagedUsers = users.Skip((page - 1) * pageSize).Take(pageSize);
+            var pagedUsers = Users.Skip((page - 1) * pageSize).Take(pageSize);
 
-            var count = users.Count;
+            var count = Users.Count;
 
             var pagination = new Pagination()
             {
