@@ -1,12 +1,12 @@
 ﻿namespace JoelMcBethWebsite.Data.MicrosoftSql
 {
-    using Dapper;
-    using JoelMcBethWebsite.Data.Models;
     using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
+    using Dapper;
+    using JoelMcBethWebsite.Data.Models;
 
     public class MicrosoftSqlMediaRepository : IMediaRepository
     {

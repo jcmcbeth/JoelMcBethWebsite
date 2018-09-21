@@ -102,7 +102,7 @@ p {
 }
 
 .menu-group {
-    padding: 0 0 .5rem 0px;
+    padding: 0 0 .5rem 0;
 }
 
 @media (min-width: 768px) {

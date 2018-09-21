@@ -8,11 +8,11 @@
 
     public class MemoryBookRepository : IBookRepository
     {
-        private static readonly ICollection<Book> books = new List<Book>();
+        private static readonly ICollection<Book> Books = new List<Book>();
 
         static MemoryBookRepository()
         {
-            books.Add(new Book()
+            Books.Add(new Book()
             {
                 Title = "Soft Skills: The software developer's life manual",
                 Isbn13 = "9781617292392",
@@ -31,7 +31,7 @@
                 }
             });
 
-            books.Add(new Book()
+            Books.Add(new Book()
             {
                 Title = "Pro AngularJS",
                 Isbn13 = "9781430264484",
@@ -52,21 +52,21 @@
 
         public Task<Book> AddBook(Book book)
         {
-            books.Add(book);
+            Books.Add(book);
 
             return Task.FromResult(book);
         }
 
         public Task<Book> GetBookByIsbn13Async(string isbn)
         {
-            var result = books.Single(b => b.Isbn13 == isbn);
+            var result = Books.Single(b => b.Isbn13 == isbn);
 
             return Task.FromResult(result);
         }
 
         public Task<PagedEnumerable<Book>> GetBooksAsync(int page, int pageSize, string filter)
         {
-            var filteredBooks = books.AsEnumerable();
+            var filteredBooks = Books.AsEnumerable();
             var pagination = new Pagination()
             {
                 Page = page,
