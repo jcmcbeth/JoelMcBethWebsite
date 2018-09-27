@@ -21,45 +21,45 @@
                 title: "Projects",
                 visible: true
             },
-            {
-                group: "Main",
-                state: "media",
-                title: "Media",
-                visible: true
-            },
-            {
-                group: "Main",
-                state: "books",
-                title: "Books",
-                visible: true
-            },
-            {
-                group: "Main",
-                state: "resume",
-                title: "Resume",
-                visible: true
-            },
-            {
-                group: "Account",
-                state: "login",
-                title: "Login",
-                visible: true,
-                unauthenticatedOnly: true
-            },
-            {
-                group: "Account",
-                state: "logout",
-                title: "Logout",
-                visible: true,
-                requireAuthentication: true
-            },
-            {
-                group: "Users",
-                state: "users",
-                title: "User List",
-                visible: true,
-                requireAuthentication: true
-            }
+            //{
+            //    group: "Main",
+            //    state: "media",
+            //    title: "Media",
+            //    visible: false
+            //},
+            //{
+            //    group: "Main",
+            //    state: "books",
+            //    title: "Books",
+            //    visible: false
+            //},
+            //{
+            //    group: "Main",
+            //    state: "resume",
+            //    title: "Resume",
+            //    visible: false
+            //},
+            //{
+            //    group: "Account",
+            //    state: "login",
+            //    title: "Login",
+            //    visible: false,
+            //    unauthenticatedOnly: true
+            //},
+            //{
+            //    group: "Account",
+            //    state: "logout",
+            //    title: "Logout",
+            //    visible: false,
+            //    requireAuthentication: true
+            //},
+            //{
+            //    group: "Users",
+            //    state: "users",
+            //    title: "User List",
+            //    visible: false,
+            //    requireAuthentication: true
+            //}
         ];
 
         var service = {
