@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="appsettings.json" />
     <Content Remove="package.json" />
   </ItemGroup>
 
@@ -27,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="appsettings.json" />
     <None Include="package.json" />
   </ItemGroup>
 
