@@ -25,7 +25,7 @@
         <div class="row">
             <nav id="side-nav" class="navbar navbar-expand-md navbar-side d-md-block col-md-2 col-lg-1" ng-controller="MenuController as vm">
                 <div class="collapse navbar-collapse navbar-side-content" id="menu">
-                    <div class="menu-group" ng-repeat="group in vm.menuGroups" ng-if="group.visible">
+                    <div class="menu-group" ng-repeat="group in vm.menuGroups" ng-if="group.visible" ng-cloak>
                         <h2>{{group.name}}</h2>
                         <ul class="navbar-nav mr-auto" ng-repeat="item in group.menuItems">
                             <!-- remember to set active, check change log -->

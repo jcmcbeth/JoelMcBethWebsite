@@ -98,6 +98,8 @@
                     WHERE [Books].[Title] LIKE @Filter OR [Authors].[FirstName] LIKE @Filter OR [Authors].[LastName] LIKE @Filter
                 ";
 
+            var orderBy = 
+
             var query = string.Format(
                 @"
                 SELECT DISTINCT [Books].[Id]
@@ -111,7 +113,7 @@
                 LEFT JOIN [BookAuthors] on [Books].[Id] = [BookAuthors].[BookId]
                 LEFT JOIN [Authors] ON [BookAuthors].[AuthorId] = [Authors].[Id]
                 WHERE [Books].[Title] LIKE @Filter OR [Authors].[FirstName] LIKE @Filter OR [Authors].[LastName] LIKE @Filter
-                ORDER BY [Books].[Id]
+                ORDER BY {
                 OFFSET {0} ROWS
                 FETCH NEXT {1} ROWS ONLY
                 ",
