@@ -5,7 +5,16 @@
 </ul>
 
 <div class="form-group">
-    <input id="filter" type="text" class="form-control" placeholder="Search" ng-model="vm.filterText" />
+    <input id="filter" type="text" class="form-control col-lg-2" placeholder="Search" ng-model="vm.filterText" />
+</div>
+
+<div class="form-group">
+    <label id="sort">Sort:</label>
+    <select for="sort" class="form-control col-lg-2">
+        <option>Title</option>
+        <option>Rating</option>
+        <option>Queue</option>
+    </select>
 </div>
 
 <div class="row">

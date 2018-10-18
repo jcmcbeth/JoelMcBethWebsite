@@ -24,5 +24,9 @@
         public string Pages { get; set; }
 
         public ICollection<Author> Authors { get; set; }
+
+        public int? Rating { get; set; }
+
+        public int? Order { get; set; }
     }
 }

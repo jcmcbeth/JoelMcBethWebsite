@@ -91,33 +91,34 @@
 
             var countQuery =
                 @"
-                    SELECT COUNT(*)
+                    SELECT COUNT(DISTINCT([Books].[Id]))
                     FROM [Books]
                     LEFT JOIN [BookAuthors] on [Books].[Id] = [BookAuthors].[BookId]
                     LEFT JOIN [Authors] ON [BookAuthors].[AuthorId] = [Authors].[Id]
                     WHERE [Books].[Title] LIKE @Filter OR [Authors].[FirstName] LIKE @Filter OR [Authors].[LastName] LIKE @Filter
                 ";
 
+            var orderBy = 
+
             var query = string.Format(
                 @"
-                SELECT [Books].[Id]
+                SELECT DISTINCT [Books].[Id]
                     ,[Books].[Isbn13]
                     ,[Books].[Title]
                     ,[Books].[Edition]
                     ,[Books].[Pages]
-                    ,[Authors].[Id]
-                    ,[Authors].[FirstName]
-                    ,[Authors].[LastName]
-                    ,[Authors].[MiddleName]
-                FROM [JoelMcBethWebsite].[dbo].[Books]
+                    ,[Books].[Rating]
+                    ,[Books].[Order]
+                FROM [Books]
                 LEFT JOIN [BookAuthors] on [Books].[Id] = [BookAuthors].[BookId]
                 LEFT JOIN [Authors] ON [BookAuthors].[AuthorId] = [Authors].[Id]
                 WHERE [Books].[Title] LIKE @Filter OR [Authors].[FirstName] LIKE @Filter OR [Authors].[LastName] LIKE @Filter
-                ORDER BY [Books].[Id]
+                ORDER BY {
                 OFFSET {0} ROWS
                 FETCH NEXT {1} ROWS ONLY
                 ",
-                offset, pageSize);
+                offset,
+                pageSize);
 
             var mappedBooks = new Dictionary<int, Book>();
 
@@ -131,7 +132,7 @@
                     if (!mappedBooks.TryGetValue(book.Id, out Book existingBook))
                     {
                         existingBook = book;
-                       
+
                         mappedBooks.Add(existingBook.Id, existingBook);
                     }
 
@@ -141,6 +142,26 @@
                 }, param: new { Offset = offset, PageSize = pageSize, Filter = "%" + filter + "%" });
 
                 return new PagedEnumerable<Book>(books, pagination);
+            }
+        }
+
+        public async Task<IEnumerable<Author>> GetBookAuthorsAsync(params int[] bookIds)
+        {
+            var idList = "(" + string.Join(", ", bookIds) + ")";
+
+            var authorsQuery = @"SELECT [Authors].[Id],
+                                        [Authors].[FirstName],
+                                        [Authors].[LastName],
+                                        [Authors].[MiddleName]
+                                 FROM [Authors]
+                                 INNER JOIN [BookAuthors] ON [BookAuthors].[Id] = [Authors].[Id]
+                                 WHERE [BookAuthors].[Id] IN " + idList;
+
+            using (var connection = new SqlConnection(this.connectionString))
+            {
+                var authors = await connection.QueryAsync<Author>(authorsQuery);
+
+                return authors;
             }
         }
     }
