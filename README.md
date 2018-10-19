@@ -1,4 +1,5 @@
 # JoelMcBethWebsite
+[![Build Status](https://joelmcbeth.visualstudio.com/Personal/_apis/build/status/JoelMcBethWebsite-CI)](https://joelmcbeth.visualstudio.com/Personal/_build/latest?definitionId=7)
 Personal website of Joel McBeth.
 
 This is my attempt at learning and/or practicing Angular, TypeScript and ASP.NET Core.
