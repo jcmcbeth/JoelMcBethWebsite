@@ -98,7 +98,7 @@
                     WHERE [Books].[Title] LIKE @Filter OR [Authors].[FirstName] LIKE @Filter OR [Authors].[LastName] LIKE @Filter
                 ";
 
-            var orderBy = 
+            var orderBy = "";
 
             var query = string.Format(
                 @"
