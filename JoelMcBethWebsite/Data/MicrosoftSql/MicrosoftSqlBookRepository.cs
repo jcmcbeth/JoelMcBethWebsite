@@ -33,6 +33,18 @@
 
             using (var connection = new SqlConnection(this.connectionString))
             {
+                //await connection.OpenAsync();
+
+                //using (var command = new SqlCommand(query, connection))
+                //{
+                //    command.Parameters.AddWithValue("@Isbn13", book.Isbn13);
+                //    command.Parameters.AddWithValue("@Title", book.Title);
+                //    command.Parameters.AddWithValue("@Edition", book.Edition);
+                //    command.Parameters.AddWithValue("@Pages", book.Pages);
+
+                //    book.Id = (int)await command.ExecuteScalarAsync();
+                //}
+
                 book.Id = await connection.QuerySingleAsync<int>(query, book, commandTimeout: 30);
             }
 
@@ -75,6 +87,30 @@
             }
         }
 
+
+
+        public async Task<IEnumerable<Book>> GetBooksAsync()
+        {
+            throw new NotImplementedException();
+            var bookQuery =
+                @"
+                SELECT [Books].[Id] AS BookId
+                    ,[Books].[Isbn13]
+                    ,[Books].[Title]
+                    ,[Books].[Edition]
+                    ,[Books].[Pages]
+                    ,[Books].[Rating]
+                    ,[Books].[Order]
+                FROM [Books]
+                ";
+
+            var books = new List<Book>();
+
+            using (var connection = new SqlConnection(this.connectionString))
+            {
+            }
+        }
+
         public async Task<PagedEnumerable<Book>> GetBooksAsync(int page, int pageSize, string filter)
         {
             if (page <= 0)
@@ -87,6 +123,8 @@
                 throw new ArgumentOutOfRangeException(nameof(pageSize), pageSize, "The page size must at least be 1.");
             }
 
+            throw new NotImplementedException();
+
             var offset = (page - 1) * pageSize;
 
             var countQuery =
@@ -98,11 +136,9 @@
                     WHERE [Books].[Title] LIKE @Filter OR [Authors].[FirstName] LIKE @Filter OR [Authors].[LastName] LIKE @Filter
                 ";
 
-            var orderBy = "";
-
             var query = string.Format(
                 @"
-                SELECT DISTINCT [Books].[Id]
+                SELECT [Books].[Id]
                     ,[Books].[Isbn13]
                     ,[Books].[Title]
                     ,[Books].[Edition]
@@ -110,15 +146,7 @@
                     ,[Books].[Rating]
                     ,[Books].[Order]
                 FROM [Books]
-                LEFT JOIN [BookAuthors] on [Books].[Id] = [BookAuthors].[BookId]
-                LEFT JOIN [Authors] ON [BookAuthors].[AuthorId] = [Authors].[Id]
-                WHERE [Books].[Title] LIKE @Filter OR [Authors].[FirstName] LIKE @Filter OR [Authors].[LastName] LIKE @Filter
-                ORDER BY {
-                OFFSET {0} ROWS
-                FETCH NEXT {1} ROWS ONLY
-                ",
-                offset,
-                pageSize);
+                ");
 
             var mappedBooks = new Dictionary<int, Book>();
 
@@ -155,11 +183,31 @@
                                         [Authors].[MiddleName]
                                  FROM [Authors]
                                  INNER JOIN [BookAuthors] ON [BookAuthors].[Id] = [Authors].[Id]
-                                 WHERE [BookAuthors].[Id] IN " + idList;
+                                 WHERE [BookAuthors].[BookId] IN " + idList;
 
             using (var connection = new SqlConnection(this.connectionString))
             {
                 var authors = await connection.QueryAsync<Author>(authorsQuery);
+
+                return authors;
+            }
+        }
+
+        public async Task<IEnumerable<Author>> GetAuthorsAsync()
+        {
+            var query =
+                @"
+                    SELECT
+                        [Authors].[Id],
+                        [Authors].[FirstName],
+                        [Authors].[LastName],
+                        [Authors].[MiddleName]
+                    FROM [Authors]
+                ";
+
+            using (var connection = new SqlConnection(this.connectionString))
+            {
+                var authors = await connection.QueryAsync<Author>(query);
 
                 return authors;
             }

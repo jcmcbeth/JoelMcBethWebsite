@@ -59,6 +59,8 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Data" />
+    <Folder Include="Queries" />
+    <Folder Include="Queries\Books" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Authors.sql" />
@@ -78,5 +80,6 @@
   <ItemGroup>
     <None Include="JoelMcBethWebsite.Database.publish.xml" />
     <None Include="Data\Media.sql" />
+    <None Include="Queries\Books\GetAllBooks.sql" />
   </ItemGroup>
 </Project>

@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		stylecop.json = stylecop.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoelMcBethWebsite.Tests", "JoelMcBethWebsite.Tests\JoelMcBethWebsite.Tests.csproj", "{A156FC24-06C5-402A-B9B2-618AC038B622}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{C741CFB5-7506-4512-86BC-320E93B71606}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C741CFB5-7506-4512-86BC-320E93B71606}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C741CFB5-7506-4512-86BC-320E93B71606}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A156FC24-06C5-402A-B9B2-618AC038B622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A156FC24-06C5-402A-B9B2-618AC038B622}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A156FC24-06C5-402A-B9B2-618AC038B622}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A156FC24-06C5-402A-B9B2-618AC038B622}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

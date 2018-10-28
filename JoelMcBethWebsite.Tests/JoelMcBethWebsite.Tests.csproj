@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.2.1" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JoelMcBethWebsite.Database\JoelMcBethWebsite.Database.sqlproj" />
+    <ProjectReference Include="..\JoelMcBethWebsite\JoelMcBethWebsite.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Data.Tools.Schema.Sql">
+      <HintPath>..\Shared Binaries\Microsoft.SqlServer.Dac\Microsoft.Data.Tools.Schema.Sql.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Tools.Utilities">
+      <HintPath>..\Shared Binaries\Microsoft.SqlServer.Dac\Microsoft.Data.Tools.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Dac">
+      <HintPath>..\Shared Binaries\Microsoft.SqlServer.Dac\Microsoft.SqlServer.Dac.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Dac.Extensions">
+      <HintPath>..\Shared Binaries\Microsoft.SqlServer.Dac\Microsoft.SqlServer.Dac.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.TransactSql.ScriptDom">
+      <HintPath>..\Shared Binaries\Microsoft.SqlServer.Dac\Microsoft.SqlServer.TransactSql.ScriptDom.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Packaging">
+      <HintPath>..\Shared Binaries\Microsoft.SqlServer.Dac\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions">
+      <HintPath>..\Shared Binaries\Microsoft.SqlServer.Dac\System.Security.Permissions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="xcopy /y &quot;$(SolutionDir)JoelMcBethWebsite.Database\bin\$(ConfigurationName)\JoelMcBethWebsite.dacpac&quot; &quot;$(TargetDir)&quot;" />
+  </Target>
+
+</Project>
