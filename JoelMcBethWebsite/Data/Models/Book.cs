@@ -21,7 +21,7 @@
 
         public string Edition { get; set; }
 
-        public string Pages { get; set; }
+        public int? Pages { get; set; }
 
         public ICollection<Author> Authors { get; set; }
 

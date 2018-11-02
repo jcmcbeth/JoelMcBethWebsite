@@ -12,6 +12,6 @@
 
         Task<PagedEnumerable<Book>> GetBooksAsync(int page, int pageSize, string filter);
 
-        Task<Book> AddBook(Book book);
+        Task<Book> AddBookAsync(Book book);
     }
 }

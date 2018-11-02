@@ -17,9 +17,9 @@
             this.connectionString = connectionString;
         }
 
-        public async Task<Book> AddBook(Book book)
+        public async Task<Book> AddBookAsync(Book book)
         {
-            var query = @"INSERT INTO [dbo].[Books]
+            var bookQuery = @"INSERT INTO [dbo].[Books]
                             ([Isbn13],
                              [Title],         
                              [Edition],
@@ -31,24 +31,42 @@
 			                 @Edition,
 			                 @Pages)";
 
+            var authorQuery = @"
+                INSERT INTO [Authors]
+                    ([FirstName], [LastName])
+                OUTPUT INSERTED.[Id]
+                VALUES
+                    (@FirstName, @LastName)
+                ";
+
+            var bookAuthorQuery = @"
+                INSERT INTO [BookAuthors]
+                    ([BookId], [AuthorId])
+                VALUES
+                    (@BookId, @AuthorId)
+                ";
+
             using (var connection = new SqlConnection(this.connectionString))
             {
-                //await connection.OpenAsync();
+                book.Id = await connection.QuerySingleAsync<int>(bookQuery, book);
 
-                //using (var command = new SqlCommand(query, connection))
-                //{
-                //    command.Parameters.AddWithValue("@Isbn13", book.Isbn13);
-                //    command.Parameters.AddWithValue("@Title", book.Title);
-                //    command.Parameters.AddWithValue("@Edition", book.Edition);
-                //    command.Parameters.AddWithValue("@Pages", book.Pages);
+                foreach (var author in book.Authors)
+                {
+                    author.Id = await connection.QuerySingleAsync<int>(authorQuery, author);
 
-                //    book.Id = (int)await command.ExecuteScalarAsync();
-                //}
-
-                book.Id = await connection.QuerySingleAsync<int>(query, book, commandTimeout: 30);
+                    await connection.ExecuteAsync(bookAuthorQuery, new { BookId = book.Id, AuthorId = author.Id });
+                }
             }
 
             return book;
+        }
+
+        public async Task AddBooksAsync(IEnumerable<Book> books)
+        {
+            foreach (var book in books)
+            {
+                await this.AddBookAsync(book);
+            }
         }
 
         public async Task<Book> GetBookByIsbn13Async(string isbn)
@@ -59,19 +77,19 @@
                             ,[Books].[Edition]
                             ,[Books].[Pages]
                         FROM [Books]
-                        WHERE [Books].[Isbn] = @Isbn13";
+                        WHERE [Books].[Isbn13] = @Isbn13";
 
             var authorsQuery = @"SELECT [Authors].[Id],
                                         [Authors].[FirstName],
                                         [Authors].[LastName],
                                         [Authors].[MiddleName]
                                  FROM [Authors]
-                                 INNER JOIN [BookAuthors] ON [BookAuthors].[Id] = [Authors].[Id]
-                                 WHERE [BookAuthors].[Id] = @BookId";
+                                 INNER JOIN [BookAuthors] ON [BookAuthors].[AuthorId] = [Authors].[Id]
+                                 WHERE [BookAuthors].[BookId] = @BookId";
 
             using (var connection = new SqlConnection(this.connectionString))
             {
-                var book = await connection.QuerySingleOrDefaultAsync<Book>(bookQuery);
+                var book = await connection.QuerySingleOrDefaultAsync<Book>(bookQuery, new { Isbn13 = isbn });
 
                 if (book != null)
                 {
@@ -87,28 +105,75 @@
             }
         }
 
-
-
         public async Task<IEnumerable<Book>> GetBooksAsync()
         {
-            throw new NotImplementedException();
-            var bookQuery =
+            var query =
                 @"
-                SELECT [Books].[Id] AS BookId
-                    ,[Books].[Isbn13]
-                    ,[Books].[Title]
-                    ,[Books].[Edition]
-                    ,[Books].[Pages]
-                    ,[Books].[Rating]
-                    ,[Books].[Order]
-                FROM [Books]
+                SELECT
+	                [Books].[Id] AS BookId,
+                    [Books].[Isbn13],
+                    [Books].[Title],
+                    [Books].[Edition],
+                    [Books].[Pages],
+                    [Books].[Rating],
+                    [Books].[Order],
+	                [Authors].[Id] AS AuthorId,
+	                [Authors].[FirstName],
+	                [Authors].[LastName],
+	                [Authors].[MiddleName]
+                FROM
+	                [Books]
+                INNER JOIN
+	                BookAuthors ON [Books].[Id] = [BookAuthors].[BookId]
+                INNER JOIN
+	                Authors ON [BookAuthors].[AuthorId] = [Authors].[Id]
                 ";
 
-            var books = new List<Book>();
+            var books = new Dictionary<int, Book>();
 
             using (var connection = new SqlConnection(this.connectionString))
             {
+                await connection.OpenAsync();
+
+                using (var command = new SqlCommand(query, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            var id = reader.GetInt32("BookId");
+
+                            if (!books.TryGetValue(id, out Book book))
+                            {
+                                book = new Book()
+                                {
+                                    Id = id,
+                                    Edition = reader.GetNullableString("Edition"),
+                                    Isbn13 = reader.GetNullableString("Isbn13"),
+                                    Pages = reader.GetNullableInt32("Pages"),
+                                    Title = reader.GetNullableString("Title"),
+                                    Order = reader.GetNullableInt32("Order"),
+                                    Rating = reader.GetNullableInt32("Rating")
+                                };
+
+                                books.Add(id, book);
+                            }
+
+                            var author = new Author()
+                            {
+                                Id = reader.GetInt32("AuthorId"),
+                                FirstName = reader.GetNullableString("FirstName"),
+                                LastName = reader.GetNullableString("LastName"),
+                                MiddleName = reader.GetNullableString("MiddleName")
+                            };
+
+                            book.Authors.Add(author);
+                        }
+                    }
+                }
             }
+
+            return books.Values;
         }
 
         public async Task<PagedEnumerable<Book>> GetBooksAsync(int page, int pageSize, string filter)
@@ -123,54 +188,16 @@
                 throw new ArgumentOutOfRangeException(nameof(pageSize), pageSize, "The page size must at least be 1.");
             }
 
-            throw new NotImplementedException();
+            var books = await this.GetBooksAsync();
+            var count = books.Count();
+
+            var pagination = new Pagination(page, pageSize, count);
 
             var offset = (page - 1) * pageSize;
 
-            var countQuery =
-                @"
-                    SELECT COUNT(DISTINCT([Books].[Id]))
-                    FROM [Books]
-                    LEFT JOIN [BookAuthors] on [Books].[Id] = [BookAuthors].[BookId]
-                    LEFT JOIN [Authors] ON [BookAuthors].[AuthorId] = [Authors].[Id]
-                    WHERE [Books].[Title] LIKE @Filter OR [Authors].[FirstName] LIKE @Filter OR [Authors].[LastName] LIKE @Filter
-                ";
+            books = books.Skip(offset).Take(pageSize);
 
-            var query = string.Format(
-                @"
-                SELECT [Books].[Id]
-                    ,[Books].[Isbn13]
-                    ,[Books].[Title]
-                    ,[Books].[Edition]
-                    ,[Books].[Pages]
-                    ,[Books].[Rating]
-                    ,[Books].[Order]
-                FROM [Books]
-                ");
-
-            var mappedBooks = new Dictionary<int, Book>();
-
-            using (var connection = new SqlConnection(this.connectionString))
-            {
-                var count = (int)await connection.ExecuteScalarAsync(countQuery, new { Filter = "%" + filter + "%" });
-                var pagination = new Pagination(page, pageSize, count);
-
-                var books = await connection.QueryAsync<Book, Author, Book>(query, (book, author) =>
-                {
-                    if (!mappedBooks.TryGetValue(book.Id, out Book existingBook))
-                    {
-                        existingBook = book;
-
-                        mappedBooks.Add(existingBook.Id, existingBook);
-                    }
-
-                    existingBook.Authors.Add(author);
-
-                    return existingBook;
-                }, param: new { Offset = offset, PageSize = pageSize, Filter = "%" + filter + "%" });
-
-                return new PagedEnumerable<Book>(books, pagination);
-            }
+            return new PagedEnumerable<Book>(books, pagination);
         }
 
         public async Task<IEnumerable<Author>> GetBookAuthorsAsync(params int[] bookIds)

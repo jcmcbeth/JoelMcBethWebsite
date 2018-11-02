@@ -50,7 +50,7 @@
         {
         }
 
-        public Task<Book> AddBook(Book book)
+        public Task<Book> AddBookAsync(Book book)
         {
             Books.Add(book);
 

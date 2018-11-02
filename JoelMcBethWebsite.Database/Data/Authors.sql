@@ -1,4 +1,6 @@
-﻿MERGE INTO [Authors] AS [Target]
+﻿SET IDENTITY_INSERT [Authors] ON;
+
+MERGE INTO [Authors] AS [Target]
 USING (VALUES
 	(1, 'John', 'Sonmez', NULL)
 ) AS [Source] ([Id], [FirstName], [LastName], [MiddleName])
@@ -19,3 +21,5 @@ WHEN NOT MATCHED BY TARGET THEN
 	)
 WHEN NOT MATCHED BY SOURCE THEN
 	DELETE;
+
+SET IDENTITY_INSERT [Authors] OFF;
