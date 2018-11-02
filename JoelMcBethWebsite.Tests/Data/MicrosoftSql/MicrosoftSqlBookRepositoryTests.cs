@@ -11,13 +11,16 @@
     using System.Data.SqlClient;
     using JoelMcBethWebsite.Data.Models;
     using System.Threading.Tasks;
+    using System.Linq;
+    using AutoFixture;
 
     [TestClass]
     public class MicrosoftSqlBookRepositoryTests : MicrosoftSqlTestBase<MicrosoftSqlBookRepository>
     {
-        public override MicrosoftSqlBookRepository CreateTarget(string connectionString)
+        protected override void SetupFixture(Fixture fixture)
         {
-            return new MicrosoftSqlBookRepository(connectionString);
+            fixture.Customizations.Add(
+                new IsbnSpecimenBuilder<Book>(b => b.Isbn13));
         }
 
         [TestMethod]
@@ -26,24 +29,129 @@
         {
             var book = new Book()
             {
-                Isbn13 = "asdf"
+                Title = "Test",
+                Isbn13 = "9783161484100",
+                Authors = new List<Author>
+                {
+                    new Author()
+                    {
+                        FirstName = "Joe",
+                        LastName = "Bob"
+                    },
+                    new Author()
+                    {
+                        FirstName = "Tim",
+                        LastName = "Horton"
+                    },
+                }
             };
 
-            await this.Target.AddBook(book);
+            await this.Target.AddBookAsync(book);
 
-            var actual = await this.Target.GetBookByIsbn13Async("asdf");
+            var actual = await this.Target.GetBookByIsbn13Async("9783161484100");
 
-            this.AssertEqual(book, actual);
+            BookAssert.AreEqual(book, actual);
         }
 
-        private void AssertEqual(Book expected, Book actual)
+        [TestMethod]
+        [TestCategory("Integration")]
+        public async Task GetBooksAsync_AllBooksReturned()
         {
-            Assert.AreEqual(expected.Id, actual.Id);
-            Assert.AreEqual(expected.Isbn13, actual.Isbn13);
-            Assert.AreEqual(expected.Order, actual.Order);
-            Assert.AreEqual(expected.Pages, actual.Pages);
-            Assert.AreEqual(expected.Rating, actual.Rating);
-            Assert.AreEqual(expected.Title, actual.Title);
+            // Arrange
+            var books = new List<Book>()
+            {
+                new Book()
+                {
+                    Title = "Test",
+                    Isbn13 = "9783161484100",
+                    Authors = new List<Author>
+                    {
+                        new Author()
+                        {
+                            FirstName = "Joe",
+                            LastName = "Bob"
+                        },
+                        new Author()
+                        {
+                            FirstName = "Tim",
+                            LastName = "Horton"
+                        },
+                    }
+                },
+                new Book()
+                {
+                    Title = "Test2",
+                    Isbn13 = "1234567890123",
+                    Authors = new List<Author>
+                    {
+                        new Author()
+                        {
+                            FirstName = "Bill",
+                            LastName = "Smith"
+                        }
+                    }
+                }
+            };
+
+            await this.Target.AddBooksAsync(books);
+
+            // Act
+            var actual = await this.Target.GetBooksAsync();
+
+            // Assert
+            BookAssert.AreEquivalent(books, actual);
+        }
+
+        [TestMethod]
+        [TestCategory("Integration")]
+        public async Task GetBooksAsync_NumberOfItemsLargeThanPageSize_PageSizeNumberOfItemsReturned()
+        {
+            // Arrange
+            var books = this.Fixture.Build<Book>()
+                .CreateMany(4);
+
+            await this.Target.AddBooksAsync(books);
+
+            // Act
+            var actual = await this.Target.GetBooksAsync(1, 2, null);
+
+            // Assert
+            Assert.AreEqual(2, actual.Data.Count());
+        }
+
+        [TestMethod]
+        [TestCategory("Integration")]
+        public async Task GetBooksAsync_LastPage_ItemFromLastPageReturned()
+        {
+            // Arrange
+            var books = this.Fixture.Build<Book>()
+                .CreateMany(3);
+
+            await this.Target.AddBooksAsync(books);
+
+            // Act
+            var actual = await this.Target.GetBooksAsync(2, 2, null);
+
+            // Assert
+            var expected = books.Last();
+
+            Assert.AreEqual(expected.Id, actual.Data.Single().Id);
+        }
+
+        protected override async Task Reset()
+        {
+            await this.Database.DeleteAllFromTableAsync("BookAuthors");
+            await this.Database.DeleteAllFromTableAsync("Books", resetIdentity: true);
+            await this.Database.DeleteAllFromTableAsync("Authors", resetIdentity: true);
+        }
+
+        protected override MicrosoftSqlBookRepository CreateTarget(string connectionString)
+        {
+            return new MicrosoftSqlBookRepository(connectionString);
+        }
+
+        private void SetupBooks()
+        {
         }
     }
 }

@@ -14,14 +14,14 @@
         public static Database Database { get; } = new Database(ConnectionString);
 
         [AssemblyInitialize]
-        public static async Task InitializeDatabase(TestContext testContext)
+        public static void InitializeDatabase(TestContext testContext)
         {
-            if (await Database.ExistsAsync())
+            if (Database.ExistsAsync().Result)
             {
-                await Database.DeleteAsync();
+                Database.DeleteAsync().Wait();
             }
 
-            await Database.DeployDacPackAsync("JoelMcBethWebsite.dacpac");
+            Database.DeployDacPac("JoelMcBethWebsite.dacpac");
         }
 
         [AssemblyCleanup]

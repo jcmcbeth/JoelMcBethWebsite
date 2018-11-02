@@ -1,5 +1,6 @@
 ﻿namespace JoelMcBethWebsite.Tests.Data.MicrosoftSql
 {
+    using AutoFixture;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
     using System.Collections.Generic;
@@ -35,22 +36,41 @@
             set;
         }
 
-        [TestInitialize]
-        public virtual void Initialize()
+        protected Fixture Fixture
         {
+            get;
+            set;
+        }
+
+        [TestInitialize]
+        public virtual async Task Initialize()
+        {
+            this.Database = TestDatabaseInitializer.Database;
             this.ConnectionString = TestDatabaseInitializer.ConnectionString;
 
-            this.Target = this.CreateTarget(this.ConnectionString);
+            this.Fixture = new Fixture();
 
-            this.Transaction = new TransactionScope();
+            this.SetupFixture(this.Fixture);
+
+            await this.Reset();
+
+            this.Target = this.CreateTarget(this.ConnectionString);
         }
 
         [TestCleanup]
         public virtual void Cleanup()
         {
-            this.Transaction.Dispose();
         }
 
-        public abstract TTarget CreateTarget(string connectionString);
+        protected abstract TTarget CreateTarget(string connectionString);
+
+        protected virtual void SetupFixture(Fixture fixture)
+        {
+        }
+
+        protected virtual Task Reset()
+        {
+            return Task.CompletedTask;
+        }
     }
 }
