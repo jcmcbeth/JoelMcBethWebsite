@@ -16,12 +16,12 @@
                 return;
             }
 
-            Assert.AreEqual(expected.Id, actual.Id);
-            Assert.AreEqual(expected.Isbn13, actual.Isbn13);
-            Assert.AreEqual(expected.Order, actual.Order);
-            Assert.AreEqual(expected.Pages, actual.Pages);
-            Assert.AreEqual(expected.Rating, actual.Rating);
-            Assert.AreEqual(expected.Title, actual.Title);
+            Assert.AreEqual(expected.Id, actual.Id, "Expected ids to be equal.");
+            Assert.AreEqual(expected.Isbn13, actual.Isbn13, "Expected ISBN13 to be equal.");
+            Assert.AreEqual(expected.Order, actual.Order, "Expected order to be equal.");
+            Assert.AreEqual(expected.Pages, actual.Pages, "Expected pages to be equal.");
+            Assert.AreEqual(expected.Rating, actual.Rating, "Expected rating to be equal.");
+            Assert.AreEqual(expected.Title, actual.Title, "Expected title to be equal.");
 
             AreEquivalent(expected.Authors, actual.Authors);
         }
@@ -70,9 +70,9 @@
 
         public static void AreEqual(Author expected, Author actual)
         {
-            Assert.AreEqual(expected.Id, actual.Id);
-            Assert.AreEqual(expected.FirstName, actual.FirstName);
-            Assert.AreEqual(expected.LastName, actual.LastName);
+            Assert.AreEqual(expected.Id, actual.Id, "Expected author id to be equal.");
+            Assert.AreEqual(expected.FirstName, actual.FirstName, "Expected author first name to be equal.");
+            Assert.AreEqual(expected.LastName, actual.LastName, "Expected author last name to be equal.");
         }
     }
 }

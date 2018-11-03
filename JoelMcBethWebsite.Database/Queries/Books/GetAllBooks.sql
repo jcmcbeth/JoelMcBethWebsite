@@ -12,7 +12,7 @@
 	[Authors].[MiddleName]
 FROM
 	[Books]
-INNER JOIN
-	BookAuthors ON [Books].[Id] = [BookAuthors].[BookId]
-INNER JOIN
-	Authors ON [BookAuthors].[AuthorId] = [Authors].[Id]
+LEFT JOIN
+	[BookAuthors] ON [Books].[Id] = [BookAuthors].[BookId]
+LEFT JOIN
+	[Authors] ON [BookAuthors].[AuthorId] = [Authors].[Id]

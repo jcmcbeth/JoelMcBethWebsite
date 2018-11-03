@@ -27,6 +27,18 @@
             return (int)value;
         }
 
+        public static byte? GetNullableByte(this DbDataReader reader, string columnName, byte? defaultValue = default(byte?))
+        {
+            var value = reader[columnName];
+
+            if (value == DBNull.Value)
+            {
+                return defaultValue;
+            }
+
+            return (byte)value;
+        }
+
         public static string GetNullableString(this DbDataReader reader, string columnName, string defaultValue = default(string))
         {
             var value = reader[columnName];

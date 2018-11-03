@@ -104,7 +104,7 @@
 
         [TestMethod]
         [TestCategory("Integration")]
-        public async Task GetBooksAsync_NumberOfItemsLargeThanPageSize_PageSizeNumberOfItemsReturned()
+        public async Task GetBooksAsync_NumberOfItemsLargerThanPageSize_PageSizeNumberOfItemsReturned()
         {
             // Arrange
             var books = this.Fixture.Build<Book>()
@@ -135,7 +135,35 @@
             // Assert
             var expected = books.Last();
 
-            Assert.AreEqual(expected.Id, actual.Data.Single().Id);
+            BookAssert.AreEqual(expected, actual.Data.Single());
+        }
+
+        [TestMethod]
+        [TestCategory("Integration")]
+        public async Task GetBooksAsync_FilterText_ReturnsBookWithMatchingTitle()
+        {
+            // Arrange
+            var expected = new Book()
+            {
+                Title = "aa"
+            };
+
+            var books = new List<Book>()
+            {
+                expected,
+                new Book()
+                {
+                    Title = "ab"
+                }
+            };
+
+            await this.Target.AddBooksAsync(books);
+
+            // Act
+            var actual = await this.Target.GetBooksAsync(1, int.MaxValue, "aa");
+
+            // Assert
+            BookAssert.AreEqual(expected, actual.Data.Single());
         }
 
         protected override async Task Reset()
@@ -148,10 +176,6 @@
         protected override MicrosoftSqlBookRepository CreateTarget(string connectionString)
         {
             return new MicrosoftSqlBookRepository(connectionString);
-        }
-
-        private void SetupBooks()
-        {
         }
     }
 }

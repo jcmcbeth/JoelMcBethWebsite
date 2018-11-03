@@ -23,13 +23,17 @@
                             ([Isbn13],
                              [Title],         
                              [Edition],
-                             [Pages])
+                             [Pages],
+                             [Order],
+                             [Rating])
                           OUTPUT INSERTED.[Id]
                           VALUES
                             (@Isbn13,
 			                 @Title,
 			                 @Edition,
-			                 @Pages)";
+			                 @Pages,
+                             @Order,
+                             @Rating)";
 
             var authorQuery = @"
                 INSERT INTO [Authors]
@@ -123,9 +127,9 @@
 	                [Authors].[MiddleName]
                 FROM
 	                [Books]
-                INNER JOIN
+                LEFT JOIN
 	                BookAuthors ON [Books].[Id] = [BookAuthors].[BookId]
-                INNER JOIN
+                LEFT JOIN
 	                Authors ON [BookAuthors].[AuthorId] = [Authors].[Id]
                 ";
 
@@ -141,33 +145,38 @@
                     {
                         while (await reader.ReadAsync())
                         {
-                            var id = reader.GetInt32("BookId");
+                            var bookId = reader.GetInt32("BookId");
 
-                            if (!books.TryGetValue(id, out Book book))
+                            if (!books.TryGetValue(bookId, out Book book))
                             {
                                 book = new Book()
                                 {
-                                    Id = id,
+                                    Id = bookId,
                                     Edition = reader.GetNullableString("Edition"),
                                     Isbn13 = reader.GetNullableString("Isbn13"),
                                     Pages = reader.GetNullableInt32("Pages"),
                                     Title = reader.GetNullableString("Title"),
                                     Order = reader.GetNullableInt32("Order"),
-                                    Rating = reader.GetNullableInt32("Rating")
+                                    Rating = reader.GetNullableByte("Rating")
                                 };
 
-                                books.Add(id, book);
+                                books.Add(bookId, book);
                             }
 
-                            var author = new Author()
-                            {
-                                Id = reader.GetInt32("AuthorId"),
-                                FirstName = reader.GetNullableString("FirstName"),
-                                LastName = reader.GetNullableString("LastName"),
-                                MiddleName = reader.GetNullableString("MiddleName")
-                            };
+                            int? authorId = reader.GetNullableInt32("AuthorId");
 
-                            book.Authors.Add(author);
+                            if (authorId != null)
+                            {
+                                var author = new Author()
+                                {
+                                    Id = authorId.Value,
+                                    FirstName = reader.GetNullableString("FirstName"),
+                                    LastName = reader.GetNullableString("LastName"),
+                                    MiddleName = reader.GetNullableString("MiddleName")
+                                };
+
+                                book.Authors.Add(author);
+                            }
                         }
                     }
                 }
@@ -189,6 +198,12 @@
             }
 
             var books = await this.GetBooksAsync();
+
+            if (!string.IsNullOrEmpty(filter))
+            {
+                books = books.Where(b => b.Title.Contains(filter));
+            }
+
             var count = books.Count();
 
             var pagination = new Pagination(page, pageSize, count);
