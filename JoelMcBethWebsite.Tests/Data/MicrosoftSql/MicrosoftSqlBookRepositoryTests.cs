@@ -36,7 +36,8 @@
                     new Author()
                     {
                         FirstName = "Joe",
-                        LastName = "Bob"
+                        LastName = "Bob",
+                        MiddleName = "Timothy"
                     },
                     new Author()
                     {
@@ -74,7 +75,8 @@
                         new Author()
                         {
                             FirstName = "Tim",
-                            LastName = "Horton"
+                            LastName = "Horton",
+                            MiddleName = "Timothy"
                         },
                     }
                 },
@@ -138,31 +140,62 @@
             BookAssert.AreEqual(expected, actual.Data.Single());
         }
 
-        [TestMethod]
+        [DataTestMethod]
         [TestCategory("Integration")]
-        public async Task GetBooksAsync_FilterText_ReturnsBookWithMatchingTitle()
+        [DataRow("john")]
+        [DataRow("John")]
+        [DataRow("title")]
+        [DataRow("Title")]
+        [DataRow("smith")]
+        [DataRow("Smith")]
+        [DataRow("carver")]
+        [DataRow("Carver")]
+        public async Task GetBooksAsync_FilterTextThatShouldMatch_MatchingBookReturned(
+            string filter)
         {
-            // Arrange
             var expected = new Book()
             {
-                Title = "aa"
+                Title = "Title",
+                Authors = new List<Author>
+                {
+                    new Author()
+                    {
+                        FirstName = "John",
+                        LastName = "Smith",
+                        MiddleName = "Carver"
+                    }
+                }
             };
 
+            // Arrange
             var books = new List<Book>()
             {
                 expected,
                 new Book()
                 {
-                    Title = "ab"
-                }
+                    Title = "xxxxx",
+                    Authors = new List<Author>
+                    {
+                        new Author()
+                        {
+                            FirstName = "xxxxx",
+                            LastName = "xxxxx",
+                            MiddleName = "xxxxx"
+                        }
+                    }
+                },
             };
 
             await this.Target.AddBooksAsync(books);
 
             // Act
-            var actual = await this.Target.GetBooksAsync(1, int.MaxValue, "aa");
+            var actual = await this.Target.GetBooksAsync(1, int.MaxValue, filter);
 
             // Assert
+            Assert.AreEqual(1,
+                actual.Data.Count(),
+                $"Expected exactly one book to be returned for filter text '{filter}'. Actual number of books returned was {actual.Data.Count()}.");
+
             BookAssert.AreEqual(expected, actual.Data.Single());
         }
 

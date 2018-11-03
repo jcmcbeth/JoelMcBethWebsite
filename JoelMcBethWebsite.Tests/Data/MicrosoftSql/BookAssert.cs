@@ -73,6 +73,7 @@
             Assert.AreEqual(expected.Id, actual.Id, "Expected author id to be equal.");
             Assert.AreEqual(expected.FirstName, actual.FirstName, "Expected author first name to be equal.");
             Assert.AreEqual(expected.LastName, actual.LastName, "Expected author last name to be equal.");
+            Assert.AreEqual(expected.MiddleName, actual.MiddleName, "Expected author middle name to be equal.");
         }
     }
 }

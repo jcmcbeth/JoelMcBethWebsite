@@ -37,10 +37,10 @@
 
             var authorQuery = @"
                 INSERT INTO [Authors]
-                    ([FirstName], [LastName])
+                    ([FirstName], [LastName], [MiddleName])
                 OUTPUT INSERTED.[Id]
                 VALUES
-                    (@FirstName, @LastName)
+                    (@FirstName, @LastName, @MiddleName)
                 ";
 
             var bookAuthorQuery = @"
@@ -128,9 +128,9 @@
                 FROM
 	                [Books]
                 LEFT JOIN
-	                BookAuthors ON [Books].[Id] = [BookAuthors].[BookId]
+	                [BookAuthors] ON [Books].[Id] = [BookAuthors].[BookId]
                 LEFT JOIN
-	                Authors ON [BookAuthors].[AuthorId] = [Authors].[Id]
+	                [Authors] ON [BookAuthors].[AuthorId] = [Authors].[Id]
                 ";
 
             var books = new Dictionary<int, Book>();
@@ -201,7 +201,12 @@
 
             if (!string.IsNullOrEmpty(filter))
             {
-                books = books.Where(b => b.Title.Contains(filter));
+                books = books.Where(b =>
+                    b.Title?.Contains(filter, StringComparison.OrdinalIgnoreCase) == true ||
+                    b.Authors.Any(a =>
+                        a.FirstName?.Contains(filter, StringComparison.OrdinalIgnoreCase) == true ||
+                        a.LastName?.Contains(filter, StringComparison.OrdinalIgnoreCase) == true ||
+                        a.MiddleName?.Contains(filter, StringComparison.OrdinalIgnoreCase) == true));
             }
 
             var count = books.Count();
