@@ -205,6 +205,35 @@ p {
         box-shadow: 0 0 0 0.2rem rgba(0, 128, 0, 0.5);
     }
 
+/* Loader */
+#loading-overlay {
+    position: absolute;
+    left: 50%;
+    top: 35%;
+    z-index: 1;
+    margin: -50px 0 0 -50px;
+}
+
+.loading-glyph {
+    border: 14px solid green;
+    border-top: 14px solid darkgreen;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: spin 2s linear infinite;
+    margin-bottom: 1em;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 /*
     AngularJS
 */

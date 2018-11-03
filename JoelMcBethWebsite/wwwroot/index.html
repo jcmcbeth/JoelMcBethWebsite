@@ -20,32 +20,38 @@
     <script src="js/angular-ui-router.js"></script>
 </head>
 
-<body ng-app="app">
-    <nav id="top-nav" class="navbar navbar-dark flex-md-nowrap navbar-expand-md">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" ui-sref="home">JoelMcBeth.com</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </nav>
-    <div class="container-fluid">
-        <div class="row">
-            <nav id="side-nav" class="navbar navbar-expand-md navbar-side d-md-block col-md-2 col-lg-1" ng-controller="MenuController as vm">
-                <div class="collapse navbar-collapse navbar-side-content" id="menu">
-                    <div class="menu-group" ng-repeat="group in vm.menuGroups" ng-if="group.visible" ng-cloak>
-                        <h2>{{group.name}}</h2>
-                        <ul class="navbar-nav mr-auto" ng-repeat="item in group.menuItems">
-                            <!-- remember to set active, check change log -->
-                            <li class="nav-item" ng-if="item.visible">
-                                <a class="nav-link" ui-sref="{{item.state}}">{{item.title}}</a>
-                            </li>
-                        </ul>
+<body ng-app="app" ng-controller="AppController as app">
+    <div id="loading-overlay" ng-if="!app.loaded">
+        <div class="loading-glyph"></div>
+        <h1>Loading...</h1>
+    </div>
+    <div ng-if="app.loaded" ng-cloak>
+        <nav id="top-nav" class="navbar navbar-dark flex-md-nowrap navbar-expand-md">
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" ui-sref="home">JoelMcBeth.com</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <nav id="side-nav" class="navbar navbar-expand-md navbar-side d-md-block col-md-2 col-lg-1" ng-controller="MenuController as vm">
+                    <div class="collapse navbar-collapse navbar-side-content" id="menu">
+                        <div class="menu-group" ng-repeat="group in vm.menuGroups" ng-if="group.visible" ng-cloak>
+                            <h2>{{group.name}}</h2>
+                            <ul class="navbar-nav mr-auto" ng-repeat="item in group.menuItems">
+                                <!-- remember to set active, check change log -->
+                                <li class="nav-item" ng-if="item.visible">
+                                    <a class="nav-link" ui-sref="{{item.state}}">{{item.title}}</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </nav>
+                </nav>
 
-            <main id="main" role="main" class="col-md-10 ml-sm-auto col-lg-11">
-                <ui-view></ui-view>
-            </main>
+                <main id="main" role="main" class="col-md-10 ml-sm-auto col-lg-11">
+                    <ui-view></ui-view>
+                </main>
+            </div>
         </div>
     </div>
 
@@ -60,6 +66,7 @@
     <script src="app/services/menu.service.js"></script>
     <script src="app/services/media.service.js"></script>
 
+    <script src="app/app.controller.js"></script>
     <script src="app/menu/menu.controller.js"></script>
 
     <script src="app/app.run.js"></script>
@@ -77,5 +84,7 @@
     <script src="app/users/users.controller.js"></script>
 
     <script src="app/media/media.controller.js"></script>
+
+    <div ng-init="app.initialize()"></div>
 </body>
 </html>
