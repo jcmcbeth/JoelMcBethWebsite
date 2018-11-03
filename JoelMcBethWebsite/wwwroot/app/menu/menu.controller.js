@@ -66,23 +66,29 @@
         function updateMenuItems() {
             for (var i = 0; i < vm.menuItems.length; i++) {
                 var item = vm.menuItems[i];
-                var visible = true;
+
+                if (item.hidden) {
+                    item.visible = false;
+                    continue;
+                }
 
                 if (item.unauthenticatedOnly && authenticated) {
-                    visible = false;
+                    item.visible = false;
+                    continue;
                 }
 
                 if (item.requireAuthentication && !authenticated) {
-                    visible = false;
+                    item.visible = false;
+                    continue;
                 }
 
-                item.visible = visible;
+                item.visible = true;
             }
 
             for (i = 0; i < vm.menuGroups.length; i++) {
                 var group = vm.menuGroups[i];
 
-                visible = group.menuItems.some(function (item) {
+                var visible = group.menuItems.some(function (item) {
                     return item.visible === true;
                 });
 

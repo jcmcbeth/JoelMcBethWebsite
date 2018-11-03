@@ -13,53 +13,53 @@
                 group: "Main",
                 state: "home",
                 title: "Home",
-                visible: true
+                hidden: false
             },
             {
                 group: "Main",
                 state: "projects",
                 title: "Projects",
-                visible: true
+                hidden: false
             },
-            //{
-            //    group: "Main",
-            //    state: "media",
-            //    title: "Media",
-            //    visible: false
-            //},
-            //{
-            //    group: "Main",
-            //    state: "books",
-            //    title: "Books",
-            //    visible: false
-            //},
-            //{
-            //    group: "Main",
-            //    state: "resume",
-            //    title: "Resume",
-            //    visible: false
-            //},
-            //{
-            //    group: "Account",
-            //    state: "login",
-            //    title: "Login",
-            //    visible: false,
-            //    unauthenticatedOnly: true
-            //},
-            //{
-            //    group: "Account",
-            //    state: "logout",
-            //    title: "Logout",
-            //    visible: false,
-            //    requireAuthentication: true
-            //},
-            //{
-            //    group: "Users",
-            //    state: "users",
-            //    title: "User List",
-            //    visible: false,
-            //    requireAuthentication: true
-            //}
+            {
+                group: "Main",
+                state: "media",
+                title: "Media",
+                hidden: true
+            },
+            {
+                group: "Main",
+                state: "books",
+                title: "Books",
+                hidden: true
+            },
+            {
+                group: "Main",
+                state: "resume",
+                title: "Resume",
+                hidden: true
+            },
+            {
+                group: "Account",
+                state: "login",
+                title: "Login",
+                hidden: true,
+                unauthenticatedOnly: true
+            },
+            {
+                group: "Account",
+                state: "logout",
+                title: "Logout",
+                hidden: true,
+                requireAuthentication: true
+            },
+            {
+                group: "Users",
+                state: "users",
+                title: "User List",
+                hidden: true,
+                requireAuthentication: true
+            }
         ];
 
         var service = {
