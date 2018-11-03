@@ -1,18 +1,12 @@
 ﻿namespace JoelMcBethWebsite.Tests.Data.MicrosoftSql
 {
-    using System;
-    using System.Text;
     using System.Collections.Generic;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using JoelMcBethWebsite.Data.MicrosoftSql;
-    using System.IO;
-    using System.Reflection;
-    using Microsoft.SqlServer.Dac;
-    using System.Data.SqlClient;
-    using JoelMcBethWebsite.Data.Models;
-    using System.Threading.Tasks;
     using System.Linq;
+    using System.Threading.Tasks;
     using AutoFixture;
+    using JoelMcBethWebsite.Data.MicrosoftSql;
+    using JoelMcBethWebsite.Data.Models;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class MicrosoftSqlBookRepositoryTests : MicrosoftSqlTestBase<MicrosoftSqlBookRepository>
@@ -192,7 +186,8 @@
             var actual = await this.Target.GetBooksAsync(1, int.MaxValue, filter);
 
             // Assert
-            Assert.AreEqual(1,
+            Assert.AreEqual(
+                1,
                 actual.Data.Count(),
                 $"Expected exactly one book to be returned for filter text '{filter}'. Actual number of books returned was {actual.Data.Count()}.");
 
