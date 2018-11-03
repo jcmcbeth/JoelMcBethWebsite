@@ -49,7 +49,7 @@
 
             if (resetIdentity)
             {
-                query += "DBCC CHECKIDENT ('{1}', RESEED, 1);";
+                query += "DBCC CHECKIDENT ('{1}', RESEED, 0);";
             }
 
             query = string.Format(query, this.databaseName, tableName);
