@@ -14,12 +14,14 @@
             getBookByIsbn13: getBookByIsbn13
         };
 
-        function getBooks(filter, page, pageSize) {
+        function getBooks(filter, page, pageSize, sort, sortDirection) {
             return $http.get(baseUrl, {
                 params: {
                     filter: filter,
                     page: page,
-                    pageSize: pageSize
+                    pageSize: pageSize,
+                    sort: sort,
+                    sortDirection: sortDirection
                 }
             }).then(getBooksComplete);
 

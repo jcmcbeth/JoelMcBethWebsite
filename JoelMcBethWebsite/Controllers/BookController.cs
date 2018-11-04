@@ -20,9 +20,18 @@
         }
 
         [HttpGet("api/books")]
-        public async Task<PagedEnumerable<Book>> Get(int? page, int? pageSize, string filter = null)
+        public async Task<PagedEnumerable<Book>> Get(int? page, int? pageSize, BookSort? sort, SortDirection? sortDirection, string filter = null)
         {
-            return await this.books.GetBooksAsync(page ?? 1, pageSize ?? 12, filter);
+            var criteria = new BookCriteria()
+            {
+                Page = page ?? 1,
+                PageSize = pageSize ?? 12,
+                Sort = sort ?? BookSort.None,
+                SortDirection = sortDirection ?? SortDirection.Ascending,
+                FilterText = filter
+            };
+
+            return await this.books.GetBooksAsync(criteria);
         }
 
         [HttpGet(@"api/books/{isbn:regex(^\d{{13}}$)}")]

@@ -11,12 +11,6 @@
     [TestClass]
     public class MicrosoftSqlBookRepositoryTests : MicrosoftSqlTestBase<MicrosoftSqlBookRepository>
     {
-        protected override void SetupFixture(Fixture fixture)
-        {
-            fixture.Customizations.Add(
-                new IsbnSpecimenBuilder<Book>(b => b.Isbn13));
-        }
-
         [TestMethod]
         [TestCategory("Integration")]
         public async Task AddBook_ValidBook_BookAdded()
@@ -95,7 +89,151 @@
             var actual = await this.Target.GetBooksAsync();
 
             // Assert
-            BookAssert.AreEquivalent(books, actual);
+            BookAssert.AreEqual(books, actual);
+        }
+
+        [TestMethod]
+        [TestCategory("Integration")]
+        public async Task GetBooksAsync_TitleBookSortAscending_ReturnedBooksSortedByTitleAscending()
+        {
+            // Arrange
+            var books = new List<Book>()
+            {
+                new Book()
+                {
+                    Title = "b",
+                    Rating = 1
+                },
+                new Book()
+                {
+                    Title = "a",
+                    Rating = 2
+                }
+            };
+
+            await this.Target.AddBooksAsync(books);
+
+            // Act
+            var criteria = new BookCriteria()
+            {
+                Page = 1,
+                PageSize = int.MaxValue,
+                Sort = BookSort.Title,
+                SortDirection = SortDirection.Ascending
+            };
+
+            var actual = await this.Target.GetBooksAsync(criteria);
+
+            // Assert
+            BookAssert.AreEqual(books.OrderBy(b => b.Title), actual.Data);
+        }
+
+        [TestMethod]
+        [TestCategory("Integration")]
+        public async Task GetBooksAsync_TitleBookSortAscending_ReturnedBooksSortedByTitleDescending()
+        {
+            // Arrange
+            var books = new List<Book>()
+            {
+                new Book()
+                {
+                    Title = "a",
+                    Rating = 1
+                },
+                new Book()
+                {
+                    Title = "b",
+                    Rating = 2
+                }
+            };
+
+            await this.Target.AddBooksAsync(books);
+
+            // Act
+            var criteria = new BookCriteria()
+            {
+                Page = 1,
+                PageSize = int.MaxValue,
+                Sort = BookSort.Title,
+                SortDirection = SortDirection.Descending
+            };
+
+            var actual = await this.Target.GetBooksAsync(criteria);
+
+            // Assert
+            BookAssert.AreEqual(books.OrderByDescending(b => b.Title), actual.Data);
+        }
+
+        [TestMethod]
+        [TestCategory("Integration")]
+        public async Task GetBooksAsync_RatingBookSortAscending_ReturnedBooksSortedByRatingAscending()
+        {
+            // Arrange
+            var books = new List<Book>()
+            {
+                new Book()
+                {
+                    Title = "a",
+                    Rating = 2
+                },
+                new Book()
+                {
+                    Title = "b",
+                    Rating = 1
+                }
+            };
+
+            await this.Target.AddBooksAsync(books);
+
+            // Act
+            var criteria = new BookCriteria()
+            {
+                Page = 1,
+                PageSize = int.MaxValue,
+                Sort = BookSort.Rating,
+                SortDirection = SortDirection.Ascending
+            };
+
+            var actual = await this.Target.GetBooksAsync(criteria);
+
+            // Assert
+            BookAssert.AreEqual(books.OrderBy(b => b.Rating), actual.Data);
+        }
+
+        [TestMethod]
+        [TestCategory("Integration")]
+        public async Task GetBooksAsync_RatingBookSortDescending_ReturnedBooksSortedByRatingDescending()
+        {
+            // Arrange
+            var books = new List<Book>()
+            {
+                new Book()
+                {
+                    Title = "a",
+                    Rating = 1
+                },
+                new Book()
+                {
+                    Title = "b",
+                    Rating = 2
+                }
+            };
+
+            await this.Target.AddBooksAsync(books);
+
+            // Act
+            var criteria = new BookCriteria()
+            {
+                Page = 1,
+                PageSize = int.MaxValue,
+                Sort = BookSort.Rating,
+                SortDirection = SortDirection.Descending
+            };
+
+            var actual = await this.Target.GetBooksAsync(criteria);
+
+            // Assert
+            BookAssert.AreEqual(books.OrderByDescending(b => b.Rating), actual.Data);
         }
 
         [TestMethod]
@@ -109,7 +247,13 @@
             await this.Target.AddBooksAsync(books);
 
             // Act
-            var actual = await this.Target.GetBooksAsync(1, 2, null);
+            var criteria = new BookCriteria()
+            {
+                Page = 1,
+                PageSize = 2
+            };
+
+            var actual = await this.Target.GetBooksAsync(criteria);
 
             // Assert
             Assert.AreEqual(2, actual.Data.Count());
@@ -126,7 +270,13 @@
             await this.Target.AddBooksAsync(books);
 
             // Act
-            var actual = await this.Target.GetBooksAsync(2, 2, null);
+            var criteria = new BookCriteria()
+            {
+                Page = 2,
+                PageSize = 2
+            };
+
+            var actual = await this.Target.GetBooksAsync(criteria);
 
             // Assert
             var expected = books.Last();
@@ -183,7 +333,14 @@
             await this.Target.AddBooksAsync(books);
 
             // Act
-            var actual = await this.Target.GetBooksAsync(1, int.MaxValue, filter);
+            var criteria = new BookCriteria()
+            {
+                Page = 1,
+                PageSize = int.MaxValue,
+                FilterText = filter
+            };
+
+            var actual = await this.Target.GetBooksAsync(criteria);
 
             // Assert
             Assert.AreEqual(
@@ -192,6 +349,12 @@
                 $"Expected exactly one book to be returned for filter text '{filter}'. Actual number of books returned was {actual.Data.Count()}.");
 
             BookAssert.AreEqual(expected, actual.Data.Single());
+        }
+
+        protected override void SetupFixture(Fixture fixture)
+        {
+            fixture.Customizations.Add(
+                new IsbnSpecimenBuilder<Book>(b => b.Isbn13));
         }
 
         protected override async Task Reset()

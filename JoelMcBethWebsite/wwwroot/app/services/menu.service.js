@@ -12,14 +12,12 @@
             {
                 group: "Main",
                 state: "home",
-                title: "Home",
-                hidden: false
+                title: "Home"
             },
             {
                 group: "Main",
                 state: "projects",
-                title: "Projects",
-                hidden: false
+                title: "Projects"
             },
             {
                 group: "Main",
@@ -30,8 +28,7 @@
             {
                 group: "Main",
                 state: "books",
-                title: "Books",
-                hidden: true
+                title: "Books"
             },
             {
                 group: "Main",

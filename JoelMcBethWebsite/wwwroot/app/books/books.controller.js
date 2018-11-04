@@ -3,9 +3,9 @@
         .module("app")
         .controller("BookController", BookController);
 
-    BookController.$inject = ["$scope", "bookService", "authenticationService"];
+    BookController.$inject = ["$scope", "bookService", "authenticationService", "sortDirections"];
 
-    function BookController($scope, bookService, authenticationSerivce) {
+    function BookController($scope, bookService, authenticationSerivce, sortDirections) {
         var vm = this;
 
         vm.pageSize = 12;
@@ -13,23 +13,32 @@
         vm.pageCount = 0;
         vm.pages = [];
         vm.canAdd = canAdd;
+        vm.selectPage = selectPage;
+        vm.filterBooks = filterBooks;
+        vm.updateBooks = updateBooks;
+        vm.sort = 0;
+        vm.sortDirection = 0;
+        vm.sortDirections = sortDirections;
 
-        $scope.$watch("vm.filterText", function (newValue, oldValue) {
-            if (newValue !== oldValue) {
-                vm.page = 1;
-                updateBooks();
-            }
-        });
+        vm.sortOptions = [
+            { name: "None", value: 0 },
+            { name: "Title", value: 1 }
+        ];
 
         activate();
 
-        vm.selectPage = function (page) {
+        function filterBooks() {
+            vm.page = 1;
+            updateBooks();
+        }
+
+        function selectPage(page) {
             if (page <= vm.pageCount || page >= 1) {
                 vm.page = page;
 
                 updateBooks();
             }
-        };
+        }
 
         function canAdd() {
             return authenticationSerivce.isAuthenticated();
@@ -40,7 +49,7 @@
         }
 
         function updateBooks() {
-            return bookService.getBooks(vm.filterText, vm.page, vm.pageSize).then(function (data) {
+            return bookService.getBooks(vm.filterText, vm.page, vm.pageSize, vm.sort, vm.sortDirection).then(function (data) {
                 vm.books = data.books;
                 vm.pageCount = data.pagination.pages;
 

@@ -185,37 +185,63 @@
             return books.Values;
         }
 
-        public async Task<PagedEnumerable<Book>> GetBooksAsync(int page, int pageSize, string filter)
+        public async Task<PagedEnumerable<Book>> GetBooksAsync(BookCriteria criteria)
         {
-            if (page <= 0)
+            if (criteria.Page <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(page), page, "The page number must be at least 1.");
+                throw new ArgumentOutOfRangeException(nameof(criteria), criteria.Page, "The page number must be at least 1.");
             }
 
-            if (pageSize <= 0)
+            if (criteria.PageSize <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(pageSize), pageSize, "The page size must at least be 1.");
+                throw new ArgumentOutOfRangeException(nameof(criteria), criteria.PageSize, "The page size must at least be 1.");
             }
 
             var books = await this.GetBooksAsync();
 
-            if (!string.IsNullOrEmpty(filter))
+            if (!string.IsNullOrEmpty(criteria.FilterText))
             {
                 books = books.Where(b =>
-                    b.Title?.Contains(filter, StringComparison.OrdinalIgnoreCase) == true ||
+                    b.Title?.Contains(criteria.FilterText, StringComparison.OrdinalIgnoreCase) == true ||
                     b.Authors.Any(a =>
-                        a.FirstName?.Contains(filter, StringComparison.OrdinalIgnoreCase) == true ||
-                        a.LastName?.Contains(filter, StringComparison.OrdinalIgnoreCase) == true ||
-                        a.MiddleName?.Contains(filter, StringComparison.OrdinalIgnoreCase) == true));
+                        a.FirstName?.Contains(criteria.FilterText, StringComparison.OrdinalIgnoreCase) == true ||
+                        a.LastName?.Contains(criteria.FilterText, StringComparison.OrdinalIgnoreCase) == true ||
+                        a.MiddleName?.Contains(criteria.FilterText, StringComparison.OrdinalIgnoreCase) == true));
+            }
+
+            if (criteria.Sort != BookSort.None)
+            {
+                Func<Book, object> sortSelector;
+
+                switch (criteria.Sort)
+                {
+                    case BookSort.Rating:
+                        sortSelector = b => b.Rating;
+                        break;
+                    case BookSort.Title:
+                        sortSelector = b => b.Title;
+                        break;
+                    default:
+                        throw new NotSupportedException($"Unknown sort field {criteria.Sort}.");
+                }
+
+                if (criteria.SortDirection == SortDirection.Ascending)
+                {
+                    books = books.OrderBy(sortSelector);
+                }
+                else
+                {
+                    books = books.OrderByDescending(sortSelector);
+                }
             }
 
             var count = books.Count();
 
-            var pagination = new Pagination(page, pageSize, count);
+            var pagination = new Pagination(criteria.Page, criteria.PageSize, count);
 
-            var offset = (page - 1) * pageSize;
+            var offset = (criteria.Page - 1) * criteria.PageSize;
 
-            books = books.Skip(offset).Take(pageSize);
+            books = books.Skip(offset).Take(criteria.PageSize);
 
             return new PagedEnumerable<Book>(books, pagination);
         }

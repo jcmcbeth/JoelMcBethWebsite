@@ -4,33 +4,35 @@
     <li ng-if="::vm.canAdd()"><a ui-sref="addBook">Add Book</a></li>
 </ul>
 
-<div class="form-group">
-    <input id="filter" type="text" class="form-control col-lg-2" placeholder="Search" ng-model="vm.filterText" />
-</div>
-
-<div class="form-group">
-    <label id="sort">Sort:</label>
-    <select for="sort" class="form-control col-lg-2">
-        <option>Title</option>
-        <option>Rating</option>
-        <option>Queue</option>
-    </select>
-</div>
-
 <div class="row">
-    <div ng-repeat="book in vm.books" class="col-lg-3">
-        <div class="card">            
-            <div class="card-body">
-                <h5 class="card-title"><strong>{{book.title}}</strong></h5>
-                <div class="card-subtitle text-muted" ng-show="book.authors.length > 0">
-                    by
-                    <span ng-repeat="author in book.authors">{{author.firstName}} {{author.lastName}}{{ !$last ? ", " : ""}}</span>
-                </div>
-                <p><img src="https://books.google.com/books?vid=ISBN{{book.isbn13}}&printsec=frontcover&img=1&zoom=1" /></p>
-                <a ui-sref="bookDetails({ isbn: book.isbn13  })">Details</a>
+    <div class="form-group col-md-2">
+        <label for="filter">Filter:</label>
+        <input id="filter" type="text" class="form-control" ng-model="vm.filterText" ng-change="vm.filterBooks()" />
+    </div>
+    <div class="form-group col-md-2">
+        <label for="sort">Sort:</label>
+        <select id="sort" class="form-control" ng-model="vm.sort" ng-change="vm.updateBooks()"
+                ng-options="option.value as option.name for option in vm.sortOptions">
+        </select>
+    </div>
+    <div class="form-group col-md-2">
+        <label for="sortDirection">Order:</label>
+        <select id="sortDirection" class="form-control" ng-model="vm.sortDirection" ng-change="vm.updateBooks()"
+                ng-options="option.value as option.name for option in vm.sortDirections">
+        </select>
+    </div>
+</div>
 
-            </div>
-        </div>
+<div ng-repeat="book in vm.books" class="book">
+    <div class="book-image">
+        <img src="https://books.google.com/books?vid=ISBN{{book.isbn13}}&printsec=frontcover&img=1&zoom=1" />
+    </div>
+    <div class="book-summary">
+        <h5><strong>{{book.title}}</strong></h5>
+        <div class="text-muted" ng-if="book.authors.length > 0">
+            by <span ng-repeat="author in book.authors">{{author.firstName}} {{author.lastName}}{{ !$last ? ", " : ""}}</span>
+        </div>   
+        <!--<a ui-sref="bookDetails({ isbn: book.isbn13  })">Details</a>-->
     </div>
 </div>
 

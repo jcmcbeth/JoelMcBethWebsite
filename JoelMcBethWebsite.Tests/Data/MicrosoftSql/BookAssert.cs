@@ -23,10 +23,15 @@
             Assert.AreEqual(expected.Rating, actual.Rating, "Expected rating to be equal.");
             Assert.AreEqual(expected.Title, actual.Title, "Expected title to be equal.");
 
-            AreEquivalent(expected.Authors, actual.Authors);
+            AreEqual(expected.Authors.ToList(), actual.Authors.ToList());
         }
 
-        public static void AreEquivalent(IEnumerable<Book> expectedBooks, IEnumerable<Book> actualBooks)
+        public static void AreEqual(IEnumerable<Book> expectedBooks, IEnumerable<Book> actualBooks)
+        {
+            AreEqual(expectedBooks.ToList(), actualBooks.ToList());
+        }
+
+        public static void AreEqual(IList<Book> expectedBooks, IList<Book> actualBooks)
         {
             if (expectedBooks == null)
             {
@@ -37,17 +42,21 @@
 
             Assert.AreEqual(expectedBooks.Count(), actualBooks.Count(), "Expected list of books to have the same number of items.");
 
-            foreach (var expectedBook in expectedBooks)
+            for (int i = 0; i < expectedBooks.Count; i++)
             {
-                var actualBook = actualBooks.SingleOrDefault(b => b.Id == expectedBook.Id);
-
-                Assert.IsNotNull(actualBook);
+                var expectedBook = expectedBooks[i];
+                var actualBook = actualBooks[i];
 
                 AreEqual(expectedBook, actualBook);
             }
         }
 
-        public static void AreEquivalent(IEnumerable<Author> expectedAuthors, IEnumerable<Author> actualAuthors)
+        public static void AreEqual(IEnumerable<Author> expectedAuthors, IEnumerable<Author> actualAuthors)
+        {
+            AreEqual(expectedAuthors, actualAuthors);
+        }
+
+        public static void AreEqual(IList<Author> expectedAuthors, IList<Author> actualAuthors)
         {
             if (expectedAuthors == null)
             {
@@ -56,13 +65,14 @@
                 return;
             }
 
-            Assert.AreEqual(expectedAuthors.Count(), actualAuthors.Count(), "Expected list of authors to have the same number of items.");
+            int count = expectedAuthors.Count();
 
-            foreach (var expectedAuthor in expectedAuthors)
+            Assert.AreEqual(count, actualAuthors.Count(), "Expected list of authors to have the same number of items.");
+
+            for (int i = 0; i < count; i++)
             {
-                var actualAuthor = actualAuthors.SingleOrDefault(a => a.Id == expectedAuthor.Id);
-
-                Assert.IsNotNull(actualAuthor);
+                var actualAuthor = actualAuthors[i];
+                var expectedAuthor = expectedAuthors[i];
 
                 AreEqual(expectedAuthor, actualAuthor);
             }

@@ -64,23 +64,23 @@
             return Task.FromResult(result);
         }
 
-        public Task<PagedEnumerable<Book>> GetBooksAsync(int page, int pageSize, string filter)
+        public Task<PagedEnumerable<Book>> GetBooksAsync(BookCriteria criteria)
         {
             var filteredBooks = Books.AsEnumerable();
             var pagination = new Pagination()
             {
-                Page = page,
-                PageSize = pageSize
+                Page = criteria.Page,
+                PageSize = criteria.PageSize
             };
 
-            if (!string.IsNullOrEmpty(filter))
+            if (!string.IsNullOrEmpty(criteria.FilterText))
             {
-                filteredBooks = filteredBooks.Where(b => b.Title.IndexOf(filter, StringComparison.CurrentCultureIgnoreCase) >= 0 || b.Authors.Any(a =>
-                    a.FirstName.IndexOf(filter, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
-                    a.LastName.IndexOf(filter, StringComparison.CurrentCultureIgnoreCase) >= 0));
+                filteredBooks = filteredBooks.Where(b => b.Title.IndexOf(criteria.FilterText, StringComparison.CurrentCultureIgnoreCase) >= 0 || b.Authors.Any(a =>
+                    a.FirstName.IndexOf(criteria.FilterText, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+                    a.LastName.IndexOf(criteria.FilterText, StringComparison.CurrentCultureIgnoreCase) >= 0));
             }
 
-            filteredBooks = filteredBooks.Skip((page - 1) * pageSize).Take(pageSize);
+            filteredBooks = filteredBooks.Skip((criteria.Page - 1) * criteria.PageSize).Take(criteria.PageSize);
 
             var result = new PagedEnumerable<Book>(filteredBooks, pagination);
 
