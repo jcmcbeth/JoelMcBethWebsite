@@ -14,6 +14,7 @@
             .state("books", {
                 url: '/books',
                 templateUrl: "app/books/books.html",
+                css: "app/books/books.css",
                 controller: "BookController",
                 controllerAs: "vm"
             })

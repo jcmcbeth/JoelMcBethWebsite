@@ -19,8 +19,6 @@
         }
 
         function onRouteStart(transition) {
-            console.log(transition);
-
             const stateService = transition.router.stateService;
             const stateData = transition.to().data;
             const requireAuthentication = stateData && stateData.requireAuthentication;

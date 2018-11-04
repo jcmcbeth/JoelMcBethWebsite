@@ -1,0 +1,17 @@
+﻿.book-image {
+    float: left;
+    margin-right: 1em;
+}
+
+.book-summary {
+}
+
+.book {
+    margin-bottom: 1em;
+}
+
+.book::after {
+    display: block;
+    clear: both;
+    content: "";
+}
