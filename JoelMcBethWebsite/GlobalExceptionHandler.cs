@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.Extensions.Logging;
     using Newtonsoft.Json;
 
     // Extension method used to add the middleware to the HTTP request pipeline.
@@ -25,7 +26,7 @@
             this.next = next;
         }
 
-        public async Task Invoke(HttpContext httpContext)
+        public async Task Invoke(HttpContext httpContext, ILogger<GlobalExceptionHandler> logger)
         {
             try
             {
@@ -33,6 +34,8 @@
             }
             catch (Exception exception)
             {
+                logger.LogError(exception, "An unhandled exception has occurred when processing a request.");
+
                 var result = JsonConvert.SerializeObject(new { error = exception.Message });
 
                 httpContext.Response.StatusCode = 500;
