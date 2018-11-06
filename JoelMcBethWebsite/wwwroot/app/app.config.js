@@ -1,9 +1,9 @@
 ﻿(function () {
     angular
         .module("app")
-        .config(["$transitionsProvider", "$cssProvider", configure]);
+        .config(["$transitionsProvider", "$cssProvider", "$locationProvider", configure]);
 
-    function configure($transitionsProvider, $cssProvider) {
+    function configure($transitionsProvider, $cssProvider, $locationProvider) {
 
         // Workaround: ui.router no longer supports the $stateChangeSuccess event
         // but the angularCSS module depends on it.
@@ -13,5 +13,7 @@
             $rootScope.$emit('$stateChangeSuccess', state, null, previousState);
             previousState = state;
         });
+
+        $locationProvider.html5Mode(true);
     }
 })();
