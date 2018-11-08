@@ -33,10 +33,12 @@
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
             return WebHost.CreateDefaultBuilder(args)
-                .ConfigureLogging((hostingContext, logging) =>
+                .ConfigureLogging(logging =>
                 {
-                    logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                    logging.ClearProviders();
+                    logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
                 })
+                .UseNLog()
                 .UseStartup<Startup>();
         }
     }
