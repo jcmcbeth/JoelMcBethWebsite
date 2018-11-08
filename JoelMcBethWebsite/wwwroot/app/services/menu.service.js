@@ -37,6 +37,11 @@
                 hidden: true
             },
             {
+                group: "Main",
+                state: "learning",
+                title: "Learning"
+            },
+            {
                 group: "Account",
                 state: "login",
                 title: "Login",
