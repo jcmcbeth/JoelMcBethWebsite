@@ -5,42 +5,19 @@
         .module('app')
         .factory('resourceService', resourceService);
 
-    resourceService.$inject = ["$q"];
+    resourceService.$inject = ["$http"];
 
-    function resourceService($q) {
+    function resourceService($http) {
         var service = {
-            getResources: getResources,
-            getResourceGroups: getResourceGroups
+            getResources: getResources
         };
 
         return service;
 
-        function getResourceGroups() {
-            var groups = [
-                {
-                    name: "Applications",
-                    description: "",
-                    subgroups: [
-                        {
-                            name: "Tools"
-                        }
-                    ]
-                }
-            ];
-
-            return $q(groups);
-        }
-
         function getResources() {
-            var resources = [
-                {
-                    url: "",
-                    title: "",
-                    description: ""
-                }
-            ];
-
-            return $q(resources);
+            return $http.get("/data/resources.json").then(function (response) {
+                return response.data;
+            });
         }
     }
 })();

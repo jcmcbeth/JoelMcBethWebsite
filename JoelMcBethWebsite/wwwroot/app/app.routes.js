@@ -57,9 +57,10 @@
                 templateUrl: "app/media/media.html",
                 controller: "MediaController as vm"
             })
-            .state("learning", {
-                url: "/learning",
-                templateUrl: "app/learning/learning.html"
+            .state("resources", {
+                url: "/resources",
+                templateUrl: "app/resources/resources.html",
+                controller: "ResourceController as vm"
             })
             .state("users", {
                 url: "/users",

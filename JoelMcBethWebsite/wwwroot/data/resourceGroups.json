@@ -1,0 +1,11 @@
+﻿[
+    {
+        name: "Applications",
+        description: "",
+        subgroups: [
+            {
+                name: "Tools"
+            }
+        ]
+    }
+]

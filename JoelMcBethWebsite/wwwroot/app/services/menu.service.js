@@ -38,8 +38,8 @@
             },
             {
                 group: "Main",
-                state: "learning",
-                title: "Learning"
+                state: "resources",
+                title: "Resources"
             },
             {
                 group: "Account",

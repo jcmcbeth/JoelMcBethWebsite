@@ -1,0 +1,97 @@
+﻿[
+  {
+    "title": "Scott Hanselman",
+    "description": "Community leader for ASP.NET.",
+    "url": "https://www.hanselman.com/blog/"
+  },
+  {
+    "title": "Misko Hevery",
+    "description": "Author of AngularJS and his blog cemented my understanding of dependency injection.",
+    "url": "http://misko.hevery.com/"
+  },
+  {
+    "title": "Mark Seemann",
+    "description": "Author of Dependency Injection in .NET.",
+    "url": "http://blog.ploeh.dk/"
+  },
+  {
+    "title": "Scott Hanselman",
+    "description": "Community leader for ASP.NET.",
+    "url": "https://www.youtube.com/user/shanselman"
+  },
+  {
+    "title": "Visual Studio",
+    "description": "Videos on Visual Studio and programming.",
+    "url": "https://www.youtube.com/channel/UChqrDOwARrxdJF-ykAptc7w"
+  },
+  {
+    "title": ".NET Foundation",
+    "description": "Hosts the ASP.NET community standup.",
+    "url": "https://www.youtube.com/channel/UCiaZbznpWV1o-KLxj8zqR6A"
+  },
+  {
+    "title": "Expresso",
+    "description": "",
+    "url": ""
+  },
+  {
+    "title": "WinMerge",
+    "description": "",
+    "url": ""
+  },
+  {
+    "title": "WinDirStat",
+    "description": "",
+    "url": ""
+  },
+  {
+    "title": "WizTree",
+    "description": "",
+    "url": ""
+  },
+  {
+    "title": "Putty",
+    "description": "",
+    "url": ""
+  },
+  {
+    "title": "Ghost Docs",
+    "description": "",
+    "url": ""
+  },
+  {
+    "title": "NAPS2",
+    "description": "",
+    "url": ""
+  },
+  {
+    "title": "LastPass",
+    "description": "",
+    "url": ""
+  },
+  {
+    "title": "KeePass",
+    "description": "",
+    "url": ""
+  },
+  {
+    "title": "FileZilla",
+    "description": "",
+    "url": ""
+  },
+  {
+    "title": "Notepad++",
+    "description": "",
+    "url": ""
+  },
+  {
+    "title": "Teamviewer",
+    "description": "",
+    "url": ""
+  },
+  {
+    "title": "Microsoft SQL Management Studio",
+    "description": "",
+    "url": ""
+  }
+]
