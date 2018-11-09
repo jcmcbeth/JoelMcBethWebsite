@@ -1,11 +1,22 @@
 ﻿[
-    {
-        name: "Applications",
-        description: "",
-        subgroups: [
-            {
-                name: "Tools"
-            }
-        ]
-    }
+  {
+    "name": "Blogs"
+  },
+  {
+    "name": "YouTube"
+  },
+  {
+    "name": "Articles"
+  },
+  {
+    "name": "Online Learning"
+  },
+  {
+    "name": "Applications",
+    "groups": [
+      {
+        "name": "Tools"
+      }
+    ]
+  }
 ]
