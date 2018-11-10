@@ -16,17 +16,17 @@
         "title": "Mark Seemann",
         "description": "Author of Dependency Injection in .NET.",
         "url": "http://blog.ploeh.dk/"
-      },
-      {
-        "title": "Scott Hanselman",
-        "description": "Community leader for ASP.NET.",
-        "url": "https://www.youtube.com/user/shanselman"
       }
     ]
   },
   {
     "name": "YouTube",
     "resources": [
+      {
+        "title": "Scott Hanselman",
+        "description": "Community leader for ASP.NET.",
+        "url": "https://www.youtube.com/user/shanselman"
+      },
       {
         "title": "Visual Studio",
         "description": "Videos on Visual Studio and programming.",
@@ -43,7 +43,14 @@
     "name": "Articles"
   },
   {
-    "name": "Online Learning"
+    "name": "Courses and Training",
+    "resources": [
+      {
+        "title": "Microsoft Virtual Academy",
+        "description": "Free training videos for Microsoft developement technolgies.",
+        "url": "https://mva.microsoft.com/"
+      }
+    ]
   },
   {
     "name": "Applications",
