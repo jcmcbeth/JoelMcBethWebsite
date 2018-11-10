@@ -1,8 +1,3 @@
-﻿<h2>Learning Resources</h2>
+﻿<h1>Learning Resources</h1>
 <p>I have compiled a list of resources that I have found useful.</p>
-<ul class="list-unstyled">
-    <li ng-repeat="resource in vm.resources">
-        <span ng-if="!resource.url">{{ resource.title }}</span>
-        <a ng-if="resource.url" href="{{ resource.url }}">{{ resource.title }}</a><span ng-if="resource.description"> - {{ resource.description }}</span>
-    </li>
-</ul>
+<div ng-repeat="group in vm.groups" ng-include="'/app/resources/resourceGroup.html'" ng-init="level = 2"></div>

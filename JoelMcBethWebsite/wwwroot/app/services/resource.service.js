@@ -9,12 +9,12 @@
 
     function resourceService($http) {
         var service = {
-            getResources: getResources
+            getGroupedResources: getGroupedResources
         };
 
         return service;
 
-        function getResources() {
+        function getGroupedResources() {
             return $http.get("/data/resources.json").then(function (response) {
                 return response.data;
             });

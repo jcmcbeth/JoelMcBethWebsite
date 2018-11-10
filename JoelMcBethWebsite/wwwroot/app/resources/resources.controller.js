@@ -14,8 +14,8 @@
         activate();
 
         function activate() {
-            var groupsPromise = resourceService.getResources().then(function (resources) {
-                vm.resources = resources;
+            var groupsPromise = resourceService.getGroupedResources().then(function (groups) {
+                vm.groups = groups;
             });
         }
     }

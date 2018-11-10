@@ -1,97 +1,127 @@
 ﻿[
   {
-    "title": "Scott Hanselman",
-    "description": "Community leader for ASP.NET.",
-    "url": "https://www.hanselman.com/blog/"
+    "name": "Blogs",
+    "resources": [
+      {
+        "title": "Scott Hanselman",
+        "description": "Community leader for ASP.NET.",
+        "url": "https://www.hanselman.com/blog/"
+      },
+      {
+        "title": "Misko Hevery",
+        "description": "Author of AngularJS and his blog cemented my understanding of dependency injection.",
+        "url": "http://misko.hevery.com/"
+      },
+      {
+        "title": "Mark Seemann",
+        "description": "Author of Dependency Injection in .NET.",
+        "url": "http://blog.ploeh.dk/"
+      },
+      {
+        "title": "Scott Hanselman",
+        "description": "Community leader for ASP.NET.",
+        "url": "https://www.youtube.com/user/shanselman"
+      }
+    ]
   },
   {
-    "title": "Misko Hevery",
-    "description": "Author of AngularJS and his blog cemented my understanding of dependency injection.",
-    "url": "http://misko.hevery.com/"
+    "name": "YouTube",
+    "resources": [
+      {
+        "title": "Visual Studio",
+        "description": "Videos on Visual Studio and programming.",
+        "url": "https://www.youtube.com/channel/UChqrDOwARrxdJF-ykAptc7w"
+      },
+      {
+        "title": ".NET Foundation",
+        "description": "Hosts the ASP.NET community standup.",
+        "url": "https://www.youtube.com/channel/UCiaZbznpWV1o-KLxj8zqR6A"
+      }
+    ]
   },
   {
-    "title": "Mark Seemann",
-    "description": "Author of Dependency Injection in .NET.",
-    "url": "http://blog.ploeh.dk/"
+    "name": "Articles"
   },
   {
-    "title": "Scott Hanselman",
-    "description": "Community leader for ASP.NET.",
-    "url": "https://www.youtube.com/user/shanselman"
+    "name": "Online Learning"
   },
   {
-    "title": "Visual Studio",
-    "description": "Videos on Visual Studio and programming.",
-    "url": "https://www.youtube.com/channel/UChqrDOwARrxdJF-ykAptc7w"
-  },
-  {
-    "title": ".NET Foundation",
-    "description": "Hosts the ASP.NET community standup.",
-    "url": "https://www.youtube.com/channel/UCiaZbznpWV1o-KLxj8zqR6A"
-  },
-  {
-    "title": "Expresso",
-    "description": "",
-    "url": ""
-  },
-  {
-    "title": "WinMerge",
-    "description": "",
-    "url": ""
-  },
-  {
-    "title": "WinDirStat",
-    "description": "",
-    "url": ""
-  },
-  {
-    "title": "WizTree",
-    "description": "",
-    "url": ""
-  },
-  {
-    "title": "Putty",
-    "description": "",
-    "url": ""
-  },
-  {
-    "title": "Ghost Docs",
-    "description": "",
-    "url": ""
-  },
-  {
-    "title": "NAPS2",
-    "description": "",
-    "url": ""
-  },
-  {
-    "title": "LastPass",
-    "description": "",
-    "url": ""
-  },
-  {
-    "title": "KeePass",
-    "description": "",
-    "url": ""
-  },
-  {
-    "title": "FileZilla",
-    "description": "",
-    "url": ""
-  },
-  {
-    "title": "Notepad++",
-    "description": "",
-    "url": ""
-  },
-  {
-    "title": "Teamviewer",
-    "description": "",
-    "url": ""
-  },
-  {
-    "title": "Microsoft SQL Management Studio",
-    "description": "",
-    "url": ""
+    "name": "Applications",
+    "resources": [
+      {
+        "title": "WinDirStat",
+        "description": "Visualizes disk usage for freeing up disk space.",
+        "url": ""
+      },
+      {
+        "title": "WizTree",
+        "description": "A more modern version of WinDirStat.",
+        "url": ""
+      },
+      {
+        "title": "Putty",
+        "description": "SSH client.",
+        "url": ""
+      },
+      {
+        "title": "NAPS2",
+        "description": "Scans documents to PDF and also does OCR.",
+        "url": ""
+      },
+      {
+        "title": "LastPass",
+        "description": "Cloud password manager.",
+        "url": ""
+      },
+      {
+        "title": "KeePass",
+        "description": "Local password manager, good for backing up LastPass and for those who don't trust cloud password managers.",
+        "url": ""
+      },
+      {
+        "title": "FileZilla",
+        "description": "FTP/SFTP/FTPS client.",
+        "url": ""
+      },
+
+      {
+        "title": "TeamViewer",
+        "description": "Free remote desktop access. Good replacement for LogMeIn.",
+        "url": ""
+      }
+
+    ],
+    "groups": [
+      {
+        "name": "Development Tools",
+        "resources": [
+          {
+            "title": "Notepad++",
+            "description": "Text editor that supports syntax highlighting for numerious file formats.",
+            "url": ""
+          },
+          {
+            "title": "Expresso",
+            "description": "Regular expression editor targeting .NET regular expressions.",
+            "url": ""
+          },
+          {
+            "title": "WinMerge",
+            "description": "Tool for diffing and merging files and directories.",
+            "url": ""
+          },
+          {
+            "title": "Ghost Docs",
+            "description": "Plugin for Visual Studio that assists and automatically documents code.",
+            "url": ""
+          },
+          {
+            "title": "Microsoft SQL Management Studio",
+            "description": "Tool for managing SQL Server, SQL Express, and LocalDB.",
+            "url": ""
+          }
+        ]
+      }
+    ]
   }
 ]
