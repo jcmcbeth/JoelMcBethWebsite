@@ -31,7 +31,11 @@
         <h5><strong>{{book.title}}</strong></h5>
         <div class="text-muted" ng-if="book.authors.length > 0">
             by <span ng-repeat="author in book.authors">{{author.firstName}} {{author.lastName}}{{ !$last ? ", " : ""}}</span>
-        </div>   
+        </div>
+        <div ng-if="book.reviews[0].rating">
+            <rating value="book.reviews[0].rating"></rating>
+        </div>
+        <span ng-if="book.reviews[0].isRecommended" class="badge badge-primary">Recommended</span>
         <!--<a ui-sref="bookDetails({ isbn: book.isbn13  })">Details</a>-->
     </div>
 </div>

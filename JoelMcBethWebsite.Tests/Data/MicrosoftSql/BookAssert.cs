@@ -7,6 +7,22 @@
 
     public static class BookAssert
     {
+        public static void AreEqual(BookReview expected, BookReview actual)
+        {
+            if (expected == null)
+            {
+                Assert.IsNull(actual, "Expected actual book review to be null.");
+
+                return;
+            }
+
+            Assert.AreEqual(expected.Id, actual.Id, "Expected book review ids to be equal.");
+            Assert.AreEqual(expected.Rating, actual.Rating, "Expected book review ratings to be equal.");
+            Assert.AreEqual(expected.IsRecommended, actual.IsRecommended, "Expected book review recommendation to be equal.");
+            Assert.AreEqual(expected.Comments, actual.Comments, "Expected book review comments to be equal.");
+            Assert.AreEqual(expected.BookId, actual.BookId, "Expected book review book ids to be equal.");
+        }
+
         public static void AreEqual(Book expected, Book actual)
         {
             if (expected == null)
@@ -20,10 +36,37 @@
             Assert.AreEqual(expected.Isbn13, actual.Isbn13, "Expected ISBN13 to be equal.");
             Assert.AreEqual(expected.Order, actual.Order, "Expected order to be equal.");
             Assert.AreEqual(expected.Pages, actual.Pages, "Expected pages to be equal.");
-            Assert.AreEqual(expected.Rating, actual.Rating, "Expected rating to be equal.");
             Assert.AreEqual(expected.Title, actual.Title, "Expected title to be equal.");
 
             AreEqual(expected.Authors.ToList(), actual.Authors.ToList());
+            AreEqual(expected.Reviews.ToList(), actual.Reviews.ToList());
+        }
+
+        public static void AreEqual(IEnumerable<BookReview> expectedReviews, IList<BookReview> actualReviews)
+        {
+            AreEqual(expectedReviews.ToList(), actualReviews.ToList());
+        }
+
+        public static void AreEqual(IList<BookReview> expectedReviews, IList<BookReview> actualReviews)
+        {
+            if (expectedReviews == null)
+            {
+                Assert.IsNull(actualReviews, "Expected list of reviews to be null");
+
+                return;
+            }
+
+            int count = expectedReviews.Count();
+
+            Assert.AreEqual(count, actualReviews.Count(), "Expected list of reviews to have the same number of items.");
+
+            for (int i = 0; i < count; i++)
+            {
+                var expectedReview = expectedReviews[i];
+                var actualReview = actualReviews[i];
+
+                AreEqual(expectedReview, actualReview);
+            }
         }
 
         public static void AreEqual(IEnumerable<Book> expectedBooks, IEnumerable<Book> actualBooks)

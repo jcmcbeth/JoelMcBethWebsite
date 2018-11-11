@@ -9,9 +9,15 @@
 	[Authors].[Id] AS AuthorId,
 	[Authors].[FirstName],
 	[Authors].[LastName],
-	[Authors].[MiddleName]
+	[Authors].[MiddleName],
+	[BookReviews].[Id] AS BookReviewId,
+	[BookReviews].[Rating],
+	[BookReviews].[IsRecommended],
+	[BookReviews].[Comments]
 FROM
 	[Books]
+LEFT JOIN
+	[BookReviews] ON [Books].[Id] = [BookReviews].[BookId]
 LEFT JOIN
 	[BookAuthors] ON [Books].[Id] = [BookAuthors].[BookId]
 LEFT JOIN

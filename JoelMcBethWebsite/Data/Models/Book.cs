@@ -11,6 +11,7 @@
         public Book()
         {
             this.Authors = new Collection<Author>();
+            this.Reviews = new Collection<BookReview>();
         }
 
         public int Id { get; set; }
@@ -25,8 +26,8 @@
 
         public ICollection<Author> Authors { get; set; }
 
-        public int? Rating { get; set; }
-
         public int? Order { get; set; }
+
+        public ICollection<BookReview> Reviews { get; set; }
     }
 }

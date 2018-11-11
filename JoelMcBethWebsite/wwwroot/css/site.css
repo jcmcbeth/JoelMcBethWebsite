@@ -251,3 +251,11 @@ p {
 input[type=text].ng-invalid.ng-dirty {
     background-color: pink;
 }
+
+/**
+    Badges
+*/
+
+.badge-primary {
+    background-color: Green;
+}

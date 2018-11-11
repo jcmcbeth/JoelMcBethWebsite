@@ -32,6 +32,18 @@
                         FirstName = "Tim",
                         LastName = "Horton"
                     },
+                },
+                Reviews = new List<BookReview>()
+                {
+                    new BookReview()
+                    {
+                        Comments = "test",
+                        IsRecommended = true,
+                        Rating = 3
+                    },
+                    new BookReview()
+                    {
+                    }
                 }
             };
 
@@ -66,6 +78,18 @@
                             LastName = "Horton",
                             MiddleName = "Timothy"
                         },
+                    },
+                    Reviews = new List<BookReview>()
+                    {
+                        new BookReview()
+                        {
+                            Comments = "test",
+                            IsRecommended = true,
+                            Rating = 3
+                        },
+                        new BookReview()
+                        {
+                        }
                     }
                 },
                 new Book()
@@ -101,13 +125,11 @@
             {
                 new Book()
                 {
-                    Title = "b",
-                    Rating = 1
+                    Title = "b"
                 },
                 new Book()
                 {
-                    Title = "a",
-                    Rating = 2
+                    Title = "a"
                 }
             };
 
@@ -137,13 +159,11 @@
             {
                 new Book()
                 {
-                    Title = "a",
-                    Rating = 1
+                    Title = "a"
                 },
                 new Book()
                 {
-                    Title = "b",
-                    Rating = 2
+                    Title = "b"
                 }
             };
 
@@ -174,12 +194,24 @@
                 new Book()
                 {
                     Title = "a",
-                    Rating = 2
+                    Reviews = new List<BookReview>()
+                    {
+                        new BookReview()
+                        {
+                            Rating = 2
+                        }
+                    }
                 },
                 new Book()
                 {
                     Title = "b",
-                    Rating = 1
+                    Reviews = new List<BookReview>()
+                    {
+                        new BookReview()
+                        {
+                            Rating = 1
+                        }
+                    }
                 }
             };
 
@@ -197,7 +229,7 @@
             var actual = await this.Target.GetBooksAsync(criteria);
 
             // Assert
-            BookAssert.AreEqual(books.OrderBy(b => b.Rating), actual.Data);
+            BookAssert.AreEqual(books.OrderBy(b => b.Reviews.Single().Rating), actual.Data);
         }
 
         [TestMethod]
@@ -210,12 +242,24 @@
                 new Book()
                 {
                     Title = "a",
-                    Rating = 1
+                    Reviews = new List<BookReview>()
+                    {
+                        new BookReview()
+                        {
+                            Rating = 1
+                        }
+                    }
                 },
                 new Book()
                 {
                     Title = "b",
-                    Rating = 2
+                    Reviews = new List<BookReview>()
+                    {
+                        new BookReview()
+                        {
+                            Rating = 2
+                        }
+                    }
                 }
             };
 
@@ -233,7 +277,7 @@
             var actual = await this.Target.GetBooksAsync(criteria);
 
             // Assert
-            BookAssert.AreEqual(books.OrderByDescending(b => b.Rating), actual.Data);
+            BookAssert.AreEqual(books.OrderByDescending(b => b.Reviews.Single().Rating), actual.Data);
         }
 
         [TestMethod]

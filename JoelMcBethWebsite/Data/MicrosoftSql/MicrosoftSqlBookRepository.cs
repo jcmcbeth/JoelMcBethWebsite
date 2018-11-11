@@ -24,16 +24,14 @@
                              [Title],         
                              [Edition],
                              [Pages],
-                             [Order],
-                             [Rating])
+                             [Order])
                           OUTPUT INSERTED.[Id]
                           VALUES
                             (@Isbn13,
 			                 @Title,
 			                 @Edition,
 			                 @Pages,
-                             @Order,
-                             @Rating)";
+                             @Order)";
 
             var authorQuery = @"
                 INSERT INTO [Authors]
@@ -50,6 +48,14 @@
                     (@BookId, @AuthorId)
                 ";
 
+            var reviewQuery = @"
+                INSERT INTO [BookReviews]
+                    ([Rating], [IsRecommended], [Comments], [BookId])
+                OUTPUT INSERTED.[Id]
+                VALUES
+                    (@Rating, @IsRecommended, @Comments, @BookId)
+                ";
+
             using (var connection = new SqlConnection(this.connectionString))
             {
                 book.Id = await connection.QuerySingleAsync<int>(bookQuery, book);
@@ -59,6 +65,12 @@
                     author.Id = await connection.QuerySingleAsync<int>(authorQuery, author);
 
                     await connection.ExecuteAsync(bookAuthorQuery, new { BookId = book.Id, AuthorId = author.Id });
+                }
+
+                foreach (var review in book.Reviews)
+                {
+                    review.BookId = book.Id;
+                    review.Id = await connection.QuerySingleAsync<int>(reviewQuery, review);
                 }
             }
 
@@ -91,6 +103,19 @@
                                  INNER JOIN [BookAuthors] ON [BookAuthors].[AuthorId] = [Authors].[Id]
                                  WHERE [BookAuthors].[BookId] = @BookId";
 
+            var reviewQuery = @"
+                    SELECT
+	                    [BookReviews].[Id],
+	                    [BookReviews].[Rating],
+	                    [BookReviews].[IsRecommended],
+	                    [BookReviews].[Comments],
+	                    [BookReviews].[BookId]
+                    FROM
+	                    [BookReviews]
+                    WHERE
+                        [BookReviews].[BookId] = @BookId
+                ";
+
             using (var connection = new SqlConnection(this.connectionString))
             {
                 var book = await connection.QuerySingleOrDefaultAsync<Book>(bookQuery, new { Isbn13 = isbn });
@@ -102,6 +127,13 @@
                     foreach (var author in authors)
                     {
                         book.Authors.Add(author);
+                    }
+
+                    var reviews = await connection.QueryAsync<BookReview>(reviewQuery, new { BookId = book.Id });
+
+                    foreach (var review in reviews)
+                    {
+                        book.Reviews.Add(review);
                     }
                 }
 
@@ -119,14 +151,19 @@
                     [Books].[Title],
                     [Books].[Edition],
                     [Books].[Pages],
-                    [Books].[Rating],
                     [Books].[Order],
 	                [Authors].[Id] AS AuthorId,
 	                [Authors].[FirstName],
 	                [Authors].[LastName],
-	                [Authors].[MiddleName]
+	                [Authors].[MiddleName],
+	                [BookReviews].[Id] AS BookReviewId,
+	                [BookReviews].[Rating],
+	                [BookReviews].[IsRecommended],
+	                [BookReviews].[Comments]
                 FROM
 	                [Books]
+                LEFT JOIN
+	                [BookReviews] ON [Books].[Id] = [BookReviews].[BookId]
                 LEFT JOIN
 	                [BookAuthors] ON [Books].[Id] = [BookAuthors].[BookId]
                 LEFT JOIN
@@ -156,8 +193,7 @@
                                     Isbn13 = reader.GetNullableString("Isbn13"),
                                     Pages = reader.GetNullableInt32("Pages"),
                                     Title = reader.GetNullableString("Title"),
-                                    Order = reader.GetNullableInt32("Order"),
-                                    Rating = reader.GetNullableByte("Rating")
+                                    Order = reader.GetNullableInt32("Order")
                                 };
 
                                 books.Add(bookId, book);
@@ -165,7 +201,7 @@
 
                             int? authorId = reader.GetNullableInt32("AuthorId");
 
-                            if (authorId != null)
+                            if (authorId != null && !book.Authors.Any(a => a.Id == authorId))
                             {
                                 var author = new Author()
                                 {
@@ -176,6 +212,22 @@
                                 };
 
                                 book.Authors.Add(author);
+                            }
+
+                            int? reviewId = reader.GetNullableInt32("BookReviewId");
+
+                            if (reviewId != null && !book.Reviews.Any(r => r.Id == reviewId))
+                            {
+                                var review = new BookReview()
+                                {
+                                    Id = reviewId.Value,
+                                    Rating = reader.GetNullableByte("Rating"),
+                                    IsRecommended = reader.GetNullableBool("IsRecommended"),
+                                    Comments = reader.GetNullableString("Comments"),
+                                    BookId = bookId
+                                };
+
+                                book.Reviews.Add(review);
                             }
                         }
                     }
@@ -216,7 +268,7 @@
                 switch (criteria.Sort)
                 {
                     case BookSort.Rating:
-                        sortSelector = b => b.Rating;
+                        sortSelector = b => b.Reviews.Single().Rating;
                         break;
                     case BookSort.Title:
                         sortSelector = b => b.Title;
