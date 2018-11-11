@@ -33,7 +33,9 @@ USING (VALUES
 	(25, 31),
 	(26, 32),
     (27, 33),
-	(28, 34)
+	(28, 34),
+	(29, 35),
+	(30, 4)
 ) AS [Source] ([BookId], [AuthorId])
 ON
 	([Target].[BookId] = [Source].[BookId] AND [Target].[AuthorId] = [Source].[AuthorId])
