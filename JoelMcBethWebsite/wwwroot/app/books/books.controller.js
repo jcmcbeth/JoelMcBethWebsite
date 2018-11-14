@@ -22,7 +22,8 @@
 
         vm.sortOptions = [
             { name: "None", value: 0 },
-            { name: "Title", value: 1 }
+            { name: "Title", value: 1 },
+            { name: "Rating", value: 2 }
         ];
 
         activate();

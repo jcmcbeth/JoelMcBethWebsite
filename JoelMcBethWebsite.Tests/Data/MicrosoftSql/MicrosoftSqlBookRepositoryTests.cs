@@ -212,6 +212,17 @@
                             Rating = 1
                         }
                     }
+                },
+                new Book()
+                {
+                    Title = "c",
+                    Reviews = new List<BookReview>()
+                    {
+                        new BookReview()
+                        {
+                            Rating = null
+                        }
+                    }
                 }
             };
 
@@ -258,6 +269,17 @@
                         new BookReview()
                         {
                             Rating = 2
+                        }
+                    }
+                },
+                new Book()
+                {
+                    Title = "c",
+                    Reviews = new List<BookReview>()
+                    {
+                        new BookReview()
+                        {
+                            Rating = null
                         }
                     }
                 }

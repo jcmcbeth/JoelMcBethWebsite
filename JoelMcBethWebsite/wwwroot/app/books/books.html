@@ -25,7 +25,7 @@
 
 <div ng-repeat="book in vm.books" class="book">
     <div class="book-image">
-        <img src="https://books.google.com/books?vid=ISBN{{book.isbn13}}&printsec=frontcover&img=1&zoom=1" />
+        <img src="https://books.google.com/books?vid=ISBN{{book.isbn13}}&printsec=frontcover&img=1&zoom=1" no-cover-src="/images/nocover.png" />
     </div>
     <div class="book-summary">
         <h5><strong>{{book.title}}</strong></h5>

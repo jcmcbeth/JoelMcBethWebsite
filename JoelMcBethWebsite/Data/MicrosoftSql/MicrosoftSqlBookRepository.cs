@@ -268,7 +268,7 @@
                 switch (criteria.Sort)
                 {
                     case BookSort.Rating:
-                        sortSelector = b => b.Reviews.Single().Rating;
+                        sortSelector = b => b.Reviews.SingleOrDefault()?.Rating ?? 0;
                         break;
                     case BookSort.Title:
                         sortSelector = b => b.Title;

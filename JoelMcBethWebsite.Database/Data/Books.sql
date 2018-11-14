@@ -30,7 +30,7 @@ USING (VALUES
 	(26, '9780671027032', 'How to Win Friends & Influence People', NULL, 288, NULL, NULL),
 	(27, '9781633535770', 'Coyote Peterson''s Brave Adventures: Wild Animals in a Wild World', NULL, 192, NULL, NULL),
 	(28, '9781617292392', 'Soft Skills: The software developer''s life manual', NULL, 504, NULL, NULL),
-	(28, '9780672326967', 'C Primer Plus', '5th', 984, NULL, NULL),
+	(29, '9780672326967', 'C Primer Plus', '5th', 984, NULL, NULL),
 	(30, '9780137081073', 'The Clean Coder: A Code of Conduct for Professional Programmers', NULL, 256, NULL, NULL)
 ) AS [Source] ([Id], [Isbn13], [Title], [Edition], [Pages], [Rating], [Order])
 ON
