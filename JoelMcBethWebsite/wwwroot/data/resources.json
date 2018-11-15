@@ -126,6 +126,11 @@
             "title": "Microsoft SQL Management Studio",
             "description": "Tool for managing SQL Server, SQL Express, and LocalDB.",
             "url": ""
+          },
+          {
+            "title": "LinqPad",
+            "description": "Scratchpad tool for writing Linq queries.",
+            "url": "https://www.linqpad.net/"
           }
         ]
       }
