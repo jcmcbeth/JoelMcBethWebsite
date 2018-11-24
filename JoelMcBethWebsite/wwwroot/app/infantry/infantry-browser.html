@@ -4,14 +4,12 @@
     <thead class="thead-light">
         <tr>
             <th>Zone</th>
-            <th>Players</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>        
         <tr ng-repeat="zone in vm.zones">
             <td>{{ zone.name }}</td>
-            <td>{{ zone.playerCount }}</td>
             <td>{{ zone.description }}</td>
         </tr>
     </tbody>

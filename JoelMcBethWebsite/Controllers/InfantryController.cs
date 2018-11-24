@@ -3,7 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
     using System.Threading.Tasks;
+    using Infantry.Client.Directory;
+    using Infantry.Directory;
+    using JoelMcBethWebsite.Models.Infantry;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
@@ -12,23 +16,34 @@
     {
         [HttpGet]
         [Route("api/[controller]/browser/zones")]
-        public IActionResult GetZones()
+        public async Task<IActionResult> GetZones()
         {
-            return this.Ok(new[]
+            var hostEntry = await Dns.GetHostEntryAsync("infdir1.aaerox.com");
+            var address = hostEntry.AddressList.First();
+
+            using (var directoryClient = new DirectoryClient(address))
             {
-                new
+                var zones = await directoryClient.GetZonesAsync();
+
+                var models = new List<ZoneModel>();
+
+                foreach (var zone in zones)
                 {
-                    Name = "[I:CTFPL] Twin Peaks 2016",
-                    PlayerCount = 1,
-                    Description = "It's twin peaks yo."
-                },
-                new
-                {
-                    Name = "[I:League] USL KR",
-                    PlayerCount = 43,
-                    Description = "It's kilest ridge yo."
+                    // TODO: use automapper
+                    var model = new ZoneModel()
+                    {
+                        Description = zone.Description,
+                        IsAdvanced = zone.IsAdvanced,
+                        Name = zone.Name,
+                        ServerAddress = zone.ServerAddress.ToString(),
+                        ServerPort = zone.ServerPort
+                    };
+
+                    models.Add(model);
                 }
-            });
+
+                return this.Ok(models);
+            }
         }
     }
 }

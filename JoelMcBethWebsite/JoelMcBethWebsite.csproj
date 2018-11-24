@@ -35,6 +35,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Infantry.Client">
+      <HintPath>..\Shared Binaries\Infantry\Infantry.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Infantry.Common">
+      <HintPath>..\Shared Binaries\Infantry\Infantry.Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="nlog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
