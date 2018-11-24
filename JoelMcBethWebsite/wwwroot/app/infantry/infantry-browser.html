@@ -1,0 +1,18 @@
+﻿<h2>Infantry Browser</h2>
+<p>Current zone list.</p>
+<table class="table table-sm">
+    <thead class="thead-light">
+        <tr>
+            <th>Zone</th>
+            <th>Players</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>        
+        <tr ng-repeat="zone in vm.zones">
+            <td>{{ zone.name }}</td>
+            <td>{{ zone.playerCount }}</td>
+            <td>{{ zone.description }}</td>
+        </tr>
+    </tbody>
+</table>
