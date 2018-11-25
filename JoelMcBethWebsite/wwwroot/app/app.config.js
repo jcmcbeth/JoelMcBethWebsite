@@ -1,9 +1,9 @@
 ﻿(function () {
     angular
         .module("app")
-        .config(["$transitionsProvider", "$cssProvider", "$locationProvider", configure]);
+        .config(["$transitionsProvider", "$cssProvider", "$locationProvider", "$compileProvider", configure]);
 
-    function configure($transitionsProvider, $cssProvider, $locationProvider) {
+    function configure($transitionsProvider, $cssProvider, $locationProvider, $compileProvider) {
 
         // Workaround: ui.router no longer supports the $stateChangeSuccess event
         // but the angularCSS module depends on it.
@@ -15,5 +15,7 @@
         });
 
         $locationProvider.html5Mode(true);
+
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|infantry):/);
     }
 })();

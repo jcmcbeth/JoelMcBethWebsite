@@ -9,7 +9,7 @@
     </thead>
     <tbody>        
         <tr ng-repeat="zone in vm.zones">
-            <td>{{ zone.name }}</td>
+            <td><a href="infantry://{{ zone.serverAddress }}:{{ zone.serverPort }}">{{ zone.name }}</a></td>
             <td>{{ zone.description }}</td>
         </tr>
     </tbody>
