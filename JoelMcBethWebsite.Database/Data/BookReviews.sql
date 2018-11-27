@@ -3,7 +3,8 @@
 MERGE INTO [BookReviews] AS [Target]
 USING (VALUES
 	(4, 5, 1, NULL, 4),
-	(16, 5, 1, NULL, 16)
+	(16, 5, 1, NULL, 16),
+	(31, 4, 1, NULL, 31)
 ) AS [Source] ([Id], [Rating], [IsRecommended], [Comments], [BookId])
 ON
 	([Target].[Id] = [Source].[Id])
