@@ -62,6 +62,10 @@
                 templateUrl: "app/resources/resources.html",
                 controller: "ResourceController as vm"
             })
+            .state("infantry", {
+                url: "/infantry",
+                templateUrl: "app/infantry/infantry.html"
+            })
             .state("infantry-browser", {
                 url: "/infantry/browser",
                 templateUrl: "app/infantry/infantry-browser.html",
