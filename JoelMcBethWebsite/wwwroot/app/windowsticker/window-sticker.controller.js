@@ -16,8 +16,14 @@
         activate();
 
         function lookup() {
-            var url = "https://www.mitsubishicars.com/rs/file/monroney?vin=" + vm.vin;
-            $window.open(url, '_blank');
+            if (vm.vin.manufacturer === "Mitsubishi") {
+                var url = "https://www.mitsubishicars.com/rs/file/monroney?vin=" + vm.vin.vin;
+                $window.open(url, '_blank');
+
+                vm.error = null;
+            } else {
+                vm.error = "That vin is not supported";
+            }          
         }
 
         function activate() { }
