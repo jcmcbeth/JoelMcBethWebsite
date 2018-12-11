@@ -1,3 +1,3 @@
 ﻿(function () {
-    angular.module('app', ["ui.router", "angularCSS"]);
+    angular.module('app', ["ui.router", "angularCSS", "ngMessages"]);
 })();

@@ -1,0 +1,15 @@
+﻿<h1>Window Sticker Lookup</h1>
+<p>Lookup window stickers by VIN. Currently only supports Mitsubishi.</p>
+<div class="row">
+    <form name="vm.form" class="col-md-4 col-lg-3" ng-submit="vm.lookup()" novalidate>
+        <div class="form-group">
+            <label for="vin">VIN</label><span class="badge badge-light">Required</span>
+            <input type="text" name="vin" class="form-control" ng-model="vm.vin" vin />
+
+            <div class="error-message" ng-messages="vm.form.vin.$error" role="alert" ng-if="vm.form.vin.$dirty">
+                <div ng-message="vin">The VIN is invalid or not for a Mitsubishi.</div>
+            </div>
+        </div>
+        <button ng-disabled="vm.form.$invalid" type="submit" class="btn btn-primary">Get Window Sticker</button>
+    </form>
+</div>

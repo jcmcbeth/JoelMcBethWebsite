@@ -42,6 +42,11 @@
                 title: "Resources"
             },
             {
+                group: "Main",
+                state: "misc",
+                title: "Misc"
+            },
+            {
                 group: "Account",
                 state: "login",
                 title: "Login",

@@ -86,6 +86,15 @@
                 data: {
                     requireAuthentication: true
                 }
+            })
+            .state("misc", {
+                url: "/misc",
+                templateUrl: "app/home/misc.html"
+            })
+            .state("window-sticker-lookup", {
+                url: "/window-sticker-lookup",
+                templateUrl: "app/windowsticker/window-sticker.html",
+                controller: "WindowStickerController as vm"
             });
 
         $urlRouterProvider.otherwise("/");
