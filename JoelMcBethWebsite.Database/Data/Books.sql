@@ -10,9 +10,9 @@ USING (VALUES
 	(6, '9780132887410', 'Modern Cryptography', NULL, 672, NULL, NULL),
 	(7, '9780201616224', 'The Pragmatic Programmer: From Journeyman to Master', NULL, 259, NULL, NULL),
 	(8, '9781784395582', 'Building Wireless Sensor Networks', NULL, 259, NULL, NULL),
-	(9, NULL, 'Pandemic', NULL, 407, NULL, NULL),
+	(9, '9780765359940', 'Pandemic', NULL, 407, NULL, NULL),
 	(10, '9780470497029', 'Assembly Language Step by Step - Programming with Linux', '3rd', 506, NULL, NULL),
-	(11, NULL, '127 Hours - Between a Rock and a Hard Place', NULL, 406, NULL, NULL),
+	(11, '9781451617702', '127 Hours - Between a Rock and a Hard Place', NULL, 406, NULL, NULL),
 	(12, '9780201038019', 'The Art of Computer Programming - Fundamental Algorithms - Volume 1', NULL, 463, NULL, NULL),
 	(13, '9781933988719', 'Brownfield Application Development in .NET', NULL, 366, NULL, NULL),
 	(14, '9780452285255', 'Prime Obsession', NULL, 364, NULL, NULL),
@@ -31,7 +31,8 @@ USING (VALUES
 	(27, '9781633535770', 'Coyote Peterson''s Brave Adventures: Wild Animals in a Wild World', NULL, 192, NULL, NULL),
 	(28, '9781617292392', 'Soft Skills: The software developer''s life manual', NULL, 504, NULL, NULL),
 	(29, '9780672326967', 'C Primer Plus', '5th', 984, NULL, NULL),
-	(30, '9780137081073', 'The Clean Coder: A Code of Conduct for Professional Programmers', NULL, 256, NULL, NULL)
+	(30, '9780137081073', 'The Clean Coder: A Code of Conduct for Professional Programmers', NULL, 256, NULL, NULL),
+	(31, '9780553293357', 'Foundation', NULL, 296, NULL, NULL)
 ) AS [Source] ([Id], [Isbn13], [Title], [Edition], [Pages], [Rating], [Order])
 ON
 	([Target].[Id] = [Source].[Id])
