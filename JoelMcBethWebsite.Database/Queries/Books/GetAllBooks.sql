@@ -4,7 +4,6 @@
     [Books].[Title],
     [Books].[Edition],
     [Books].[Pages],
-    [Books].[Rating],
     [Books].[Order],
 	[Authors].[Id] AS AuthorId,
 	[Authors].[FirstName],

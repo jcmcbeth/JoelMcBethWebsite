@@ -61,6 +61,7 @@
     <Folder Include="Data" />
     <Folder Include="Queries" />
     <Folder Include="Queries\Books" />
+    <Folder Include="DataLossScripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Authors.sql" />
@@ -71,6 +72,7 @@
     <None Include="Data\BookAuthors.sql" />
     <Build Include="Media.sql" />
     <Build Include="BookReviews.sql" />
+    <None Include="DataLossScripts\Books.DropRatingColumn.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="JoelMcBethWebsite.Database.refactorlog" />

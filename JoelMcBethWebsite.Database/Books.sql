@@ -1,11 +1,10 @@
 ﻿CREATE TABLE [dbo].[Books]
 (
-	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY(100000, 1), 
     [Isbn13] NCHAR(13) NULL, 
     [Title] NVARCHAR(128) NOT NULL, 
     [Edition] NVARCHAR(64) NULL, 
     [Pages] INT NULL, 
-    [Rating] TINYINT NULL, 
     [Order] INT NULL 
 )
 
