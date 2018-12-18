@@ -14,8 +14,6 @@
 
         function activate() {
             return projectService.getProjects().then(function (projects) {
-
-                console.log(projects);
                 vm.projects = projects;
             });
         }

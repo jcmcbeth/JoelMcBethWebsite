@@ -1,5 +1,5 @@
 ﻿<!doctype html>
-<html lang="en">
+<html lang="en" ng-app="app" ng-strict-di>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -22,7 +22,7 @@
     <script src="js/angular-css/angular-css.js"></script>
 </head>
 
-<body ng-app="app" ng-controller="AppController as app">
+<body ng-controller="AppController as app">
     <div id="loading-overlay" ng-if="!app.loaded">
         <div class="loading-glyph"></div>
         <h1>Loading...</h1>

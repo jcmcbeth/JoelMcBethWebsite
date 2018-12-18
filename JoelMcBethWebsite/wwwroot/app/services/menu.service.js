@@ -5,7 +5,7 @@
         .module("app")
         .factory("menuService", menuService);
 
-    menu.$inject = ["authenticationService"];
+    menuService.$inject = ["authenticationService"];
 
     function menuService(authenticationService) {
         var menuItems = [
