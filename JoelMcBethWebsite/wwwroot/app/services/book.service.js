@@ -3,10 +3,10 @@
         .module("app")
         .factory("bookService", bookService);
 
-    bookService.$inject = ["$http"];
+    bookService.$inject = ["$http", "config"];
 
-    function bookService($http) {
-        var baseUrl = "/api/books";
+    function bookService($http, config) {
+        var baseUrl = config.serviceUrlBase + "/books";
 
         return {
             addBook: addBook,
