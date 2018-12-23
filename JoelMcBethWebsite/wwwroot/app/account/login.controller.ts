@@ -1,37 +1,25 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
-(function () {
-    'use strict';
 
-    angular
-        .module("app")
-        .controller("LoginController", LoginController);
+class LoginController {
+    static $inject = ["authenticationService", "$state"];
 
-    LoginController.$inject = ["authenticationService", "$state"];
+    public error: string;
+    public username: string;
+    public password: string;
 
-    function LoginController(authenticationService, $state) {
-        /* jshint validthis:true */
-        var vm = this;
-        vm.login = login;
+    constructor(private authenticationService, private $state) {
 
-        activate();
-
-        function login() {
-            console.log("Login pressed.");
-            vm.error = null;
-
-            authenticationService.login(vm.username, vm.password)
-                .then(onLoginSuccess, onLoginFailure);
-
-            function onLoginSuccess() {
-                $state.go("home");
-            }
-
-            function onLoginFailure(error) {
-                vm.error = error;
-            }
-        }
-
-        function activate() {
-        }
     }
-})();
+
+    login() {
+        this.error = null;
+
+        this.authenticationService.login(this.username, this.password)
+            .then(() => this.$state.go("home"),
+            error => this.error = error);
+    }
+}
+
+angular
+    .module("app")
+    .controller("LoginController", LoginController);
