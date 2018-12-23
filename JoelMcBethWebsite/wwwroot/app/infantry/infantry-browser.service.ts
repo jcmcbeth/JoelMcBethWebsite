@@ -1,26 +1,23 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
+/// <reference path="zone.ts" />
 
-(function () {
-    angular
-        .module("app")
-        .factory("infantryBrowserService", infantryBrowserService);
+class InfantryBrowserService {
+    static $inject = ["$http"];
 
-    infantryBrowserService.$inject = ["$http"];
+    private baseUrl = "/api/infantry/browser/";
 
-    function infantryBrowserService($http) {
-        var baseUrl = "/api/infantry/browser/";
-
-        return {
-            getZones: getZones
-        };
-
-        function getZones() {
-            var url = baseUrl + "zones";
-            return $http.get(url).then(getZonesComplete);
-
-            function getZonesComplete(response) {
-                return response.data;
-            }
-        }
+    constructor(private $http: ng.IHttpService) {
     }
-})();
+
+    getZones(): ng.IPromise<Zone[]> {
+        const url = this.baseUrl + "zones";
+
+        return <ng.IPromise<Zone[]>>this.$http.get(url).then(response => {
+            return response.data;
+        });
+    }
+}
+
+angular
+    .module("app")
+    .service("InfantryBrowserService", InfantryBrowserService);

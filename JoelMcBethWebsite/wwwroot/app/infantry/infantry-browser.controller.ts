@@ -1,24 +1,23 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
 
-(function () {
-    "use strict";
+class InfantryBrowserController implements ng.IOnInit {
+    static $inject = ["InfantryBrowserService"];
 
-    angular
-        .module("app")
-        .controller("InfantryBrowserController", MediaController);
+    public zones: Zone[];
 
-    MediaController.$inject = ["infantryBrowserService"];
-
-    function MediaController(infantryBrowserService) {
-        /* jshint validthis:true */
-        var vm = this;
-
-        activate();
-
-        function activate() {
-            infantryBrowserService.getZones().then(zones => {
-                vm.zones = zones;
-            });
-        }
+    constructor(private infantryBrowserService: InfantryBrowserService) {
+        this.zones = [];
     }
-})();
+
+    $onInit() {
+        this.infantryBrowserService.getZones().then(zones => {
+            this.zones = zones;
+        });
+    }
+    
+}
+
+angular
+    .module("app")
+    .controller("InfantryBrowserController", InfantryBrowserController);
+    

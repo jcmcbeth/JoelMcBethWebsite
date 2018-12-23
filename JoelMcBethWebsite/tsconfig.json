@@ -1,12 +1,17 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
     "noImplicitAny": false,
     "noEmitOnError": true,
     "removeComments": false,
     "sourceMap": true,
-    "target": "es2015",
+    "target": "es5",
     "skipLibCheck": true,
-    "module": "none"
+    "module": "none",
+    "lib": [
+      "es6",
+      "dom"
+    ]
   },
   "exclude": [
     "node_modules"

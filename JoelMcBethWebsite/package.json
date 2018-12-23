@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.html",
-  "dependencies": {},
+  "dependencies": {
+    "es6-shim": "0.35.4"
+  },
   "devDependencies": {
     "@types/angular": "1.6.52"
   },

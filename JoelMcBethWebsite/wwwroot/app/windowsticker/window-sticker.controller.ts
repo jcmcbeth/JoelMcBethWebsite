@@ -1,32 +1,27 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
-(function () {
-    'use strict';
 
-    angular
-        .module('app')
-        .controller('WindowStickerController', WindowStickerController);
+class WindowStickerController {
+    static $inject = ['$window'];
 
-    WindowStickerController.$inject = ["$window"];
+    public error: string;
+    public vin: any;
 
-    function WindowStickerController($window) {
-        /* jshint validthis:true */
-        var vm = this;
+    constructor(private $window: ng.IWindowService) {
 
-        vm.lookup = lookup;
-
-        activate();
-
-        function lookup() {
-            if (vm.vin.manufacturer === "Mitsubishi") {
-                var url = "https://www.mitsubishicars.com/rs/file/monroney?vin=" + vm.vin.vin;
-                $window.open(url, '_blank');
-
-                vm.error = null;
-            } else {
-                vm.error = "That vin is not supported";
-            }          
-        }
-
-        function activate() { }
     }
-})();
+
+    public lookup() {
+        if (this.vin.manufacturer === "Mitsubishi") {
+            var url = "https://www.mitsubishicars.com/rs/file/monroney?vin=" + this.vin.vin;
+            this.$window.open(url, '_blank');
+
+            this.error = null;
+        } else {
+            this.error = "That vin is not supported";
+        }    
+    }
+}
+
+angular
+    .module('app')
+    .controller('WindowStickerController', WindowStickerController);
