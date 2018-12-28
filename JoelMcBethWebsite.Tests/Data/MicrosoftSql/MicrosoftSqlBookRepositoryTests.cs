@@ -147,7 +147,7 @@
             var actual = await this.Target.GetBooksAsync(criteria);
 
             // Assert
-            BookAssert.AreEqual(books.OrderBy(b => b.Title), actual.Data);
+            BookAssert.AreEqual(books.OrderBy(b => b.Title), actual.Items);
         }
 
         [TestMethod]
@@ -181,7 +181,7 @@
             var actual = await this.Target.GetBooksAsync(criteria);
 
             // Assert
-            BookAssert.AreEqual(books.OrderByDescending(b => b.Title), actual.Data);
+            BookAssert.AreEqual(books.OrderByDescending(b => b.Title), actual.Items);
         }
 
         [TestMethod]
@@ -240,7 +240,7 @@
             var actual = await this.Target.GetBooksAsync(criteria);
 
             // Assert
-            BookAssert.AreEqual(books.OrderBy(b => b.Reviews.Single().Rating), actual.Data);
+            BookAssert.AreEqual(books.OrderBy(b => b.Reviews.Single().Rating), actual.Items);
         }
 
         [TestMethod]
@@ -299,7 +299,7 @@
             var actual = await this.Target.GetBooksAsync(criteria);
 
             // Assert
-            BookAssert.AreEqual(books.OrderByDescending(b => b.Reviews.Single().Rating), actual.Data);
+            BookAssert.AreEqual(books.OrderByDescending(b => b.Reviews.Single().Rating), actual.Items);
         }
 
         [TestMethod]
@@ -322,7 +322,7 @@
             var actual = await this.Target.GetBooksAsync(criteria);
 
             // Assert
-            Assert.AreEqual(2, actual.Data.Count());
+            Assert.AreEqual(2, actual.Items.Count());
         }
 
         [TestMethod]
@@ -347,7 +347,7 @@
             // Assert
             var expected = books.Last();
 
-            BookAssert.AreEqual(expected, actual.Data.Single());
+            BookAssert.AreEqual(expected, actual.Items.Single());
         }
 
         [DataTestMethod]
@@ -411,10 +411,10 @@
             // Assert
             Assert.AreEqual(
                 1,
-                actual.Data.Count(),
-                $"Expected exactly one book to be returned for filter text '{filter}'. Actual number of books returned was {actual.Data.Count()}.");
+                actual.Items.Count(),
+                $"Expected exactly one book to be returned for filter text '{filter}'. Actual number of books returned was {actual.Items.Count()}.");
 
-            BookAssert.AreEqual(expected, actual.Data.Single());
+            BookAssert.AreEqual(expected, actual.Items.Single());
         }
 
         protected override void SetupFixture(Fixture fixture)

@@ -1,25 +1,22 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
-(function () {
-    "use strict";
 
-    angular
-        .module("app")
-        .controller("LogoutController", LogoutController);
+class LogoutController implements ng.IOnInit {
+    static $inject = ["authenticationService"];
 
-    LogoutController.$inject = ["authenticationService"];
+    public message: string;
 
-    function LogoutController(authenticationService) {
-        /* jshint validthis:true */
-        var vm = this;
-        vm.message = "You are being logged out.";
-
-        activate();
-
-        function activate() {
-            authenticationService.logout()
-                .then(function () {
-                    vm.message = "You have been logged out!";
-                });
-        }
+    constructor(private authenticationService) {
+        this.message = "You are being logged out.";
     }
-})();
+
+    $onInit() {
+        this.authenticationService.logout()
+            .then(function () {
+                this.message = "You have been logged out!";
+            });
+    }
+}
+
+angular
+    .module("app")
+    .controller("LogoutController", LogoutController);

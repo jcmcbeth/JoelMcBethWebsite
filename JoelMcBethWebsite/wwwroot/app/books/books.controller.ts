@@ -1,73 +1,74 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
+class BookController implements ng.IOnInit {
+    static $inject = ["BookService", "authenticationService", "sortDirections"];
 
-(function () {
-    angular
-        .module("app")
-        .controller("BookController", BookController);
+    pageSize: number;
+    page: number;
+    pageCount: number;
+    pages: number[];
+    sort: number;
+    sortDirection: number;
+    sortOptions: any[];
+    books: Book[];
+    filterText: string;
 
-    BookController.$inject = ["$scope", "bookService", "authenticationService", "sortDirections"];
-
-    function BookController($scope, bookService, authenticationSerivce, sortDirections) {
-        var vm = this;
-
-        vm.pageSize = 12;
-        vm.page = 1;
-        vm.pageCount = 0;
-        vm.pages = [];
-        vm.canAdd = canAdd;
-        vm.selectPage = selectPage;
-        vm.filterBooks = filterBooks;
-        vm.updateBooks = updateBooks;
-        vm.sort = 0;
-        vm.sortDirection = 0;
-        vm.sortDirections = sortDirections;
-
-        vm.sortOptions = [
+    constructor(private bookService, private authenticationSerivce, public sortDirections) {
+        this.pageSize = 12;
+        this.page = 1;
+        this.pageCount = 0;
+        this.pages = [];
+        this.sort = 0;
+        this.sortDirection = 0;
+        this.sortOptions = [
             { name: "None", value: 0 },
             { name: "Title", value: 1 },
             { name: "Rating", value: 2 }
         ];
+        this.books = [];
+        this.filterText = "";
+    }
 
-        activate();
+    canAdd(): boolean {
+        return this.authenticationSerivce.isAuthenticated();
+    }
 
-        function filterBooks() {
-            vm.page = 1;
-            updateBooks();
-        }
+    selectPage(page: number) {
+        if (page <= this.pageCount || page >= 1) {
+            this.page = page;
 
-        function selectPage(page) {
-            if (page <= vm.pageCount || page >= 1) {
-                vm.page = page;
-
-                updateBooks();
-            }
-        }
-
-        function canAdd() {
-            return authenticationSerivce.isAuthenticated();
-        }
-
-        function activate() {
-            return updateBooks();
-        }
-
-        function updateBooks() {
-            return bookService.getBooks(vm.filterText, vm.page, vm.pageSize, vm.sort, vm.sortDirection).then(function (data) {
-                vm.books = data.books;
-                vm.pageCount = data.pagination.pages;
-
-                updatePages();
-            });
-        }
-
-        function updatePages() {
-            // I couldn't find a simple way to do a repeat over a range of
-            // numbers. I think the easiest way was to just create an array
-            // of the numbers.
-            vm.pages = new Array(vm.pageCount);
-            for (var i = 0; i < vm.pageCount; i++) {
-                vm.pages[i] = i + 1;
-            }
+            this.updateBooks();
         }
     }
-})();
+
+    filterBooks() {
+        this.page = 1;
+        this.updateBooks();
+    }
+
+    updateBooks() {
+        return this.bookService.getBooks(this.filterText, this.page, this.pageSize, this.sort, this.sortDirection).then(data => {
+            this.books = data.items;
+            this.pageCount = data.pagination.pages;
+
+            this.updatePages();
+        });
+    }
+
+    $onInit(): void {
+        this.updateBooks();
+    }
+
+    private updatePages() {
+        // I couldn't find a simple way to do a repeat over a range of
+        // numbers. I think the easiest way was to just create an array
+        // of the numbers.
+        this.pages = new Array(this.pageCount);
+        for (var i = 0; i < this.pageCount; i++) {
+            this.pages[i] = i + 1;
+        }
+    }
+}
+
+angular
+    .module("app")
+    .controller("BookController", BookController);

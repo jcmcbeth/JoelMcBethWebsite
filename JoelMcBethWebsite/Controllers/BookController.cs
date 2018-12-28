@@ -43,9 +43,9 @@
         [HttpPost("api/books")]
         public async Task<IActionResult> Post([FromBody]Book book)
         {
-            var books = await this.books.AddBookAsync(book);
+            book = await this.books.AddBookAsync(book);
 
-            return this.Ok(books);
+            return this.Ok(book);
         }
     }
 }

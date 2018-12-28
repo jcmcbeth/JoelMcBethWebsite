@@ -7,7 +7,7 @@
         .module("app")
         .controller("AddBookController", AddBookController);
 
-    AddBookController.$inject = ["bookService", "$state"];
+    AddBookController.$inject = ["BookService", "$state"];
 
     function AddBookController(bookService, $state) {
         /* jshint validthis:true */

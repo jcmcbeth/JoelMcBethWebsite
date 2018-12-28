@@ -7,7 +7,7 @@
         .module("app")
         .controller("BookDetailsController", BookDetailsController);
 
-    BookDetailsController.$inject = ["bookService", "$stateParams"];
+    BookDetailsController.$inject = ["BookService", "$stateParams"];
 
     function BookDetailsController(bookService, $stateParams) {
         var vm = this;

@@ -1,33 +1,28 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
 
-(function () {
-    "use strict";
+class MediaController implements ng.IOnInit {
+    static $inject = ["mediaService"];
 
-    angular
-        .module("app")
-        .controller("MediaController", MediaController);
+    filterText: string;
 
-    MediaController.$inject = ["mediaService"];
-
-    function MediaController(mediaService) {
-        /* jshint validthis:true */
-        var vm = this;
-        vm.search = search;
-
-        function search() {
-            updateMedia();
-        }
-
-        activate();
-
-        function updateMedia() {
-            return mediaService.getMedia(vm.filterText).then(function (data) {
-                vm.media = data.media;
-            });
-        }
-
-        function activate() {
-            updateMedia();
-        }
+    constructor(private mediaService) {
     }
-})();
+
+    search() {
+        this.updateMedia();
+    }
+
+    $onInit() {
+        this.updateMedia();
+    }
+
+    private updateMedia() {
+        this.mediaService.getMedia(this.filterText).then(function (data) {
+            this.media = data.media;
+        });
+    }
+}
+
+angular
+    .module("app")
+    .controller("MediaController", MediaController);

@@ -4,13 +4,13 @@
 
     public class PagedEnumerable<T>
     {
-        public PagedEnumerable(IEnumerable<T> data, Pagination pagination)
+        public PagedEnumerable(IEnumerable<T> items, Pagination pagination)
         {
-            this.Data = data;
+            this.Items = items;
             this.Pagination = pagination;
         }
 
-        public IEnumerable<T> Data
+        public IEnumerable<T> Items
         {
             get;
             private set;
