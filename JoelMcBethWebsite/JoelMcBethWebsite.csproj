@@ -27,11 +27,13 @@
     <Content Remove="wwwroot\app\infantry\infantry-browser.service.ts" />
     <Content Remove="wwwroot\app\infantry\zone.ts" />
     <Content Remove="wwwroot\app\media\media.controller.ts" />
+    <Content Remove="wwwroot\app\menu\menu-item.ts" />
     <Content Remove="wwwroot\app\menu\menu.controller.ts" />
     <Content Remove="wwwroot\app\projects\projects.controller.ts" />
     <Content Remove="wwwroot\app\resources\resources.controller.ts" />
     <Content Remove="wwwroot\app\resume\resume.controller.ts" />
-    <Content Remove="wwwroot\app\books\book.service.ts" />
+    <Content Remove="wwwroot\app\services\authentication.service.ts" />
+    <Content Remove="wwwroot\app\services\menu.service.ts" />
     <Content Remove="wwwroot\app\shared\paged-array.ts" />
     <Content Remove="wwwroot\app\shared\pagination.ts" />
     <Content Remove="wwwroot\app\users\addUser.controller.ts" />
@@ -84,7 +86,6 @@
     <TypeScriptCompile Include="wwwroot\app\app.module.ts" />
     <TypeScriptCompile Include="wwwroot\app\app.routes.ts" />
     <TypeScriptCompile Include="wwwroot\app\app.run.ts" />
-    <TypeScriptCompile Include="wwwroot\app\books\book.service.ts" />
     <TypeScriptCompile Include="wwwroot\app\books\addBook.controller.ts" />
     <TypeScriptCompile Include="wwwroot\app\books\author.ts" />
     <TypeScriptCompile Include="wwwroot\app\books\book-review.ts" />
@@ -96,10 +97,13 @@
     <TypeScriptCompile Include="wwwroot\app\infantry\infantry-browser.service.ts" />
     <TypeScriptCompile Include="wwwroot\app\infantry\zone.ts" />
     <TypeScriptCompile Include="wwwroot\app\media\media.controller.ts" />
+    <TypeScriptCompile Include="wwwroot\app\menu\menu-item.ts" />
     <TypeScriptCompile Include="wwwroot\app\menu\menu.controller.ts" />
     <TypeScriptCompile Include="wwwroot\app\projects\projects.controller.ts" />
     <TypeScriptCompile Include="wwwroot\app\resources\resources.controller.ts" />
     <TypeScriptCompile Include="wwwroot\app\resume\resume.controller.ts" />
+    <TypeScriptCompile Include="wwwroot\app\menu\menu.service.ts" />
+    <TypeScriptCompile Include="wwwroot\app\services\authentication.service.ts" />
     <TypeScriptCompile Include="wwwroot\app\shared\models\paged-array.ts" />
     <TypeScriptCompile Include="wwwroot\app\shared\models\pagination.ts" />
     <TypeScriptCompile Include="wwwroot\app\users\addUser.controller.ts" />
@@ -111,9 +115,6 @@
   <ItemGroup>
     <Content Update="nlog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\app\books\book.service.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
 

@@ -1,101 +1,100 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
 
-(function () {
-    "use strict";
+class MenuController implements ng.IOnInit {
+    static $inject = ["menuService", "$rootScope", "authenticationService"];
 
-    angular
-        .module("app")
-        .controller("MenuController", MenuController);
+    public menuItems: any[];
+    public menuGroups: any[];
 
-    MenuController.$inject = ["menuService", "$rootScope", "authenticationService"];
+    private authenticated;
 
-    function MenuController(menuService, $rootScope, authenticationService) {
-        var vm = this;
-        vm.menuItems = [];
-        vm.menuGroups = [];
+    constructor(private menuService, private rootScope: ng.IRootScopeService, private authenticationService) {
+        this.menuItems = [];
+        this.menuGroups = [];
+        this.authenticated = false;
 
-        var authenticated = false;
+        rootScope.$on("authenticated", () => {
+            this.authenticated = true;
 
-        $rootScope.$on("authenticated", function () {
-            authenticated = true;
-
-            updateMenuItems();
+            this.updateMenuItems();
         });
 
-        $rootScope.$on("unauthenticated", function () {
-            authenticated = false;
+        rootScope.$on("unauthenticated", () => {
+            this.authenticated = false;
 
-            updateMenuItems();
+            this.updateMenuItems();
         });
+    }
 
-        activate();
+    $onInit(): void {
+        this.menuItems = this.menuService.getMenuItems();
+        this.menuGroups = this.getMenuGroups();
 
-        function activate() {
-            vm.menuItems = menuService.getMenuItems();
-            vm.menuGroups = getMenuGroups();
+        this.authenticated = this.authenticationService.isAuthenticated();
 
-            authenticated = authenticationService.isAuthenticated();
+        this.updateMenuItems();
+    }
 
-            updateMenuItems();
+    private getMenuGroups() {
+        var groups = [];
+
+        for (var i = 0; i < this.menuItems.length; i++) {
+            var menuItem = this.menuItems[i];
+            var groupName = menuItem.group;
+
+            var group = groups.find((currentGroup) => {
+                return currentGroup.name === groupName;
+            });
+
+            if (group === undefined) {
+                group = {
+                    name: groupName,
+                    menuItems: []
+                };
+
+                groups.push(group);
+            }
+
+            group.menuItems.push(menuItem);
         }
 
-        function getMenuGroups() {
-            var groups = [];
+        return groups;
+    }
 
-            for (var i = 0; i < vm.menuItems.length; i++) {
-                var menuItem = vm.menuItems[i];
-                var groupName = menuItem.group;
+    private updateMenuItems(): void {
+        for (var i = 0; i < this.menuItems.length; i++) {
+            var item = this.menuItems[i];
 
-                var group = groups.find(function (currentGroup) {
-                    return currentGroup.name === groupName;
-                });
-
-                if (group === undefined) {
-                    group = {
-                        name: groupName,
-                        menuItems: []
-                    };
-
-                    groups.push(group);
-                }
-
-                group.menuItems.push(menuItem);
+            if (item.hidden) {
+                item.visible = false;
+                continue;
             }
 
-            return groups;
+            if (item.unauthenticatedOnly && this.authenticated) {
+                item.visible = false;
+                continue;
+            }
+
+            if (item.requireAuthentication && !this.authenticated) {
+                item.visible = false;
+                continue;
+            }
+
+            item.visible = true;
         }
 
-        function updateMenuItems() {
-            for (var i = 0; i < vm.menuItems.length; i++) {
-                var item = vm.menuItems[i];
+        for (i = 0; i < this.menuGroups.length; i++) {
+            var group = this.menuGroups[i];
 
-                if (item.hidden) {
-                    item.visible = false;
-                    continue;
-                }
+            var visible = group.menuItems.some((item) => {
+                return item.visible === true;
+            });
 
-                if (item.unauthenticatedOnly && authenticated) {
-                    item.visible = false;
-                    continue;
-                }
-
-                if (item.requireAuthentication && !authenticated) {
-                    item.visible = false;
-                    continue;
-                }
-
-                item.visible = true;
-            }
-
-            for (i = 0; i < vm.menuGroups.length; i++) {
-                var group = vm.menuGroups[i];
-
-                var visible = group.menuItems.some(function (item) {
-                    return item.visible === true;
-                });
-
-                group.visible = visible;
-            }
+            group.visible = visible;
         }
     }
-})();
+}
+
+angular
+    .module("app")
+    .controller("MenuController", MenuController);
