@@ -1,4 +1,5 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
+/// <reference path="../services/authentication.service.ts" />
 /// <reference path="menu-item.ts" />
 
 class MenuService {
@@ -6,7 +7,7 @@ class MenuService {
 
     public menuItems: MenuItem[];
 
-    constructor(private authenticationService) {
+    constructor(private authenticationService: AuthenticationService) {
         this.menuItems = [
             {
                 group: "Main",
@@ -98,4 +99,4 @@ class MenuService {
 
 angular
     .module("app")
-    .factory("menuService", MenuService);
+    .service("menuService", MenuService);

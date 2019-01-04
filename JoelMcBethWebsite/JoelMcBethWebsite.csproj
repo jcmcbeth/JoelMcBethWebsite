@@ -34,6 +34,7 @@
     <Content Remove="wwwroot\app\resume\resume.controller.ts" />
     <Content Remove="wwwroot\app\services\authentication.service.ts" />
     <Content Remove="wwwroot\app\services\menu.service.ts" />
+    <Content Remove="wwwroot\app\services\project.service.ts" />
     <Content Remove="wwwroot\app\shared\paged-array.ts" />
     <Content Remove="wwwroot\app\shared\pagination.ts" />
     <Content Remove="wwwroot\app\users\addUser.controller.ts" />
@@ -104,6 +105,7 @@
     <TypeScriptCompile Include="wwwroot\app\resume\resume.controller.ts" />
     <TypeScriptCompile Include="wwwroot\app\menu\menu.service.ts" />
     <TypeScriptCompile Include="wwwroot\app\services\authentication.service.ts" />
+    <TypeScriptCompile Include="wwwroot\app\services\project.service.ts" />
     <TypeScriptCompile Include="wwwroot\app\shared\models\paged-array.ts" />
     <TypeScriptCompile Include="wwwroot\app\shared\models\pagination.ts" />
     <TypeScriptCompile Include="wwwroot\app\users\addUser.controller.ts" />

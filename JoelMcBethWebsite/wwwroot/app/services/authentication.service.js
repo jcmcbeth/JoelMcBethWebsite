@@ -1,3 +1,4 @@
+/// <reference path="../../../client/typings/angularjs/index.d.ts" />
 var AuthenticationService = /** @class */ (function () {
     function AuthenticationService(http, window, q, rootScope) {
         this.http = http;
@@ -56,4 +57,7 @@ var AuthenticationService = /** @class */ (function () {
     AuthenticationService.$inject = ["$http", "$window", "$q", "$rootScope"];
     return AuthenticationService;
 }());
+angular
+    .module("app")
+    .service("authenticationService", AuthenticationService);
 //# sourceMappingURL=authentication.service.js.map

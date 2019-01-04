@@ -1,4 +1,6 @@
-﻿class AuthenticationService {
+﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
+
+class AuthenticationService {
     static $inject = ["$http", "$window", "$q", "$rootScope"];
 
     readonly baseUrl = "/api/account";
@@ -72,3 +74,7 @@
         return deferred.promise;
     }
 }
+
+angular
+    .module("app")
+    .service("authenticationService", AuthenticationService);
