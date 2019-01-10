@@ -1,24 +1,21 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
+/// <reference path="resource.service.ts" />
 
-(function () {
-    'use strict';
+class ResourceController implements ng.IOnInit {
+    static $inject = ['resourceService', '$q'];
 
-    angular
-        .module('app')
-        .controller('ResourceController', ResourceController);
+    groups: any;
 
-    ResourceController.$inject = ['resourceService', '$q'];
-
-    function ResourceController(resourceService, $q) {
-        /* jshint validthis:true */
-        var vm = this;
-
-        activate();
-
-        function activate() {
-            var groupsPromise = resourceService.getGroupedResources().then(function (groups) {
-                vm.groups = groups;
-            });
-        }
+    constructor(private resourceService: ResourceService) {      
     }
-})();
+
+    $onInit(): void {
+        var groupsPromise = this.resourceService.getGroupedResources().then((groups) => {
+            this.groups = groups;
+        });
+    }
+}
+
+angular
+    .module('app')
+    .controller('ResourceController', ResourceController);
