@@ -4,6 +4,8 @@ class MediaController implements ng.IOnInit {
     static $inject = ["mediaService"];
 
     filterText: string;
+    media: any[];
+
 
     constructor(private mediaService) {
     }
@@ -17,7 +19,7 @@ class MediaController implements ng.IOnInit {
     }
 
     private updateMedia() {
-        this.mediaService.getMedia(this.filterText).then(function (data) {
+        this.mediaService.getMedia(this.filterText).then((data) => {
             this.media = data.media;
         });
     }
