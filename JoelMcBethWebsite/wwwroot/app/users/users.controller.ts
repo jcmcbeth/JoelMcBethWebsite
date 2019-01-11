@@ -1,31 +1,31 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
+/// <reference path="user.service.ts" />
 
-(function () {
-    "use strict";
+class UsersController implements ng.IOnInit {
+    static $inject = ["userService"];
 
-    angular
-        .module("app")
-        .controller("UsersController", UsersController);
+    page: number;
+    pageSize: number;
+    pageCount: number;
+    users: User[];
 
-    UsersController.$inject = ["userService"];
-
-    function UsersController(userService) {
-        var vm = this;
-        vm.page = 1;
-        vm.pageSize = 15;
-
-        activate();
-
-        function activate() {
-            updateUsers();
-        }
-
-        function updateUsers() {
-            userService.getUsers(vm.page, vm.pageSize).then(function (data) {
-                console.log(data.users);
-                vm.users = data.users;
-                vm.pageCount = data.pagination.pageCount;
-            });
-        }
+    constructor(private userService: UserService) {
+        this.page = 1;
+        this.pageSize = 15;
     }
-})();
+
+    updateUsers() {
+        this.userService.getUsers(this.page, this.pageSize).then(users => {
+            this.users = users.items;
+            this.pageCount = users.pagination.count;
+        });
+    }
+
+    $onInit(): void {
+        this.updateUsers();
+    }
+}
+
+angular
+    .module("app")
+    .controller("UsersController", UsersController);

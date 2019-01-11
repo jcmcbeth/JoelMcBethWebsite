@@ -1,33 +1,26 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
+/// <reference path="../../../client/typings/angular-ui-router/index.d.ts" />
+/// <reference path="user.service.ts" />
 
-(function () {
-    'use strict';
+class AddUserController {
+    static $inject = ["userService", "$state"];
 
-    angular
-        .module("app")
-        .controller("AddUserController", AddUserController);
+    user: User;
 
-    AddUserController.$inject = ["userService", "$state"];
-
-    function AddUserController(userService, $state) {
-        var vm = this;
-        vm.addUser = addUser;
-        vm.user = null;
-
-        activate();
-
-        function activate() {
-        }
-
-        function addUser() {
-            vm.user.userName = vm.user.email;
-
-            userService.addUser(vm.user)
-                .then(addUserComplete);
-
-            function addUserComplete() {
-                $state.go("users");
-            }
-        }
+    constructor(private userService: UserService, private state) {
+        this.user = new User();
     }
-})();
+
+    addUser() {
+        this.user.userName = this.user.email;
+
+        this.userService.addUser(this.user)
+            .then(response => {
+                this.state.go("users");
+            });
+    }
+}
+
+angular
+    .module("app")
+    .controller("AddUserController", AddUserController);
