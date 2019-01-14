@@ -37,6 +37,7 @@
     <Content Remove="wwwroot\app\services\menu.service.ts" />
     <Content Remove="wwwroot\app\services\project.service.ts" />
     <Content Remove="wwwroot\app\services\resource.service.ts" />
+    <Content Remove="wwwroot\app\services\routeAuthentication.service.ts" />
     <Content Remove="wwwroot\app\services\user.service.ts" />
     <Content Remove="wwwroot\app\shared\paged-array.ts" />
     <Content Remove="wwwroot\app\shared\pagination.ts" />
@@ -112,6 +113,7 @@
     <TypeScriptCompile Include="wwwroot\app\media\media.service.ts" />
     <TypeScriptCompile Include="wwwroot\app\projects\project.service.ts" />
     <TypeScriptCompile Include="wwwroot\app\resources\resource.service.ts" />
+    <TypeScriptCompile Include="wwwroot\app\services\routeAuthentication.service.ts" />
     <TypeScriptCompile Include="wwwroot\app\users\user.ts" />
     <TypeScriptCompile Include="wwwroot\app\users\user.service.ts" />
     <TypeScriptCompile Include="wwwroot\app\shared\models\paged-array.ts" />
