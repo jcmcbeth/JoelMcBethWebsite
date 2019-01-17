@@ -25,7 +25,7 @@ class BookService {
     }
 
     getBookByIsbn13(isbn): ng.IPromise<Book> {
-        var url = this.baseUrl + isbn;
+        var url = this.baseUrl + "/" + isbn;
 
         return this.http.get<Book>(url).then(response => {
             return response.data;

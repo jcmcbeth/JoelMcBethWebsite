@@ -1,26 +1,24 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
+/// <reference path="book.service.ts" />
+/// <reference path="book.ts" />
 
-(function () {
-    "use strict";
+class BookDetailsController implements ng.IOnInit {  
+    static $inject = ["BookService", "$stateParams"];
 
-    angular
-        .module("app")
-        .controller("BookDetailsController", BookDetailsController);
+    book: Book;
 
-    BookDetailsController.$inject = ["BookService", "$stateParams"];
-
-    function BookDetailsController(bookService, $stateParams) {
-        var vm = this;
-
-        activate();
-
-        function activate() {
-            var isbn = $stateParams.isbn;
-
-            bookService.getBookByIsbn13(isbn).then(function (book) {
-                console.log(book);
-                vm.book = book;
-            });
-        }
+    constructor(private bookService: BookService, private stateParams) {
     }
-})();
+
+    $onInit(): void {
+        let isbn = this.stateParams.isbn;
+
+        this.bookService.getBookByIsbn13(isbn).then(book => {
+            this.book = book;
+        });
+    }
+}
+
+angular
+    .module("app")
+    .controller("BookDetailsController", BookDetailsController);

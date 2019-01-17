@@ -1,39 +1,28 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
+/// <reference path="book.ts" />
+/// <reference path="book.service.ts" />
 
-(function () {
-    "use strict";
+class AddBookController {
+    static $inject = ["BookService", "$state"];
 
-    angular
-        .module("app")
-        .controller("AddBookController", AddBookController);
+    book: Book;
+    error: string;
 
-    AddBookController.$inject = ["BookService", "$state"];
-
-    function AddBookController(bookService, $state) {
-        /* jshint validthis:true */
-        var vm = this;
-        vm.book = {};
-        vm.error = null;
-
-        vm.addBook = addBook;
-
-        activate();
-
-        function activate() {
-        }
-
-        function addBook(book) {
-            bookService.addBook(book).then(onAddBookSuccess, onAddBookFailure);
-
-            function onAddBookSuccess(result) {
-                book.id = result.id;
-
-                $state.go("books");
-            }
-
-            function onAddBookFailure(response) {
-                vm.error = response.data.error;
-            }
-        }
+    constructor(private bookService: BookService, private state) {
+        this.book = <Book>{};
     }
-})();
+
+    addBook(book) {
+        this.bookService.addBook(book).then(updatedBook => {
+            book.id = updatedBook.id;
+
+            this.state.go("books");
+        }, response => {
+            this.error = response.data.error;
+        });
+    }
+}
+
+angular
+    .module("app")
+    .controller("AddBookController", AddBookController);
