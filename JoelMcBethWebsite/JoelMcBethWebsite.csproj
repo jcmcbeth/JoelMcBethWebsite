@@ -42,6 +42,8 @@
     <Content Remove="wwwroot\app\services\user.service.ts" />
     <Content Remove="wwwroot\app\shared\paged-array.ts" />
     <Content Remove="wwwroot\app\shared\pagination.ts" />
+    <Content Remove="wwwroot\app\shared\rating\rating.controller.ts" />
+    <Content Remove="wwwroot\app\shared\rating\rating.directive.ts" />
     <Content Remove="wwwroot\app\users\addUser.controller.ts" />
     <Content Remove="wwwroot\app\users\user.ts" />
     <Content Remove="wwwroot\app\users\users.controller.ts" />
@@ -116,6 +118,8 @@
     <TypeScriptCompile Include="wwwroot\app\projects\project.service.ts" />
     <TypeScriptCompile Include="wwwroot\app\resources\resource.service.ts" />
     <TypeScriptCompile Include="wwwroot\app\services\routeAuthentication.service.ts" />
+    <TypeScriptCompile Include="wwwroot\app\shared\rating\rating.controller.ts" />
+    <TypeScriptCompile Include="wwwroot\app\shared\rating\rating.directive.ts" />
     <TypeScriptCompile Include="wwwroot\app\users\user.ts" />
     <TypeScriptCompile Include="wwwroot\app\users\user.service.ts" />
     <TypeScriptCompile Include="wwwroot\app\shared\models\paged-array.ts" />
