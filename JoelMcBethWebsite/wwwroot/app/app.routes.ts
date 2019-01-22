@@ -54,6 +54,11 @@
                 templateUrl: "app/account/logout.html",
                 controller: "LogoutController as vm"
             })
+            .state("register", {
+                url: "/register",
+                templateUrl: "app/account/register.html",
+                controller: "RegisterController as vm"
+            })
             .state("media", {
                 url: "/media",
                 templateUrl: "app/media/media.html",

@@ -1,10 +1,10 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
-/// <reference path="../services/authentication.service.ts" />
+/// <reference path="../authentication/authentication.service.ts" />
 /// <reference path="../shared/models/paged-array.ts" />
 /// <reference path="user.ts" />
 
 class UserService {
-    static $inject = ["$http", "authenticationService"];
+    static $inject = ["$http", "AuthenticationService"];
 
     constructor(private http: ng.IHttpService, private authenticationService: AuthenticationService) {
     }
@@ -14,9 +14,6 @@ class UserService {
             params: {
                 page: page,
                 pageSize: pageSize
-            },
-            headers: {
-                Authorization: this.authenticationService.getToken()
             }
         }).then(response => {
             return response.data;

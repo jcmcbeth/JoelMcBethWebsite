@@ -3,9 +3,9 @@
 (function () {
     angular
         .module("app")
-        .config(["$transitionsProvider", "$cssProvider", "$locationProvider", "$compileProvider", configure]);
+        .config(["$transitionsProvider", "$cssProvider", "$locationProvider", "$compileProvider", "$httpProvider", configure]);
 
-    function configure($transitionsProvider, $cssProvider, $locationProvider, $compileProvider) {
+    function configure($transitionsProvider, $cssProvider, $locationProvider, $compileProvider, httpProvider: ng.IHttpProvider) {
 
         // Workaround: ui.router no longer supports the $stateChangeSuccess event
         // but the angularCSS module depends on it.
@@ -19,5 +19,7 @@
         $locationProvider.html5Mode(true);
 
         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|infantry):/);
+
+        httpProvider.interceptors.push("TokenHttpInterceptor");
     }
 })();

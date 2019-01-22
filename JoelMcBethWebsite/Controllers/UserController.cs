@@ -6,11 +6,13 @@
     using System.Threading.Tasks;
     using JoelMcBethWebsite.Data;
     using JoelMcBethWebsite.Data.Models;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
     [Produces("application/json")]
     [Route("api/Users")]
+    [Authorize]
     public class UserController : Controller
     {
         private readonly IUserRepository users;

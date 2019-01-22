@@ -8,10 +8,12 @@
 
     public interface IUserRepository
     {
-        Task<User> GetUserByEmailAsync(string email);
+        Task<User> GetUserByUserNameAsync(string userName);
 
         Task<User> AddUserAsync(User user);
 
         Task<PagedEnumerable<User>> GetUsersAsync(int page, int pageSize);
+
+        Task UpdateUserAsync(User user);
     }
 }

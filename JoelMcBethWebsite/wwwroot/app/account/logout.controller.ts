@@ -1,7 +1,7 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
 
 class LogoutController implements ng.IOnInit {
-    static $inject = ["authenticationService"];
+    static $inject = ["AuthenticationService"];
 
     public message: string;
 

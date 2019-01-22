@@ -1,7 +1,7 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
 
 class LoginController {
-    static $inject = ["authenticationService", "$state"];
+    static $inject = ["AuthenticationService", "$state"];
 
     public error: string;
     public username: string;

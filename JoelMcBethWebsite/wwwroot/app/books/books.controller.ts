@@ -1,6 +1,6 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
 class BookController implements ng.IOnInit {
-    static $inject = ["BookService", "authenticationService", "sortDirections"];
+    static $inject = ["BookService", "AuthenticationService", "sortDirections"];
 
     pageSize: number;
     page: number;

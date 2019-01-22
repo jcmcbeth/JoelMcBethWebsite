@@ -1,7 +1,7 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
 
 class MenuController implements ng.IOnInit {
-    static $inject = ["menuService", "$rootScope", "authenticationService"];
+    static $inject = ["menuService", "$rootScope", "AuthenticationService"];
 
     public menuItems: any[];
     public menuGroups: any[];

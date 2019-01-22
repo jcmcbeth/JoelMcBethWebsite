@@ -1,9 +1,9 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
-/// <reference path="../services/authentication.service.ts" />
+/// <reference path="../authentication/authentication.service.ts" />
 /// <reference path="menu-item.ts" />
 
 class MenuService {
-    static $inject = ["authenticationService"];
+    static $inject = ["AuthenticationService"];
 
     public menuItems: MenuItem[];
 

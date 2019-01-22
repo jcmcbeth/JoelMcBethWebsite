@@ -73,6 +73,7 @@
     <Build Include="Media.sql" />
     <Build Include="BookReviews.sql" />
     <None Include="DataLossScripts\Books.DropRatingColumn.sql" />
+    <Build Include="User.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="JoelMcBethWebsite.Database.refactorlog" />

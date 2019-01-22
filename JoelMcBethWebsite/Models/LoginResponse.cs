@@ -1,4 +1,6 @@
-﻿namespace JoelMcBethWebsite.Models
+﻿using JoelMcBethWebsite.Authentication;
+
+namespace JoelMcBethWebsite.Models
 {
     public class LoginResponse
     {
