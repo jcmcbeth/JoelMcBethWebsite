@@ -29,7 +29,15 @@
         [Route("Authenticate")]
         public async Task<LoginResponse> Authenticate(string userName, string password)
         {
-            await this.authenticationManager.AuthenticateAsync(userName, password);
+            var success = await this.authenticationManager.AuthenticateAsync(userName, password);
+
+            if (!success)
+            {
+                return new LoginResponse()
+                {
+                    Success = false
+                };
+            }
 
             var user = await this.userRepository.GetUserByUserNameAsync(userName);
 

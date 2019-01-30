@@ -16,7 +16,11 @@ class LoginController {
 
         this.authenticationService.login(this.username, this.password)
             .then(() => this.$state.go("home"),
-            error => this.error = error);
+            error => {
+                this.error = error
+                this.username = "";
+                this.password = "";
+            });
     }
 }
 

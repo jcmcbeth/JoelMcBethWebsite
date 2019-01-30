@@ -69,7 +69,7 @@ class MenuService {
                 group: "Account",
                 state: "login",
                 title: "Login",
-                hidden: true,
+                hidden: false,
                 unauthenticatedOnly: true,
                 requireAuthentication: false
             },
@@ -77,7 +77,7 @@ class MenuService {
                 group: "Account",
                 state: "logout",
                 title: "Logout",
-                hidden: true,
+                hidden: false,
                 unauthenticatedOnly: false,
                 requireAuthentication: true
             },
@@ -85,7 +85,7 @@ class MenuService {
                 group: "Users",
                 state: "users",
                 title: "User List",
-                hidden: true,
+                hidden: false,
                 unauthenticatedOnly: false,
                 requireAuthentication: true
             }
