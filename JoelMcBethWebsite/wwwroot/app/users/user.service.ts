@@ -26,6 +26,14 @@ class UserService {
                 return response.data;
             });
     }
+
+    approval(id: number, approved: boolean): ng.IPromise<void> {
+        const url = "/api/users/" + id + "/approval/" + approved;
+
+        return this.http.patch<void>(url, null)
+            .then(response => {
+            });
+    }
 }
 
 angular

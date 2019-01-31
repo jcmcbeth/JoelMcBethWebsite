@@ -21,6 +21,12 @@ class UsersController implements ng.IOnInit {
         });
     }
 
+    approve(user: User) {
+        this.userService.approval(user.id, !user.isApproved).then(() => {
+            user.isApproved = !user.isApproved;
+        });
+    }
+
     $onInit(): void {
         this.updateUsers();
     }

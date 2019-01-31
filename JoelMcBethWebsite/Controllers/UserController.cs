@@ -28,10 +28,27 @@
             return await this.users.GetUsersAsync(page, pageSize);
         }
 
+        [Route("{id:int}")]
+        public async Task<User> Get(int userId)
+        {
+            return await this.users.GetUserById(userId);
+        }
+
         [HttpPost]
         public async Task<User> Add([FromBody]User user)
         {
             return await this.users.AddUserAsync(user);
+        }
+
+        [HttpPatch]
+        [Route("{id:int}/approval/{approved:bool}")]
+        public async Task Approve(int id, bool approved)
+        {
+            var user = await this.users.GetUserById(id);
+
+            user.IsApproved = approved;
+
+            await this.users.UpdateUserAsync(user);
         }
     }
 }

@@ -24,6 +24,11 @@
             return user;
         }
 
+        public async Task<User> GetUserById(int id)
+        {
+            return await this.context.Users.SingleAsync(u => u.Id == id);
+        }
+
         public async Task<User> GetUserByUserNameAsync(string userName)
         {
             return await this.context.Users.SingleOrDefaultAsync(u => u.UserName == userName);

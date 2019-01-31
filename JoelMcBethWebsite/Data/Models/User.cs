@@ -11,5 +11,7 @@
         public byte[] PasswordSalt { get; set; }
 
         public byte[] HashedPassword { get; set; }
+
+        public bool IsApproved { get; set; }
     }
 }

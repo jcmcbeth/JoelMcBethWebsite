@@ -9,12 +9,18 @@
         <tr>
             <th>Username</th>
             <th>Email</th>
+            <th>Approved</th>
+            <td></td>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="user in vm.users">
             <td>{{user.userName}}</td>
             <td>{{user.email}}</td>
+            <td>{{user.isApproved ? 'Yes' : 'No'}}</td>
+            <td>
+                <button class="btn" ng-click="vm.approve(user)">{{user.isApproved ? 'Unapprove' : 'Approve'}}</button>
+            </td>
         </tr>
     </tbody>
 </table>

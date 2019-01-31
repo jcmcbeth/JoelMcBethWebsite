@@ -15,5 +15,7 @@
         Task<PagedEnumerable<User>> GetUsersAsync(int page, int pageSize);
 
         Task UpdateUserAsync(User user);
+
+        Task<User> GetUserById(int id);
     }
 }
