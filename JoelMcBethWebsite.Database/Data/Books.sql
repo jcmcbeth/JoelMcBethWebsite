@@ -33,7 +33,8 @@ USING (VALUES
 	(29, '9780672326967', 'C Primer Plus', '5th', 984, NULL),
 	(30, '9780137081073', 'The Clean Coder: A Code of Conduct for Professional Programmers', NULL, 256, NULL),
 	(31, '9780553293357', 'Foundation', NULL, 296, NULL),
-	(32, '9780812981605', 'The Power of Habit: Why We Do What We Do in Life and Business', NULL, 416, NULL)
+	(32, '9780812981605', 'The Power of Habit: Why We Do What We Do in Life and Business', NULL, 416, NULL),
+	(33, '9780553382587', 'Foundation and Empire', NULL, 272, NULL)
 ) AS [Source] ([Id], [Isbn13], [Title], [Edition], [Pages], [Order])
 ON
 	([Target].[Id] = [Source].[Id])
