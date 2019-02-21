@@ -41,17 +41,5 @@
 
             return tokenHandler.WriteToken(token);
         }
-
-        public TokenValidationParameters GetValidationParameters()
-        {
-            return new TokenValidationParameters
-            {
-                IssuerSigningKey = this.key,
-                ValidAudience = this.audience,
-                ValidIssuer = this.issuer,
-                ValidateLifetime = true,
-                ClockSkew = TimeSpan.FromSeconds(0) // Identity and resource servers are the same.
-            };
-        }
     }
 }

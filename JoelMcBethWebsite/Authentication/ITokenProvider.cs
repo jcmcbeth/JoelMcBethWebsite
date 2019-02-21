@@ -10,7 +10,5 @@
     public interface ITokenProvider
     {
         string CreateToken(User user, DateTime expiration);
-
-        TokenValidationParameters GetValidationParameters();
     }
 }
