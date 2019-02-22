@@ -98,6 +98,11 @@
                 url: "/misc",
                 templateUrl: "app/home/misc.html"
             })
+            .state("base64-converter", {
+                url: "/base64-converter",
+                templateUrl: "app/tools/base64.html",
+                controller: "Base64Controller as vm"
+            })
             .state("window-sticker-lookup", {
                 url: "/window-sticker-lookup",
                 templateUrl: "app/windowsticker/window-sticker.html",

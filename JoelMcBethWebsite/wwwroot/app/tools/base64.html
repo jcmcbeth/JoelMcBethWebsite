@@ -1,0 +1,15 @@
+﻿<h1>Base64 Converter</h1>
+<p>It is nice to be able to convert strings to base 64 and knowing that the string isn't being logged.</p>
+<div class="row">
+    <form name="vm.form" class="col-md-4 col-lg-3" ng-submit="vm.convert()" novalidate>
+        <div class="form-group">
+            <label for="text">Text</label><span class="badge badge-light">Required</span>
+            <textarea name="text" class="form-control" ng-model="vm.text" rows="5" required autocomplete="off" />
+        </div>
+        <div class="form-group">
+            <label for="Base64">Base64:</label>
+            <textarea name="Base64" class="form-control" ng-model="vm.base64" rows="5" autocomplete="off" />
+        </div>
+        <button ng-disabled="vm.form.$invalid" type="submit" class="btn btn-primary">Convert</button>
+    </form>
+</div>

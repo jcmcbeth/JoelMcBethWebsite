@@ -7,46 +7,6 @@
 
   <ItemGroup>
     <Content Remove="package.json" />
-    <Content Remove="wwwroot\app\account\account.service.ts" />
-    <Content Remove="wwwroot\app\account\login.controller.ts" />
-    <Content Remove="wwwroot\app\account\logout.controller.ts" />
-    <Content Remove="wwwroot\app\account\register.controller.ts" />
-    <Content Remove="wwwroot\app\account\user-registration.ts" />
-    <Content Remove="wwwroot\app\app.bootstrap.ts" />
-    <Content Remove="wwwroot\app\app.config.ts" />
-    <Content Remove="wwwroot\app\app.constants.ts" />
-    <Content Remove="wwwroot\app\app.controller.ts" />
-    <Content Remove="wwwroot\app\app.module.ts" />
-    <Content Remove="wwwroot\app\app.routes.ts" />
-    <Content Remove="wwwroot\app\app.run.ts" />
-    <Content Remove="wwwroot\app\authentication\authentication-response.ts" />
-    <Content Remove="wwwroot\app\authentication\token.service.ts" />
-    <Content Remove="wwwroot\app\books\addBook.controller.ts" />
-    <Content Remove="wwwroot\app\books\author.ts" />
-    <Content Remove="wwwroot\app\books\book-review.ts" />
-    <Content Remove="wwwroot\app\books\book.details.controller.ts" />
-    <Content Remove="wwwroot\app\books\book.ts" />
-    <Content Remove="wwwroot\app\books\books.controller.ts" />
-    <Content Remove="wwwroot\app\books\noCoverSrc.directive.ts" />
-    <Content Remove="wwwroot\app\infantry\infantry-browser.controller.ts" />
-    <Content Remove="wwwroot\app\infantry\infantry-browser.service.ts" />
-    <Content Remove="wwwroot\app\infantry\zone.ts" />
-    <Content Remove="wwwroot\app\media\media.controller.ts" />
-    <Content Remove="wwwroot\app\menu\menu-item.ts" />
-    <Content Remove="wwwroot\app\menu\menu.controller.ts" />
-    <Content Remove="wwwroot\app\projects\project.ts" />
-    <Content Remove="wwwroot\app\projects\projects.controller.ts" />
-    <Content Remove="wwwroot\app\resources\resources.controller.ts" />
-    <Content Remove="wwwroot\app\resume\resume.controller.ts" />
-    <Content Remove="wwwroot\app\shared\paged-array.ts" />
-    <Content Remove="wwwroot\app\shared\pagination.ts" />
-    <Content Remove="wwwroot\app\shared\rating\rating.controller.ts" />
-    <Content Remove="wwwroot\app\shared\rating\rating.directive.ts" />
-    <Content Remove="wwwroot\app\users\addUser.controller.ts" />
-    <Content Remove="wwwroot\app\users\user.ts" />
-    <Content Remove="wwwroot\app\users\users.controller.ts" />
-    <Content Remove="wwwroot\app\windowsticker\vin.validator.ts" />
-    <Content Remove="wwwroot\app\windowsticker\window-sticker.controller.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -82,57 +42,7 @@
       <HintPath>..\Shared Binaries\Infantry\Infantry.Common.dll</HintPath>
     </Reference>
   </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Include="wwwroot\app\account\account.service.ts" />
-    <TypeScriptCompile Include="wwwroot\app\account\login.controller.ts" />
-    <TypeScriptCompile Include="wwwroot\app\account\logout.controller.ts" />
-    <TypeScriptCompile Include="wwwroot\app\account\register.controller.ts" />
-    <TypeScriptCompile Include="wwwroot\app\account\user-registration.ts" />
-    <TypeScriptCompile Include="wwwroot\app\app.bootstrap.ts" />
-    <TypeScriptCompile Include="wwwroot\app\app.config.ts" />
-    <TypeScriptCompile Include="wwwroot\app\app.constants.ts" />
-    <TypeScriptCompile Include="wwwroot\app\app.controller.ts" />
-    <TypeScriptCompile Include="wwwroot\app\app.module.ts" />
-    <TypeScriptCompile Include="wwwroot\app\app.routes.ts" />
-    <TypeScriptCompile Include="wwwroot\app\app.run.ts" />
-    <TypeScriptCompile Include="wwwroot\app\authentication\authentication-response.ts" />
-    <TypeScriptCompile Include="wwwroot\app\authentication\token.service.ts" />
-    <TypeScriptCompile Include="wwwroot\app\books\addBook.controller.ts" />
-    <TypeScriptCompile Include="wwwroot\app\books\author.ts" />
-    <TypeScriptCompile Include="wwwroot\app\books\book-review.ts" />
-    <TypeScriptCompile Include="wwwroot\app\books\book.details.controller.ts" />
-    <TypeScriptCompile Include="wwwroot\app\books\book.ts" />
-    <TypeScriptCompile Include="wwwroot\app\books\books.controller.ts" />
-    <TypeScriptCompile Include="wwwroot\app\books\noCoverSrc.directive.ts" />
-    <TypeScriptCompile Include="wwwroot\app\infantry\infantry-browser.controller.ts" />
-    <TypeScriptCompile Include="wwwroot\app\infantry\infantry-browser.service.ts" />
-    <TypeScriptCompile Include="wwwroot\app\infantry\zone.ts" />
-    <TypeScriptCompile Include="wwwroot\app\media\media.controller.ts" />
-    <TypeScriptCompile Include="wwwroot\app\menu\menu-item.ts" />
-    <TypeScriptCompile Include="wwwroot\app\menu\menu.controller.ts" />
-    <TypeScriptCompile Include="wwwroot\app\projects\project.ts" />
-    <TypeScriptCompile Include="wwwroot\app\projects\projects.controller.ts" />
-    <TypeScriptCompile Include="wwwroot\app\resources\resources.controller.ts" />
-    <TypeScriptCompile Include="wwwroot\app\resume\resume.controller.ts" />
-    <TypeScriptCompile Include="wwwroot\app\menu\menu.service.ts" />
-    <TypeScriptCompile Include="wwwroot\app\authentication\authentication.service.ts" />
-    <TypeScriptCompile Include="wwwroot\app\media\media.service.ts" />
-    <TypeScriptCompile Include="wwwroot\app\projects\project.service.ts" />
-    <TypeScriptCompile Include="wwwroot\app\resources\resource.service.ts" />
-    <TypeScriptCompile Include="wwwroot\app\authentication\routeAuthentication.service.ts" />
-    <TypeScriptCompile Include="wwwroot\app\shared\rating\rating.controller.ts" />
-    <TypeScriptCompile Include="wwwroot\app\shared\rating\rating.directive.ts" />
-    <TypeScriptCompile Include="wwwroot\app\users\user.ts" />
-    <TypeScriptCompile Include="wwwroot\app\users\user.service.ts" />
-    <TypeScriptCompile Include="wwwroot\app\shared\models\paged-array.ts" />
-    <TypeScriptCompile Include="wwwroot\app\shared\models\pagination.ts" />
-    <TypeScriptCompile Include="wwwroot\app\users\addUser.controller.ts" />
-    <TypeScriptCompile Include="wwwroot\app\users\users.controller.ts" />
-    <TypeScriptCompile Include="wwwroot\app\windowsticker\vin.validator.ts" />
-    <TypeScriptCompile Include="wwwroot\app\windowsticker\window-sticker.controller.ts" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <Content Update="nlog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
