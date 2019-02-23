@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.StaticFiles;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -41,10 +42,17 @@
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            var contentTypeProvider = new FileExtensionContentTypeProvider();
+            contentTypeProvider.Mappings.Add(".exe", "application/vnd.microsoft.portable-executable");
+            contentTypeProvider.Mappings.Add(".cfg", "text/plain");
+
             app.UseAuthentication();
-            app.UseSpaRedirection();
             app.UseDefaultFiles();
-            app.UseStaticFiles();
+            app.UseSpaRedirection();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                ContentTypeProvider = contentTypeProvider
+            });
             app.UseGlobalExceptionHandler();
             app.UseMvc();
         }
