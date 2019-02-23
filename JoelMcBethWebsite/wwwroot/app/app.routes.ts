@@ -103,6 +103,11 @@
                 templateUrl: "app/tools/base64.html",
                 controller: "Base64Controller as vm"
             })
+            .state("adblock", {
+                url: "/adblock",
+                templateUrl: "app/adblock/adblock.html",
+                css: "app/adblock/adblock.css"
+            })
             .state("window-sticker-lookup", {
                 url: "/window-sticker-lookup",
                 templateUrl: "app/windowsticker/window-sticker.html",
