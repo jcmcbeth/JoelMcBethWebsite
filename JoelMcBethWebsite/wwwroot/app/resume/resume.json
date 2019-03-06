@@ -6,8 +6,8 @@
     "picture": "",
     "email": "joel.mcbeth@gmail.com",
     "phone": "(910) 690-7511",
-    "website": "https://joelmcbeth.com",
-    "summary": "",
+    "url": "https://joelmcbeth.com",
+    "summary": "",    
     "location": {
       "address": "10415 Alexander Martin Ave.",
       "postalCode": "28277",
@@ -15,9 +15,18 @@
       "countryCode": "US",
       "region": "North Carolina"
     },
-    "profiles": []
-  },
+    "profiles": [
+    ]    
+  },  
   "education": [
+    {
+      "institution": "University of North Carolina at Charlotte",
+      "gpa": "3.5",
+      "area": "Computer Science",
+      "studyType": "Master of Science",
+      "startDate": "",
+      "endDate": "2009-12"
+    },
     {
       "institution": "University of North Carolina at Charlotte",
       "area": "Computer Science",
@@ -49,19 +58,49 @@
   "skills": [
     {
       "name": "C#",
-      "level": "Expert"
+      "level": "Expert"      
     }
   ],
   "volunteer": [],
   "work": [
     {
+      "company": "Jack Henry & Associates",
+      "position": "Senior Software Engineer",
+      "url": "https://jackhenry.com",      
+      "startDate": "2018-06-18"
+    },
+    {
       "company": "Zuercher Technologies",
       "position": "Quality Assurance Engineer",
-      "website": "https://zuerchertech.com",
+      "url": "https://zuerchertech.com",
       "startDate": "2012-02",
       "endDate": "",
       "summary": "",
       "highlights": []
+    },
+    {
+      "company": "Awarepoint",
+      "position": "Software Developer",
+      "startDate": "2011-08",
+      "endDate": "2012-01"
+    },
+    {
+      "company": "Impact",
+      "position": "Software Developer",
+      "startDate": "2010-04",
+      "endDate": "2011-08"
+    },
+    {
+      "company": "Geopier Foundations, LLC",
+      "position": "Software Consultant",
+      "startDate": "2008-04",
+      "endDate": "2013-03"
+    },
+    {
+      "company": "University of North Carolina at Charlotte",
+      "position": "Undergradute/Graduate Teaching Assitant",
+      "startDate": "2006-08",
+      "endDate": "2009-12"
     }
   ]
 }
