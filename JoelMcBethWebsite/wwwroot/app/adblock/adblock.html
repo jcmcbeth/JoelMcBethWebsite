@@ -1,0 +1,102 @@
+﻿<div class="page-header">
+    <h1>Warnings and Popins Adblock Filter</h1>
+</div>
+<p>The prevelence of in-page "popups", popins, overlays, or whatever they are called is on the rise. It seems that popular adblock lists are unable to keep up or are not trying. This is where this Adblock list steps in. As I discover pages with these popins I will add them to the block list.</p>
+
+<p>You can <a href="joel.txt">view the Warnings and Popins list</a> or <a href="abp:subscribe?location=http://joelmcbeth.com/adblock/adblock.txt&title=Warnings%20and%20Popins">add it to your add blocker</a>. If you have any additions or find issues send them to <a href="mailto:joel.mcbeth@gmail.com">joel.mcbeth@gmail.com</a>.</p>
+<h2>Incomplete list of some of the offenders</h2>
+<table class="table table-sm">
+    <caption></caption>
+    <thead>
+        <tr>
+            <th>Website</th>
+            <!--<th>Date Added</th>-->
+            <th class="type-column">Type</th>
+            <th>Filters</th>
+            <th>Comments</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="https://www.kbb.com" target="_blank">https://www.kbb.com</td>
+            <!--<td>08/01/2016</td>-->
+            <td>Adblock Warning</td>
+            <td>
+                <pre>||kelleybbook.tt.omtrdc.net^*mbox=kbb_global_top$script</pre>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><a href="http://oilprice.com" target="_blank">http://oilprice.com</td>
+            <!--<td>08/01/2016</td>-->
+            <td>Email Overlay</td>
+            <td>
+                <a href="#optinmonster">OptinMonster</a>
+            </td>
+            <td>Powered by OptinMonster.</td>
+        </tr>
+        <tr>
+            <td><a href="http://optinmonster.com" target="_blank">http://optinmonster.com</td>
+            <!--<td>08/01/2016</td>-->
+            <td>Email Overlay</td>
+            <td>
+                <a href="#optinmonster">OptinMonster</a>
+            </td>
+            <td>Powered by OptinMonster.</td>
+        </tr>
+        <tr>
+            <td><a href="http://www.independent.co.uk" target="_blank">http://www.independent.co.uk</td>
+            <!--<td>08/02/2016</td>-->
+            <td>Adblock Warning</td>
+            <td>
+                <pre>independent.co.uk##.adblock-modal.adblock</pre>
+            </td>
+            <td>Inline script. Creates element with known blocked class and checks if the offset height is zero. Uses cookie to only show once and to show a thank you overlay when you disable adblock.</td>
+        </tr>
+        <tr>
+            <td><a href="http://jsfiddle.net" target="_blank">http://jsfiddle.net</td>
+            <!--<td>08/05/2016</td>-->
+            <td>Adblock Warning</td>
+            <td>
+                <pre>jsfiddle.net###keep-us-running</pre>
+            </td>
+            <td>Checks if one elements for the ads are there and if not it shows a small div with a message in the corner.</td>
+        </tr>
+        <tr>
+            <td><a href="http://runningmagazine.ca" target="_blank">http://runningmagazine.ca</td>
+            <!--<td>08/08/2016</td>-->
+            <td>Adblock Warning</td>
+            <td>
+                <pre>runningmagazine.ca##.SiHwxDbYoYHE-bg
+runningmagazine.ca###fHMi2ohEuU23
+runningmagazine.ca##.SiHwxDbYoYHE</pre>
+            </td>
+            <td>Might have to investigate this further. The Ids seem too random to be static.</td>
+        </tr>
+    </tbody>
+</table>
+<h2>Incomplete list of some of the services</h2>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Service</th>
+            <th>Website</th>
+            <!--<th>Date Added</th>-->
+            <th>Type</th>
+            <th>Filters</th>
+            <th>Comments</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a name="optinmonster"></a>OptinMonster</td>
+            <td><a href="http://optinmonster.com" target="_blank">http://optinmonster.com</td>
+            <!--<td>08/01/2016</td>-->
+            <td>Email Overlay</td>
+            <td>
+                <pre>||a.optnmnstr.com/app/js/api.min.js*$script</pre>
+            </td>
+            <td>Blocking the script seems to prevent the overlay from appearing.</td>
+        </tr>
+    </tbody>
+</table>

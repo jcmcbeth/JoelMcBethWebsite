@@ -5,7 +5,7 @@
     <ul class="list-unstyled">
         <li ng-repeat="resource in group.resources">
             <span ng-if="!resource.url">{{ resource.title }}</span>
-            <a ng-if="resource.url" href="{{ resource.url }}">{{ resource.title }}</a><span ng-if="resource.description"> - {{ resource.description }}</span>
+            <a ng-if="resource.url" href="{{ resource.url }}" target="_blank">{{ resource.title }}</a><span ng-if="resource.description"> - {{ resource.description }}</span>
         </li>
     </ul>
 

@@ -100,7 +100,7 @@
     ],
     "groups": [
       {
-        "name": "Development Tools",
+        "name": "Development Tools & Stuff",
         "resources": [
           {
             "title": "Notepad++",
@@ -131,6 +131,11 @@
             "title": "LinqPad",
             "description": "Scratchpad tool for writing Linq queries.",
             "url": "https://www.linqpad.net/"
+          },
+          {
+            "title": "JSON Resume Schema",
+            "description": "Useful JSON schema for resumes with examples, themes and tools.",
+            "url": "https://jsonresume.org/"
           }
         ]
       }
