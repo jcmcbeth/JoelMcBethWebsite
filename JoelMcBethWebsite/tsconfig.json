@@ -8,8 +8,10 @@
     "target": "es5",
     "skipLibCheck": true,
     "module": "none",
+    "allowJs": false,
     "lib": [
       "es6",
+      "es2017",
       "dom"
     ]
   },

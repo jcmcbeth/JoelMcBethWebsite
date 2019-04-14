@@ -103,6 +103,11 @@
                 templateUrl: "app/tools/base64.html",
                 controller: "Base64Controller as vm"
             })
+            .state("hash-generator", {
+                url: "/hash-generator",
+                templateUrl: "app/tools/hash.html",
+                controller: "HashController as vm"
+            })
             .state("window-sticker-lookup", {
                 url: "/window-sticker-lookup",
                 templateUrl: "app/windowsticker/window-sticker.html",

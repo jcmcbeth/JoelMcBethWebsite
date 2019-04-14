@@ -1,28 +1,22 @@
-﻿(function () {
-    'use strict';
-
-    angular
-        .module('app')
-        .directive('imgError', imgError);
-
-    imgError.$inject = [];
-
-    function imgError() {
-        var directive = {
-            link: link,
-            restrict: 'A'
-        };
-        return directive;
-
-        function link(scope, element, attrs) {
-            element.bind("error", onError);
-
-            function onError() {
-                if (attrs.src !== attrs.imgError) {
-                    attrs.$set("src", attrs.imgError);
-                }
-            }
-        }
+/// <reference path="../../../client/typings/angularjs/index.d.ts" />
+var ImageErrorDirective = /** @class */ (function () {
+    function ImageErrorDirective() {
+        this.restrict = "A";
     }
-
-})();
+    ImageErrorDirective.prototype.link = function (scope, element, attrs) {
+        element.bind("error", function () {
+            if (attrs.src !== attrs.imgError) {
+                attrs.$set("src", attrs.imgError);
+            }
+        });
+    };
+    ImageErrorDirective.getFactory = function () {
+        var directive = function () { return new ImageErrorDirective(); };
+        return directive;
+    };
+    return ImageErrorDirective;
+}());
+angular
+    .module("app")
+    .directive("imgError", ImageErrorDirective.getFactory());
+//# sourceMappingURL=imgError.directive.js.map
