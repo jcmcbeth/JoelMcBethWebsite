@@ -1,7 +1,7 @@
-﻿using JoelMcBethWebsite.Authentication;
-
-namespace JoelMcBethWebsite.Models
+﻿namespace JoelMcBethWebsite.Models
 {
+    using JoelMcBethWebsite.Authentication;
+
     public class LoginResponse
     {
         public bool Success { get; set; }

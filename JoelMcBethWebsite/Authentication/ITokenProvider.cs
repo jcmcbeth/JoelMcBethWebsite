@@ -1,11 +1,7 @@
 ﻿namespace JoelMcBethWebsite.Authentication
 {
-    using JoelMcBethWebsite.Data.Models;
-    using Microsoft.IdentityModel.Tokens;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
+    using JoelMcBethWebsite.Data.Models;
 
     public interface ITokenProvider
     {
