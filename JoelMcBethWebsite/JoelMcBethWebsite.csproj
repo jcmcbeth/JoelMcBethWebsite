@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
+    <UserSecretsId>a29d13e2-565a-420d-b4ea-3985c7b7113f</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,6 +36,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Amcrest.HttpClient">
+      <HintPath>..\Shared Binaries\Amcrest\Amcrest.HttpClient.dll</HintPath>
+    </Reference>
     <Reference Include="Infantry.Client">
       <HintPath>..\Shared Binaries\Infantry\Infantry.Client.dll</HintPath>
     </Reference>

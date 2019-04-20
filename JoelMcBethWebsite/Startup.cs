@@ -1,5 +1,6 @@
 ﻿namespace JoelMcBethWebsite
 {
+    using Amcrest.HttpClient;
     using JoelMcBethWebsite.Authentication;
     using JoelMcBethWebsite.Data;
     using JoelMcBethWebsite.Data.EntityFramework;
@@ -33,6 +34,12 @@
             services.AddTransient<IBookRepository, MicrosoftSqlBookRepository>(s => new MicrosoftSqlBookRepository(connectionString));
             services.AddTransient<IUserRepository, EntityFrameworkUserRepository>();
             services.AddTransient<IMediaRepository, MicrosoftSqlMediaRepository>(s => new MicrosoftSqlMediaRepository(connectionString));
+
+            services.AddSingleton<ICameraClient, AmcrestHttpClient>(srv =>
+                new AmcrestHttpClient(
+                    System.Net.IPAddress.Parse(this.Configuration["Camera:IPAddress"]),
+                    this.Configuration["Camera:UserName"],
+                    this.Configuration["Camera:Password"]));
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
