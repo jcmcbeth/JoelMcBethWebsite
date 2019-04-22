@@ -21,11 +21,12 @@
         }
 
         [HttpGet]
+        [Route("Snapshot")]
         public async Task<IActionResult> GetSnapshot()
         {
             var stream = await this.cameraClient.GetSnapshotAsync();
 
-            return this.File(stream, "image/jpg");
+            return this.File(stream, "image/jpeg");
         }
     }
 }

@@ -66,6 +66,14 @@ class MenuService {
                 requireAuthentication: false
             },
             {
+                group: "Main",
+                state: "cameras",
+                title: "Cameras",
+                hidden: false,
+                unauthenticatedOnly: false,
+                requireAuthentication: true
+            },
+            {
                 group: "Account",
                 state: "login",
                 title: "Login",

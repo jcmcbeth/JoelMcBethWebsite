@@ -1,4 +1,5 @@
 ﻿/// <reference path="../../client/typings/angularjs/index.d.ts" />
+/// <reference path="shared/models/config.ts" />
 
 (function () {
     angular.element(function () {
@@ -6,7 +7,7 @@
         var $http = injector.get("$http");
 
         $http.get("/config.json").then(function (response) {
-            var config = response.data;
+            const config = <Config>response.data;
 
             angular
                 .module("app")

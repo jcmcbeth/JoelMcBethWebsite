@@ -113,6 +113,12 @@
                 templateUrl: "app/tools/hash.html",
                 controller: "HashController as vm"
             })
+            .state("cameras", {
+                url: "/cameras",
+                templateUrl: "app/cameras/camera.html",
+                controller: "CameraController as vm",
+                css: "app/cameras/camera.css"
+            })
             .state("window-sticker-lookup", {
                 url: "/window-sticker-lookup",
                 templateUrl: "app/windowsticker/window-sticker.html",

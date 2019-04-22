@@ -1,0 +1,10 @@
+﻿.camera-viewer {
+    padding-bottom: .5rem;
+}
+
+
+@media (min-width: 768px) {
+    .camera-viewer-img {
+        max-height: 600px;
+    }
+}
