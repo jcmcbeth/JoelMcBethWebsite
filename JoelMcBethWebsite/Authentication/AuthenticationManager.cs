@@ -4,9 +4,12 @@
     using System.Linq;
     using System.Threading.Tasks;
     using JoelMcBethWebsite.Data;
+    using JoelMcBethWebsite.Data.Models;
 
     public class AuthenticationManager
     {
+        public const int MaxFailedLoginAttempts = 5;
+
         private readonly IUserRepository userRepository;
         private readonly IPasswordHashProvider hashProvider;
 
@@ -16,7 +19,7 @@
             this.hashProvider = hashProvider;
         }
 
-        public async Task<bool> AuthenticateAsync(string userName, string password)
+        public async Task<AuthenticationResult> AuthenticateAsync(string userName, string password)
         {
             if (userName == null)
             {
@@ -32,12 +35,45 @@
 
             if (user == null)
             {
-                return false;
+                return AuthenticationResult.InvalidCredentials;
             }
 
-            var hashedPassword = this.hashProvider.HashPassword(password, user.PasswordSalt);
+            user.LastLoginAttempt = DateTime.UtcNow;
 
-            return hashedPassword.SequenceEqual(user.HashedPassword);
+            var result = AuthenticationResult.InvalidCredentials;
+
+            var passwordValid = this.ValidatePassword(password, user);
+
+            if (passwordValid)
+            {
+                user.FailedLoginAttempts = 0;
+
+                if (!user.IsApproved)
+                {
+                    result = AuthenticationResult.Unapproved;
+                }
+                else if (user.IsLocked)
+                {
+                    result = AuthenticationResult.Locked;
+                }
+                else
+                {
+                    result = AuthenticationResult.Success;
+                }
+            }
+            else
+            {
+                user.FailedLoginAttempts++;
+
+                if (user.FailedLoginAttempts >= MaxFailedLoginAttempts)
+                {
+                    user.IsLocked = true;
+                }
+            }
+
+            await this.userRepository.UpdateUserAsync(user);
+
+            return result;
         }
 
         public async Task CreateCredentialsAsync(string userName, string password)
@@ -60,6 +96,12 @@
             user.HashedPassword = this.hashProvider.HashPassword(password, salt);
 
             await this.userRepository.UpdateUserAsync(user);
+        }
+
+        private bool ValidatePassword(string password, User user)
+        {
+            return this.hashProvider.HashPassword(password, user.PasswordSalt)
+                .SequenceEqual(user.HashedPassword);
         }
     }
 }

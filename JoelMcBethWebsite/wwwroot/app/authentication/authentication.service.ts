@@ -1,6 +1,7 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
 /// <reference path="token.service.ts" />
 /// <reference path="authentication-response.ts" />
+/// <reference path="authentication-result.ts" />
 
 class AuthenticationService {
     static $inject = ["$http", "$q", "$rootScope", "TokenService"];
@@ -32,29 +33,22 @@ class AuthenticationService {
     }
 
     login(userName: string, password: string) {
-        let deferred = this.q.defer();
         let url = this.baseUrl + "/authenticate?userName=" + userName + "&password=" + password;
 
-        this.http<AuthenticationResponse>({
+        return this.http<AuthenticationResponse>({
             url: url,
             method: "POST"
         }).then(response => {
-            if (response.data.success === true) {
+            if (response.data.result === AuthenticationResult.Success) {
                 const token = response.data.token;
 
                 this.tokenService.setToken(token);
 
                 this.rootScope.$broadcast("authenticated");
-
-                deferred.resolve();
             }
 
-            deferred.reject("Invalid credentials.");
-        }, () => {
-            deferred.reject("An error occurred when attempting to login.");
+            return response.data.result;
         });
-
-        return deferred.promise;
     }
 }
 

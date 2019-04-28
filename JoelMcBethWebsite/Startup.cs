@@ -41,6 +41,7 @@
                     this.Configuration["Camera:UserName"],
                     this.Configuration["Camera:Password"]));
 
+            services.AddMemoryCache();
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 

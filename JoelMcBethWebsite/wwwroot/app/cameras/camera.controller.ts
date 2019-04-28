@@ -9,11 +9,15 @@ class CameraController {
     public refreshInterval: number;
     public timeoutPromise: ng.IPromise<void>;
 
+    private requestPending: boolean;
+
     constructor(
         private cameraService: CameraService,
         private interval: ng.IIntervalService) {
         this.refreshInterval = 5;
         this.refreshAutomatically = false;
+
+        this.requestPending = false;
     }
 
     $onInit() {
@@ -21,9 +25,13 @@ class CameraController {
     }
 
     refresh() {
-        this.cameraService.getSnapshotUrl().then(url => {
-            this.snapshotUrl = url;
-        });
+        if (!this.requestPending) {
+            this.requestPending = true;
+            this.cameraService.getSnapshotUrl().then(url => {
+                this.snapshotUrl = url;
+                this.requestPending = false;
+            });
+        }
     }
 
     updateInterval() {

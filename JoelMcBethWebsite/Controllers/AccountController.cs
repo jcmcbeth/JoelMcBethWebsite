@@ -29,25 +29,25 @@
         [Route("Authenticate")]
         public async Task<LoginResponse> Authenticate(string userName, string password)
         {
-            var success = await this.authenticationManager.AuthenticateAsync(userName, password);
+            var result = await this.authenticationManager.AuthenticateAsync(userName, password);
 
-            if (!success)
+            var response = new LoginResponse()
             {
-                return new LoginResponse()
-                {
-                    Success = false
-                };
+                Result = result
+            };
+
+            if (result != AuthenticationResult.Success)
+            {
+                return response;
             }
 
             var user = await this.userRepository.GetUserByUserNameAsync(userName);
 
-            DateTime expiration = DateTime.UtcNow.AddMinutes(20);
+            var expiration = DateTime.UtcNow.AddMinutes(20);
 
-            return new LoginResponse()
-            {
-                Success = true,
-                Token = this.tokenProvider.CreateToken(user, expiration)
-            };
+            response.Token = this.tokenProvider.CreateToken(user, expiration);
+
+            return response;
         }
 
         [HttpPost]

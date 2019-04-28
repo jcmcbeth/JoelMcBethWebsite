@@ -4,7 +4,7 @@
 
     public class LoginResponse
     {
-        public bool Success { get; set; }
+        public AuthenticationResult Result { get; set; }
 
         public string Token { get; set; }
     }

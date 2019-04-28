@@ -1,13 +1,9 @@
 ﻿namespace JoelMcBethWebsite.Tests.Data.MicrosoftSql
 {
-    using AutoFixture;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
     using System.Transactions;
+    using AutoFixture;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public abstract class MicrosoftSqlTestBase<TTarget>

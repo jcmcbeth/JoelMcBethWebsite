@@ -1,4 +1,6 @@
-﻿class AuthenticationResponse {
-    success: boolean;
+﻿/// <reference path="authentication-result.ts" />
+
+class AuthenticationResponse {
+    result: AuthenticationResult;
     token: string;
 }
