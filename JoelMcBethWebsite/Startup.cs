@@ -48,8 +48,19 @@
             services.AddDbContext<JoelMcbethWebsiteDbContext>(options => options.UseSqlServer(connectionString));
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment environment)
         {
+            if (environment.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+
             var contentTypeProvider = new FileExtensionContentTypeProvider();
             contentTypeProvider.Mappings.Add(".exe", "application/vnd.microsoft.portable-executable");
             contentTypeProvider.Mappings.Add(".cfg", "text/plain");
