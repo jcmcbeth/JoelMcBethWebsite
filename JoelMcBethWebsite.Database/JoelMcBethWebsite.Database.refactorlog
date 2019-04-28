@@ -49,4 +49,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="LastLoginAttempts" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="c6179472-1e5f-4327-9626-94b7a453934a" ChangeDateTime="04/28/2019 17:29:24">
+    <Property Name="ElementName" Value="[dbo].[User].[LastLoginAttempts]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[User]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="LastLoginAttempt" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="08d03b56-d31c-407f-bf6e-3ae401614df0" ChangeDateTime="04/28/2019 17:29:28">
+    <Property Name="ElementName" Value="[dbo].[User].[FailedLoginAttempt]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[User]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FailedLoginAttempts" />
+  </Operation>
 </Operations>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2011
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JoelMcBethWebsite", "JoelMcBethWebsite\JoelMcBethWebsite.csproj", "{0496203A-71A6-49E2-8049-0A540CD5FF49}"
 EndProject
@@ -13,7 +13,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		stylecop.json = stylecop.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoelMcBethWebsite.Tests", "JoelMcBethWebsite.Tests\JoelMcBethWebsite.Tests.csproj", "{A156FC24-06C5-402A-B9B2-618AC038B622}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JoelMcBethWebsite.Tests", "JoelMcBethWebsite.Tests\JoelMcBethWebsite.Tests.csproj", "{A156FC24-06C5-402A-B9B2-618AC038B622}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{28FC6C4E-2E48-4526-A0AE-78E2E4A4D80A}"
+	ProjectSection(SolutionItems) = preProject
+		Generate-Key.ps1 = Generate-Key.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +43,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{28FC6C4E-2E48-4526-A0AE-78E2E4A4D80A} = {D3108818-CBCB-4DA6-A666-626AAB89FB3B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {50700E5E-D139-4FAB-95D3-B9B3279A8217}
