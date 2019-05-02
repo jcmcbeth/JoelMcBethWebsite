@@ -10,14 +10,19 @@ class RegisterController {
     public repeatPassword: string;
 
     constructor(private readonly accountService: AccountService, private readonly $state) {
+        this.registration = new UserRegistration();
     }
 
     register() {
+        this.error = "";
+
         this.registration.userName = this.registration.email;
 
         this.accountService.register(this.registration).then(() => {
             this.$state.go("login");
-        })
+        }).catch(reason => {
+            this.error = "A server error occurred.";
+        });
     }
 }
 

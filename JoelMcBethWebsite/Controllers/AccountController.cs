@@ -43,7 +43,7 @@
 
             var user = await this.userRepository.GetUserByUserNameAsync(userName);
 
-            var expiration = DateTime.UtcNow.AddMinutes(20);
+            var expiration = DateTime.UtcNow.AddMinutes(60);
 
             response.Token = this.tokenProvider.CreateToken(user, expiration);
 

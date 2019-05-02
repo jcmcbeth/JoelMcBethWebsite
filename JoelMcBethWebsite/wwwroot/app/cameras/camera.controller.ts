@@ -24,6 +24,10 @@ class CameraController {
         this.refresh();
     }
 
+    $onDestroy() {
+        this.stopAutomaticRefresh();
+    }
+
     refresh() {
         if (!this.requestPending) {
             this.requestPending = true;
