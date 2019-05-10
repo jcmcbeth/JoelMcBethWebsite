@@ -66,8 +66,9 @@
     {
       "company": "Jack Henry & Associates",
       "position": "Senior Software Engineer",
-      "url": "https://jackhenry.com",      
-      "startDate": "2018-06-18"
+      "url": "https://jackhenry.com",
+      "startDate": "2018-06-18",
+      "summary": ""
     },
     {
       "company": "Zuercher Technologies",

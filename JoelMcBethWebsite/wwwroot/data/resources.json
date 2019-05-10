@@ -136,6 +136,11 @@
             "title": "JSON Resume Schema",
             "description": "Useful JSON schema for resumes with examples, themes and tools.",
             "url": "https://jsonresume.org/"
+          },
+          {
+            "title": "Postman",
+            "description": "Great tool for testing and interfacing with a Web API.",
+            "url": "https://postman.com"
           }
         ]
       }

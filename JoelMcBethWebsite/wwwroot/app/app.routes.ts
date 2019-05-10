@@ -108,6 +108,10 @@
                 templateUrl: "app/adblock/adblock.html",
                 css: "app/adblock/adblock.css"
             })
+            .state("exception-formatter", {
+                url: "/exception-formatter",
+                template: "<exception-formatter></exception-formatter>"
+            })
             .state("hash-generator", {
                 url: "/hash-generator",
                 templateUrl: "app/tools/hash.html",

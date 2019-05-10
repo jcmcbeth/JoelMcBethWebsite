@@ -1,0 +1,15 @@
+﻿<div>
+    <h1>Exception Formatter</h1>
+    <p>If for whatever reason your .NET exception and stack trace isn't formatted nicely this tool will fix that. All done client side. Nothing is sent to the server.</p>
+    <form name="$ctrl.form" ng-submit="$ctrl.format()" novalidate>
+        <div class="form-group">
+            <label for="exception-text">Exception Text</label><span class="badge badge-light">Required</span>
+            <textarea name="exception-text" class="form-control" ng-model="$ctrl.exceptionText" rows="7" required autocomplete="off" />
+        </div>
+        <div>
+            <div>Formatted Exception</div>
+            <pre>{{$ctrl.formattedException}}</pre>
+        </div>
+        <button ng-disabled="vm.form.$invalid" type="submit" class="btn btn-primary">Format</button>
+    </form>
+</div>
