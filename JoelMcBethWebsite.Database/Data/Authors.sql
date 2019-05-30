@@ -38,7 +38,8 @@ USING (VALUES
 	(34, 'John', 'Sonmez', ''),
 	(35, 'Stephen', 'Prata', ''),
 	(36, 'Isacc', 'Asimov', ''),
-	(37, 'Charles', 'Duhigg', '')
+	(37, 'Charles', 'Duhigg', ''),
+	(38, 'John', 'Clark', 'D.')
 ) AS [Source] ([Id], [FirstName], [LastName], [MiddleName])
 ON
 	([Target].[Id] = [Source].[Id])
