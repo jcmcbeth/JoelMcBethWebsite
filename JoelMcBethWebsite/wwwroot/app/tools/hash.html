@@ -1,5 +1,12 @@
 ﻿<h1>Hash Generator</h1>
-<form ng-submit="vm.execute()" novalidate>
+<p>
+    The purpose of this is for testing sending hashed credentials for SSO systems. This will take a list of properties to hash and/or send to the specified URL as a POST or GET.
+</p>
+<p>
+    You can select Send for a property to send it in the POST/GET and you can select Hash to also include the value in the Hash that is calculated. The properties that are selected to hash are appended together from top to bottem before being hashed.
+</p>
+<p>If you are working with a particularly sophisticated SSO system that requires a certain casing for the hash there is an option for that too.</p>
+<form name="vm.form" ng-submit="vm.execute()" novalidate>
     <table class="table">
         <thead>
             <tr>
@@ -39,7 +46,7 @@
 
     <div class="form-group">
         <label>URL</label><span class="badge badge-light">Required</span>
-        <input type="text" class="form-control" ng-model="vm.url" />
+        <input type="text" class="form-control" ng-model="vm.url" required />
     </div>
 
     <div class="form-group">
@@ -64,7 +71,7 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Execute</button>
+    <button type="submit" class="btn btn-primary" ng-disabled="vm.form.$invalid">Execute</button>
 </form>
 
 <form id="submission-form" action="{{vm.actionUrl}}" method="{{vm.method}}" target="_blank">

@@ -47,7 +47,7 @@
     "resources": [
       {
         "title": "Microsoft Virtual Academy",
-        "description": "Free training videos for Microsoft developement technolgies.",
+        "description": "Free training videos for Microsoft developement technolgies. Closing June 10th, 2019.",
         "url": "https://mva.microsoft.com/"
       }
     ]
@@ -140,7 +140,7 @@
           {
             "title": "Postman",
             "description": "Great tool for testing and interfacing with a Web API.",
-            "url": "https://postman.com"
+            "url": "https://www.getpostman.com/"
           }
         ]
       }
