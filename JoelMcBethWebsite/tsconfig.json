@@ -5,12 +5,11 @@
     "noEmitOnError": true,
     "removeComments": false,
     "sourceMap": true,
-    "target": "es5",
+    "target": "es2015",
     "skipLibCheck": true,
-    "module": "none",
+    "module": "es2015",
     "allowJs": false,
     "lib": [
-      "es6",
       "es2017",
       "dom"
     ]

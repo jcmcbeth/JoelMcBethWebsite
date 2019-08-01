@@ -1,20 +1,9 @@
-﻿
-
-namespace JoelMcBethWebsite
+﻿namespace JoelMcBethWebsite
 {
     using System.IO;
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.Logging;
-
-    public static class SpaRedirectExtensions
-    {
-        public static IApplicationBuilder UseSpaRedirection(this IApplicationBuilder builder)
-        {
-            return builder.UseMiddleware<SpaRedirect>();
-        }
-    }
 
     public class SpaRedirect
     {

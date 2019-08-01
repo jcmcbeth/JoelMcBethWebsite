@@ -39,7 +39,8 @@
                     logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
                 })
                 .UseNLog()
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+                .ConfigureKestrel((context, options) => { });
         }
     }
 }
