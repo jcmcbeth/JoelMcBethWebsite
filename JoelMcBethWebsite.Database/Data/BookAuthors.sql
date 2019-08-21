@@ -48,6 +48,4 @@ WHEN NOT MATCHED BY TARGET THEN
 	VALUES (
 		[Source].[BookId],
 		[Source].[AuthorId]
-	)
-WHEN NOT MATCHED BY SOURCE THEN
-	DELETE;
+	);

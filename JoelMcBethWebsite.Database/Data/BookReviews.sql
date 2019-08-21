@@ -13,12 +13,6 @@ USING (VALUES
 ) AS [Source] ([Id], [Rating], [IsRecommended], [Comments], [BookId])
 ON
 	([Target].[Id] = [Source].[Id])
-WHEN MATCHED THEN
-	UPDATE SET
-		[Rating] = [Source].[Rating],
-		[IsRecommended] = [Source].[IsRecommended],
-		[Comments] = [Source].[Comments],
-		[BookId] = [Source].[BookId]
 WHEN NOT MATCHED BY TARGET THEN
 	INSERT ([Id], [Rating], [IsRecommended], [Comments], [BookId])
 	VALUES (
@@ -27,8 +21,6 @@ WHEN NOT MATCHED BY TARGET THEN
 		[Source].[IsRecommended], 
 		[Source].[Comments],
 		[Source].[BookId]
-	)
-WHEN NOT MATCHED BY SOURCE THEN
-	DELETE;
+	);
 
 SET IDENTITY_INSERT [BookReviews] OFF;

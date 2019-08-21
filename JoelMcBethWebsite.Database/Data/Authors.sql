@@ -43,11 +43,6 @@ USING (VALUES
 ) AS [Source] ([Id], [FirstName], [LastName], [MiddleName])
 ON
 	([Target].[Id] = [Source].[Id])
-WHEN MATCHED THEN
-	UPDATE SET
-		[FirstName] = [Source].[FirstName],
-		[LastName] = [Source].[LastName],
-		[MiddleName] = [Source].[MiddleName]
 WHEN NOT MATCHED BY TARGET THEN
 	INSERT ([Id], [FirstName], [LastName], [MiddleName])
 	VALUES (
@@ -55,8 +50,6 @@ WHEN NOT MATCHED BY TARGET THEN
 		[Source].[FirstName],
 		[Source].[LastName], 
 		[Source].[MiddleName]
-	)
-WHEN NOT MATCHED BY SOURCE THEN
-	DELETE;
+	);
 
 SET IDENTITY_INSERT [Authors] OFF;
