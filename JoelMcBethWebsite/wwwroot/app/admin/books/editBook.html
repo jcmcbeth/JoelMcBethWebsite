@@ -1,0 +1,24 @@
+﻿<h2>Edit Book</h2>
+<form name="bookForm" novalidate>
+    <div class="alert alert-danger" role="alert" ng-show="vm.error">
+        {{vm.error}}
+    </div>
+
+    <div class="form-group">
+        <label>Title</label> <span class="badge badge-light">Required</span>
+        <input class="form-control col-lg-3 col-md-4" ng-model="vm.book.title" required type="text" />
+        <div class="invalid-feedback col-lg-3">Enter a valid title.</div>
+    </div>
+
+    <div class="form-group">
+        <label>ISBN 13</label> <span class="badge badge-light">Required</span>
+        <input class="form-control" ng-model="vm.book.isbn13" required type="text" ng-minlength="13" ng-maxlength="13" />
+    </div>
+
+    <div class="form-group">
+        <label>Number of Pages</label>
+        <input class="form-control" ng-model="vm.book.pages" type="number" />
+    </div>
+
+    <button type="submit" class="btn btn-primary" ng-click="vm.addBook(vm.book)">Save</button>
+</form>

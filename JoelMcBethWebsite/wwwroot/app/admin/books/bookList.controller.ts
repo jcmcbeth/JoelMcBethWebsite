@@ -1,18 +1,21 @@
-﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
-class BookController implements ng.IOnInit {
-    static $inject = ["BookService", "sortDirections"];
+﻿/// <reference path="../../../../client/typings/angularjs/index.d.ts" />
+/// <reference path="../../books/book.ts" />
+/// <reference path="../../books/book.service.ts" />
+
+class BookListController {
+    static $inject = ["BookService", "$state", "sortDirections"];
 
     pageSize: number;
     page: number;
     pageCount: number;
     pages: number[];
     sort: number;
-    sortDirection: number;
     sortOptions: any[];
+    sortDirection: number;
     books: Book[];
     filterText: string;
 
-    constructor(private bookService, public sortDirections) {
+    constructor(private bookService: BookService, private state, public sortDirections) {
         this.pageSize = 12;
         this.page = 1;
         this.pageCount = 0;
@@ -67,4 +70,4 @@ class BookController implements ng.IOnInit {
 
 angular
     .module("app")
-    .controller("BookController", BookController);
+    .controller("BookListController", BookListController);

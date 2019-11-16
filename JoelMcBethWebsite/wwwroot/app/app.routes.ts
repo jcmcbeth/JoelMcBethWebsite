@@ -26,12 +26,6 @@
                 controller: "BookDetailsController",
                 controllerAs: "vm"
             })
-            .state("addBook", {
-                url: "/books/add",
-                templateUrl: "app/books/addBook.html",
-                controller: "AddBookController",
-                controllerAs: "vm"
-            })
             .state("resume", {
                 url: "/resume",
                 templateUrl: "app/resume/resume.html",
@@ -122,6 +116,20 @@
                 templateUrl: "app/cameras/camera.html",
                 controller: "CameraController as vm",
                 css: "app/cameras/camera.css"
+            })
+            .state("admin-books", {
+                url: "/admin/books",
+                component: "adminBookList"
+            })
+            .state("admin-books-addBook", {
+                url: "/admin/books/add",
+                templateUrl: "app/books/addBook.html",
+                controller: "AddBookController",
+                controllerAs: "vm"
+            })
+            .state("admin-books-editBook", {
+                url: "/admin/books/edit/{id}",
+                component: "adminEditBook"
             })
             .state("window-sticker-lookup", {
                 url: "/window-sticker-lookup",

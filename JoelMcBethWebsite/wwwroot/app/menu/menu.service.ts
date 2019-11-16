@@ -96,6 +96,14 @@ class MenuService {
                 hidden: false,
                 unauthenticatedOnly: false,
                 requireAuthentication: true
+            },
+            {
+                group: "Admin",
+                state: "admin-books",
+                title: "Books",
+                hidden: false,
+                unauthenticatedOnly: false,
+                requireAuthentication: true
             }
         ];
     }

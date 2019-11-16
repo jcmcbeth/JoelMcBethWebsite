@@ -39,6 +39,14 @@ class BookService {
             return response.data;
         });
     }
+
+    updateBook(book): ng.IPromise<Book> {
+        var url = this.baseUrl;
+
+        return this.http.put<Book>(url, book).then(response => {
+            return response.data;
+        });
+    }
 }
 
 angular

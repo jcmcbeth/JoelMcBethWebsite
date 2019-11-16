@@ -1,6 +1,6 @@
-﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
-/// <reference path="book.ts" />
-/// <reference path="book.service.ts" />
+﻿/// <reference path="../../../../client/typings/angularjs/index.d.ts" />
+/// <reference path="../../books/book.ts" />
+/// <reference path="../../books/book.service.ts" />
 
 class AddBookController {
     static $inject = ["BookService", "$state"];
@@ -16,7 +16,7 @@ class AddBookController {
         this.bookService.addBook(book).then(updatedBook => {
             book.id = updatedBook.id;
 
-            this.state.go("books");
+            this.state.go("admin-books");
         }, response => {
             this.error = response.data.error;
         });
