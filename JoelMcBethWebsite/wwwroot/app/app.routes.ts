@@ -123,7 +123,7 @@
             })
             .state("admin-books-addBook", {
                 url: "/admin/books/add",
-                templateUrl: "app/books/addBook.html",
+                templateUrl: "app/admin/books/addBook.html",
                 controller: "AddBookController",
                 controllerAs: "vm"
             })

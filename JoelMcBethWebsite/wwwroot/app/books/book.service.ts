@@ -32,6 +32,14 @@ class BookService {
         });
     }
 
+    getBookById(id: number): ng.IPromise<Book> {
+        var url = this.baseUrl + "/" + id;
+
+        return this.http.get<Book>(url).then(response => {
+            return response.data;
+        });
+    }
+
     addBook(book): ng.IPromise<Book> {
         var url = this.baseUrl;
 

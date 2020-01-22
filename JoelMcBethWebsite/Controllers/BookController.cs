@@ -40,6 +40,12 @@
             return await this.books.GetBookByIsbn13Async(isbn);
         }
 
+        [HttpGet(@"api/books/{id:int}")]
+        public async Task<Book> Get(int id)
+        {
+            return await this.books.GetBookByIdAsync(id);
+        }
+
         [HttpPost("api/books")]
         public async Task<IActionResult> Post([FromBody]Book book)
         {

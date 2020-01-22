@@ -1,5 +1,5 @@
 ﻿<h2>Add Book</h2>
-<form name="bookForm" novalidate>
+<form name="vm.form" novalidate>
     <div class="alert alert-danger" role="alert" ng-show="vm.error">
         {{vm.error}}
     </div>
@@ -20,5 +20,42 @@
         <input class="form-control" ng-model="vm.book.pages" type="number" />
     </div>
 
-    <button type="submit" class="btn btn-primary" ng-click="vm.addBook(vm.book)">Add Book</button>
+    <div>
+        <div class="row">
+            <label class="col">Authors</label>
+        </div>
+        
+        <div class="row">
+            <div class="col form-group">
+                <input class="btn" type="button" value="Add" ng-click="vm.createAuthor()" />
+            </div>
+        </div>
+
+        <div class="form-row" ng-if="vm.book.authors.length > 0">
+                <label class="col-3">First Name</label>
+                <label class="col-3">Last Name</label>
+                <label class="col-3">Middle Name</label>
+        </div>
+
+        <div ng-repeat="author in vm.book.authors">
+            <div class="form-row">
+                <input type="hidden" ng-model="author.id" />
+                <div class="form-group col-3">
+                    <input class="form-control col" ng-model="author.firstName" required />
+                </div>
+                <div class="form-group col-3">
+                    <input class="form-control col" ng-model="author.lastName" required />
+                </div>
+                <div class="form-group col-3">
+                    <input class="form-control col" ng-model="author.middleName" />
+                </div>
+                <div class="form-group col">
+                    <input class="btn btn-danger" type="button" value="Remove" ng-click="vm.removeAuthor(author)" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary" ng-click="vm.addBook(vm.book)" ng-disabled="!vm.canAddBook()">Add Book</button>
 </form>

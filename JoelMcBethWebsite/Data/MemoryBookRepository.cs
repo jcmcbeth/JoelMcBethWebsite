@@ -64,6 +64,13 @@
             return Task.FromResult(result);
         }
 
+        public Task<Book> GetBookByIdAsync(int id)
+        {
+            var result = Books.Single(b => b.Id == id);
+
+            return Task.FromResult(result);
+        }
+
         public Task<PagedEnumerable<Book>> GetBooksAsync(BookCriteria criteria)
         {
             var filteredBooks = Books.AsEnumerable();

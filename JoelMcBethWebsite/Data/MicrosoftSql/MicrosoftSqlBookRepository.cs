@@ -141,6 +141,62 @@
             }
         }
 
+        public async Task<Book> GetBookByIdAsync(int id)
+        {
+            var bookQuery = @"SELECT [Books].[Id]
+                            ,[Books].[Isbn13]
+                            ,[Books].[Title]
+                            ,[Books].[Edition]
+                            ,[Books].[Pages]
+                        FROM [Books]
+                        WHERE [Books].[Id] = @Id";
+
+            var authorsQuery = @"SELECT [Authors].[Id],
+                                        [Authors].[FirstName],
+                                        [Authors].[LastName],
+                                        [Authors].[MiddleName]
+                                 FROM [Authors]
+                                 INNER JOIN [BookAuthors] ON [BookAuthors].[AuthorId] = [Authors].[Id]
+                                 WHERE [BookAuthors].[BookId] = @BookId";
+
+            var reviewQuery = @"
+                    SELECT
+	                    [BookReviews].[Id],
+	                    [BookReviews].[Rating],
+	                    [BookReviews].[IsRecommended],
+	                    [BookReviews].[Comments],
+	                    [BookReviews].[BookId]
+                    FROM
+	                    [BookReviews]
+                    WHERE
+                        [BookReviews].[BookId] = @BookId
+                ";
+
+            using (var connection = new SqlConnection(this.connectionString))
+            {
+                var book = await connection.QuerySingleOrDefaultAsync<Book>(bookQuery, new { Id = id });
+
+                if (book != null)
+                {
+                    var authors = await connection.QueryAsync<Author>(authorsQuery, new { BookId = book.Id });
+
+                    foreach (var author in authors)
+                    {
+                        book.Authors.Add(author);
+                    }
+
+                    var reviews = await connection.QueryAsync<BookReview>(reviewQuery, new { BookId = book.Id });
+
+                    foreach (var review in reviews)
+                    {
+                        book.Reviews.Add(review);
+                    }
+                }
+
+                return book;
+            }
+        }
+
         public async Task<IEnumerable<Book>> GetBooksAsync()
         {
             var query =

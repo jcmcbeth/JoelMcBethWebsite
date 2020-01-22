@@ -8,6 +8,8 @@
     {
         Task<Book> GetBookByIsbn13Async(string isbn);
 
+        Task<Book> GetBookByIdAsync(int id);
+
         Task<PagedEnumerable<Book>> GetBooksAsync(BookCriteria criteria);
 
         Task<Book> AddBookAsync(Book book);
