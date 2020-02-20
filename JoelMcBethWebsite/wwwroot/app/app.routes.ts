@@ -123,9 +123,7 @@
             })
             .state("admin-books-addBook", {
                 url: "/admin/books/add",
-                templateUrl: "app/admin/books/addBook.html",
-                controller: "AddBookController",
-                controllerAs: "vm"
+                component: "adminAddBook"
             })
             .state("admin-books-editBook", {
                 url: "/admin/books/edit/{id}",
