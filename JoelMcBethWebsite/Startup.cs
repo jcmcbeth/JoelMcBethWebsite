@@ -5,6 +5,9 @@
     using JoelMcBethWebsite.Data;
     using JoelMcBethWebsite.Data.EntityFramework;
     using JoelMcBethWebsite.Data.MicrosoftSql;
+    using JoelMcBethWebsite.Scheduler;
+    using JoelMcBethWebsite.Tasks;
+    using JoelMcBethWebsite.Tasks.Todoist;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
@@ -34,6 +37,7 @@
             services.AddTransient<IBookRepository, MicrosoftSqlBookRepository>(s => new MicrosoftSqlBookRepository(connectionString));
             services.AddTransient<IUserRepository, EntityFrameworkUserRepository>();
             services.AddTransient<IMediaRepository, MicrosoftSqlMediaRepository>(s => new MicrosoftSqlMediaRepository(connectionString));
+            services.AddTransient<ITaskRepository, EntityFrameworkTaskRepository>();
 
             services.AddSingleton<ICameraClient, AmcrestHttpClient>(srv =>
                 new AmcrestHttpClient(
@@ -46,6 +50,19 @@
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<JoelMcbethWebsiteDbContext>(options => options.UseSqlServer(connectionString));
+
+            services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
+
+            services.AddSingleton<ITaskClient, TodoistRestTaskClient>(
+                factory => new TodoistRestTaskClient(this.Configuration["Todoist:Key"]));
+            services.AddSingleton<Schedule>(factory => new Schedule()
+            {
+                //Interval = 60,
+                Interval = 10,
+                ScheduledJobType = typeof(TaskCountSchedulerJob)
+            });
+            services.AddTransient<TaskCountSchedulerJob>();
+            services.AddHostedService<SchedulerHostedService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment environment)
