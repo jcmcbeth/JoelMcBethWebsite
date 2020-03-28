@@ -57,8 +57,14 @@
             var user = new User()
             {
                 UserName = registration.UserName,
-                Email = registration.Email
+                Email = registration.Email,
             };
+
+            // We want the first user that registers to actually be able to login
+            if (await this.userRepository.Any() == false)
+            {
+                user.IsApproved = true;
+            }
 
             await this.userRepository.AddUserAsync(user);
             await this.authenticationManager.CreateCredentialsAsync(registration.UserName, registration.Password);

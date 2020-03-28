@@ -1,8 +1,5 @@
 ﻿namespace JoelMcBethWebsite.Data
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using JoelMcBethWebsite.Data.Models;
 
@@ -17,5 +14,7 @@
         Task UpdateUserAsync(User user);
 
         Task<User> GetUserById(int id);
+
+        Task<bool> Any();
     }
 }

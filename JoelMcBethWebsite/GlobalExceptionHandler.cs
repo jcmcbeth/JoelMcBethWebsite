@@ -1,10 +1,10 @@
 ﻿namespace JoelMcBethWebsite
 {
     using System;
+    using System.Text.Json;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.Logging;
-    using Newtonsoft.Json;
 
     public class GlobalExceptionHandler
     {
@@ -25,7 +25,7 @@
             {
                 logger.LogError(exception, "An unhandled exception has occurred when processing a request.");
 
-                var result = JsonConvert.SerializeObject(new { error = exception.Message });
+                var result = JsonSerializer.Serialize(new { error = exception.Message });
 
                 httpContext.Response.StatusCode = 500;
                 httpContext.Response.ContentType = "application/json";

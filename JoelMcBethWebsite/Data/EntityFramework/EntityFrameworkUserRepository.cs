@@ -24,6 +24,11 @@
             return user;
         }
 
+        public async Task<bool> Any()
+        {
+            return await this.context.Users.AnyAsync();
+        }
+
         public async Task<User> GetUserById(int id)
         {
             return await this.context.Users.SingleAsync(u => u.Id == id);
@@ -43,7 +48,7 @@
                 Count = count,
                 Page = page,
                 Pages = (int)Math.Ceiling(count / (double)pageSize),
-                PageSize = pageSize
+                PageSize = pageSize,
             };
 
             var pagedUsers = await this.context.Users

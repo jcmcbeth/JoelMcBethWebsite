@@ -1,5 +1,6 @@
 ﻿namespace JoelMcBethWebsite
 {
+    using System.Diagnostics.CodeAnalysis;
     using Amcrest.HttpClient;
     using JoelMcBethWebsite.Authentication;
     using JoelMcBethWebsite.Data;
@@ -7,11 +8,11 @@
     using JoelMcBethWebsite.Data.MicrosoftSql;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.StaticFiles;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
 
     public class Startup
     {
@@ -42,13 +43,13 @@
                     this.Configuration["Camera:Password"]));
 
             services.AddMemoryCache();
-            services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddControllers();
 
             services.AddDbContext<JoelMcbethWebsiteDbContext>(options => options.UseSqlServer(connectionString));
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment environment)
+        [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "This needs to be an instance method as it is called by convention.")]
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment environment)
         {
             if (environment.IsDevelopment())
             {
@@ -65,15 +66,23 @@
             contentTypeProvider.Mappings.Add(".exe", "application/vnd.microsoft.portable-executable");
             contentTypeProvider.Mappings.Add(".cfg", "text/plain");
 
-            app.UseAuthentication();
             app.UseDefaultFiles();
             app.UseSpaRedirection();
             app.UseStaticFiles(new StaticFileOptions()
             {
-                ContentTypeProvider = contentTypeProvider
+                ContentTypeProvider = contentTypeProvider,
             });
             app.UseGlobalExceptionHandler();
-            app.UseMvc();
+
+            app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }
