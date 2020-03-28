@@ -13,9 +13,9 @@
 
     public class JwtTokenProvider : ITokenProvider
     {
-        private SymmetricSecurityKey key;
-        private string issuer;
-        private string audience;
+        private readonly SymmetricSecurityKey key;
+        private readonly string issuer;
+        private readonly string audience;
 
         public JwtTokenProvider(string issuer, string audience, byte[] key)
         {
@@ -36,7 +36,7 @@
                 Issuer = this.issuer,
                 SigningCredentials = new SigningCredentials(this.key, SecurityAlgorithms.HmacSha256),
                 Expires = expiration.ToUniversalTime(),
-                Subject = identity
+                Subject = identity,
             });
 
             return tokenHandler.WriteToken(token);

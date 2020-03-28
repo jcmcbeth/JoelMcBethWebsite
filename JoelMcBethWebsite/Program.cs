@@ -1,13 +1,13 @@
 ﻿namespace JoelMcBethWebsite
 {
     using System;
-    using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
     using NLog;
     using NLog.Web;
 
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
@@ -17,7 +17,7 @@
 
             try
             {
-                CreateWebHostBuilder(args).Build().Run();
+                CreateHostBuilder(args).Build().Run();
             }
             catch (Exception exception)
             {
@@ -30,17 +30,20 @@
             }
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        public static IHostBuilder CreateHostBuilder(string[] args)
         {
-            return WebHost.CreateDefaultBuilder(args)
-                .ConfigureLogging(logging =>
+            return Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(builder =>
                 {
-                    logging.ClearProviders();
-                    logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
-                })
-                .UseNLog()
-                .UseStartup<Startup>()
-                .ConfigureKestrel((context, options) => { });
+                    builder.ConfigureLogging(logging =>
+                    {
+                        logging.ClearProviders();
+                        logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+                    });
+                    builder.UseNLog();
+                    builder.UseStartup<Startup>();
+                    builder.ConfigureKestrel((context, options) => { });
+                });
         }
     }
 }

@@ -1,9 +1,6 @@
 ﻿namespace JoelMcBethWebsite
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
     using JoelMcBethWebsite.Authentication;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Authorization;
@@ -44,7 +41,7 @@
                         ValidAudience = options.Audience,
                         ValidIssuer = options.Issuer,
                         ValidateLifetime = true,
-                        ClockSkew = TimeSpan.FromSeconds(options.ClockSkew)
+                        ClockSkew = TimeSpan.FromSeconds(options.ClockSkew),
                     };
                 });
 
