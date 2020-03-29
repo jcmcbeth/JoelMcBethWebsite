@@ -1,0 +1,3 @@
+﻿class ChatUser {
+    name: string;
+}

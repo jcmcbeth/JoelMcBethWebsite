@@ -46,6 +46,8 @@
             services.AddControllers();
 
             services.AddDbContext<JoelMcbethWebsiteDbContext>(options => options.UseSqlServer(connectionString));
+
+            services.AddSignalR();
         }
 
         [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "This needs to be an instance method as it is called by convention.")]
@@ -81,6 +83,7 @@
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<ChatHub>("/hub");
                 endpoints.MapControllers();
             });
         }

@@ -1,0 +1,18 @@
+﻿jm-chat .card-header {
+    padding: 0.5rem 1rem;
+}
+
+jm-chat .card-header {
+    cursor: pointer;
+}
+
+jm-chat .card-header h1 {
+    font-style: normal;
+    margin: 0;
+}
+
+jm-chat #chat-messages {
+    min-height: 10rem;
+    border-width: 1px;
+    border-style: solid;
+}

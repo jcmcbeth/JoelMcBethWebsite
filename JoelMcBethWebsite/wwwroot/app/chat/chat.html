@@ -1,0 +1,30 @@
+﻿<div class="card">
+    <div class="card-header bg-primary text-white" ng-click="$ctrl.toggleCollapse()">
+        <h1>Chat</h1>
+    </div>
+    <div class="card-body row" ng-show="!$ctrl.collapsed">
+        <div class="col">
+            <label>Chat Messages</label>
+            <div id="chat-messages" class="border-primary p-2">
+                <div ng-repeat="message in $ctrl.messages track by $index">
+                    <strong>{{ message.userName }}: </strong>{{ message.text }}
+                </div>
+            </div>
+            <form name="$ctrl.form" novalidate ng-submit="$ctrl.sendMessage()">
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea class="form-control" required ng-model="$ctrl.message"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" ng-disabled="!$ctrl.form.$valid || !$ctrl.form.$dirty">Send</button>
+            </form>
+        </div>
+        <div class="col-sm-3">
+            <label>Users ({{ $ctrl.users.length }})</label>
+            <div class="border-primary">
+                <ul class="list-unstyled">
+                    <li ng-repeat="user in $ctrl.users">{{ user.name }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

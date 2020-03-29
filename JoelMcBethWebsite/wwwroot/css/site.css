@@ -278,3 +278,38 @@ input[type=text].ng-invalid.ng-dirty {
     color: red;
     margin-top: .5rem;
 }
+
+/**
+    Bootstrap Colors
+*/
+
+.bg-primary {
+    background-color: green !important;
+}
+
+.border-primary {
+    border-color: green !important;
+}
+
+/**
+    Cards
+*/
+
+.card {
+    border-radius: unset;
+}
+
+.card-header:first-child {
+    border-radius: unset;
+}
+
+/**
+    Chat
+*/
+
+#chat {
+    position: fixed;
+    bottom: 0;
+    right: 10px;
+    width: 500px;
+}
