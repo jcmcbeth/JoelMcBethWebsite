@@ -3,6 +3,7 @@
     using System.Diagnostics.CodeAnalysis;
     using Amcrest.HttpClient;
     using JoelMcBethWebsite.Authentication;
+    using JoelMcBethWebsite.Chat;
     using JoelMcBethWebsite.Data;
     using JoelMcBethWebsite.Data.EntityFramework;
     using JoelMcBethWebsite.Data.MicrosoftSql;
