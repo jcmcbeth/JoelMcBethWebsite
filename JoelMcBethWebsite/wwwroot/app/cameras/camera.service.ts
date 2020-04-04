@@ -23,9 +23,10 @@ class CameraService {
             responseType: 'arraybuffer',
         }).then(response => {
             //return 'data:image/jpeg;base64,' + this._arrayBufferToBase64(response.data);
-            let blob = new Blob([response.data], { type: "image/jpeg" });
+            //let blob = new Blob([response.data], { type: "image/jpeg" });
 
-            return this.window.URL.createObjectURL(blob);
+            //return this.window.URL.createObjectURL(blob);
+            return null;
         });
     }
 
