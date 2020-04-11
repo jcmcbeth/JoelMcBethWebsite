@@ -2,9 +2,8 @@
 /// <reference path="../../books/book.ts" />
 /// <reference path="../../books/book.service.ts" />
 /// <reference path="../../books/author.ts" />
-/// <reference path="../../books/book-review.ts" />
 
-class AddBookController {
+class AuthorListController {
     static $inject = ["BookService", "$state"];
 
     book: Book;
@@ -16,39 +15,17 @@ class AddBookController {
         this.book.authors = new Array<Author>();
     }
 
-    addBook(book) {
-        this.bookService.addBook(book).then(updatedBook => {
-            book.id = updatedBook.id;
-
-            this.state.go("admin-books");
-        }, response => {
-            this.error = response.data.error;
-        });
-    }
-
-    canAddBook(): boolean {
-        return this.form.$dirty && this.form.$valid;
-    }
-
     createAuthor(): void {
         this.book.authors.push(new Author());
     }
 
     removeAuthor(author: Author): void {
-        const index = this.book.authors.indexOf(author);
+        var index = this.book.authors.indexOf(author);
 
         this.book.authors.splice(index, 1);
-    }
-
-    createReview() {
-        if (!this.book.reviews) {
-            this.book.reviews = [];
-        }
-
-        this.book.reviews.push(new BookReview());
     }
 }
 
 angular
     .module("app")
-    .controller("AddBookController", AddBookController);
+    .controller("AuthorListController", AuthorListController);

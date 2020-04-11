@@ -1,4 +1,4 @@
-﻿interface BookReview {
+﻿class BookReview {
     id: number;
     rating: number;
     comments: number;
