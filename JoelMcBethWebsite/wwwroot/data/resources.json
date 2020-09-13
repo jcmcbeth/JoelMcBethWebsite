@@ -43,58 +43,48 @@
     "name": "Articles"
   },
   {
-    "name": "Courses and Training",
-    "resources": [
-      {
-        "title": "Microsoft Virtual Academy",
-        "description": "Free training videos for Microsoft developement technolgies. Closing June 10th, 2019.",
-        "url": "https://mva.microsoft.com/"
-      }
-    ]
-  },
-  {
     "name": "Applications",
     "resources": [
       {
         "title": "WinDirStat",
         "description": "Visualizes disk usage for freeing up disk space.",
-        "url": ""
+        "url": "https://windirstat.net/"
       },
       {
         "title": "WizTree",
         "description": "A more modern version of WinDirStat.",
-        "url": ""
+        "url": "https://wiztreefree.com/"
       },
       {
         "title": "Putty",
         "description": "SSH client.",
-        "url": ""
+        "url": "https://www.putty.org/"
       },
       {
         "title": "NAPS2",
         "description": "Scans documents to PDF and also does OCR.",
-        "url": ""
+        "url": "https://www.naps2.com/"
       },
       {
-        "title": "LastPass",
-        "description": "Cloud password manager.",
-        "url": ""
+        "title": "1Password",
+        "description": "Cloud password manager that doesn't have access to your encrypted data.",
+        "url": "https://1password.com/"
       },
       {
         "title": "KeePass",
         "description": "Local password manager, good for backing up LastPass and for those who don't trust cloud password managers.",
-        "url": ""
+        "url": "https://keepass.info/"
       },
       {
         "title": "FileZilla",
         "description": "FTP/SFTP/FTPS client.",
-        "url": ""
+        "url": "https://filezilla-project.org/"
       },
 
       {
         "title": "TeamViewer",
         "description": "Free remote desktop access. Good replacement for LogMeIn.",
-        "url": ""
+        "url": "https://www.teamviewer.com/"
       }
 
     ],
@@ -105,27 +95,27 @@
           {
             "title": "Notepad++",
             "description": "Text editor that supports syntax highlighting for numerious file formats.",
-            "url": ""
+            "url": "https://notepad-plus-plus.org/"
           },
           {
             "title": "Expresso",
             "description": "Regular expression editor targeting .NET regular expressions.",
-            "url": ""
+            "url": "http://www.ultrapico.com/Expresso.htm"
           },
           {
             "title": "WinMerge",
             "description": "Tool for diffing and merging files and directories.",
-            "url": ""
+            "url": "https://winmerge.org/"
           },
           {
             "title": "Ghost Docs",
-            "description": "Plugin for Visual Studio that assists and automatically documents code.",
+            "description": "Plugin for Visual Studio that assists with writing XML documentation.",
             "url": ""
           },
           {
             "title": "Microsoft SQL Management Studio",
             "description": "Tool for managing SQL Server, SQL Express, and LocalDB.",
-            "url": ""
+            "url": "https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15"
           },
           {
             "title": "LinqPad",
