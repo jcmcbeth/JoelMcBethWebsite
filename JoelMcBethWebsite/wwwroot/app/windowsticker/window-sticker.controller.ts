@@ -12,7 +12,8 @@ class WindowStickerController {
 
     public lookup() {
         if (this.vin.manufacturer === "Mitsubishi") {
-            var url = "https://www.mitsubishicars.com/rs/file/monroney?vin=" + this.vin.vin;
+            // Must be uppercase or it will not match the VIN
+            var url = "https://www.mitsubishicars.com/rs/file/monroney?vin=" + this.vin.vin.toUpperCase();
             this.$window.open(url, '_blank');
 
             this.error = null;
