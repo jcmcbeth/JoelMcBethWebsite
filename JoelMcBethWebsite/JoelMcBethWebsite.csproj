@@ -15,11 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.0.30" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.3" />
     <PackageReference Include="Microsoft.CodeAnalysis" Version="3.5.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="2.8.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
@@ -29,7 +26,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.5.0" />
   </ItemGroup>
 
@@ -67,6 +63,11 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\inf\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JoelMcBethWebsite.Common\JoelMcBethWebsite.Common.csproj" />
+    <ProjectReference Include="..\JoelMcBethWebsite.Data.EntityFramework\JoelMcBethWebsite.Data.EntityFramework.csproj" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
