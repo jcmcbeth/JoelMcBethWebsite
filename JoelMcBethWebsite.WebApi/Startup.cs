@@ -51,7 +51,7 @@ namespace JoelMcBethWebsite.WebApi
                     this.Configuration["Camera:UserName"],
                     this.Configuration["Camera:Password"]));
 
-            var allowedOrigins = new string[] { this.Configuration["AllowedOrigin"] };
+            var allowedOrigins = GetAllowedOrigins();
 
             services.AddCors(options =>
             {
@@ -69,6 +69,18 @@ namespace JoelMcBethWebsite.WebApi
             services.AddControllers();
 
             services.AddDbContext<JoelMcbethWebsiteDbContext>(options => options.UseSqlServer(connectionString));
+        }
+
+        private string[] GetAllowedOrigins()
+        {
+            var allowedOrigin = this.Configuration["AllowedOrigin"];
+
+            if (allowedOrigin != null)
+            {
+                return new string[] { allowedOrigin };
+            }
+
+            return new string[0];
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

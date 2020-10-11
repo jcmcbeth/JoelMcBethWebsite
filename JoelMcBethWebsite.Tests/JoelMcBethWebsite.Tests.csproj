@@ -17,7 +17,6 @@
     <ProjectReference Include="..\JoelMcBethWebsite.Common\JoelMcBethWebsite.Common.csproj" />
     <ProjectReference Include="..\JoelMcBethWebsite.Data.EntityFramework\JoelMcBethWebsite.Data.EntityFramework.csproj" />
     <ProjectReference Include="..\JoelMcBethWebsite.Database\JoelMcBethWebsite.Database.sqlproj" />
-    <ProjectReference Include="..\JoelMcBethWebsite\JoelMcBethWebsite.csproj" />
   </ItemGroup>
 
   <ItemGroup>
