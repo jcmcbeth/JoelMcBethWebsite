@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Content Remove="package.json" />
+    <Content Remove="wwwroot\config.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +34,7 @@
 
   <ItemGroup>
     <None Include="package.json" />
+    <None Include="wwwroot\config.json" />
   </ItemGroup>
   
   <ItemGroup>
