@@ -8,6 +8,7 @@ using JoelMcBethWebsite.Data;
 using JoelMcBethWebsite.Data.EntityFramework;
 using JoelMcBethWebsite.Data.MicrosoftSql;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
@@ -50,13 +51,18 @@ namespace JoelMcBethWebsite.WebApi
                     this.Configuration["Camera:UserName"],
                     this.Configuration["Camera:Password"]));
 
+            var allowedOrigins = new string[] { this.Configuration["AllowedOrigin"] };
+
             services.AddCors(options =>
             {
                 options.AddPolicy(CorsPolicyName, policy =>
                 {
-                    policy
-                        .WithOrigins("https://localhost:44339")
-                        .AllowAnyHeader();
+                    policy.AllowAnyHeader();
+
+                    if (allowedOrigins.Any())
+                    {
+                        policy.WithOrigins(allowedOrigins);
+                    }
                 });
             });
 
