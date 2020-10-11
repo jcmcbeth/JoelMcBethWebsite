@@ -50,10 +50,6 @@
     <Folder Include="wwwroot\inf\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\JoelMcBethWebsite.Common\JoelMcBethWebsite.Common.csproj" />
-  </ItemGroup>
-
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
