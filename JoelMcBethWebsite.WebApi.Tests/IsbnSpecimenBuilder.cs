@@ -1,4 +1,4 @@
-﻿namespace JoelMcBethWebsite.Tests
+﻿namespace JoelMcBethWebsite.WebApi.Tests
 {
     using System;
     using System.Linq.Expressions;

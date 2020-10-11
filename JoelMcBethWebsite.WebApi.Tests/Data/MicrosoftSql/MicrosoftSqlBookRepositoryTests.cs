@@ -1,4 +1,4 @@
-﻿namespace JoelMcBethWebsite.Tests.Data.MicrosoftSql
+﻿namespace JoelMcBethWebsite.WebApi.Tests.Data.MicrosoftSql
 {
     using System.Collections.Generic;
     using System.Linq;
