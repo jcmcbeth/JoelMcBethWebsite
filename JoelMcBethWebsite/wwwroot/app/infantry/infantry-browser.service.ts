@@ -12,7 +12,7 @@ class InfantryBrowserService {
     }
 
     getZones(): ng.IPromise<Zone[]> {
-        const url = this.baseUrl + "zones";
+        const url = this.baseUrl + "/zones";
 
         return <ng.IPromise<Zone[]>>this.$http.get(url).then(response => {
             return response.data;
