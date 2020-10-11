@@ -10,7 +10,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     [Produces("application/json")]
-    [Route("api/Media")]
+    [Route("Media")]
     public class MediaController : Controller
     {
         private readonly IMediaRepository mediaRepository;

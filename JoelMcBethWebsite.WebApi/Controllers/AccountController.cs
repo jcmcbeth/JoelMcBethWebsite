@@ -11,7 +11,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     [Produces("application/json")]
-    [Route("api/account")]
+    [Route("account")]
     public class AccountController : Controller
     {
         private readonly IUserRepository userRepository;

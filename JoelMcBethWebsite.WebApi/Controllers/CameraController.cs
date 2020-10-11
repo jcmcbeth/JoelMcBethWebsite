@@ -9,7 +9,7 @@
     using Microsoft.Extensions.Caching.Memory;
 
     [Produces("application/json")]
-    [Route("api/camera")]
+    [Route("camera")]
     [Authorize]
     public class CameraController : Controller
     {

@@ -1,18 +1,21 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
 /// <reference path="token.service.ts" />
 /// <reference path="authentication-response.ts" />
+/// <reference path="../shared/models/config.ts" />
 /// <reference path="authentication-result.ts" />
 
 class AuthenticationService {
-    static $inject = ["$http", "$q", "$rootScope", "TokenService"];
+    static $inject = ["$http", "$q", "$rootScope", "TokenService", "config"];
 
-    readonly baseUrl = "/api/account";
+    private baseUrl;
 
     constructor(
         private readonly http: ng.IHttpService,
         private readonly q: ng.IQService,
         private readonly rootScope: ng.IRootScopeService,
-        private readonly tokenService: TokenService) {
+        private readonly tokenService: TokenService,
+        config: Config) {
+        this.baseUrl = config.serviceUrlBase + "/account";
     }
 
     isAuthenticated(): boolean {

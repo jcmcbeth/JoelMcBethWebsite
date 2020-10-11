@@ -15,7 +15,7 @@
     public class InfantryController : ControllerBase
     {
         [HttpGet]
-        [Route("api/[controller]/browser/zones")]
+        [Route("[controller]/browser/zones")]
         public async Task<IActionResult> GetZones()
         {
             var hostEntry = await Dns.GetHostEntryAsync("infdir1.aaerox.com");

@@ -9,7 +9,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     [Produces("application/json")]
-    [Route("api/Projects")]
+    [Route("Projects")]
     public class ProjectController : Controller
     {
         // GET: api/Project

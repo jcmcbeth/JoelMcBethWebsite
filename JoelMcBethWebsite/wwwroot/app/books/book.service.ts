@@ -1,12 +1,13 @@
 ﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
 /// <reference path="../shared/models/paged-array.ts" />
+/// <reference path="../shared/models/config.ts" />
 
 class BookService {
     static $inject = ["$http", "config"];
 
     private baseUrl;
 
-    constructor(private http: ng.IHttpService, config: any) {
+    constructor(private http: ng.IHttpService, config: Config) {
         this.baseUrl = config.serviceUrlBase + "/books";
     }
 

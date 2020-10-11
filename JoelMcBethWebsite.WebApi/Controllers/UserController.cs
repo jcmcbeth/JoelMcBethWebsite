@@ -11,7 +11,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     [Produces("application/json")]
-    [Route("api/Users")]
+    [Route("Users")]
     [Authorize]
     public class UserController : Controller
     {
