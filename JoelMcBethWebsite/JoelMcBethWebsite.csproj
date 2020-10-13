@@ -263,7 +263,7 @@
     <Content Include="ClientApp\src\app\windowsticker\window-sticker.controller.ts" />
     <Content Include="ClientApp\src\app\windowsticker\window-sticker.html" />
     <Content Include="ClientApp\src\index.html" />
-    <Content Include="ClientApp\src\site.css" />
+    <Content Include="ClientApp\src\styles.css" />
   </ItemGroup>
 
   <ItemGroup>
