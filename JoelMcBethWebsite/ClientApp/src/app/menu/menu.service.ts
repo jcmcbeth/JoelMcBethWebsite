@@ -21,7 +21,7 @@ export class MenuService {
                 group: "Main",
                 state: "projects",
                 title: "Projects",
-                hidden: false,
+                hidden: true,
                 unauthenticatedOnly: false,
                 requireAuthentication: false
             },
@@ -37,7 +37,7 @@ export class MenuService {
                 group: "Main",
                 state: "books",
                 title: "Books",
-                hidden: false,
+                hidden: true,
                 unauthenticatedOnly: false,
                 requireAuthentication: false
             },
@@ -53,7 +53,7 @@ export class MenuService {
                 group: "Main",
                 state: "resources",
                 title: "Resources",
-                hidden: false,
+                hidden: true,
                 unauthenticatedOnly: false,
                 requireAuthentication: false
             },
@@ -61,7 +61,7 @@ export class MenuService {
                 group: "Main",
                 state: "misc",
                 title: "Misc",
-                hidden: false,
+                hidden: true,
                 unauthenticatedOnly: false,
                 requireAuthentication: false
             },
@@ -69,7 +69,7 @@ export class MenuService {
                 group: "Main",
                 state: "cameras",
                 title: "Cameras",
-                hidden: false,
+                hidden: true,
                 unauthenticatedOnly: false,
                 requireAuthentication: true
             },
@@ -77,7 +77,7 @@ export class MenuService {
                 group: "Account",
                 state: "login",
                 title: "Login",
-                hidden: false,
+                hidden: true,
                 unauthenticatedOnly: true,
                 requireAuthentication: false
             },
@@ -85,7 +85,7 @@ export class MenuService {
                 group: "Account",
                 state: "logout",
                 title: "Logout",
-                hidden: false,
+                hidden: true,
                 unauthenticatedOnly: false,
                 requireAuthentication: true
             },
@@ -93,7 +93,7 @@ export class MenuService {
                 group: "Users",
                 state: "users",
                 title: "User List",
-                hidden: false,
+                hidden: true,
                 unauthenticatedOnly: false,
                 requireAuthentication: true
             },
@@ -101,7 +101,7 @@ export class MenuService {
                 group: "Admin",
                 state: "admin-books",
                 title: "Books",
-                hidden: false,
+                hidden: true,
                 unauthenticatedOnly: false,
                 requireAuthentication: true
             }

@@ -1,21 +1,26 @@
 import { MenuService } from "./menu.service";
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { MenuItem } from "./menu-item";
 
 @Component({
-  selector: 'app-menu',
-  templateUrl: './menu.component.html'
+    selector: 'app-menu',
+    templateUrl: './menu.component.html',
+    styleUrls: ['./menu.component.css'],
+    host: {
+        "class": "navbar navbar-expand-md d-md-block col-md-2 col-lg-1"
+    }
 })
-export class MenuComponent {
+export class MenuComponent implements OnInit {
     //static $inject = ["menuService", "$rootScope", "AuthenticationService"];
 
-    public menuItems: any[];
-    public menuGroups: any[];
+    public items: MenuItem[];
+    public groups: MenuGroupViewModel[];
 
     private authenticated;
 
-  constructor(private menuService: MenuService/*, private rootScope: ng.IRootScopeService, private authenticationService*/) {
-        this.menuItems = [];
-        this.menuGroups = [];
+    constructor(private menuService: MenuService/*, private rootScope: ng.IRootScopeService, private authenticationService*/) {
+        this.items = [];
+        this.groups = [];
         this.authenticated = false;
 
         //rootScope.$on("authenticated", () => {
@@ -29,75 +34,63 @@ export class MenuComponent {
 
         //    this.updateMenuItems();
         //});
-
-      this.$onInit();
     }
 
-    $onInit(): void {
-        this.menuItems = this.menuService.getMenuItems();
-        this.menuGroups = this.getMenuGroups();
-
+    ngOnInit(): void {
         //this.authenticated = this.authenticationService.isAuthenticated();
 
-        this.updateMenuItems();
+        this.items = this.menuService.getMenuItems();
+        this.groups = this.getMenuGroups();
     }
 
-    private getMenuGroups() {
-        var groups = [];
+    private getMenuGroups(): MenuGroupViewModel[] {
+        var groups: MenuGroupViewModel[] = [];
 
-        for (var i = 0; i < this.menuItems.length; i++) {
-            var menuItem = this.menuItems[i];
-            var groupName = menuItem.group;
+        for (var i = 0; i < this.items.length; i++) {
+            const menuItem = this.items[i];
 
-            var group = groups.find((currentGroup) => {
+            if (!this.isMenuItemVisible(menuItem)) {
+                continue;
+            }
+
+            const groupName = menuItem.group;
+            let group = groups.find((currentGroup) => {
                 return currentGroup.name === groupName;
             });
 
             if (group === undefined) {
                 group = {
                     name: groupName,
-                    menuItems: []
+                    items: []
                 };
 
                 groups.push(group);
             }
 
-            group.menuItems.push(menuItem);
+            group.items.push(menuItem);
         }
 
         return groups;
     }
 
-    private updateMenuItems(): void {
-        for (var i = 0; i < this.menuItems.length; i++) {
-            var item = this.menuItems[i];
-
-            if (item.hidden) {
-                item.visible = false;
-                continue;
-            }
-
-            if (item.unauthenticatedOnly && this.authenticated) {
-                item.visible = false;
-                continue;
-            }
-
-            if (item.requireAuthentication && !this.authenticated) {
-                item.visible = false;
-                continue;
-            }
-
-            item.visible = true;
+    private isMenuItemVisible(item: MenuItem): boolean {
+        if (item.hidden) {
+            return false;
         }
 
-        for (i = 0; i < this.menuGroups.length; i++) {
-            var group = this.menuGroups[i];
-
-            var visible = group.menuItems.some((item) => {
-                return item.visible === true;
-            });
-
-            group.visible = visible;
+        if (item.requireAuthentication && !this.authenticated) {
+            return false;
         }
+
+        if (item.unauthenticatedOnly && this.authenticated) {
+            return false;
+        }
+
+        return true;
     }
+}
+
+class MenuGroupViewModel {
+    name: string;
+    items: MenuItem[];
 }

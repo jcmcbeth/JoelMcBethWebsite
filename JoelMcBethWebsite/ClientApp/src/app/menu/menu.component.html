@@ -1,13 +1,11 @@
-<nav id="side-nav" class="navbar navbar-expand-md navbar-side d-md-block col-md-2 col-lg-1">
-  <div class="collapse navbar-collapse navbar-side-content" id="menu">
-    <div class="menu-group" ngFor="let group of menuGroups" *ngIf="group.visible">
-      <h2>{{group.name}}</h2>
-      <ul class="navbar-nav mr-auto" ngFor="let item of group.menuItems">
-        <!-- remember to set active, check change log -->
-        <li class="nav-item" *ngIf="item.visible">
-          <a class="nav-link" [routerLink]="[item.state]">{{item.title}}</a>
-        </li>
-      </ul>
+<div class="collapse navbar-collapse navbar-side-content" id="menu">
+    <div class="menu-group" *ngFor="let group of groups">
+        <h2>{{group.name}}</h2>
+
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" *ngFor="let item of group.items">
+                <a class="nav-link" [routerLink]="[item.state]">{{item.title}}</a>
+            </li>
+        </ul>
     </div>
-  </div>
-</nav>
+</div>
