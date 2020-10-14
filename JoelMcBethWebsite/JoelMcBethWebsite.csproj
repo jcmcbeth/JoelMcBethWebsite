@@ -2,9 +2,27 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <TypeScriptToolsVersion>3.7</TypeScriptToolsVersion>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <IsPackable>false</IsPackable>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
     <UserSecretsId>a29d13e2-565a-420d-b4ea-3985c7b7113f</UserSecretsId>
+
+    <!-- Set this to true if you enable server-side prerendering -->
+    <BuildServerSideRenderer>false</BuildServerSideRenderer>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Content Remove="$(SpaRoot)**" />
+    <None Remove="$(SpaRoot)**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Remove="package.json" />
@@ -16,257 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="ClientApp\src\app\.gitignore" />
-    <Content Include="ClientApp\src\app\account\account.service.js" />
-    <Content Include="ClientApp\src\app\account\account.service.js.map" />
-    <Content Include="ClientApp\src\app\account\account.service.ts" />
-    <Content Include="ClientApp\src\app\account\login.controller.js" />
-    <Content Include="ClientApp\src\app\account\login.controller.js.map" />
-    <Content Include="ClientApp\src\app\account\login.controller.ts" />
-    <Content Include="ClientApp\src\app\account\login.html" />
-    <Content Include="ClientApp\src\app\account\logout.controller.js" />
-    <Content Include="ClientApp\src\app\account\logout.controller.js.map" />
-    <Content Include="ClientApp\src\app\account\logout.controller.ts" />
-    <Content Include="ClientApp\src\app\account\logout.html" />
-    <Content Include="ClientApp\src\app\account\register.controller.js" />
-    <Content Include="ClientApp\src\app\account\register.controller.js.map" />
-    <Content Include="ClientApp\src\app\account\register.controller.ts" />
-    <Content Include="ClientApp\src\app\account\register.html" />
-    <Content Include="ClientApp\src\app\account\user-registration.js" />
-    <Content Include="ClientApp\src\app\account\user-registration.js.map" />
-    <Content Include="ClientApp\src\app\account\user-registration.ts" />
-    <Content Include="ClientApp\src\app\adblock\adblock.controller.js" />
-    <Content Include="ClientApp\src\app\adblock\adblock.controller.js.map" />
-    <Content Include="ClientApp\src\app\adblock\adblock.controller.ts" />
-    <Content Include="ClientApp\src\app\adblock\adblock.css" />
-    <Content Include="ClientApp\src\app\adblock\adblock.html" />
-    <Content Include="ClientApp\src\app\admin\books\addBook.component.js" />
-    <Content Include="ClientApp\src\app\admin\books\addBook.component.js.map" />
-    <Content Include="ClientApp\src\app\admin\books\addBook.component.ts" />
-    <Content Include="ClientApp\src\app\admin\books\addBook.controller.js" />
-    <Content Include="ClientApp\src\app\admin\books\addBook.controller.js.map" />
-    <Content Include="ClientApp\src\app\admin\books\addBook.controller.ts" />
-    <Content Include="ClientApp\src\app\admin\books\addBook.html" />
-    <Content Include="ClientApp\src\app\admin\books\bookList.component.js" />
-    <Content Include="ClientApp\src\app\admin\books\bookList.component.js.map" />
-    <Content Include="ClientApp\src\app\admin\books\bookList.component.ts" />
-    <Content Include="ClientApp\src\app\admin\books\booklist.controller.js" />
-    <Content Include="ClientApp\src\app\admin\books\booklist.controller.js.map" />
-    <Content Include="ClientApp\src\app\admin\books\bookList.controller.ts" />
-    <Content Include="ClientApp\src\app\admin\books\bookList.html" />
-    <Content Include="ClientApp\src\app\admin\books\editBook.component.js" />
-    <Content Include="ClientApp\src\app\admin\books\editBook.component.js.map" />
-    <Content Include="ClientApp\src\app\admin\books\editBook.component.ts" />
-    <Content Include="ClientApp\src\app\admin\books\editbook.controller.js" />
-    <Content Include="ClientApp\src\app\admin\books\editbook.controller.js.map" />
-    <Content Include="ClientApp\src\app\admin\books\editBook.controller.ts" />
-    <Content Include="ClientApp\src\app\admin\books\editBook.html" />
-    <Content Include="ClientApp\src\app\app.bootstrap.js" />
-    <Content Include="ClientApp\src\app\app.bootstrap.js.map" />
-    <Content Include="ClientApp\src\app\app.bootstrap.ts" />
-    <Content Include="ClientApp\src\app\app.config.js" />
-    <Content Include="ClientApp\src\app\app.config.js.map" />
-    <Content Include="ClientApp\src\app\app.config.ts" />
-    <Content Include="ClientApp\src\app\app.constants.js" />
-    <Content Include="ClientApp\src\app\app.constants.js.map" />
-    <Content Include="ClientApp\src\app\app.constants.ts" />
-    <Content Include="ClientApp\src\app\app.controller.js" />
-    <Content Include="ClientApp\src\app\app.controller.js.map" />
-    <Content Include="ClientApp\src\app\app.controller.ts" />
-    <Content Include="ClientApp\src\app\app.module.js" />
-    <Content Include="ClientApp\src\app\app.module.js.map" />
-    <Content Include="ClientApp\src\app\app.module.ts" />
-    <Content Include="ClientApp\src\app\app.routes.js" />
-    <Content Include="ClientApp\src\app\app.routes.js.map" />
-    <Content Include="ClientApp\src\app\app.routes.ts" />
-    <Content Include="ClientApp\src\app\app.run.js" />
-    <Content Include="ClientApp\src\app\app.run.js.map" />
-    <Content Include="ClientApp\src\app\app.run.ts" />
-    <Content Include="ClientApp\src\app\authentication\authentication-response.js" />
-    <Content Include="ClientApp\src\app\authentication\authentication-response.js.map" />
-    <Content Include="ClientApp\src\app\authentication\authentication-response.ts" />
-    <Content Include="ClientApp\src\app\authentication\authentication-result.js" />
-    <Content Include="ClientApp\src\app\authentication\authentication-result.js.map" />
-    <Content Include="ClientApp\src\app\authentication\authentication-result.ts" />
-    <Content Include="ClientApp\src\app\authentication\authentication.service.js" />
-    <Content Include="ClientApp\src\app\authentication\authentication.service.js.map" />
-    <Content Include="ClientApp\src\app\authentication\authentication.service.ts" />
-    <Content Include="ClientApp\src\app\authentication\routeAuthentication.service.js" />
-    <Content Include="ClientApp\src\app\authentication\routeAuthentication.service.js.map" />
-    <Content Include="ClientApp\src\app\authentication\routeAuthentication.service.ts" />
-    <Content Include="ClientApp\src\app\authentication\token-http-interceptor.service.js" />
-    <Content Include="ClientApp\src\app\authentication\token-http-interceptor.service.js.map" />
-    <Content Include="ClientApp\src\app\authentication\token-http-interceptor.service.ts" />
-    <Content Include="ClientApp\src\app\authentication\token.service.js" />
-    <Content Include="ClientApp\src\app\authentication\token.service.js.map" />
-    <Content Include="ClientApp\src\app\authentication\token.service.ts" />
-    <Content Include="ClientApp\src\app\books\author.js" />
-    <Content Include="ClientApp\src\app\books\author.js.map" />
-    <Content Include="ClientApp\src\app\books\author.ts" />
-    <Content Include="ClientApp\src\app\books\book-review.js" />
-    <Content Include="ClientApp\src\app\books\book-review.js.map" />
-    <Content Include="ClientApp\src\app\books\book-review.ts" />
-    <Content Include="ClientApp\src\app\books\book.details.controller.js" />
-    <Content Include="ClientApp\src\app\books\book.details.controller.js.map" />
-    <Content Include="ClientApp\src\app\books\book.details.controller.ts" />
-    <Content Include="ClientApp\src\app\books\book.details.html" />
-    <Content Include="ClientApp\src\app\books\book.js" />
-    <Content Include="ClientApp\src\app\books\book.js.map" />
-    <Content Include="ClientApp\src\app\books\book.service.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="ClientApp\src\app\books\book.service.js.map">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="ClientApp\src\app\books\book.service.ts" />
-    <Content Include="ClientApp\src\app\books\book.ts" />
-    <Content Include="ClientApp\src\app\books\books.controller.js" />
-    <Content Include="ClientApp\src\app\books\books.controller.js.map" />
-    <Content Include="ClientApp\src\app\books\books.controller.ts" />
-    <Content Include="ClientApp\src\app\books\books.css" />
-    <Content Include="ClientApp\src\app\books\books.html" />
-    <Content Include="ClientApp\src\app\books\noCoverSrc.directive.js" />
-    <Content Include="ClientApp\src\app\books\noCoverSrc.directive.js.map" />
-    <Content Include="ClientApp\src\app\books\noCoverSrc.directive.ts" />
-    <Content Include="ClientApp\src\app\cameras\camera.controller.js" />
-    <Content Include="ClientApp\src\app\cameras\camera.controller.js.map" />
-    <Content Include="ClientApp\src\app\cameras\camera.controller.ts" />
-    <Content Include="ClientApp\src\app\cameras\camera.css" />
-    <Content Include="ClientApp\src\app\cameras\camera.html" />
-    <Content Include="ClientApp\src\app\cameras\camera.service.js" />
-    <Content Include="ClientApp\src\app\cameras\camera.service.js.map" />
-    <Content Include="ClientApp\src\app\cameras\camera.service.ts" />
-    <Content Include="ClientApp\src\app\consent-prompt\consent-prompt.component.js" />
-    <Content Include="ClientApp\src\app\consent-prompt\consent-prompt.component.js.map" />
-    <Content Include="ClientApp\src\app\consent-prompt\consent-prompt.component.ts" />
-    <Content Include="ClientApp\src\app\consent-prompt\consent-prompt.controller.js" />
-    <Content Include="ClientApp\src\app\consent-prompt\consent-prompt.controller.js.map" />
-    <Content Include="ClientApp\src\app\consent-prompt\consent-prompt.controller.ts" />
-    <Content Include="ClientApp\src\app\consent-prompt\consent-prompt.css" />
-    <Content Include="ClientApp\src\app\consent-prompt\consent-prompt.html" />
-    <Content Include="ClientApp\src\app\consent-prompt\consent-status.js" />
-    <Content Include="ClientApp\src\app\consent-prompt\consent-status.js.map" />
-    <Content Include="ClientApp\src\app\consent-prompt\consent-status.ts" />
-    <Content Include="ClientApp\src\app\consent-prompt\consent.service.js" />
-    <Content Include="ClientApp\src\app\consent-prompt\consent.service.js.map" />
-    <Content Include="ClientApp\src\app\consent-prompt\consent.service.ts" />
-    <Content Include="ClientApp\src\app\home\home.html" />
-    <Content Include="ClientApp\src\app\home\misc.html" />
-    <Content Include="ClientApp\src\app\infantry\infantry-browser.controller.js" />
-    <Content Include="ClientApp\src\app\infantry\infantry-browser.controller.js.map" />
-    <Content Include="ClientApp\src\app\infantry\infantry-browser.controller.ts" />
-    <Content Include="ClientApp\src\app\infantry\infantry-browser.html" />
-    <Content Include="ClientApp\src\app\infantry\infantry-browser.service.js" />
-    <Content Include="ClientApp\src\app\infantry\infantry-browser.service.js.map" />
-    <Content Include="ClientApp\src\app\infantry\infantry-browser.service.ts" />
-    <Content Include="ClientApp\src\app\infantry\infantry.html" />
-    <Content Include="ClientApp\src\app\infantry\zone.js" />
-    <Content Include="ClientApp\src\app\infantry\zone.js.map" />
-    <Content Include="ClientApp\src\app\infantry\zone.ts" />
-    <Content Include="ClientApp\src\app\media\media.controller.js" />
-    <Content Include="ClientApp\src\app\media\media.controller.js.map" />
-    <Content Include="ClientApp\src\app\media\media.controller.ts" />
-    <Content Include="ClientApp\src\app\media\media.html" />
-    <Content Include="ClientApp\src\app\media\media.service.js" />
-    <Content Include="ClientApp\src\app\media\media.service.js.map" />
-    <Content Include="ClientApp\src\app\media\media.service.ts" />
-    <Content Include="ClientApp\src\app\menu\menu-item.js" />
-    <Content Include="ClientApp\src\app\menu\menu-item.js.map" />
-    <Content Include="ClientApp\src\app\menu\menu-item.ts" />
-    <Content Include="ClientApp\src\app\menu\menu.controller.js" />
-    <Content Include="ClientApp\src\app\menu\menu.controller.js.map" />
-    <Content Include="ClientApp\src\app\menu\menu.controller.ts" />
-    <Content Include="ClientApp\src\app\menu\menu.service.js" />
-    <Content Include="ClientApp\src\app\menu\menu.service.js.map" />
-    <Content Include="ClientApp\src\app\menu\menu.service.ts" />
-    <Content Include="ClientApp\src\app\projects\project.js" />
-    <Content Include="ClientApp\src\app\projects\project.js.map" />
-    <Content Include="ClientApp\src\app\projects\project.service.js" />
-    <Content Include="ClientApp\src\app\projects\project.service.js.map" />
-    <Content Include="ClientApp\src\app\projects\project.service.ts" />
-    <Content Include="ClientApp\src\app\projects\project.ts" />
-    <Content Include="ClientApp\src\app\projects\projects.controller.js" />
-    <Content Include="ClientApp\src\app\projects\projects.controller.js.map" />
-    <Content Include="ClientApp\src\app\projects\projects.controller.ts" />
-    <Content Include="ClientApp\src\app\projects\projects.html" />
-    <Content Include="ClientApp\src\app\resources\resource.service.js" />
-    <Content Include="ClientApp\src\app\resources\resource.service.js.map" />
-    <Content Include="ClientApp\src\app\resources\resource.service.ts" />
-    <Content Include="ClientApp\src\app\resources\resourceGroup.html" />
-    <Content Include="ClientApp\src\app\resources\resources.controller.js" />
-    <Content Include="ClientApp\src\app\resources\resources.controller.js.map" />
-    <Content Include="ClientApp\src\app\resources\resources.controller.ts" />
-    <Content Include="ClientApp\src\app\resources\resources.html" />
-    <Content Include="ClientApp\src\app\resume\resume.controller.js" />
-    <Content Include="ClientApp\src\app\resume\resume.controller.js.map" />
-    <Content Include="ClientApp\src\app\resume\resume.controller.ts" />
-    <Content Include="ClientApp\src\app\resume\resume.html" />
-    <Content Include="ClientApp\src\app\shared\heading.directive.js" />
-    <Content Include="ClientApp\src\app\shared\heading.directive.js.map" />
-    <Content Include="ClientApp\src\app\shared\heading.directive.ts" />
-    <Content Include="ClientApp\src\app\shared\imgError.directive.js" />
-    <Content Include="ClientApp\src\app\shared\imgError.directive.js.map" />
-    <Content Include="ClientApp\src\app\shared\imgError.directive.ts" />
-    <Content Include="ClientApp\src\app\shared\models\config.js" />
-    <Content Include="ClientApp\src\app\shared\models\config.js.map" />
-    <Content Include="ClientApp\src\app\shared\models\config.ts" />
-    <Content Include="ClientApp\src\app\shared\models\environment.js" />
-    <Content Include="ClientApp\src\app\shared\models\environment.js.map" />
-    <Content Include="ClientApp\src\app\shared\models\paged-array.js" />
-    <Content Include="ClientApp\src\app\shared\models\paged-array.js.map" />
-    <Content Include="ClientApp\src\app\shared\models\paged-array.ts" />
-    <Content Include="ClientApp\src\app\shared\models\pagination.js" />
-    <Content Include="ClientApp\src\app\shared\models\pagination.js.map" />
-    <Content Include="ClientApp\src\app\shared\models\pagination.ts" />
-    <Content Include="ClientApp\src\app\shared\rating\rating.controller.js" />
-    <Content Include="ClientApp\src\app\shared\rating\rating.controller.js.map" />
-    <Content Include="ClientApp\src\app\shared\rating\rating.controller.ts" />
-    <Content Include="ClientApp\src\app\shared\rating\rating.css" />
-    <Content Include="ClientApp\src\app\shared\rating\rating.directive.js" />
-    <Content Include="ClientApp\src\app\shared\rating\rating.directive.js.map" />
-    <Content Include="ClientApp\src\app\shared\rating\rating.directive.ts" />
-    <Content Include="ClientApp\src\app\shared\rating\rating.html" />
-    <Content Include="ClientApp\src\app\tools\base64.controller.js" />
-    <Content Include="ClientApp\src\app\tools\base64.controller.js.map" />
-    <Content Include="ClientApp\src\app\tools\base64.controller.ts" />
-    <Content Include="ClientApp\src\app\tools\base64.html" />
-    <Content Include="ClientApp\src\app\tools\exception-formatter.component.js" />
-    <Content Include="ClientApp\src\app\tools\exception-formatter.component.js.map" />
-    <Content Include="ClientApp\src\app\tools\exception-formatter.component.ts" />
-    <Content Include="ClientApp\src\app\tools\exception-formatter.controller.js" />
-    <Content Include="ClientApp\src\app\tools\exception-formatter.controller.js.map" />
-    <Content Include="ClientApp\src\app\tools\exception-formatter.controller.ts" />
-    <Content Include="ClientApp\src\app\tools\exception-formatter.html" />
-    <Content Include="ClientApp\src\app\tools\hash.controller.js" />
-    <Content Include="ClientApp\src\app\tools\hash.controller.js.map" />
-    <Content Include="ClientApp\src\app\tools\hash.controller.ts" />
-    <Content Include="ClientApp\src\app\tools\hash.html" />
-    <Content Include="ClientApp\src\app\users\addUser.controller.js" />
-    <Content Include="ClientApp\src\app\users\addUser.controller.js.map" />
-    <Content Include="ClientApp\src\app\users\addUser.controller.ts" />
-    <Content Include="ClientApp\src\app\users\addUser.html" />
-    <Content Include="ClientApp\src\app\users\user.js" />
-    <Content Include="ClientApp\src\app\users\user.js.map" />
-    <Content Include="ClientApp\src\app\users\user.service.js" />
-    <Content Include="ClientApp\src\app\users\user.service.js.map" />
-    <Content Include="ClientApp\src\app\users\user.service.ts" />
-    <Content Include="ClientApp\src\app\users\user.ts" />
-    <Content Include="ClientApp\src\app\users\users.controller.js" />
-    <Content Include="ClientApp\src\app\users\users.controller.js.map" />
-    <Content Include="ClientApp\src\app\users\users.controller.ts" />
-    <Content Include="ClientApp\src\app\users\users.html" />
-    <Content Include="ClientApp\src\app\windowsticker\vin.validator.js" />
-    <Content Include="ClientApp\src\app\windowsticker\vin.validator.js.map" />
-    <Content Include="ClientApp\src\app\windowsticker\vin.validator.ts" />
-    <Content Include="ClientApp\src\app\windowsticker\window-sticker.controller.js" />
-    <Content Include="ClientApp\src\app\windowsticker\window-sticker.controller.js.map" />
-    <Content Include="ClientApp\src\app\windowsticker\window-sticker.controller.ts" />
-    <Content Include="ClientApp\src\app\windowsticker\window-sticker.html" />
-    <Content Include="ClientApp\src\index.html" />
-    <Content Include="ClientApp\src\styles.css" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="2.8.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
@@ -274,33 +41,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="package.json" />
-    <None Include="wwwroot\config.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="wwwroot\inf\" />
   </ItemGroup>
-
-  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-    <TypeScriptTarget>ES5</TypeScriptTarget>
-    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
-    <TypeScriptModuleKind>ES6</TypeScriptModuleKind>
-    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
-    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
-    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
-    <TypeScriptOutFile></TypeScriptOutFile>
-    <TypeScriptOutDir>C:\Users\Joel McBeth\Documents\Visual Studio 2017\Projects\JoelMcBethWebsite\JoelMcBethWebsite\wwwroot\js</TypeScriptOutDir>
-    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
-    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
-    <TypeScriptSourceMap>True</TypeScriptSourceMap>
-    <TypeScriptMapRoot />
-    <TypeScriptSourceRoot />
-  </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <CodeAnalysisRuleSet>..\JoelMcBethWebsite.ruleset</CodeAnalysisRuleSet>
@@ -311,5 +53,33 @@
     <DocumentationFile>bin\Debug\netcoreapp2.0\JoelMcBethWebsite.xml</DocumentationFile>
     <NoWarn>1701;1702;1705;1591</NoWarn>
   </PropertyGroup>
+
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+  </Target>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --prod" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr -- --prod" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
+      <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
 
 </Project>
