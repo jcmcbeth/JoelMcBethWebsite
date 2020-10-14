@@ -1,13 +1,13 @@
-﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
-/// <reference path="../authentication/authentication.service.ts" />
-/// <reference path="menu-item.ts" />
+import { MenuItem } from "./menu-item";
+import { Injectable } from "@angular/core";
 
-class MenuService {
-    static $inject = ["AuthenticationService"];
-
+@Injectable({
+  providedIn: 'root',
+})
+export class MenuService {
     public menuItems: MenuItem[];
 
-    constructor(private authenticationService: AuthenticationService) {
+    constructor() {
         this.menuItems = [
             {
                 group: "Main",
@@ -112,7 +112,3 @@ class MenuService {
         return this.menuItems;
     }
 }
-
-angular
-    .module("app")
-    .service("menuService", MenuService);

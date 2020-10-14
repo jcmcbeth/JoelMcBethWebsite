@@ -1,153 +1,17 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!--<link rel="icon" href="../../../../favicon.ico">-->
+  <!--<link rel="icon" href="../../../../favicon.ico">-->
 
-    <title>JoelMcBeth.com</title>
+  <title>JoelMcBeth.com</title>
 
-    <base href="/" />
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/site.css" rel="stylesheet">
-
-    <script src="lib/jquery-3.3.1.js"></script>
-    <script src="lib/popper.min.js"></script>
-    <script src="lib/bootstrap.js"></script>
-    <script src="lib/angular.min.js"></script>
-    <script src="lib/angular-ui-router.js"></script>
-    <script src="lib/angular-css/angular-css.js"></script>
-    <script src="lib/angular-messages.js"></script>
-    <script src="lib/angular-animate.js"></script>
-    <script src="lib/es6-shim.js"></script>
-    <script src="lib/es2017.js"></script>
+  <base href="/" />
 </head>
 
-<body ng-controller="AppController as app">
-    <div id="loading-overlay" ng-if="!app.loaded">
-        <div class="loading-glyph"></div>
-        <h1>Loading...</h1>
-    </div>
-    <div ng-if="app.loaded" ng-cloak>
-        <nav id="top-nav" class="navbar navbar-dark flex-md-nowrap navbar-expand-md">
-            <a class="navbar-brand col-sm-3 col-md-2 mr-0" ui-sref="home">JoelMcBeth.com</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </nav>
-        <div class="container-fluid">
-            <div class="row">
-                <nav id="side-nav" class="navbar navbar-expand-md navbar-side d-md-block col-md-2 col-lg-1" ng-controller="MenuController as vm">
-                    <div class="collapse navbar-collapse navbar-side-content" id="menu">
-                        <div class="menu-group" ng-repeat="group in vm.menuGroups" ng-if="group.visible" ng-cloak>
-                            <h2>{{group.name}}</h2>
-                            <ul class="navbar-nav mr-auto" ng-repeat="item in group.menuItems">
-                                <!-- remember to set active, check change log -->
-                                <li class="nav-item" ng-if="item.visible">
-                                    <a class="nav-link" ui-sref="{{item.state}}">{{item.title}}</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-
-                <main id="main" role="main" class="col-md-10 ml-sm-auto col-lg-11">
-                    <ui-view></ui-view>
-                </main>
-            </div>
-        </div>
-    </div>
-
-    <jm-consent-prompt></jm-consent-prompt>
-
-    <script src="app/authentication/authentication-result.js"></script>
-
-    <script src="app/app.module.js"></script>
-    <script src="app/app.constants.js"></script>
-    <script src="app/app.config.js"></script>
-    <script src="app/app.routes.js"></script>
-
-    <script src="app/authentication/token.service.js"></script>
-    <script src="app/authentication/authentication.service.js"></script>
-    <script src="app/authentication/routeAuthentication.service.js"></script>
-    <script src="app/authentication/token-http-interceptor.service.js"></script>
-
-    <script src="app/app.run.js"></script>
-
-    <script src="app/shared/heading.directive.js"></script>
-    <script src="app/shared/imgError.directive.js"></script>
-    <script src="app/shared/rating/rating.controller.js"></script>
-    <script src="app/shared/rating/rating.directive.js"></script>
-
-    <script src="app/app.controller.js"></script>
-    <script src="app/menu/menu-item.js"></script>
-    <script src="app/menu/menu.service.js"></script>
-    <script src="app/menu/menu.controller.js"></script>
-
-    <script src="app/account/account.service.js"></script>
-    <script src="app/account/user-registration.js"></script>
-    <script src="app/account/login.controller.js"></script>
-    <script src="app/account/logout.controller.js"></script>
-    <script src="app/account/register.controller.js"></script>
-
-    <script src="app/books/book.js"></script>
-    <script src="app/books/book.service.js"></script>
-    <script src="app/books/book-review.js"></script>
-    <script src="app/books/author.js"></script>
-    <script src="app/books/books.controller.js"></script>
-    <script src="app/books/book.details.controller.js"></script>
-    <script src="app/books/noCoverSrc.directive.js"></script>
-
-    <script src="app/projects/project.js"></script>
-    <script src="app/projects/project.service.js"></script>
-    <script src="app/projects/projects.controller.js"></script>
-
-    <script src="app/resume/resume.controller.js"></script>
-
-    <script src="app/users/user.js"></script>
-    <script src="app/users/user.service.js"></script>
-    <script src="app/users/addUser.controller.js"></script>
-    <script src="app/users/users.controller.js"></script>
-
-    <script src="app/resources/resource.service.js"></script>
-    <script src="app/resources/resources.controller.js"></script>
-
-    <script src="app/media/media.service.js"></script>
-    <script src="app/media/media.controller.js"></script>
-
-    <script src="app/infantry/zone.js"></script>
-    <script src="app/infantry/infantry-browser.service.js"></script>
-    <script src="app/infantry/infantry-browser.controller.js"></script>
-
-    <script src="app/windowsticker/vin.validator.js"></script>
-    <script src="app/windowsticker/window-sticker.controller.js"></script>
-
-    <script src="app/tools/base64.controller.js"></script>
-    <script src="app/tools/hash.controller.js"></script>
-    <script src="app/tools/exception-formatter.controller.js"></script>
-    <script src="app/tools/exception-formatter.component.js"></script>
-
-    <script src="app/cameras/camera.service.js"></script>
-    <script src="app/cameras/camera.controller.js"></script>
-
-    <script src="app/adblock/adblock.controller.js"></script>
-
-    <script src="app/admin/books/addBook.controller.js"></script>
-    <script src="app/admin/books/bookList.controller.js"></script>
-    <script src="app/admin/books/bookList.component.js"></script>
-    <script src="app/admin/books/editBook.controller.js"></script>
-    <script src="app/admin/books/editBook.component.js"></script>
-
-    <script src="app/consent-prompt/consent-status.js"></script>
-    <script src="app/consent-prompt/consent.service.js"></script>
-    <script src="app/consent-prompt/consent-prompt.controller.js"></script>
-    <script src="app/consent-prompt/consent-prompt.component.js"></script>
-
-    <script src="app/app.bootstrap.js"></script>
-
-    <div ng-init="app.initialize()"></div>
-</body>
+  <body>
+    <app-root>Loading...</app-root>
+  </body>
 </html>

@@ -1,4 +1,4 @@
-﻿class MenuItem {
+export class MenuItem {
     group: string;
     state: string;
     title: string;

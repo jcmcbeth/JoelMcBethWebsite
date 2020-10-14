@@ -1,36 +1,43 @@
-﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
+import { MenuService } from "./menu.service";
+import { Component } from "@angular/core";
 
-class MenuController implements ng.IOnInit {
-    static $inject = ["menuService", "$rootScope", "AuthenticationService"];
+@Component({
+  selector: 'app-menu',
+  templateUrl: './menu.component.html'
+})
+export class MenuComponent {
+    //static $inject = ["menuService", "$rootScope", "AuthenticationService"];
 
     public menuItems: any[];
     public menuGroups: any[];
 
     private authenticated;
 
-    constructor(private menuService, private rootScope: ng.IRootScopeService, private authenticationService) {
+  constructor(private menuService: MenuService/*, private rootScope: ng.IRootScopeService, private authenticationService*/) {
         this.menuItems = [];
         this.menuGroups = [];
         this.authenticated = false;
 
-        rootScope.$on("authenticated", () => {
-            this.authenticated = true;
+        //rootScope.$on("authenticated", () => {
+        //    this.authenticated = true;
 
-            this.updateMenuItems();
-        });
+        //    this.updateMenuItems();
+        //});
 
-        rootScope.$on("unauthenticated", () => {
-            this.authenticated = false;
+        //rootScope.$on("unauthenticated", () => {
+        //    this.authenticated = false;
 
-            this.updateMenuItems();
-        });
+        //    this.updateMenuItems();
+        //});
+
+      this.$onInit();
     }
 
     $onInit(): void {
         this.menuItems = this.menuService.getMenuItems();
         this.menuGroups = this.getMenuGroups();
 
-        this.authenticated = this.authenticationService.isAuthenticated();
+        //this.authenticated = this.authenticationService.isAuthenticated();
 
         this.updateMenuItems();
     }
@@ -94,7 +101,3 @@ class MenuController implements ng.IOnInit {
         }
     }
 }
-
-angular
-    .module("app")
-    .controller("MenuController", MenuController);

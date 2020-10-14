@@ -1,6 +1,55 @@
+<!--<div id="loading-overlay" ng-if="!app.loaded">
+    <div class="loading-glyph"></div>
+    <h1>Loading...</h1>
+  </div>
+  <div ng-if="app.loaded" ng-cloak>
+    <nav id="top-nav" class="navbar navbar-dark flex-md-nowrap navbar-expand-md">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" ui-sref="home">JoelMcBeth.com</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <nav id="side-nav" class="navbar navbar-expand-md navbar-side d-md-block col-md-2 col-lg-1" ng-controller="MenuController as vm">
+          <div class="collapse navbar-collapse navbar-side-content" id="menu">
+            <div class="menu-group" ng-repeat="group in vm.menuGroups" ng-if="group.visible" ng-cloak>
+              <h2>{{group.name}}</h2>
+              <ul class="navbar-nav mr-auto" ng-repeat="item in group.menuItems">-->
+<!-- remember to set active, check change log -->
+<!--<li class="nav-item" ng-if="item.visible">
+                <a class="nav-link" ui-sref="{{item.state}}">{{item.title}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <main id="main" role="main" class="col-md-10 ml-sm-auto col-lg-11">
+        <ui-view></ui-view>
+      </main>
+    </div>
+  </div>
+</div>
+
+<jm-consent-prompt></jm-consent-prompt>-->
+
 <body>
-  <app-nav-menu></app-nav-menu>
-  <div class="container">
-    <router-outlet></router-outlet>
+  <nav id="top-nav" class="navbar navbar-dark flex-md-nowrap navbar-expand-md">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" ui-sref="home">JoelMcBeth.com</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+
+  <div class="container-fluid">
+
+    <div class="row">
+      <app-menu></app-menu>
+
+      <main id="main" role="main" class="col-md-10 ml-sm-auto col-lg-11">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
   </div>
 </body>
