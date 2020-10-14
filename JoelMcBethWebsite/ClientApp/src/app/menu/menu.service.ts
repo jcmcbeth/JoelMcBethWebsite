@@ -21,7 +21,7 @@ export class MenuService {
                 group: "Main",
                 state: "projects",
                 title: "Projects",
-                hidden: true,
+                hidden: false,
                 unauthenticatedOnly: false,
                 requireAuthentication: false
             },

@@ -22,7 +22,6 @@
     "app/consent-prompt/*.ts",
     "app/infantry/*.ts",
     "app/media/*.ts",
-    "app/projects/*.ts",
     "app/resources/*.ts",
     "app/resume/*.ts",
     "app/shared/**/*.ts",

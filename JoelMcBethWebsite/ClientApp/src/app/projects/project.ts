@@ -1,4 +1,4 @@
-﻿class Project {
+export interface Project {
     name: string;
     description: string;
     gitHubUrl: string;

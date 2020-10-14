@@ -1,23 +1,19 @@
-﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
-/// <reference path="project.ts" />
-/// <reference path="../shared/models/config.ts" />
+import { HttpClient } from "@angular/common/http";
+import { Inject, Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { Project } from "./project";
 
-class ProjectService {
-    static $inject = ["$http", "config"];
-
+@Injectable({
+    providedIn: 'root',
+})
+export class ProjectService {
     private baseUrl: string;
 
-    constructor(private http: ng.IHttpService, config: Config) {
-        this.baseUrl = config.serviceUrlBase + "/projects";
+    constructor(private httpClient: HttpClient, @Inject('API_URL') apiUrl: string) {
+        this.baseUrl = apiUrl + "/projects";
     }
 
-    getProjects() {
-        return this.http.get<Project[]>(this.baseUrl).then(response => {
-            return response.data;
-        });
+    public getProjects(): Observable<Project[]> {
+        return this.httpClient.get<Project[]>(this.baseUrl);
     }
 }
-
-angular
-    .module("app")
-    .service("projectService", ProjectService);
