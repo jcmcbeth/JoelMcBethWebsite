@@ -53,7 +53,7 @@ export class MenuService {
                 group: "Main",
                 state: "resources",
                 title: "Resources",
-                hidden: true,
+                hidden: false,
                 unauthenticatedOnly: false,
                 requireAuthentication: false
             },

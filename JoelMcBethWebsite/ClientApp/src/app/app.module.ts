@@ -9,13 +9,17 @@ import { MenuComponent } from './menu/menu.component';
 import { HomeComponent } from './home/home.component';
 import { environment } from '../environments/environment';
 import { ProjectsComponent } from './projects/projects.component';
+import { ResourcesComponent } from './resources/resources.component';
+import { ResourceGroupComponent } from './resources/resource-group.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         MenuComponent,
         HomeComponent,
-        ProjectsComponent
+        ProjectsComponent,
+        ResourcesComponent,
+        ResourceGroupComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -23,7 +27,8 @@ import { ProjectsComponent } from './projects/projects.component';
         FormsModule,
         RouterModule.forRoot([
             { path: '', component: HomeComponent, pathMatch: 'full' },
-            { path: 'projects', component: ProjectsComponent }
+            { path: 'projects', component: ProjectsComponent },
+            { path: 'resources', component: ResourcesComponent }
         ])
     ],
     providers: [

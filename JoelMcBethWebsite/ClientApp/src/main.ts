@@ -5,7 +5,13 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 export function getBaseUrl() {
-  return document.getElementsByTagName('base')[0].href;
+    let baseUrl = document.getElementsByTagName('base')[0].href;
+
+    if (baseUrl.endsWith("/")) {
+        baseUrl = baseUrl.substring(0, baseUrl.length - 1);
+    }
+
+    return baseUrl;
 }
 
 const providers = [

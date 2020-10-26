@@ -1,19 +1,20 @@
-﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
+import { HttpClient } from "@angular/common/http";
+import { Injectable, Inject } from "@angular/core";
+import { ResourceGroup } from "./resource-group";
+import { Observable } from "rxjs";
 
-class ResourceService {
-    static $inject = ["$http"];
+@Injectable({
+    providedIn: 'root',
+})
+export class ResourceService {
+    private baseUrl: string;
 
-    constructor(private $http: ng.IHttpService) {
-
+    constructor(private httpClient: HttpClient, @Inject("BASE_URL") baseUrl: string) {
+        this.baseUrl = baseUrl;
     }
 
-    getGroupedResources() {
-        return this.$http.get("/data/resources.json").then(response => {
-            return response.data;
-        });
+    getResourceGroups(): Observable<ResourceGroup[]> {
+        const url = this.baseUrl + "/data/resources.json";
+        return this.httpClient.get<ResourceGroup[]>(url);
     }
 }
-
-angular
-    .module('app')
-    .service('resourceService', ResourceService);
