@@ -1,25 +1,23 @@
-﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
-/// <reference path="zone.ts" />
-/// <reference path="../shared/models/config.ts" />
+import { Inject, Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Zone } from "./zone";
+import { Observable } from "rxjs";
 
-class InfantryBrowserService {
+@Injectable({
+    providedIn: 'root',
+})
+export class InfantryBrowserService {
     static $inject = ["$http", "config"];
 
     private baseUrl: string;
 
-    constructor(private $http: ng.IHttpService, config: Config) {
-        this.baseUrl = config.serviceUrlBase + "/infantry/browser";
+    constructor(private httpClient: HttpClient, @Inject("API_URL") baseUrl: string) {
+        this.baseUrl = baseUrl + "/infantry/browser";
     }
 
-    getZones(): ng.IPromise<Zone[]> {
+    public getZones(): Observable<Zone[]> {
         const url = this.baseUrl + "/zones";
 
-        return <ng.IPromise<Zone[]>>this.$http.get(url).then(response => {
-            return response.data;
-        });
+        return this.httpClient.get<Zone[]>(url);
     }
 }
-
-angular
-    .module("app")
-    .service("InfantryBrowserService", InfantryBrowserService);

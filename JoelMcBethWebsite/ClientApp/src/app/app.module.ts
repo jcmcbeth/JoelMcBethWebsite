@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -11,6 +11,18 @@ import { environment } from '../environments/environment';
 import { ProjectsComponent } from './projects/projects.component';
 import { ResourcesComponent } from './resources/resources.component';
 import { ResourceGroupComponent } from './resources/resource-group.component';
+import { MiscellaneousComponent } from './home/miscellaneous.component';
+import { InfantryBrowserComponent } from './infantry/infantry-browser.component';
+import { InfantryComponent } from './infantry/infantry.component';
+
+const routes: Routes = [
+    { path: 'projects', component: ProjectsComponent },
+    { path: 'resources', component: ResourcesComponent },
+    { path: 'miscellaneous', component: MiscellaneousComponent },
+    { path: 'infantry', component: InfantryComponent },
+    { path: 'infantry/browser', component: InfantryBrowserComponent },
+    { path: '', component: HomeComponent, pathMatch: 'full' }
+];
 
 @NgModule({
     declarations: [
@@ -19,17 +31,16 @@ import { ResourceGroupComponent } from './resources/resource-group.component';
         HomeComponent,
         ProjectsComponent,
         ResourcesComponent,
-        ResourceGroupComponent
+        ResourceGroupComponent,
+        MiscellaneousComponent,
+        InfantryBrowserComponent,
+        InfantryComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
         HttpClientModule,
         FormsModule,
-        RouterModule.forRoot([
-            { path: '', component: HomeComponent, pathMatch: 'full' },
-            { path: 'projects', component: ProjectsComponent },
-            { path: 'resources', component: ResourcesComponent }
-        ])
+        RouterModule.forRoot(routes)
     ],
     providers: [
         { provide: 'API_URL', useValue: environment.apiUrl }

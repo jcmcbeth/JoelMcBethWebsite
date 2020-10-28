@@ -1,4 +1,4 @@
-﻿<h2>Infantry Browser</h2>
+<h2>Infantry Browser</h2>
 <p>Current zone list.</p>
 <table class="table table-sm">
     <thead class="thead-light">
@@ -8,8 +8,8 @@
         </tr>
     </thead>
     <tbody>        
-        <tr ng-repeat="zone in vm.zones">
-            <td><a href="infantry://{{ zone.serverAddress }}:{{ zone.serverPort }}">{{ zone.name }}</a></td>
+        <tr *ngFor="let zone of zones">
+            <td><a [href]="getUrl(zone)">{{ zone.name }}</a></td>
             <td>{{ zone.description }}</td>
         </tr>
     </tbody>

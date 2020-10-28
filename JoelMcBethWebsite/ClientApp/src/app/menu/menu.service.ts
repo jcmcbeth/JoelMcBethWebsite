@@ -59,9 +59,9 @@ export class MenuService {
             },
             {
                 group: "Main",
-                state: "misc",
+                state: "miscellaneous",
                 title: "Misc",
-                hidden: true,
+                hidden: false,
                 unauthenticatedOnly: false,
                 requireAuthentication: false
             },
