@@ -1,19 +1,26 @@
-﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
-/// <reference path="exception-formatter.controller.ts" />
+import { Component } from "@angular/core";
 
-class ExceptionFormatterComponent implements ng.IComponentOptions {
-    public bindings: any;
-    public controller: any;
-    public templateUrl: string;
+@Component({
+    selector: 'app-exception-formatter',
+    templateUrl: './exception-formatter.component.html'
+})
+export class ExceptionFormatterComponent {
+    public exceptionText: string;
+    public formattedException: string;
 
     constructor() {
-        this.bindings = {
-        };
-        this.controller = ExceptionFormatterController;
-        this.templateUrl = "/app/tools/exception-formatter.html";
+    }
+
+    public format() {
+        let text = this.exceptionText;
+
+        if (!text) {
+            return;
+        }
+
+        text = text.replace(/\\r\\n/g, "\n");
+        text = text.replace(/\s+at /g, "\n    at ");
+
+        this.formattedException = text;
     }
 }
-
-angular
-    .module("app")
-    .component("exceptionFormatter", new ExceptionFormatterComponent());

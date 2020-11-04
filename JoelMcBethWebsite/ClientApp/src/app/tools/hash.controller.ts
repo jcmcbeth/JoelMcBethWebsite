@@ -1,4 +1,4 @@
-﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
+import { Component } from "@angular/core";
 
 class Property {
     name: string;
@@ -7,9 +7,11 @@ class Property {
     hash: boolean;
 }
 
-class HashController {
-    static $inject = ["$window", "$scope", "$document", "$sce"];
-
+@Component({
+    selector: 'app-base64-converter',
+    templateUrl: './base64.component.html'
+})
+export class HashController {
     algorithm: string;
     algorithms: string[];
     url: string;
@@ -20,7 +22,11 @@ class HashController {
     hash: string;
     uppercaseHash: boolean;
 
-    constructor(private window: ng.IWindowService, private scope: ng.IScope, private document: ng.IDocumentService, private sce: ng.ISCEService) {
+    constructor(
+        private window/*: ng.IWindowService*/,
+        private scope/*: ng.IScope*/,
+        private document/*: ng.IDocumentService*/,
+        private sce/*: ng.ISCEService*/) {
         this.algorithms = ["SHA-1", "SHA-256", "SHA-384", "SHA-512"];
         this.algorithm = this.algorithms[0];
         this.methods = ["POST", "GET"];
@@ -92,7 +98,3 @@ class HashController {
         return text;
     }
 }
-
-angular
-    .module("app")
-    .controller("HashController", HashController);

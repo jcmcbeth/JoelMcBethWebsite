@@ -14,6 +14,8 @@ import { ResourceGroupComponent } from './resources/resource-group.component';
 import { MiscellaneousComponent } from './home/miscellaneous.component';
 import { InfantryBrowserComponent } from './infantry/infantry-browser.component';
 import { InfantryComponent } from './infantry/infantry.component';
+import { ExceptionFormatterComponent } from './tools/exception-formatter.component';
+import { Base64ConverterComponent } from './tools/base64-converter.component';
 
 const routes: Routes = [
     { path: 'projects', component: ProjectsComponent },
@@ -21,6 +23,8 @@ const routes: Routes = [
     { path: 'miscellaneous', component: MiscellaneousComponent },
     { path: 'infantry', component: InfantryComponent },
     { path: 'infantry/browser', component: InfantryBrowserComponent },
+    { path: 'exception-formatter', component: ExceptionFormatterComponent },
+    { path: 'base64-converter', component: Base64ConverterComponent },
     { path: '', component: HomeComponent, pathMatch: 'full' }
 ];
 
@@ -34,7 +38,9 @@ const routes: Routes = [
         ResourceGroupComponent,
         MiscellaneousComponent,
         InfantryBrowserComponent,
-        InfantryComponent
+        InfantryComponent,
+        ExceptionFormatterComponent,
+        Base64ConverterComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

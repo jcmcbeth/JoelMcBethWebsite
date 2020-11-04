@@ -24,7 +24,6 @@
         "app/resources/*.ts",
         "app/resume/*.ts",
         "app/shared/**/*.ts",
-        "app/tools/*.ts",
         "app/users/*.ts",
         "app/windowsticker/*.ts"
     ]
