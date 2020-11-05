@@ -1,0 +1,86 @@
+<h1>Hash Generator</h1>
+<p>
+    The purpose of this is for testing sending hashed credentials for SSO systems. This will take a list of properties to hash and/or send to the specified URL as a POST or GET.
+</p>
+<p>
+    You can select Send for a property to send it in the POST/GET and you can select Hash to also include the value in the Hash that is calculated. The properties that are selected to hash are appended together from top to bottem before being hashed.
+</p>
+<p>If you are working with a particularly sophisticated SSO system that requires a certain casing for the hash there is an option for that too.</p>
+<form #form="ngForm" (ngSubmit)="execute()">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Hash</th>
+                <th>Send</th>
+                <th>Property</th>
+                <th>Value</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let property of properties">
+                <td>
+                    <input name="propertyHash" type="checkbox" class="form-control" [(ngModel)]="property.hash" />
+                </td>
+                <td>
+                    <input name="propertyInclude" type="checkbox" class="form-control" [(ngModel)]="property.include" />
+                </td>
+                <td>
+                    <input name="propertyName" type="text" class="form-control" [(ngModel)]="property.name" />
+                </td>
+                <td>
+                    <input name="propertyText" type="text" class="form-control" [(ngModel)]="property.value" />
+                </td>
+                <td>
+                    <button class="btn btn-secondary" (click)="deleteProperty(property)">
+                        Remove
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="form-group">
+        <button type="button" class="btn btn-secondary" (click)="addProperty()">Add Property</button>
+    </div>
+
+    <div class="form-group">
+        <label>URL</label><span class="badge badge-light">Required</span>
+        <input name="url" type="text" class="form-control" ngModel="url" required />
+    </div>
+
+    <div class="form-group">
+        <label>Method</label>
+        <select name="method" type="text" class="form-control" [(ngModel)]="method">
+            <option *ngFor="let option of methods" [value]="option">{{option}}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Algorithm</label>
+        <select name="algorithm" type="text" class="form-control" [(ngModel)]="algorithm">
+            <option *ngFor="let option of algorithms" [value]="option">{{option}}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Hash</label>
+        <div class="input-group">
+            <input name="hash" type="text" class="form-control" [(ngModel)]="hash" />
+            <button type="button" class="btn" (click)="generate()">Generate Hash</button>
+        </div>
+        <div class="form-check">
+            <input name="upperCaseHash" id="uppercase-hash" class="form-check-input" type="checkbox" [(ngModel)]="uppercaseHash" (change)="generate()" />
+            <label for="uppercase-hash" class="form-check-label">Uppercase Hash</label>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Execute</button>
+</form>
+
+<form id="submissionForm" action="{{actionUrl}}" method="{{method}}" target="_blank">
+    <ng-container *ngFor="let property of properties">
+        <input type="hidden" *ngIf="property.include" name="{{property.name}}" value="{{property.value}}" />
+    </ng-container>
+    <input type="hidden" name="Hash" value="{{hash}}" />
+</form>

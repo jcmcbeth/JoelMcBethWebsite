@@ -158,6 +158,10 @@ label {
     border-radius: unset;
 }
 
+/**
+    primary button
+*/
+
 .btn-primary {
     color: #fff;
     background-color: green;
@@ -188,6 +192,16 @@ label {
 
 .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .show > .btn-primary.dropdown-toggle:focus {
     box-shadow: 0 0 0 0.2rem rgba(0, 128, 0, 0.5);
+}
+
+/*
+    secondary button
+*/
+
+.btn-secondary {
+    background-color: #EFEFEF;
+    border: 1px solid transparent;
+    color: black;
 }
 
 /* Loader */

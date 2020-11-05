@@ -16,6 +16,7 @@ import { InfantryBrowserComponent } from './infantry/infantry-browser.component'
 import { InfantryComponent } from './infantry/infantry.component';
 import { ExceptionFormatterComponent } from './tools/exception-formatter.component';
 import { Base64ConverterComponent } from './tools/base64-converter.component';
+import { HashComponent } from './tools/hash.component';
 
 const routes: Routes = [
     { path: 'projects', component: ProjectsComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
     { path: 'infantry/browser', component: InfantryBrowserComponent },
     { path: 'exception-formatter', component: ExceptionFormatterComponent },
     { path: 'base64-converter', component: Base64ConverterComponent },
+    { path: 'hash-generator', component: HashComponent },
     { path: '', component: HomeComponent, pathMatch: 'full' }
 ];
 
@@ -40,16 +42,17 @@ const routes: Routes = [
         InfantryBrowserComponent,
         InfantryComponent,
         ExceptionFormatterComponent,
-        Base64ConverterComponent
+        Base64ConverterComponent,
+        HashComponent
     ],
     imports: [
-        BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+        BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
         HttpClientModule,
         FormsModule,
         RouterModule.forRoot(routes)
     ],
     providers: [
-        { provide: 'API_URL', useValue: environment.apiUrl }
+        { provide: "API_URL", useValue: environment.apiUrl }
     ],
     bootstrap: [AppComponent]
 })

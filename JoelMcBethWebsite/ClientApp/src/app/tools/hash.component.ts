@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, Inject } from "@angular/core";
+import { DOCUMENT } from "@angular/common";
 
 class Property {
     name: string;
@@ -8,10 +9,10 @@ class Property {
 }
 
 @Component({
-    selector: 'app-base64-converter',
-    templateUrl: './base64.component.html'
+    selector: "app-hash",
+    templateUrl: "./hash.component.html"
 })
-export class HashController {
+export class HashComponent {
     algorithm: string;
     algorithms: string[];
     url: string;
@@ -21,12 +22,12 @@ export class HashController {
     method: string;
     hash: string;
     uppercaseHash: boolean;
+    window: Window;
 
     constructor(
-        private window/*: ng.IWindowService*/,
-        private scope/*: ng.IScope*/,
-        private document/*: ng.IDocumentService*/,
-        private sce/*: ng.ISCEService*/) {
+        @Inject(DOCUMENT) private document: Document,
+        /*private sce: ng.ISCEService*/) {
+        this.window = document.defaultView;
         this.algorithms = ["SHA-1", "SHA-256", "SHA-384", "SHA-512"];
         this.algorithm = this.algorithms[0];
         this.methods = ["POST", "GET"];
@@ -35,10 +36,10 @@ export class HashController {
     }
 
     execute() {
-        this.actionUrl = this.sce.trustAsResourceUrl(this.url);;
+        //this.actionUrl = this.sce.trustAsResourceUrl(this.url);;
 
         return this.generate().then(() => {
-            const submissionForm = <HTMLFormElement>this.document[0].getElementById("submission-form");
+            const submissionForm = <HTMLFormElement>this.document[0].getElementById("submissionForm");
             submissionForm.submit();
         });
     }
@@ -56,19 +57,17 @@ export class HashController {
         const data = encoder.encode(text);
 
         return this.window.crypto.subtle.digest(this.algorithm, data).then(buffer => {
-            this.scope.$apply(() => {
-                let hash = this.getHexString(buffer);
+            let hash = this.getHexString(buffer);
 
-                if (this.uppercaseHash) {
-                    hash = hash.toUpperCase();
-                }
+            if (this.uppercaseHash) {
+                hash = hash.toUpperCase();
+            }
 
-                this.hash = hash;
-            });           
+            this.hash = hash;        
         });
     }
 
-    addProperty() {
+    addProperty(): void {
         let property = new Property();
 
         property.include = true;
@@ -77,7 +76,7 @@ export class HashController {
         this.properties.push(property);
     }
 
-    deleteProperty(property: Property) {
+    deleteProperty(property: Property): void {
         const index = this.properties.indexOf(property);
 
         this.properties.splice(index, 1);
