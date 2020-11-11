@@ -186,9 +186,12 @@ label {
     border-color: darkgreen;
 }
 
-.btn-primary:focus, .btn-primary.focus {
-    box-shadow: 0 0 0 0.2rem rgba(0, 128, 0, 0.5);
-}
+    .btn-primary:focus, .btn-primary.focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 128, 0, 0.5);
+        color: #fff;
+        background-color: darkgreen;
+        border-color: darkgreen;
+    }
 
 .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .show > .btn-primary.dropdown-toggle:focus {
     box-shadow: 0 0 0 0.2rem rgba(0, 128, 0, 0.5);
@@ -203,6 +206,29 @@ label {
     border: 1px solid transparent;
     color: black;
 }
+
+    .btn-secondary:hover {
+        color: black;
+        background-color: gainsboro;
+        border-color: gainsboro;
+    }
+
+    .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle {
+        color: black;
+        background-color: gainsboro;
+        border-color: gainsboro;
+    }
+
+    .btn-secondary:focus, .btn-secondary.focus {
+        box-shadow: 0 0 0 0.2rem rgba(0,0,0,.075);
+        color: black;
+        background-color: gainsboro;
+        border-color: gainsboro;
+    }
+
+    .btn-secondary:not(:disabled):not(.disabled):active:focus, .btn-secondary:not(:disabled):not(.disabled).active:focus, .show > .btn-secondary.dropdown-toggle:focus {
+        box-shadow: 0 0 0 0.2rem rgba(0,0,0,.075);
+    }
 
 /* Loader */
 #loading-overlay {

@@ -20,10 +20,14 @@
         <tbody>
             <tr *ngFor="let property of properties">
                 <td>
-                    <input name="propertyHash" type="checkbox" class="form-control" [(ngModel)]="property.hash" />
+                    <div class="form-check">
+                        <input name="propertyHash" type="checkbox" class="form-check-input" [(ngModel)]="property.hash" />
+                    </div>
                 </td>
                 <td>
-                    <input name="propertyInclude" type="checkbox" class="form-control" [(ngModel)]="property.include" />
+                    <div class="form-check">
+                        <input name="propertyInclude" type="checkbox" class="form-check-input" [(ngModel)]="property.include" />
+                    </div>
                 </td>
                 <td>
                     <input name="propertyName" type="text" class="form-control" [(ngModel)]="property.name" />
@@ -46,7 +50,7 @@
 
     <div class="form-group">
         <label>URL</label><span class="badge badge-light">Required</span>
-        <input name="url" type="text" class="form-control" ngModel="url" required />
+        <input name="url" type="text" class="form-control" [(ngModel)]="url" required />
     </div>
 
     <div class="form-group">
@@ -67,7 +71,7 @@
         <label>Hash</label>
         <div class="input-group">
             <input name="hash" type="text" class="form-control" [(ngModel)]="hash" />
-            <button type="button" class="btn" (click)="generate()">Generate Hash</button>
+            <button type="button" class="btn btn-secondary" (click)="generate()">Generate Hash</button>
         </div>
         <div class="form-check">
             <input name="upperCaseHash" id="uppercase-hash" class="form-check-input" type="checkbox" [(ngModel)]="uppercaseHash" (change)="generate()" />
@@ -78,7 +82,7 @@
     <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Execute</button>
 </form>
 
-<form id="submissionForm" action="{{actionUrl}}" method="{{method}}" target="_blank">
+<form #submissionForm action="{{actionUrl}}" method="{{method}}" target="_blank">
     <ng-container *ngFor="let property of properties">
         <input type="hidden" *ngIf="property.include" name="{{property.name}}" value="{{property.value}}" />
     </ng-container>

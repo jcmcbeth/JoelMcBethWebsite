@@ -1,4 +1,4 @@
-import { Component, Inject } from "@angular/core";
+import { Component, Inject, ViewChild, ElementRef } from "@angular/core";
 import { DOCUMENT } from "@angular/common";
 
 class Property {
@@ -23,11 +23,12 @@ export class HashComponent {
     hash: string;
     uppercaseHash: boolean;
     window: Window;
+    @ViewChild("submissionForm", { static: false }) submissionForm: ElementRef;
 
     constructor(
         @Inject(DOCUMENT) private document: Document,
         /*private sce: ng.ISCEService*/) {
-        this.window = document.defaultView;
+        this.window = this.document.defaultView;
         this.algorithms = ["SHA-1", "SHA-256", "SHA-384", "SHA-512"];
         this.algorithm = this.algorithms[0];
         this.methods = ["POST", "GET"];
@@ -36,11 +37,12 @@ export class HashComponent {
     }
 
     execute() {
-        //this.actionUrl = this.sce.trustAsResourceUrl(this.url);;
+        //this.actionUrl = this.sce.trustAsResourceUrl(this.url);
+        this.actionUrl = this.url;
+
 
         return this.generate().then(() => {
-            const submissionForm = <HTMLFormElement>this.document[0].getElementById("submissionForm");
-            submissionForm.submit();
+            this.submissionForm.nativeElement.submit();
         });
     }
 
