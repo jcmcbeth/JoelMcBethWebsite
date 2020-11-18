@@ -17,6 +17,7 @@ import { InfantryComponent } from './infantry/infantry.component';
 import { ExceptionFormatterComponent } from './tools/exception-formatter.component';
 import { Base64ConverterComponent } from './tools/base64-converter.component';
 import { HashComponent } from './tools/hash.component';
+import { ResumeComponent } from './resume/resume.component';
 
 const routes: Routes = [
     { path: 'projects', component: ProjectsComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
     { path: 'exception-formatter', component: ExceptionFormatterComponent },
     { path: 'base64-converter', component: Base64ConverterComponent },
     { path: 'hash-generator', component: HashComponent },
+    { path: 'resume', component: ResumeComponent },
     { path: '', component: HomeComponent, pathMatch: 'full' }
 ];
 
@@ -43,7 +45,8 @@ const routes: Routes = [
         InfantryComponent,
         ExceptionFormatterComponent,
         Base64ConverterComponent,
-        HashComponent
+        HashComponent,
+        ResumeComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),

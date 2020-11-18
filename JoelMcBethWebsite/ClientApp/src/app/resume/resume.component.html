@@ -1,6 +1,6 @@
-﻿<h1>{{vm.resume.basics.name}}</h1>
+<h1>{{resume.basics.name}}</h1>
 <h2>Education</h2>
-<div ng-repeat="education in vm.resume.education">
+<div *ngFor="let education of resume.education">
     <p>{{education.institution}}</p>
     <p>{{education.area}}</p>
     <p>{{education.studyType}}</p>

@@ -22,7 +22,6 @@
         "app/consent-prompt/*.ts",
         "app/media/*.ts",
         "app/resources/*.ts",
-        "app/resume/*.ts",
         "app/shared/**/*.ts",
         "app/users/*.ts",
         "app/windowsticker/*.ts"

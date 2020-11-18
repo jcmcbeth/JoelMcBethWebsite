@@ -58,6 +58,10 @@
     <Folder Include="wwwroot\inf\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\data\resume.json" />
+  </ItemGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <CodeAnalysisRuleSet>..\JoelMcBethWebsite.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
