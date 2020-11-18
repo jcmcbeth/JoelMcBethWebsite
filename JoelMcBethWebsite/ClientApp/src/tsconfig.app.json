@@ -20,7 +20,6 @@
         "app/books/*.ts",
         "app/cameras/*.ts",
         "app/consent-prompt/*.ts",
-        "app/media/*.ts",
         "app/resources/*.ts",
         "app/shared/**/*.ts",
         "app/users/*.ts",

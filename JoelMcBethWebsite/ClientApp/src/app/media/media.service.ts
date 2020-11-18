@@ -1,27 +1,22 @@
-﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { Inject, Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 
-class MediaService {
-    static $inject = ["$http", "config"];
-
+@Injectable({
+    providedIn: 'root',
+})
+export class MediaService {
     private baseUrl: string;
 
-    constructor(private http: ng.IHttpService, config: Config) {
-        this.baseUrl = config.serviceUrlBase + "/media";
+    constructor(private httpClient: HttpClient, @Inject('API_URL') apiUrl: string) {
+        this.baseUrl = apiUrl + "/media";
     }
 
-    getMedia(filter: any) {
-        return this.http.get(this.baseUrl, {
-            params: {
-                filter: filter
-            }
-        }).then(response => {
-            return {
-                media: response.data
-            };
-        });
+    getMedia(filter: string): Observable<any> {
+        let params = new HttpParams();
+
+        params = params.append("filter", filter);
+
+        return this.httpClient.get(this.baseUrl, { params: params });
     }
 }
-
-angular
-    .module("app")
-    .service("mediaService", MediaService);
