@@ -19,6 +19,7 @@ import { Base64ConverterComponent } from './tools/base64-converter.component';
 import { HashComponent } from './tools/hash.component';
 import { ResumeComponent } from './resume/resume.component';
 import { MediaComponent } from './media/media.component';
+import { ConsentPromptComponent } from './consent-prompt/consent-prompt.component';
 
 const routes: Routes = [
     { path: 'projects', component: ProjectsComponent },
@@ -49,7 +50,8 @@ const routes: Routes = [
         Base64ConverterComponent,
         HashComponent,
         ResumeComponent,
-        MediaComponent
+        MediaComponent,
+        ConsentPromptComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),

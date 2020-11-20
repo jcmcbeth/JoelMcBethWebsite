@@ -1,21 +1,29 @@
-﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
-/// <reference path="consent-prompt.controller.ts" />
+import { Component } from "@angular/core";
+import { ConsentService } from "./consent.service";
+import { ConsentStatus } from "./consent-status";
 
-class ConsentComponent implements ng.IComponentOptions {
-    public bindings;
-    public controller;
-    public templateUrl: string;
-    public css: string;
+// TODO: Add animation
+@Component({
+    selector: 'app-consent-prompt',
+    templateUrl: './consent-prompt.component.html',
+    styleUrls: ['./consent-prompt.component.css']
+})
+export class ConsentPromptComponent {
+    public message: string;
 
-    constructor() {
-        this.bindings = {
-        };
-        this.controller = ConsentController;
-        this.templateUrl = "/app/consent-prompt/consent-prompt.html";
-        this.css = "/app/consent-prompt/consent-prompt.css";
+    constructor(private consentService: ConsentService) {
+        this.message = "This site does not use cookies or save personal information. Just wanted to be as annoying as everyone else.";
+    }
+
+    accept() {
+        this.consentService.setConsentStatus(ConsentStatus.Consented);
+    }
+
+    decline() {
+        this.consentService.setConsentStatus(ConsentStatus.Declined);
+    }
+
+    showConsentPrompt(): boolean {
+        return this.consentService.getConsentStatus() === ConsentStatus.None;
     }
 }
-
-angular
-    .module("app")
-    .component("jmConsentPrompt", new ConsentComponent());
