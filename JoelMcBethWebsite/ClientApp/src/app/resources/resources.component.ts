@@ -2,6 +2,7 @@ import { OnInit, Component } from "@angular/core";
 import { ResourceService } from "./resource.service";
 import { ResourceGroup } from "./resource-group";
 
+// TODO: handle styles for nested resource groups
 @Component({
     selector: 'app-resources',
     templateUrl: './resources.component.html'

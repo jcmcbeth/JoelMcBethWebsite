@@ -1,0 +1,27 @@
+<h1>Window Sticker Lookup</h1>
+<p>Lookup window stickers by VIN. Currently only supports Mitsubishi.</p>
+<div *ngIf="error" class="alert alert-danger" role="alert">{{ error }}</div>
+<div class="row">
+    <form #form="ngForm" class="col-md-4 col-lg-3" (ngSubmit)="lookup()" novalidate>
+        <div class="form-group">
+            <label for="vin">VIN</label><span class="badge badge-light">Required</span>
+            <input type="text"
+                   name="vin"
+                   class="form-control"
+                   [(ngModel)]="vin"
+                   #vinControl="ngModel"
+                   required
+                   vin
+                   minlength="17"
+                   maxlength="17"
+                   autocomplete="off" />
+
+            <div class="error-message" role="alert" *ngIf="vinControl.invalid && vinControl.dirty">
+                <div *ngIf="vinControl.errors.minlength || vinControl.errors.maxlength">The VIN must be 17 characters long.</div>
+                <div *ngIf="vinControl.errors.required">The VIN is required.</div>
+                <div *ngIf="vinControl.errors.vin">The VIN is invalid or not for a Mitsubishi.</div>
+            </div>
+        </div>
+        <button [disabled]="!form.valid" type="submit" class="btn btn-primary">Get Window Sticker</button>
+    </form>
+</div>
