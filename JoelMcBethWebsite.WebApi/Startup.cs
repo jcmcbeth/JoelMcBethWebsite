@@ -1,25 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Amcrest.HttpClient;
-using JoelMcBethWebsite.Authentication;
-using JoelMcBethWebsite.Data;
-using JoelMcBethWebsite.Data.EntityFramework;
-using JoelMcBethWebsite.Data.MicrosoftSql;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-
 namespace JoelMcBethWebsite.WebApi
 {
+    using System.Linq;
+    using Amcrest.HttpClient;
+    using JoelMcBethWebsite.Authentication;
+    using JoelMcBethWebsite.Data;
+    using JoelMcBethWebsite.Data.EntityFramework;
+    using JoelMcBethWebsite.Data.MicrosoftSql;
+    using JoelMcBethWebsite.Scheduler;
+    using JoelMcBethWebsite.Tasks;
+    using JoelMcBethWebsite.Tasks.Todoist;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+
     public class Startup
     {
         private const string CorsPolicyName = "WebPolicy";
@@ -44,12 +40,13 @@ namespace JoelMcBethWebsite.WebApi
             services.AddTransient<IBookRepository, MicrosoftSqlBookRepository>(s => new MicrosoftSqlBookRepository(connectionString));
             services.AddTransient<IUserRepository, EntityFrameworkUserRepository>();
             services.AddTransient<IMediaRepository, MicrosoftSqlMediaRepository>(s => new MicrosoftSqlMediaRepository(connectionString));
+            services.AddTransient<ITaskRepository, EntityFrameworkTaskRepository>();
 
             services.AddSingleton<ICameraClient, AmcrestHttpClient>(srv =>
                 new AmcrestHttpClient(
                     System.Net.IPAddress.Parse(this.Configuration["Camera:IPAddress"]),
                     this.Configuration["Camera:UserName"],
-                    this.Configuration["Camera:Password"]));
+                    this.Configuration["Camera:Password"]));            
 
             var allowedOrigins = GetAllowedOrigins();
 
@@ -69,6 +66,19 @@ namespace JoelMcBethWebsite.WebApi
             services.AddControllers();
 
             services.AddDbContext<JoelMcbethWebsiteDbContext>(options => options.UseSqlServer(connectionString));
+
+            services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
+
+            services.AddSingleton<ITaskClient, TodoistRestTaskClient>(
+                factory => new TodoistRestTaskClient(this.Configuration["Todoist:Key"]));
+            services.AddSingleton<Schedule>(factory => new Schedule()
+            {
+                //Interval = 60,
+                Interval = 10,
+                ScheduledJobType = typeof(TaskCountSchedulerJob)
+            });
+            services.AddTransient<TaskCountSchedulerJob>();
+            services.AddHostedService<SchedulerHostedService>();
         }
 
         private string[] GetAllowedOrigins()

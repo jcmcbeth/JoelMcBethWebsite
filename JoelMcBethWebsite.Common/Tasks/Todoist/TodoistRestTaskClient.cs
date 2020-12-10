@@ -6,7 +6,7 @@
     using System.Net.Http.Headers;
     using System.Threading;
     using System.Threading.Tasks;
-    using Newtonsoft.Json;
+    using System.Text.Json;
 
     public class TodoistRestTaskClient : ITaskClient
     {
@@ -27,7 +27,7 @@
 
                 var response = await client.GetStringAsync(url);
 
-                return JsonConvert.DeserializeObject<List<TodoTask>>(response);
+                return JsonSerializer.Deserialize<List<TodoTask>>(response);
             }
         }
     }
