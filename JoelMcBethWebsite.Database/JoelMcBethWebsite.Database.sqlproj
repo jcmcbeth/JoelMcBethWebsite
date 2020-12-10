@@ -74,7 +74,7 @@
     <Build Include="BookReviews.sql" />
     <None Include="DataLossScripts\Books.DropRatingColumn.sql" />
     <Build Include="User.sql" />
-    <Build Include="TaskCount.sql" />
+    <Build Include="TaskCounts.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="JoelMcBethWebsite.Database.refactorlog" />

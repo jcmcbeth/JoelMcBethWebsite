@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
+    using JoelMcBethWebsite.Data.Models;
     using JoelMcBethWebsite.Tasks;
     using Microsoft.EntityFrameworkCore;
 
@@ -25,7 +26,7 @@
 
         public Task<List<TaskCount>> GetTaskCountsAsync(CancellationToken cancellationToken = default)
         {
-            return this.context.TaskCounts.ToListAsync(cancellationToken);
+            throw new System.NotImplementedException();
         }
     }
 }

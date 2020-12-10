@@ -1,4 +1,4 @@
-﻿namespace JoelMcBethWebsite.Tasks
+﻿namespace JoelMcBethWebsite.Data.Models
 {
     using System;
 

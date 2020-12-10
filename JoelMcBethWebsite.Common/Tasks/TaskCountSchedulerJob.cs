@@ -3,6 +3,8 @@
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using JoelMcBethWebsite.Data;
+    using JoelMcBethWebsite.Data.Models;
     using JoelMcBethWebsite.Scheduler;
 
     public class TaskCountSchedulerJob : ISchedulerJob

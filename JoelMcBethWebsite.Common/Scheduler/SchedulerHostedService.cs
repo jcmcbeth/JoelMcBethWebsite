@@ -8,7 +8,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
 
-    public class SchedulerHostedService : IHostedService
+    public class SchedulerHostedService : IHostedService, IDisposable
     {
         private readonly IDateTimeProvider dateTimeProvider;
         private readonly List<ScheduledJob> scheduledJobs;
@@ -16,6 +16,8 @@
 
         private Task executingTask;
         private CancellationTokenSource cancellationTokenSource;
+
+        private bool isDisposed;
 
         public SchedulerHostedService(
             IEnumerable<Schedule> schedules,
@@ -43,16 +45,18 @@
             }
         } 
 
-        public async Task StartAsync(CancellationToken cancellationToken)
+        public Task StartAsync(CancellationToken cancellationToken)
         {
             this.cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
-            while (!cancellationToken.IsCancellationRequested)
+            this.executingTask = this.ExecuteAsync(this.cancellationTokenSource.Token);
+
+            if (this.executingTask.IsCompleted)
             {
-                this.executingTask = this.ExecuteAsync(cancellationToken);
-                await Task.Delay(TimeSpan.FromMinutes(10), cancellationToken);
-                //await Task.Delay(TimeSpan.FromMinutes(1), cancellationToken);
+                return this.executingTask;
             }
+
+            return Task.CompletedTask;           
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)
@@ -62,14 +66,47 @@
                 return;
             }
 
-            this.cancellationTokenSource.Cancel();
+            try
+            {
+                this.cancellationTokenSource.Cancel();
+            }
+            finally
+            {
+                await Task.WhenAny(this.executingTask, Task.Delay(Timeout.Infinite, cancellationToken));
+            }            
+        }
 
-            await Task.WhenAny(this.executingTask, Task.Delay(-1, cancellationToken));
+        public void Dispose()
+        {
+            this.Dispose(disposing: true);
 
-            cancellationToken.ThrowIfCancellationRequested();
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!isDisposed)
+            {
+                if (disposing)
+                {
+                    this.cancellationTokenSource.Cancel();
+                }
+
+                this.isDisposed = true;
+            }
         }
 
         private async Task ExecuteAsync(CancellationToken cancellationToken)
+        {
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                await this.ExecuteJobsAsync(cancellationToken);
+                //await Task.Delay(TimeSpan.FromMinutes(10), cancellationToken);
+                await Task.Delay(TimeSpan.FromMinutes(1), cancellationToken);
+            }
+        }
+
+        private async Task ExecuteJobsAsync(CancellationToken cancellationToken)
         {
             var now = this.dateTimeProvider.UtcNow;
 
@@ -80,22 +117,16 @@
                 executingJob.ExecutionTime = now.AddSeconds(executingJob.Schedule.Interval);
                 //executingJob.ExecutionTime = now.AddMinutes(executingJob.Schedule.Interval);
 
-                using (var scope = this.serviceProvider.CreateScope())
+                await Task.Factory.StartNew(async () =>
                 {
-                    try
+                    using (var scope = this.serviceProvider.CreateScope())
                     {
                         var schedulerJob = (ISchedulerJob)scope.ServiceProvider.GetRequiredService(
                             executingJob.Schedule.ScheduledJobType);
 
-                        await Task.Factory.StartNew(
-                            () => schedulerJob.ExecuteAsync(cancellationToken),
-                            cancellationToken);
+                        await schedulerJob.ExecuteAsync(cancellationToken);
                     }
-                    catch (Exception ex)
-                    {
-
-                    }
-                }
+                });                
             }
         }
 

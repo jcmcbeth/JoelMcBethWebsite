@@ -1,8 +1,9 @@
-﻿namespace JoelMcBethWebsite.Tasks
+﻿namespace JoelMcBethWebsite.Data
 {
     using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
+    using JoelMcBethWebsite.Data.Models;
 
     public interface ITaskRepository
     {
