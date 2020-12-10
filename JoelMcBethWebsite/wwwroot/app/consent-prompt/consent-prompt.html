@@ -1,0 +1,5 @@
+﻿<div class="consent-prompt animate-fade" ng-if="$ctrl.showConsentPrompt()">
+    {{ $ctrl.message }}
+    <button class="btn btn-primary btn-sm" ng-click="$ctrl.accept()">Accept</button>
+    <button class="btn btn-sm" ng-click="$ctrl.decline()">Decline</button>
+</div>

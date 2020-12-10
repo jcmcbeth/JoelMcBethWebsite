@@ -1,20 +1,12 @@
 ﻿namespace JoelMcBethWebsite
 {
-    using Amcrest.HttpClient;
-    using JoelMcBethWebsite.Authentication;
-    using JoelMcBethWebsite.Data;
-    using JoelMcBethWebsite.Data.EntityFramework;
-    using JoelMcBethWebsite.Data.MicrosoftSql;
-    using JoelMcBethWebsite.Scheduler;
-    using JoelMcBethWebsite.Tasks;
-    using JoelMcBethWebsite.Tasks.Todoist;
+    using System.Diagnostics.CodeAnalysis;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.StaticFiles;
-    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
 
     public class Startup
     {
@@ -27,45 +19,13 @@
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = this.Configuration.GetConnectionString("MainDatabase");
-
-            services.Configure<TokenSecurityOptions>(this.Configuration.GetSection("TokenAuthentication"));
-
-            services.AddTokenSecurity(this.Configuration);
-
-            services.AddTransient<AuthenticationManager>();
-            services.AddTransient<IBookRepository, MicrosoftSqlBookRepository>(s => new MicrosoftSqlBookRepository(connectionString));
-            services.AddTransient<IUserRepository, EntityFrameworkUserRepository>();
-            services.AddTransient<IMediaRepository, MicrosoftSqlMediaRepository>(s => new MicrosoftSqlMediaRepository(connectionString));
-            services.AddTransient<ITaskRepository, EntityFrameworkTaskRepository>();
-
-            services.AddSingleton<ICameraClient, AmcrestHttpClient>(srv =>
-                new AmcrestHttpClient(
-                    System.Net.IPAddress.Parse(this.Configuration["Camera:IPAddress"]),
-                    this.Configuration["Camera:UserName"],
-                    this.Configuration["Camera:Password"]));
 
             services.AddMemoryCache();
-            services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-            services.AddDbContext<JoelMcbethWebsiteDbContext>(options => options.UseSqlServer(connectionString));
-
-            services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
-
-            services.AddSingleton<ITaskClient, TodoistRestTaskClient>(
-                factory => new TodoistRestTaskClient(this.Configuration["Todoist:Key"]));
-            services.AddSingleton<Schedule>(factory => new Schedule()
-            {
-                //Interval = 60,
-                Interval = 10,
-                ScheduledJobType = typeof(TaskCountSchedulerJob)
-            });
-            services.AddTransient<TaskCountSchedulerJob>();
-            services.AddHostedService<SchedulerHostedService>();
+            services.AddControllers();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment environment)
+        [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "This needs to be an instance method as it is called by convention.")]
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment environment)
         {
             if (environment.IsDevelopment())
             {
@@ -82,15 +42,12 @@
             contentTypeProvider.Mappings.Add(".exe", "application/vnd.microsoft.portable-executable");
             contentTypeProvider.Mappings.Add(".cfg", "text/plain");
 
-            app.UseAuthentication();
             app.UseDefaultFiles();
             app.UseSpaRedirection();
             app.UseStaticFiles(new StaticFileOptions()
             {
-                ContentTypeProvider = contentTypeProvider
+                ContentTypeProvider = contentTypeProvider,
             });
-            app.UseGlobalExceptionHandler();
-            app.UseMvc();
         }
     }
 }
