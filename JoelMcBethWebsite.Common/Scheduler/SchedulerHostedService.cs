@@ -7,12 +7,14 @@
     using System.Threading.Tasks;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using Microsoft.Extensions.Logging;
 
     public class SchedulerHostedService : IHostedService, IDisposable
     {
         private readonly IDateTimeProvider dateTimeProvider;
         private readonly List<ScheduledJob> scheduledJobs;
         private readonly IServiceProvider serviceProvider;
+        private readonly ILogger logger;
 
         private Task executingTask;
         private CancellationTokenSource cancellationTokenSource;
@@ -22,7 +24,8 @@
         public SchedulerHostedService(
             IEnumerable<Schedule> schedules,
             IServiceProvider serviceProvider,
-            IDateTimeProvider dateTimeProvider)
+            IDateTimeProvider dateTimeProvider,
+            ILogger<SchedulerHostedService> logger)
         {
             if (schedules == null)
             {
@@ -32,6 +35,7 @@
             this.dateTimeProvider = dateTimeProvider ?? throw new ArgumentNullException(nameof(dateTimeProvider));
             this.serviceProvider = serviceProvider;
             this.scheduledJobs = new List<ScheduledJob>();
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
             foreach (var schedule in schedules)
             {
@@ -47,6 +51,8 @@
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
+            this.logger.LogInformation("Starting scheduler service");
+
             this.cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
             this.executingTask = this.ExecuteAsync(this.cancellationTokenSource.Token);
@@ -56,11 +62,15 @@
                 return this.executingTask;
             }
 
+            this.logger.LogInformation("Scheduler service started");
+
             return Task.CompletedTask;           
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
+            this.logger.LogInformation("Scheduler service stopping");
+
             if (this.executingTask == null)
             {
                 return;
@@ -68,12 +78,16 @@
 
             try
             {
+                this.logger.LogInformation("Cancelling tasks");
                 this.cancellationTokenSource.Cancel();
+                this.logger.LogInformation("Tasks canceled");
             }
             finally
             {
                 await Task.WhenAny(this.executingTask, Task.Delay(Timeout.Infinite, cancellationToken));
-            }            
+            }
+
+            this.logger.LogInformation("Scheduler service stopped");
         }
 
         public void Dispose()
@@ -101,21 +115,21 @@
             while (!cancellationToken.IsCancellationRequested)
             {
                 await this.ExecuteJobsAsync(cancellationToken);
-                //await Task.Delay(TimeSpan.FromMinutes(10), cancellationToken);
                 await Task.Delay(TimeSpan.FromMinutes(1), cancellationToken);
             }
         }
 
         private async Task ExecuteJobsAsync(CancellationToken cancellationToken)
         {
+            this.logger.LogInformation("Executing jobs");
             var now = this.dateTimeProvider.UtcNow;
 
             var executingJobs = this.scheduledJobs.Where(sj => sj.ExecutionTime < now);
 
             foreach (var executingJob in executingJobs)
             {
-                executingJob.ExecutionTime = now.AddSeconds(executingJob.Schedule.Interval);
-                //executingJob.ExecutionTime = now.AddMinutes(executingJob.Schedule.Interval);
+                this.logger.LogInformation($"Executing job {executingJob.Schedule.ScheduledJobType}.");
+                executingJob.ExecutionTime = now.AddMinutes(executingJob.Schedule.Interval);
 
                 await Task.Factory.StartNew(async () =>
                 {

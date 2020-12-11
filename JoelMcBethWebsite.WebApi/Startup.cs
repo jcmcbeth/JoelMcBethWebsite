@@ -71,10 +71,9 @@ namespace JoelMcBethWebsite.WebApi
 
             services.AddSingleton<ITaskClient, TodoistRestTaskClient>(
                 factory => new TodoistRestTaskClient(this.Configuration["Todoist:Key"]));
-            services.AddSingleton<Schedule>(factory => new Schedule()
+            services.AddSingleton(factory => new Schedule()
             {
-                //Interval = 60,
-                Interval = 10,
+                Interval = 60,
                 ScheduledJobType = typeof(TaskCountSchedulerJob)
             });
             services.AddTransient<TaskCountSchedulerJob>();
