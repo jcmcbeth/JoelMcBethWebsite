@@ -37,7 +37,7 @@ export class MenuService {
                 group: "Main",
                 state: "books",
                 title: "Books",
-                hidden: true,
+                hidden: false,
                 unauthenticatedOnly: false,
                 requireAuthentication: false
             },

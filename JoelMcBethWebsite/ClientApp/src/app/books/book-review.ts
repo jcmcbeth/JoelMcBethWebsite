@@ -1,4 +1,4 @@
-﻿interface BookReview {
+export interface BookReview {
     id: number;
     rating: number;
     comments: number;

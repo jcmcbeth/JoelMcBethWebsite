@@ -1,6 +1,6 @@
-﻿/// <reference path="pagination.ts" />
+import { Pagination } from "./pagination";
 
-class PagedArray<T> {
+export class PagedArray<T> {
     public items: T[];
     public pagination: Pagination;
 }

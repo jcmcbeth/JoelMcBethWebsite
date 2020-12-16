@@ -1,5 +1,15 @@
-﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
-class BookController implements ng.IOnInit {
+import { Component, OnInit } from "@angular/core";
+import { Book } from "./book";
+import { BookService } from "./book.service";
+import { Option } from "../shared/file";
+import { SortDirection } from "../shared/sort-direction";
+
+@Component({
+    selector: "app-books",
+    templateUrl: "./books.component.html",
+    styleUrls: ["./books.component.css"]
+})
+export class BooksComponent implements OnInit {
     static $inject = ["BookService", "sortDirections"];
 
     pageSize: number;
@@ -8,17 +18,22 @@ class BookController implements ng.IOnInit {
     pages: number[];
     sort: number;
     sortDirection: number;
-    sortOptions: any[];
+    sortDirections: Option[];
+    sortOptions: Option[];
     books: Book[];
     filterText: string;
 
-    constructor(private bookService, public sortDirections) {
+    constructor(private bookService: BookService) {
         this.pageSize = 12;
         this.page = 1;
         this.pageCount = 0;
         this.pages = [];
         this.sort = 0;
         this.sortDirection = 0;
+        this.sortDirections = [
+            { name: "Acsending", value: SortDirection.Ascending },
+            { name: "Descending", value: SortDirection.Descending }
+        ];
         this.sortOptions = [
             { name: "None", value: 0 },
             { name: "Title", value: 1 },
@@ -42,7 +57,7 @@ class BookController implements ng.IOnInit {
     }
 
     updateBooks() {
-        return this.bookService.getBooks(this.filterText, this.page, this.pageSize, this.sort, this.sortDirection).then(data => {
+        return this.bookService.getBooks(this.filterText, this.page, this.pageSize, this.sort, this.sortDirection).subscribe(data => {
             this.books = data.items;
             this.pageCount = data.pagination.pages;
 
@@ -50,7 +65,7 @@ class BookController implements ng.IOnInit {
         });
     }
 
-    $onInit(): void {
+    ngOnInit(): void {
         this.updateBooks();
     }
 
@@ -64,7 +79,3 @@ class BookController implements ng.IOnInit {
         }
     }
 }
-
-angular
-    .module("app")
-    .controller("BookController", BookController);

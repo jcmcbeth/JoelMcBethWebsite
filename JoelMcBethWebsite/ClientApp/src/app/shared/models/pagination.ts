@@ -1,4 +1,4 @@
-﻿class Pagination {
+export class Pagination {
     public page: number;
     public pageSize: number;
     public count: number;

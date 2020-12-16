@@ -1,63 +1,60 @@
-﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
-/// <reference path="../shared/models/paged-array.ts" />
-/// <reference path="../shared/models/config.ts" />
+import { Injectable, Inject } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { PagedArray } from "../shared/models/paged-array";
+import { Book } from "./book";
 
-class BookService {
-    static $inject = ["$http", "config"];
-
+@Injectable({
+    providedIn: 'root',
+})
+export class BookService {
     private baseUrl;
 
-    constructor(private http: ng.IHttpService, config: Config) {
-        this.baseUrl = config.serviceUrlBase + "/books";
+    constructor(private httpClient: HttpClient, @Inject("API_URL") baseUrl: string) {
+        this.baseUrl = baseUrl + "/books";
     }
 
-    getBooks(filter, page, pageSize, sort, sortDirection): ng.IPromise<PagedArray<Book>> {
-        return this.http.get<PagedArray<Book>>(this.baseUrl, {
-            params: {
-                filter: filter,
-                page: page,
-                pageSize: pageSize,
-                sort: sort,
-                sortDirection: sortDirection
-            }
-        }).then(response => {
-            return response.data;
+    public getBooks(
+        filter: string,
+        page: number,
+        pageSize: number,
+        sort: number,
+        sortDirection): Observable<PagedArray<Book>> {
+
+        const params = {
+            filter: filter,
+            page: page ? page.toString() : "1",
+            pageSize: pageSize ? pageSize.toString() : "25",
+            sort: sort ? sort.toString() : "0",
+            sortDirection: sortDirection ? sortDirection.toString() : "0"
+        };
+
+        return this.httpClient.get<PagedArray<Book>>(this.baseUrl, {
+            params: params
         });
     }
 
-    getBookByIsbn13(isbn): ng.IPromise<Book> {
-        var url = this.baseUrl + "/" + isbn;
+    public getBookByIsbn13(isbn: string): Observable<Book> {
+        const url = this.baseUrl + "/" + isbn;
 
-        return this.http.get<Book>(url).then(response => {
-            return response.data;
-        });
+        return this.httpClient.get<Book>(url);
     }
 
-    getBookById(id: number): ng.IPromise<Book> {
+    public getBookById(id: number): Observable<Book> {
         var url = this.baseUrl + "/" + id;
 
-        return this.http.get<Book>(url).then(response => {
-            return response.data;
-        });
+        return this.httpClient.get<Book>(url);
     }
 
-    addBook(book): ng.IPromise<Book> {
+    public addBook(book: Book): Observable<Book> {
         var url = this.baseUrl;
 
-        return this.http.post<Book>(url, book).then(response => {
-            return response.data;
-        });
+        return this.httpClient.post<Book>(url, book);
     }
 
-    updateBook(book): ng.IPromise<Book> {
+    public updateBook(book): Observable<Book> {
         var url = this.baseUrl;
 
-        return this.http.put<Book>(url, book).then(response => {
-            return response.data;
-        });
+        return this.httpClient.put<Book>(url, book);
     }
 }
-
-angular
-    .module("app")
-    .service("BookService", BookService);

@@ -1,6 +1,7 @@
-﻿/// <reference path="author.ts" />
-/// <reference path="book-review.ts" />
-interface Book {
+import { Author } from "./author";
+import { BookReview } from "./book-review";
+
+export interface Book {
     id: number;    
     isbn13: string;
     title: string;

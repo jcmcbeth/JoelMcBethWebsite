@@ -21,6 +21,9 @@ import { ResumeComponent } from "./resume/resume.component";
 import { MediaComponent } from "./media/media.component";
 import { ConsentPromptComponent } from "./consent-prompt/consent-prompt.component";
 import { WindowStickerLookupComponent } from "./window-sticker-lookup/window-sticker-lookup.component";
+import { BooksComponent } from "./books/books.component";
+import { BookDetailsComponent } from "./books/book-details.component";
+import { RatingComponent } from "./shared/rating/rating.component";
 
 const routes: Routes = [
     { path: "projects", component: ProjectsComponent },
@@ -34,6 +37,7 @@ const routes: Routes = [
     { path: "resume", component: ResumeComponent },
     { path: "media", component: MediaComponent },
     { path: "window-sticker-lookup", component: WindowStickerLookupComponent },
+    { path: "books", component: BooksComponent },
     { path: "", component: HomeComponent, pathMatch: "full" }
 ];
 
@@ -54,7 +58,10 @@ const routes: Routes = [
         ResumeComponent,
         MediaComponent,
         ConsentPromptComponent,
-        WindowStickerLookupComponent
+        WindowStickerLookupComponent,
+        BooksComponent,
+        BookDetailsComponent,
+        RatingComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
