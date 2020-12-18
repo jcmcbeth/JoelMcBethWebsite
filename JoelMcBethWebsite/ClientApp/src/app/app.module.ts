@@ -26,6 +26,8 @@ import { BookDetailsComponent } from "./books/book-details.component";
 import { RatingComponent } from "./shared/rating/rating.component";
 import { AuthenticationHttpInterceptor } from "./authentication/authentication-http-interceptor";
 import { AuthenticationGuard } from "./authentication/authentication-guard";
+import { UsersComponent } from "./users/users.component";
+import { AddUserComponent } from "./users/add-user.component";
 
 const routes: Routes = [
     { path: "projects", component: ProjectsComponent, canActivate: [AuthenticationGuard] },
@@ -40,6 +42,8 @@ const routes: Routes = [
     { path: "media", component: MediaComponent, canActivate: [AuthenticationGuard] },
     { path: "window-sticker-lookup", component: WindowStickerLookupComponent, canActivate: [AuthenticationGuard] },
     { path: "books", component: BooksComponent, canActivate: [AuthenticationGuard] },
+    { path: "users", component: UsersComponent, canActivate: [AuthenticationGuard] },
+    { path: "users/add-user", component: AddUserComponent, canActivate: [AuthenticationGuard] },
     { path: "", component: HomeComponent, pathMatch: "full", canActivate: [AuthenticationGuard] }
 ];
 
@@ -63,7 +67,9 @@ const routes: Routes = [
         WindowStickerLookupComponent,
         BooksComponent,
         BookDetailsComponent,
-        RatingComponent
+        RatingComponent,
+        UsersComponent,
+        AddUserComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),

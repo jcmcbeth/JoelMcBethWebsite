@@ -1,0 +1,8 @@
+<h1>Add User</h1>
+<form #form="ngForm">
+    <div class="form-group">
+        <label for="email" class="">Email</label>
+        <input id="email" name="email" type="text" [(ngModel)]="user.email" class="form-control" placeholder="Enter email" />
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="addUser()">Add User</button>
+</form>

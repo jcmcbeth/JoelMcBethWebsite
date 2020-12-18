@@ -15,9 +15,5 @@
         "app/account/*.ts",
         "app/admin/**/*.ts",
         "app/cameras/*.ts",
-        "app/resources/*.ts",
-        "app/shared/heading/*.ts",
-        "app/users/*.ts",
-        "app/windowsticker/*.ts"
     ]
 }
