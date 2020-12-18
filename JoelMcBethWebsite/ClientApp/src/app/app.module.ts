@@ -1,7 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule, Routes } from "@angular/router";
 
 import { AppComponent } from "./app.component";
@@ -24,21 +24,27 @@ import { WindowStickerLookupComponent } from "./window-sticker-lookup/window-sti
 import { BooksComponent } from "./books/books.component";
 import { BookDetailsComponent } from "./books/book-details.component";
 import { RatingComponent } from "./shared/rating/rating.component";
+import { AuthenticationHttpInterceptor } from "./authentication/authentication-http-interceptor";
+import { AuthenticationGuard } from "./authentication/authentication-guard";
+import { UsersComponent } from "./users/users.component";
+import { AddUserComponent } from "./users/add-user.component";
 
 const routes: Routes = [
-    { path: "projects", component: ProjectsComponent },
-    { path: "resources", component: ResourcesComponent },
-    { path: "miscellaneous", component: MiscellaneousComponent },
-    { path: "infantry", component: InfantryComponent },
-    { path: "infantry/browser", component: InfantryBrowserComponent },
-    { path: "exception-formatter", component: ExceptionFormatterComponent },
-    { path: "base64-converter", component: Base64ConverterComponent },
-    { path: "hash-generator", component: HashComponent },
-    { path: "resume", component: ResumeComponent },
-    { path: "media", component: MediaComponent },
-    { path: "window-sticker-lookup", component: WindowStickerLookupComponent },
-    { path: "books", component: BooksComponent },
-    { path: "", component: HomeComponent, pathMatch: "full" }
+    { path: "projects", component: ProjectsComponent, canActivate: [AuthenticationGuard] },
+    { path: "resources", component: ResourcesComponent, canActivate: [AuthenticationGuard] },
+    { path: "miscellaneous", component: MiscellaneousComponent, canActivate: [AuthenticationGuard] },
+    { path: "infantry", component: InfantryComponent, canActivate: [AuthenticationGuard] },
+    { path: "infantry/browser", component: InfantryBrowserComponent, canActivate: [AuthenticationGuard] },
+    { path: "exception-formatter", component: ExceptionFormatterComponent, canActivate: [AuthenticationGuard] },
+    { path: "base64-converter", component: Base64ConverterComponent, canActivate: [AuthenticationGuard] },
+    { path: "hash-generator", component: HashComponent, canActivate: [AuthenticationGuard] },
+    { path: "resume", component: ResumeComponent, canActivate: [AuthenticationGuard] },
+    { path: "media", component: MediaComponent, canActivate: [AuthenticationGuard] },
+    { path: "window-sticker-lookup", component: WindowStickerLookupComponent, canActivate: [AuthenticationGuard] },
+    { path: "books", component: BooksComponent, canActivate: [AuthenticationGuard] },
+    { path: "users", component: UsersComponent, canActivate: [AuthenticationGuard] },
+    { path: "users/add-user", component: AddUserComponent, canActivate: [AuthenticationGuard] },
+    { path: "", component: HomeComponent, pathMatch: "full", canActivate: [AuthenticationGuard] }
 ];
 
 @NgModule({
@@ -61,7 +67,9 @@ const routes: Routes = [
         WindowStickerLookupComponent,
         BooksComponent,
         BookDetailsComponent,
-        RatingComponent
+        RatingComponent,
+        UsersComponent,
+        AddUserComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
@@ -70,6 +78,7 @@ const routes: Routes = [
         RouterModule.forRoot(routes)
     ],
     providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: AuthenticationHttpInterceptor, multi: true },
         { provide: "API_URL", useValue: environment.apiUrl },
         { provide: "Window", useValue: window }
     ],

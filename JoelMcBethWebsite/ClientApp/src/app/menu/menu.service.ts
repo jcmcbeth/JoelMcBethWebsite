@@ -93,7 +93,7 @@ export class MenuService {
                 group: "Users",
                 state: "users",
                 title: "User List",
-                hidden: true,
+                hidden: false,
                 unauthenticatedOnly: false,
                 requireAuthentication: true
             },

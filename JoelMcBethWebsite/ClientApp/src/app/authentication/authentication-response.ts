@@ -1,6 +1,6 @@
-﻿/// <reference path="authentication-result.ts" />
+import { AuthenticationResult } from "./authentication-result";
 
-class AuthenticationResponse {
+export interface AuthenticationResponse {
     result: AuthenticationResult;
     token: string;
 }

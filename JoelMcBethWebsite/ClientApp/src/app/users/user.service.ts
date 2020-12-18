@@ -1,49 +1,45 @@
-﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
-/// <reference path="../authentication/authentication.service.ts" />
-/// <reference path="../shared/models/paged-array.ts" />
-/// <reference path="user.ts" />
-/// <reference path="../shared/models/config.ts" />
+import { HttpClient } from "@angular/common/http";
+import { Inject, Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { Book } from "../books/book";
+import { PagedArray } from "../shared/models/paged-array";
+import { User } from "./user";
 
-class UserService {
-    static $inject = ["$http", "AuthenticationService", "config"];
+@Injectable({
+    providedIn: 'root',
+})
+export class UserService {    
 
     private baseUrl: string;
 
     constructor(
-        private http: ng.IHttpService,
-        private authenticationService: AuthenticationService,
-        config: Config
+        private readonly httpClient: HttpClient,
+        @Inject("API_URL") baseUrl: string
     ) {
-        this.baseUrl = config.serviceUrlBase + "/users";
+        this.baseUrl = baseUrl + "/users";
     }
 
-    getUsers(page: number, pageSize: number) {
-        return this.http.get<PagedArray<User>>(this.baseUrl, {
-            params: {
-                page: page,
-                pageSize: pageSize
-            }
-        }).then(response => {
-            return response.data;
+    public getUsers(
+        page: number,
+        pageSize: number): Observable<PagedArray<User>> {
+
+        const params = {
+            page: page ? page.toString() : "1",
+            pageSize: pageSize ? pageSize.toString() : "25"
+        };
+
+        return this.httpClient.get<PagedArray<User>>(this.baseUrl, {
+            params: params
         });
     }
 
-    addUser(user) {
-        return this.http.post(this.baseUrl, user)
-            .then(response => {
-                return response.data;
-            });
+    addUser(user): Observable<void> {
+        return this.httpClient.post<void>(this.baseUrl, user);
     }
 
-    approval(id: number, approved: boolean): ng.IPromise<void> {
+    approval(id: number, approved: boolean): Observable<void> {
         const url = this.baseUrl + "/" + id + "/approval/" + approved;
 
-        return this.http.patch<void>(url, null)
-            .then(response => {
-            });
+        return this.httpClient.patch<void>(url, null);
     }
 }
-
-angular
-    .module("app")
-    .service('userService', UserService);

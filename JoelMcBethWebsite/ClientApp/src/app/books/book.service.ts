@@ -10,7 +10,9 @@ import { Book } from "./book";
 export class BookService {
     private baseUrl;
 
-    constructor(private httpClient: HttpClient, @Inject("API_URL") baseUrl: string) {
+    constructor(
+        private readonly httpClient: HttpClient,
+        @Inject("API_URL") baseUrl: string) {
         this.baseUrl = baseUrl + "/books";
     }
 

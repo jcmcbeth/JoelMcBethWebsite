@@ -1,6 +1,7 @@
 import { MenuService } from "./menu.service";
 import { Component, OnInit } from "@angular/core";
 import { MenuItem } from "./menu-item";
+import { AuthenticationService } from "../authentication/authentication.service";
 
 @Component({
     selector: 'app-menu',
@@ -11,33 +12,21 @@ import { MenuItem } from "./menu-item";
     }
 })
 export class MenuComponent implements OnInit {
-    //static $inject = ["menuService", "$rootScope", "AuthenticationService"];
-
     public items: MenuItem[];
     public groups: MenuGroupViewModel[];
 
     private authenticated;
 
-    constructor(private menuService: MenuService/*, private rootScope: ng.IRootScopeService, private authenticationService*/) {
+    constructor(
+        private readonly menuService: MenuService,
+        private readonly authenticationService: AuthenticationService) {
         this.items = [];
         this.groups = [];
         this.authenticated = false;
-
-        //rootScope.$on("authenticated", () => {
-        //    this.authenticated = true;
-
-        //    this.updateMenuItems();
-        //});
-
-        //rootScope.$on("unauthenticated", () => {
-        //    this.authenticated = false;
-
-        //    this.updateMenuItems();
-        //});
     }
 
     ngOnInit(): void {
-        //this.authenticated = this.authenticationService.isAuthenticated();
+        this.authenticated = this.authenticationService.isAuthenticated();
 
         this.items = this.menuService.getMenuItems();
         this.groups = this.getMenuGroups();
