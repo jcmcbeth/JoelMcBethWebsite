@@ -1,4 +1,4 @@
-﻿enum AuthenticationResult {
+export enum AuthenticationResult {
     Unknown = 0,
     Success = 1,
     InvalidCredentials = 2,

@@ -1,21 +1,23 @@
-﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
-/// <reference path="token.service.ts" />
-/// <reference path="authentication-response.ts" />
-/// <reference path="../shared/models/config.ts" />
-/// <reference path="authentication-result.ts" />
+import { HttpClient } from "@angular/common/http";
+import { Inject, Injectable } from "@angular/core";
+import { Observable, of } from "rxjs";
+import { AuthenticationResponse } from "./authentication-response";
+import { AuthenticationResult } from "./authentication-result";
+import { TokenService } from "./token.service";
+import { map, tap } from 'rxjs/operators';
 
-class AuthenticationService {
-    static $inject = ["$http", "$q", "$rootScope", "TokenService", "config"];
+@Injectable({
+    providedIn: 'root',
+})
+export class AuthenticationService {
 
     private baseUrl;
 
     constructor(
-        private readonly http: ng.IHttpService,
-        private readonly q: ng.IQService,
-        private readonly rootScope: ng.IRootScopeService,
-        private readonly tokenService: TokenService,
-        config: Config) {
-        this.baseUrl = config.serviceUrlBase + "/account";
+        private readonly httpClient: HttpClient,
+        @Inject("API_URL") baseUrl: string,
+        private readonly tokenService: TokenService) {
+        this.baseUrl = baseUrl + "/account";
     }
 
     isAuthenticated(): boolean {
@@ -28,33 +30,31 @@ class AuthenticationService {
         return false;
     }
 
-    logout(): ng.IPromise<void> {
+    logout(): Observable<void> {
         this.tokenService.clearToken();
-        this.rootScope.$broadcast("unauthenticated");
+        //this.rootScope.$broadcast("unauthenticated");
 
-        return this.q.when();
+        return of();
     }
 
-    login(userName: string, password: string) {
+    login(userName: string, password: string): Observable<AuthenticationResult> {
         let url = this.baseUrl + "/authenticate?userName=" + userName + "&password=" + password;
 
-        return this.http<AuthenticationResponse>({
-            url: url,
-            method: "POST"
-        }).then(response => {
-            if (response.data.result === AuthenticationResult.Success) {
-                const token = response.data.token;
+        return this.httpClient.post<AuthenticationResponse>(url, null)
+            .pipe(
+                tap(response => {
+                    if (response.result === AuthenticationResult.Success) {
+                        const token = response.token;
 
-                this.tokenService.setToken(token);
+                        this.tokenService.setToken(token);
+                        // this.rootScope.$broadcast("authenticated");
+                    }
+                }),
+                map(response => response.result)
+            );
+    }
 
-                this.rootScope.$broadcast("authenticated");
-            }
-
-            return response.data.result;
-        });
+    getAuthenticationToken(): string {
+        return this.tokenService.getToken();
     }
 }
-
-angular
-    .module("app")
-    .service("AuthenticationService", AuthenticationService);

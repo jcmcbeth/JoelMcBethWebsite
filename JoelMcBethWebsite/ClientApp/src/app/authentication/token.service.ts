@@ -1,24 +1,23 @@
-﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
+import { Inject, Injectable } from "@angular/core";
 
-class TokenService {
-    static $inject = ["$window"];
+const TokenKey: string = "token";
 
-    constructor(private readonly window: ng.IWindowService) {
+@Injectable({
+    providedIn: 'root',
+})
+export class TokenService {    
+    constructor(@Inject("Window") private readonly window: Window) {
     }
 
     getToken(): string {
-        return this.window.sessionStorage.getItem("token");
+        return this.window.sessionStorage.getItem(TokenKey);
     }
 
     setToken(token: string) {
-        this.window.sessionStorage.setItem("token", token);
+        this.window.sessionStorage.setItem(TokenKey, token);
     }
 
     clearToken(): void {
-        this.window.sessionStorage.removeItem("token");
+        this.window.sessionStorage.removeItem(TokenKey);
     }
 }
-
-angular
-    .module("app")
-    .service("TokenService", TokenService);

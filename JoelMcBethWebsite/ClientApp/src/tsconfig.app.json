@@ -14,7 +14,6 @@
         "app/app.run.ts",
         "app/account/*.ts",
         "app/admin/**/*.ts",
-        "app/authentication/*.ts",
         "app/cameras/*.ts",
         "app/resources/*.ts",
         "app/shared/heading/*.ts",
