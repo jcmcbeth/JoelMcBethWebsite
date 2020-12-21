@@ -1,26 +1,29 @@
-﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
-/// <reference path="../authentication/authentication.service.ts" />
-/// <reference path="../authentication/authentication-result.ts" />
+import { Component } from "@angular/core";
+import { AuthenticationService } from "../authentication/authentication.service";
+import { Router } from "@angular/router";
+import { AuthenticationResult } from "../authentication/authentication-result";
 
-class LoginController {
-    static $inject = ["AuthenticationService", "$state"];
-
+@Component({
+    selector: "app-login",
+    templateUrl: "./login.component.html"
+})
+export class LoginComponent {
     public error: string;
     public username: string;
     public password: string;
 
     constructor(
-        private authenticationService: AuthenticationService,
-        private $state) {
+        private readonly authenticationService: AuthenticationService,
+        private readonly router: Router) {
     }
 
     login() {
         this.error = null;
 
         this.authenticationService.login(this.username, this.password)
-            .then(result => {
+            .subscribe(result => {
                 if (result === AuthenticationResult.Success) {
-                    this.$state.go("home")
+                    this.router.navigate(["/"]);
 
                     return;
                 }
@@ -41,13 +44,9 @@ class LoginController {
                 this.password = "";
             },
             error => {
-                this.error = error
+                this.error = "A server error occurred.";
                 this.username = "";
                 this.password = "";
             });
     }
 }
-
-angular
-    .module("app")
-    .controller("LoginController", LoginController);

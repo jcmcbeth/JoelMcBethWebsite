@@ -24,13 +24,11 @@ export class UsersComponent implements OnInit {
     }
 
     updateUsers() {
-        return this.userService.getUsers(this.page, this.pageSize).pipe(
-            tap(users => {
-                this.users = users.items;
-                this.pageCount = users.pagination.count;
-            })
-            // TODO: figure out how to return a void observable to indcate the update is complete
-        );
+        // TODO: figure out a way to return a void observable signaling when the update is complete
+        this.userService.getUsers(this.page, this.pageSize).subscribe(users => {
+            this.users = users.items;
+            this.pageCount = users.pagination.count;
+        });
     }
 
     approve(user: User): Observable<void> {

@@ -1,26 +1,21 @@
-﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
-/// <reference path="user-registration.ts" />
-/// <reference path="../shared/models/config.ts" />
+import { HttpClient } from "@angular/common/http";
+import { Inject, Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { UserRegistration } from "./user-registration";
 
-class AccountService {
-    static $inject = ["$http", "config"];
-
+@Injectable({
+    providedIn: "root"
+})
+export class AccountService {
     private baseUrl;
 
-    constructor(private readonly http: ng.IHttpService, config: Config) {
-        this.baseUrl = config.serviceUrlBase + "/account";
+    constructor(private httpClient: HttpClient, @Inject("API_URL") baseUrl: string) {
+        this.baseUrl = baseUrl + "/account";
     }
 
-    register(registration: UserRegistration) {
+    register(registration: UserRegistration): Observable<boolean> {
         const url = this.baseUrl + "/" + "register";
 
-        return this.http.post<void>(url, registration)
-            .then(response => {
-                return true;
-            });
+        return this.httpClient.post<boolean>(url, registration);
     }
 }
-
-angular
-    .module("app")
-    .service("AccountService", AccountService);

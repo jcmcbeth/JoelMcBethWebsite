@@ -28,6 +28,9 @@ import { AuthenticationHttpInterceptor } from "./authentication/authentication-h
 import { AuthenticationGuard } from "./authentication/authentication-guard";
 import { UsersComponent } from "./users/users.component";
 import { AddUserComponent } from "./users/add-user.component";
+import { RegisterComponent } from "./account/register.component";
+import { LoginComponent } from "./account/login.component";
+import { LogoutComponent } from "./account/logout.component";
 
 const routes: Routes = [
     { path: "projects", component: ProjectsComponent, canActivate: [AuthenticationGuard] },
@@ -44,6 +47,9 @@ const routes: Routes = [
     { path: "books", component: BooksComponent, canActivate: [AuthenticationGuard] },
     { path: "users", component: UsersComponent, canActivate: [AuthenticationGuard] },
     { path: "users/add-user", component: AddUserComponent, canActivate: [AuthenticationGuard] },
+    { path: "login", component: LoginComponent, canActivate: [AuthenticationGuard] },
+    { path: "register", component: RegisterComponent, canActivate: [AuthenticationGuard] },
+    { path: "logout", component: LogoutComponent, canActivate: [AuthenticationGuard] },
     { path: "", component: HomeComponent, pathMatch: "full", canActivate: [AuthenticationGuard] }
 ];
 
@@ -69,7 +75,10 @@ const routes: Routes = [
         BookDetailsComponent,
         RatingComponent,
         UsersComponent,
-        AddUserComponent
+        AddUserComponent,
+        RegisterComponent,
+        LoginComponent,
+        LogoutComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),

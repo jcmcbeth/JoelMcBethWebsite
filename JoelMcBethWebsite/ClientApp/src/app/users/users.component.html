@@ -16,7 +16,7 @@
         <td>{{user.email}}</td>
         <td>{{user.isApproved ? 'Yes' : 'No'}}</td>
         <td>
-            <button class="btn" (click)="approve(user)">{{user.isApproved ? 'Unapprove' : 'Approve'}}</button>
+            <button class="btn btn-primary" (click)="approve(user)">{{user.isApproved ? 'Unapprove' : 'Approve'}}</button>
         </td>
     </tr>
 </table>
