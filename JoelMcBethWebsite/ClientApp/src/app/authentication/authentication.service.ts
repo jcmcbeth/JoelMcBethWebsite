@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
+import { BehaviorSubject, Observable, of } from "rxjs";
 import { AuthenticationResponse } from "./authentication-response";
 import { AuthenticationResult } from "./authentication-result";
 import { TokenService } from "./token.service";
@@ -11,6 +11,8 @@ import { map, tap } from 'rxjs/operators';
 })
 export class AuthenticationService {
 
+    public authenticated: BehaviorSubject<boolean>;
+
     private baseUrl;
 
     constructor(
@@ -18,6 +20,8 @@ export class AuthenticationService {
         @Inject("API_URL") baseUrl: string,
         private readonly tokenService: TokenService) {
         this.baseUrl = baseUrl + "/account";
+
+        this.authenticated = new BehaviorSubject(this.isAuthenticated());
     }
 
     isAuthenticated(): boolean {
@@ -32,7 +36,7 @@ export class AuthenticationService {
 
     logout(): Observable<void> {
         this.tokenService.clearToken();
-        //this.rootScope.$broadcast("unauthenticated");
+        this.authenticated.next(false);
 
         return of();
     }
@@ -47,7 +51,7 @@ export class AuthenticationService {
                         const token = response.token;
 
                         this.tokenService.setToken(token);
-                        // this.rootScope.$broadcast("authenticated");
+                        this.authenticated.next(true);
                     }
                 }),
                 map(response => response.result)

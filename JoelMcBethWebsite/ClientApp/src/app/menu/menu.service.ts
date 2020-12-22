@@ -1,5 +1,8 @@
 import { MenuItem } from "./menu-item";
 import { Injectable } from "@angular/core";
+import { Route, Router } from "@angular/router";
+import { MenuAuthenticationType } from "./menu-authentication-type";
+import { MenuGroup } from "./menu-group";
 
 @Injectable({
   providedIn: 'root',
@@ -7,108 +10,35 @@ import { Injectable } from "@angular/core";
 export class MenuService {
     public menuItems: MenuItem[];
 
-    constructor() {
-        this.menuItems = [
-            {
-                group: "Main",
-                state: "home",
-                title: "Home",
-                hidden: false,
-                unauthenticatedOnly: false,
-                requireAuthentication: false
-            },
-            {
-                group: "Main",
-                state: "projects",
-                title: "Projects",
-                hidden: false,
-                unauthenticatedOnly: false,
-                requireAuthentication: false
-            },
-            {
-                group: "Main",
-                state: "media",
-                title: "Media",
-                hidden: true,
-                unauthenticatedOnly: false,
-                requireAuthentication: false
-            },
-            {
-                group: "Main",
-                state: "books",
-                title: "Books",
-                hidden: false,
-                unauthenticatedOnly: false,
-                requireAuthentication: false
-            },
-            {
-                group: "Main",
-                state: "resume",
-                title: "Resume",
-                hidden: true,
-                unauthenticatedOnly: false,
-                requireAuthentication: false
-            },
-            {
-                group: "Main",
-                state: "resources",
-                title: "Resources",
-                hidden: false,
-                unauthenticatedOnly: false,
-                requireAuthentication: false
-            },
-            {
-                group: "Main",
-                state: "miscellaneous",
-                title: "Misc",
-                hidden: false,
-                unauthenticatedOnly: false,
-                requireAuthentication: false
-            },
-            {
-                group: "Main",
-                state: "cameras",
-                title: "Cameras",
-                hidden: true,
-                unauthenticatedOnly: false,
-                requireAuthentication: true
-            },
-            {
-                group: "Account",
-                state: "login",
-                title: "Login",
-                hidden: true,
-                unauthenticatedOnly: true,
-                requireAuthentication: false
-            },
-            {
-                group: "Account",
-                state: "logout",
-                title: "Logout",
-                hidden: true,
-                unauthenticatedOnly: false,
-                requireAuthentication: true
-            },
-            {
-                group: "Users",
-                state: "users",
-                title: "User List",
-                hidden: false,
-                unauthenticatedOnly: false,
-                requireAuthentication: true
-            },
-            {
-                group: "Admin",
-                state: "admin-books",
-                title: "Books",
-                hidden: true,
-                unauthenticatedOnly: false,
-                requireAuthentication: true
-            }
-        ];
+    constructor(router: Router) {        
+        this.menuItems = this.createMenuItems(router.config);
     }
 
     getMenuItems(): MenuItem[] {
         return this.menuItems;
     }
+
+    private createMenuItems(routes: Route[]): MenuItem[] {
+        return routes.map((route, index) => {
+            var item = new MenuItem();
+
+            item.path = route.path;
+
+            if (route.data && route.data.menu) {
+                item.visible = route.data.menu.visible || false;
+                item.group = route.data.menu.group || "";                
+                item.title = route.data.menu.title || "";
+                item.order = route.data.menu.order || Number.MAX_VALUE;
+
+                item.authentication = route.data.menu.authentication;
+                if (item.authentication == null) {
+                    item.authentication = MenuAuthenticationType.none;
+                }
+            }
+
+            return item;
+        });
+    }
+
+
 }

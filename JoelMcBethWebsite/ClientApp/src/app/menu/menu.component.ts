@@ -2,6 +2,7 @@ import { MenuService } from "./menu.service";
 import { Component, OnInit } from "@angular/core";
 import { MenuItem } from "./menu-item";
 import { AuthenticationService } from "../authentication/authentication.service";
+import { MenuAuthenticationType } from "./menu-authentication-type";
 
 @Component({
     selector: 'app-menu',
@@ -26,16 +27,19 @@ export class MenuComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.authenticated = this.authenticationService.isAuthenticated();
-
         this.items = this.menuService.getMenuItems();
-        this.groups = this.getMenuGroups();
+
+        this.authenticationService.authenticated.subscribe(authenticated => {
+            this.authenticated = authenticated;
+
+            this.groups = this.getMenuGroups();
+        });                
     }
 
     private getMenuGroups(): MenuGroupViewModel[] {
         var groups: MenuGroupViewModel[] = [];
 
-        for (var i = 0; i < this.items.length; i++) {
+        for (let i = 0; i < this.items.length; i++) {
             const menuItem = this.items[i];
 
             if (!this.isMenuItemVisible(menuItem)) {
@@ -59,19 +63,27 @@ export class MenuComponent implements OnInit {
             group.items.push(menuItem);
         }
 
+        for (let i = 0; i < groups.length; i++) {
+            const group = groups[i];
+
+            group.items.sort((a, b) => {
+                return a.order - b.order;
+            });
+        }
+
         return groups;
     }
 
     private isMenuItemVisible(item: MenuItem): boolean {
-        if (item.hidden) {
+        if (!item.visible) {
             return false;
         }
 
-        if (item.requireAuthentication && !this.authenticated) {
+        if (item.authentication === MenuAuthenticationType.required && !this.authenticated) {
             return false;
         }
 
-        if (item.unauthenticatedOnly && this.authenticated) {
+        if (item.authentication === MenuAuthenticationType.unauthenticated && this.authenticated) {
             return false;
         }
 

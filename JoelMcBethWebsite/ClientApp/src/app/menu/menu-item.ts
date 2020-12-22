@@ -1,8 +1,10 @@
+import { MenuAuthenticationType } from "./menu-authentication-type";
+
 export class MenuItem {
     group: string;
-    state: string;
+    path: string;
     title: string;
-    hidden: boolean;
-    unauthenticatedOnly: boolean;
-    requireAuthentication: boolean;
+    visible: boolean;
+    authentication: MenuAuthenticationType;
+    order: number;
 }

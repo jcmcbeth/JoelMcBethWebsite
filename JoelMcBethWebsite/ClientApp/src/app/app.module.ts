@@ -31,26 +31,192 @@ import { AddUserComponent } from "./users/add-user.component";
 import { RegisterComponent } from "./account/register.component";
 import { LoginComponent } from "./account/login.component";
 import { LogoutComponent } from "./account/logout.component";
+import { MenuAuthenticationType } from "./menu/menu-authentication-type";
 
 const routes: Routes = [
-    { path: "projects", component: ProjectsComponent, canActivate: [AuthenticationGuard] },
-    { path: "resources", component: ResourcesComponent, canActivate: [AuthenticationGuard] },
-    { path: "miscellaneous", component: MiscellaneousComponent, canActivate: [AuthenticationGuard] },
+    {
+        path: "projects",
+        component: ProjectsComponent,
+        canActivate: [AuthenticationGuard],
+        data: {
+            menu: {
+                title: "Projects",
+                group: "Main",
+                visible: true,
+                order: 2
+            }            
+        }
+    },
+    {
+        path: "media",
+        component: MediaComponent,
+        canActivate: [AuthenticationGuard],
+        data: {
+            menu: {
+                title: "Media",
+                group: "Main",
+                visible: false,
+                order: 3
+            }
+        }
+    },
+    {
+        path: "books",
+        component: BooksComponent,
+        canActivate: [AuthenticationGuard],
+        data: {
+            menu: {
+                title: "Books",
+                group: "Main",
+                visible: true,
+                order: 4
+            }
+        }
+    },
+    {
+        path: "resume",
+        component: ResumeComponent,
+        canActivate: [AuthenticationGuard],
+        data: {
+            menu: {
+                title: "Resume",
+                group: "Main",
+                visible: false,
+                order: 5
+            }
+        }
+    },
+    {
+        path: "resources",
+        component: ResourcesComponent,
+        canActivate: [AuthenticationGuard],
+        data: {
+            menu: {
+                title: "Resources",
+                group: "Main",
+                visible: true,
+                order: 6
+            }
+        }
+    },
+    {
+        path: "miscellaneous",
+        component: MiscellaneousComponent,
+        canActivate: [AuthenticationGuard],
+        data: {
+            menu: {
+                title: "Misc",
+                group: "Main",
+                visible: true,
+                order: 7
+            }
+        }
+    },
+    //{
+    //    path: "cameras",
+    //    component: CamerasComponent,
+    //    canActivate: [AuthenticationGuard],
+    //    data: {
+    //        menu: {
+    //            title: "Misc",
+    //            group: "Main",
+    //            visible: true,
+    //            order: 8,
+    //            authentication: MenuAuthenticationType.required
+    //        }
+    //    }
+    //},
+    {
+        path: "login",
+        component: LoginComponent,
+        canActivate: [AuthenticationGuard],
+        data: {
+            menu: {
+                title: "Login",
+                group: "Account",
+                visible: true,
+                order: 9,
+                authentication: MenuAuthenticationType.unauthenticated
+            }
+        }
+    },
+    {
+        path: "register",
+        component: RegisterComponent,
+        canActivate: [AuthenticationGuard],
+        data: {
+            menu: {
+                title: "Register",
+                group: "Account",
+                visible: false,
+                order: 10,
+                authentication: MenuAuthenticationType.unauthenticated
+            }
+        }
+    },
+    {
+        path: "logout",
+        component: LogoutComponent,
+        canActivate: [AuthenticationGuard],
+        data: {
+            menu: {
+                title: "Logout",
+                group: "Account",
+                visible: true,
+                order: 11,
+                authentication: MenuAuthenticationType.required
+            }
+        }
+    },   
+    {
+        path: "users",
+        component: UsersComponent,
+        canActivate: [AuthenticationGuard],
+        data: {
+            menu: {
+                title: "User List",
+                group: "Users",
+                visible: true,
+                order: 12,
+                authentication: MenuAuthenticationType.required
+            }
+        }
+    },
+    //{
+    //    path: "admin/books",
+    //    component: AdminBooksComponent,
+    //    canActivate: [AuthenticationGuard],
+    //    data: {
+    //        menu: {
+    //            title: "Books",
+    //            group: "Admin",
+    //            visible: true,
+    //            order: 13,
+    //            authentication: MenuAuthenticationType.required
+    //        }
+    //    }
+    //}, 
     { path: "infantry", component: InfantryComponent, canActivate: [AuthenticationGuard] },
     { path: "infantry/browser", component: InfantryBrowserComponent, canActivate: [AuthenticationGuard] },
     { path: "exception-formatter", component: ExceptionFormatterComponent, canActivate: [AuthenticationGuard] },
     { path: "base64-converter", component: Base64ConverterComponent, canActivate: [AuthenticationGuard] },
     { path: "hash-generator", component: HashComponent, canActivate: [AuthenticationGuard] },
-    { path: "resume", component: ResumeComponent, canActivate: [AuthenticationGuard] },
-    { path: "media", component: MediaComponent, canActivate: [AuthenticationGuard] },
-    { path: "window-sticker-lookup", component: WindowStickerLookupComponent, canActivate: [AuthenticationGuard] },
-    { path: "books", component: BooksComponent, canActivate: [AuthenticationGuard] },
-    { path: "users", component: UsersComponent, canActivate: [AuthenticationGuard] },
+    { path: "window-sticker-lookup", component: WindowStickerLookupComponent, canActivate: [AuthenticationGuard] },    
     { path: "users/add-user", component: AddUserComponent, canActivate: [AuthenticationGuard] },
-    { path: "login", component: LoginComponent, canActivate: [AuthenticationGuard] },
-    { path: "register", component: RegisterComponent, canActivate: [AuthenticationGuard] },
-    { path: "logout", component: LogoutComponent, canActivate: [AuthenticationGuard] },
-    { path: "", component: HomeComponent, pathMatch: "full", canActivate: [AuthenticationGuard] }
+    {
+        path: "",
+        component: HomeComponent,
+        pathMatch: "full",
+        canActivate: [AuthenticationGuard],
+        data: {
+            menu: {
+                title: "Home",
+                group: "Main",
+                visible: true,
+                order: 1
+            }
+        }
+    }
 ];
 
 @NgModule({

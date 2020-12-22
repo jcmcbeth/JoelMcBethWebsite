@@ -1,6 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { AuthenticationService } from "../authentication/authentication.service";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AuthenticationResult } from "../authentication/authentication-result";
 
 @Component({
@@ -11,11 +11,15 @@ export class LoginComponent {
     public error: string;
     public username: string;
     public password: string;
+    private returnUrl: string;
 
     constructor(
         private readonly authenticationService: AuthenticationService,
-        private readonly router: Router) {
+        private readonly router: Router,
+        route: ActivatedRoute) {
+        this.returnUrl = route.snapshot.queryParams['returnUrl'] || '/';
     }
+
 
     login() {
         this.error = null;
@@ -23,7 +27,7 @@ export class LoginComponent {
         this.authenticationService.login(this.username, this.password)
             .subscribe(result => {
                 if (result === AuthenticationResult.Success) {
-                    this.router.navigate(["/"]);
+                    this.router.navigateByUrl(this.returnUrl);
 
                     return;
                 }

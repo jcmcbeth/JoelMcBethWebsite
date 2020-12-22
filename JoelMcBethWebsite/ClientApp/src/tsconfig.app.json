@@ -14,6 +14,6 @@
         "app/app.run.ts",
         "app/account/*.ts",
         "app/admin/**/*.ts",
-        "app/cameras/*.ts",
+        "app/cameras/*.ts"
     ]
 }
