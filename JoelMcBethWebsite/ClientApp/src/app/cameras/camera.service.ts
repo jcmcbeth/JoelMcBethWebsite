@@ -1,37 +1,41 @@
-﻿/// <reference path="../../../client/typings/angularjs/index.d.ts" />
-/// <reference path="../shared/models/config.ts" />
+import { HttpClient } from "@angular/common/http";
+import { Inject, Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 
-class CameraService {
-    static $inject = ["config", "$http", "$window"];
-
+@Injectable({
+    providedIn: "root"
+})
+export class CameraService {
     private baseUrl: string;
 
     constructor(
-        private config: Config,
-        private http: ng.IHttpService,
-        private window: ng.IWindowService) {
+        private readonly httpClient: HttpClient,
+        @Inject("API_URL") baseUrl: string) {
 
-        this.baseUrl = config.serviceUrlBase + "/camera";
+        this.baseUrl = baseUrl + "/camera";
     }
 
-    getSnapshotUrl() {
+    getSnapshotUrl(): Observable<string> {
         const url = this.baseUrl + "/Snapshot";
 
-        return this.http({
-            method: 'GET',
-            url: url,
-            responseType: 'arraybuffer',
-        }).then(response => {
-            //return 'data:image/jpeg;base64,' + this._arrayBufferToBase64(response.data);
-            //let blob = new Blob([response.data], { type: "image/jpeg" });
-
-            //return this.window.URL.createObjectURL(blob);
-            return null;
+        this.httpClient.get(url).subscribe(() => {
         });
+
+        //return this.http({
+        //    method: 'GET',
+        //    url: url,
+        //    responseType: 'arraybuffer',
+        //}).then(response => {
+        //    //return 'data:image/jpeg;base64,' + this._arrayBufferToBase64(response.data);
+        //    //let blob = new Blob([response.data], { type: "image/jpeg" });
+
+        //    //return this.window.URL.createObjectURL(blob);
+        //    return null;
+        //});
     }
 
     private _arrayBufferToBase64(buffer) {
-        var binary = '';
+        var binary = "";
         var bytes = new Uint8Array(buffer);
         var len = bytes.byteLength;
         for (var i = 0; i < len; i++) {
@@ -40,7 +44,3 @@ class CameraService {
         return window.btoa(binary);
     }
 }
-
-angular
-    .module("app")
-    .service('CameraService', CameraService);

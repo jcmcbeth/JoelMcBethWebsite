@@ -34,6 +34,7 @@ import { LogoutComponent } from "./account/logout.component";
 import { MenuAuthenticationType } from "./menu/menu-authentication-type";
 import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
 import { LoadingHttpInterceptor } from "./loading-spinner/loading-http-interceptor";
+import { CameraComponent } from "./cameras/camera.component";
 
 const routes: Routes = [
     {
@@ -114,20 +115,20 @@ const routes: Routes = [
             }
         }
     },
-    //{
-    //    path: "cameras",
-    //    component: CamerasComponent,
-    //    canActivate: [AuthenticationGuard],
-    //    data: {
-    //        menu: {
-    //            title: "Misc",
-    //            group: "Main",
-    //            visible: true,
-    //            order: 8,
-    //            authentication: MenuAuthenticationType.required
-    //        }
-    //    }
-    //},
+    {
+        path: "cameras",
+        component: CameraComponent,
+        canActivate: [AuthenticationGuard],
+        data: {
+            menu: {
+                title: "Cameras",
+                group: "Main",
+                visible: true,
+                order: 8,
+                authentication: MenuAuthenticationType.required
+            }
+        }
+    },
     {
         path: "login",
         component: LoginComponent,
@@ -247,7 +248,8 @@ const routes: Routes = [
         RegisterComponent,
         LoginComponent,
         LogoutComponent,
-        LoadingSpinnerComponent
+        LoadingSpinnerComponent,
+        CameraComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
