@@ -5,7 +5,7 @@ import { PagedArray } from "../shared/models/paged-array";
 import { Book } from "./book";
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: "root",
 })
 export class BookService {
     private baseUrl;

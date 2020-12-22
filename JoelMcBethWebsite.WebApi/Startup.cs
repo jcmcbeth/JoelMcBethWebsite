@@ -1,22 +1,15 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Amcrest.HttpClient;
 using JoelMcBethWebsite.Authentication;
 using JoelMcBethWebsite.Data;
 using JoelMcBethWebsite.Data.EntityFramework;
 using JoelMcBethWebsite.Data.MicrosoftSql;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace JoelMcBethWebsite.WebApi
 {
@@ -26,7 +19,7 @@ namespace JoelMcBethWebsite.WebApi
 
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -51,7 +44,7 @@ namespace JoelMcBethWebsite.WebApi
                     this.Configuration["Camera:UserName"],
                     this.Configuration["Camera:Password"]));
 
-            var allowedOrigins = GetAllowedOrigins();
+            var allowedOrigins = this.GetAllowedOrigins();
 
             services.AddCors(options =>
             {
