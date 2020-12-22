@@ -32,6 +32,8 @@ import { RegisterComponent } from "./account/register.component";
 import { LoginComponent } from "./account/login.component";
 import { LogoutComponent } from "./account/logout.component";
 import { MenuAuthenticationType } from "./menu/menu-authentication-type";
+import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
+import { LoadingHttpInterceptor } from "./loading-spinner/loading-http-interceptor";
 
 const routes: Routes = [
     {
@@ -244,7 +246,8 @@ const routes: Routes = [
         AddUserComponent,
         RegisterComponent,
         LoginComponent,
-        LogoutComponent
+        LogoutComponent,
+        LoadingSpinnerComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
@@ -254,6 +257,7 @@ const routes: Routes = [
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: AuthenticationHttpInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: LoadingHttpInterceptor, multi: true },
         { provide: "API_URL", useValue: environment.apiUrl },
         { provide: "Window", useValue: window }
     ],

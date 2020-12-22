@@ -7,12 +7,9 @@
     "exclude": [
         "src/test.ts",
         "**/*.spec.ts",
-        "app/app.bootstrap.ts",
         "app/app.config.ts",
         "app/app.controller.ts",
         "app/app.routes.ts",
-        "app/app.run.ts",
-        "app/account/*.ts",
         "app/admin/**/*.ts",
         "app/cameras/*.ts"
     ]
