@@ -10,7 +10,6 @@
         "app/app.config.ts",
         "app/app.controller.ts",
         "app/app.routes.ts",
-        "app/admin/**/*.ts",
-        "app/cameras/*.ts"
+        "app/admin/**/*.ts"
     ]
 }
