@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, fromEvent } from "rxjs";
+import { map, mergeMap } from "rxjs/operators";
 
 @Injectable({
     providedIn: "root"
@@ -18,8 +19,22 @@ export class CameraService {
     getSnapshotUrl(): Observable<string> {
         const url = this.baseUrl + "/Snapshot";
 
-        this.httpClient.get(url).subscribe(() => {
-        });
+        const reader = new FileReader();
+
+        return this.httpClient.get(url, { responseType: "blob" }).pipe(
+            mergeMap(imageBlob => {
+                var observable = fromEvent(reader, "load")
+                    .pipe(
+                        map(event => <string>reader.result)
+                    );
+
+                if (imageBlob) {
+                    reader.readAsDataURL(imageBlob);
+                }
+
+                return observable;
+            })
+        );
 
         //return this.http({
         //    method: 'GET',

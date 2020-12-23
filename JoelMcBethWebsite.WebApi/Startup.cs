@@ -62,6 +62,8 @@ namespace JoelMcBethWebsite.WebApi
             services.AddControllers();
 
             services.AddDbContext<JoelMcbethWebsiteDbContext>(options => options.UseSqlServer(connectionString));
+
+            services.AddMemoryCache();
         }
 
         private string[] GetAllowedOrigins()
