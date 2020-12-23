@@ -21,6 +21,7 @@ export class CameraComponent implements OnInit, OnDestroy {
         this.refreshAutomatically = false;
 
         this.requestPending = false;
+        this.snapshotUrl = "";
     }
 
     ngOnInit(): void {
