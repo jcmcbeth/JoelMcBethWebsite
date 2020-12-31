@@ -19,8 +19,6 @@ export class LoadingService {
         if (this.pending === 1) {
             this.loading.next(true);
         }
-
-        console.log("Load. Pending === " + this.pending);
     }
 
     complete(): void {        
@@ -29,7 +27,5 @@ export class LoadingService {
         if (this.pending === 0) {
             this.loading.next(false);
         }
-
-        console.log("Complete. Pending === " + this.pending);
     }
 }

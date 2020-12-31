@@ -53,5 +53,13 @@
 
             return this.Ok(book);
         }
+
+        [HttpPost("books")]
+        public async Task<IActionResult> Put([FromBody] Book book)
+        {
+            // TODO: implement update book
+
+            return this.Ok(book);
+        }
     }
 }

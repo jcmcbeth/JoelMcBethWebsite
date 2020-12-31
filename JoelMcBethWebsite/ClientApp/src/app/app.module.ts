@@ -35,6 +35,9 @@ import { MenuAuthenticationType } from "./menu/menu-authentication-type";
 import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
 import { LoadingHttpInterceptor } from "./loading-spinner/loading-http-interceptor";
 import { CameraComponent } from "./cameras/camera.component";
+import { BookListComponent } from "./admin/books/book-list.component";
+import { EditBookComponent } from "./admin/books/edit-book.component";
+import { AddBookComponent } from "./admin/books/add-book.component";
 
 const routes: Routes = [
     {
@@ -185,20 +188,20 @@ const routes: Routes = [
             }
         }
     },
-    //{
-    //    path: "admin/books",
-    //    component: AdminBooksComponent,
-    //    canActivate: [AuthenticationGuard],
-    //    data: {
-    //        menu: {
-    //            title: "Books",
-    //            group: "Admin",
-    //            visible: true,
-    //            order: 13,
-    //            authentication: MenuAuthenticationType.required
-    //        }
-    //    }
-    //}, 
+    {
+        path: "admin/books",
+        component: BookListComponent,
+        canActivate: [AuthenticationGuard],
+        data: {
+            menu: {
+                title: "Books",
+                group: "Admin",
+                visible: true,
+                order: 13,
+                authentication: MenuAuthenticationType.required
+            }
+        }
+    }, 
     { path: "infantry", component: InfantryComponent, canActivate: [AuthenticationGuard] },
     { path: "infantry/browser", component: InfantryBrowserComponent, canActivate: [AuthenticationGuard] },
     { path: "exception-formatter", component: ExceptionFormatterComponent, canActivate: [AuthenticationGuard] },
@@ -206,6 +209,8 @@ const routes: Routes = [
     { path: "hash-generator", component: HashComponent, canActivate: [AuthenticationGuard] },
     { path: "window-sticker-lookup", component: WindowStickerLookupComponent, canActivate: [AuthenticationGuard] },    
     { path: "users/add-user", component: AddUserComponent, canActivate: [AuthenticationGuard] },
+    { path: "admin/books/add", component: AddBookComponent, canActivate: [AuthenticationGuard] },
+    { path: "admin/books/edit/:id", component: EditBookComponent, canActivate: [AuthenticationGuard] },
     {
         path: "",
         component: HomeComponent,
@@ -249,7 +254,10 @@ const routes: Routes = [
         LoginComponent,
         LogoutComponent,
         LoadingSpinnerComponent,
-        CameraComponent
+        CameraComponent,
+        BookListComponent,
+        EditBookComponent,
+        AddBookComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),

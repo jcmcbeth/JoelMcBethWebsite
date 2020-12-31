@@ -51,6 +51,7 @@ namespace JoelMcBethWebsite.WebApi
                 options.AddPolicy(CorsPolicyName, policy =>
                 {
                     policy.AllowAnyHeader();
+                    policy.AllowAnyMethod();
 
                     if (allowedOrigins.Any())
                     {

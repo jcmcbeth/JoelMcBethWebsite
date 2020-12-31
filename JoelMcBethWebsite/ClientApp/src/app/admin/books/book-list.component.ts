@@ -1,10 +1,12 @@
-﻿/// <reference path="../../../../client/typings/angularjs/index.d.ts" />
-/// <reference path="../../books/book.ts" />
-/// <reference path="../../books/book.service.ts" />
+import { Book } from "../../books/book";
+import { BookService } from "../../books/book.service";
+import { Component, OnInit } from "@angular/core";
 
-class BookListController {
-    static $inject = ["BookService", "$state", "sortDirections"];
-
+@Component({
+    selector: "admin-book-list",
+    templateUrl: "./book-list.component.html"
+})
+export class BookListComponent implements OnInit {
     pageSize: number;
     page: number;
     pageCount: number;
@@ -15,7 +17,7 @@ class BookListController {
     books: Book[];
     filterText: string;
 
-    constructor(private bookService: BookService, private state, public sortDirections) {
+    constructor(private bookService: BookService) {
         this.pageSize = 12;
         this.page = 1;
         this.pageCount = 0;
@@ -45,15 +47,15 @@ class BookListController {
     }
 
     updateBooks() {
-        return this.bookService.getBooks(this.filterText, this.page, this.pageSize, this.sort, this.sortDirection).then(data => {
-            this.books = data.items;
-            this.pageCount = data.pagination.pages;
+        return this.bookService.getBooks(this.filterText, this.page, this.pageSize, this.sort, this.sortDirection).subscribe(books => {
+            this.books = books.items;
+            this.pageCount = books.pagination.pages;
 
             this.updatePages();
         });
     }
 
-    $onInit(): void {
+    ngOnInit(): void {
         this.updateBooks();
     }
 
@@ -67,7 +69,3 @@ class BookListController {
         }
     }
 }
-
-angular
-    .module("app")
-    .controller("BookListController", BookListController);

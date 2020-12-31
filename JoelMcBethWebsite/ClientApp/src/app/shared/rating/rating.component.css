@@ -1,3 +1,7 @@
-﻿.starred {
+.starred {
     color: orange;
+}
+
+.rating {
+    white-space: nowrap;
 }
