@@ -6,10 +6,6 @@
   },
     "exclude": [
         "src/test.ts",
-        "**/*.spec.ts",
-        "app/app.config.ts",
-        "app/app.controller.ts",
-        "app/app.routes.ts",
-        "app/admin/**/*.ts"
+        "**/*.spec.ts"
     ]
 }
