@@ -17,18 +17,8 @@ export class EditBookComponent implements OnInit {
         this.book = <Book>{};
     }
 
-    updateBook(book: Book) {
-        this.bookService.updateBook(book).subscribe(updatedBook => {
-            if (book.authors) {
-                for (let i = 0; i < book.authors.length; i++) {
-                    const author = book.authors[i];
-
-                    if (author.id < 0) {
-                        author.id = 0;
-                    }
-                }
-            }
-
+    updateBook() {
+        this.bookService.updateBook(this.book).subscribe(updatedBook => {
             this.book = updatedBook;
         }, error => {
             this.error = "Failed to update the book.";
