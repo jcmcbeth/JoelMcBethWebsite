@@ -10,8 +10,6 @@ import { SortDirection } from "../shared/sort-direction";
     styleUrls: ["./books.component.css"]
 })
 export class BooksComponent implements OnInit {
-    static $inject = ["BookService", "sortDirections"];
-
     pageSize: number;
     page: number;
     pageCount: number;

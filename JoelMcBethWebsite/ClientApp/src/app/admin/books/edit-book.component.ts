@@ -9,8 +9,6 @@ import { Author } from "../../books/author";
     templateUrl: "./edit-book.component.html"
 })
 export class EditBookComponent implements OnInit {
-    static $inject = ["BookService", "$state"];
-
     book: Book;
     id: number;
     error: string;

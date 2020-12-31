@@ -8,8 +8,6 @@ import { UserService } from "./user.service";
     templateUrl: './add-user.component.html',
 })
 export class AddUserComponent {
-    static $inject = ["userService", "$state"];
-
     user: User;
 
     constructor(private userService: UserService, private router: Router) {

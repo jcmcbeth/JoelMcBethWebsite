@@ -7,8 +7,6 @@ import { Observable } from "rxjs";
     providedIn: 'root',
 })
 export class InfantryBrowserService {
-    static $inject = ["$http", "config"];
-
     private baseUrl: string;
 
     constructor(private httpClient: HttpClient, @Inject("API_URL") baseUrl: string) {
