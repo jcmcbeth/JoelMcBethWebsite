@@ -44,6 +44,7 @@
             contentTypeProvider.Mappings.Add(".exe", "application/vnd.microsoft.portable-executable");
             contentTypeProvider.Mappings.Add(".cfg", "text/plain");
 
+            app.UseDefaultFiles();
             app.UseStaticFiles(new StaticFileOptions()
             {
                 ContentTypeProvider = contentTypeProvider,
@@ -52,8 +53,6 @@
             {
                 app.UseSpaStaticFiles();
             }
-
-            app.UseDefaultFiles();
 
             app.UseSpa(spa =>
             {
