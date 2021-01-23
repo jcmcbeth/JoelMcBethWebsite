@@ -16,10 +16,14 @@
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<Notification> Notifications { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
                 .ToTable("User");
+            modelBuilder.Entity<Notification>()
+                .ToTable("Notification");
         }
     }
 }

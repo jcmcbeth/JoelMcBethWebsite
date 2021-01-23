@@ -1,6 +1,7 @@
 ﻿namespace JoelMcBethWebsite.Data.Models
 {
     using System;
+    using System.Collections.Generic;
 
     public class User
     {
@@ -21,5 +22,7 @@
         public bool IsLocked { get; set; }
 
         public DateTime? LastLoginAttempt { get; set; }
+
+        public IEnumerable<Notification> Notifications { get; set; }
     }
 }

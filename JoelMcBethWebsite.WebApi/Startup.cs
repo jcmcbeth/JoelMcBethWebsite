@@ -4,12 +4,15 @@ using JoelMcBethWebsite.Authentication;
 using JoelMcBethWebsite.Data;
 using JoelMcBethWebsite.Data.EntityFramework;
 using JoelMcBethWebsite.Data.MicrosoftSql;
+using JoelMcBethWebsite.Messaging;
+using JoelMcBethWebsite.WebApi.Messaging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SendGrid;
 
 namespace JoelMcBethWebsite.WebApi
 {
@@ -43,6 +46,10 @@ namespace JoelMcBethWebsite.WebApi
                     System.Net.IPAddress.Parse(this.Configuration["Camera:IPAddress"]),
                     this.Configuration["Camera:UserName"],
                     this.Configuration["Camera:Password"]));
+
+            var sendGridApiKey = this.Configuration["SendGrid:ApiKey"];
+            services.AddTransient(sp => new SendGridClient(sendGridApiKey));
+            services.AddTransient<IEmailClient, SendGridEmailClient>();
 
             var allowedOrigins = this.GetAllowedOrigins();
 

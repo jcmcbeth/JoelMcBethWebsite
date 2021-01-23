@@ -3,6 +3,7 @@
     using JoelMcBethWebsite.Authentication;
     using JoelMcBethWebsite.Data;
     using JoelMcBethWebsite.Data.Models;
+    using JoelMcBethWebsite.Messaging;
     using JoelMcBethWebsite.Models;
     using Microsoft.AspNetCore.Mvc;
     using System;
@@ -15,12 +16,18 @@
         private readonly IUserRepository userRepository;
         private readonly ITokenProvider tokenProvider;
         private readonly AuthenticationManager authenticationManager;
+        private readonly IEmailClient emailClient;
 
-        public AccountController(ITokenProvider tokenProvider, IUserRepository userRepository, AuthenticationManager authenticationManager)
+        public AccountController(
+            ITokenProvider tokenProvider,
+            IUserRepository userRepository,
+            AuthenticationManager authenticationManager,
+            IEmailClient emailClient)
         {
             this.userRepository = userRepository;
             this.tokenProvider = tokenProvider;
             this.authenticationManager = authenticationManager;
+            this.emailClient = emailClient;
         }
 
         [HttpPost]
@@ -44,6 +51,13 @@
             var expiration = DateTime.UtcNow.AddMinutes(60);
 
             response.Token = this.tokenProvider.CreateToken(user, expiration);
+
+            await this.emailClient.SendAsync(new EmailMessage()
+            {
+                To = user.Email,
+                Content = "Your user has been authenticated.",
+                Subject = "JoelMcBeth.com Notification"
+            });
 
             return response;
         }
