@@ -1,14 +1,12 @@
 ﻿namespace JoelMcBethWebsite.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
     using JoelMcBethWebsite.Authentication;
     using JoelMcBethWebsite.Data;
     using JoelMcBethWebsite.Data.Models;
     using JoelMcBethWebsite.Models;
     using Microsoft.AspNetCore.Mvc;
+    using System;
+    using System.Threading.Tasks;
 
     [Produces("application/json")]
     [Route("account")]
@@ -52,13 +50,22 @@
 
         [HttpPost]
         [Route("Register")]
-        public async Task Register([FromBody]UserRegistration registration)
+        public async Task<IActionResult> Register([FromBody]UserRegistration registration)
         {
+            var userName = registration.UserName;
+
+            if (await this.userRepository.GetUserByUserNameAsync(registration.UserName) != null)
+            {
+                return this.Ok(false);
+            }
+
             var user = new User()
             {
-                UserName = registration.UserName,
+                UserName = userName,
                 Email = registration.Email,
             };
+
+
 
             // We want the first user that registers to actually be able to login
             if (await this.userRepository.Any() == false)
@@ -68,6 +75,8 @@
 
             await this.userRepository.AddUserAsync(user);
             await this.authenticationManager.CreateCredentialsAsync(registration.UserName, registration.Password);
+
+            return this.Ok(true);
         }
     }
 }

@@ -1,0 +1,22 @@
+<h1>Users</h1>
+
+<ul class="list-unstyled">
+    <li><a routerLink="/users/add-user">Add User</a></li>
+</ul>
+
+<table class="table table-sm">
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Approved</th>
+        <td></td>
+    </tr>
+    <tr *ngFor="let user of users">
+        <td>{{user.userName}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.isApproved ? 'Yes' : 'No'}}</td>
+        <td>
+            <button class="btn btn-primary" (click)="approve(user)">{{user.isApproved ? 'Unapprove' : 'Approve'}}</button>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,15 @@
+<h1>Base64 Converter</h1>
+<p>It is nice to be able to convert strings to base 64 and knowing that the string isn't being logged.</p>
+<div class="row">
+    <form #form="ngForm" class="col-md-4 col-lg-3" (ngSubmit)="convert()">
+        <div class="form-group">
+            <label for="text">Text</label><span class="badge badge-light">Required</span>
+            <textarea name="text" class="form-control" [(ngModel)]="text" rows="5" required autocomplete="off"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="Base64">Base64:</label>
+            <textarea name="base64" class="form-control" [(ngModel)]="base64" rows="5" autocomplete="off"></textarea>
+        </div>
+        <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Convert</button>
+    </form>
+</div>

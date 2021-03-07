@@ -1,0 +1,15 @@
+<div *ngIf="group.resources">
+    <h2 level="level">{{ group.name }}</h2>
+
+    <p *ngIf="group.description">{{ group.description }}</p>
+    <ul class="list-unstyled">
+        <li *ngFor="let resource of group.resources">
+            <span *ngIf="!resource.url">{{ resource.title }}</span>
+            <a *ngIf="resource.url" href="{{ resource.url }}" target="_blank">{{ resource.title }}</a><span *ngIf="resource.description"> - {{ resource.description }}</span>
+        </li>
+    </ul>
+
+    <ng-container *ngFor="let childGroup of group.groups">
+        <app-resource-group [group]="childGroup"></app-resource-group>
+    </ng-container>
+</div>

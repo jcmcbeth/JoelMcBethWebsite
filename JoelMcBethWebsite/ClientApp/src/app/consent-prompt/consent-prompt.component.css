@@ -1,0 +1,14 @@
+.consent-prompt {
+    background-color: white;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    position: fixed;
+    bottom: 0;
+    padding: .25rem;
+    font-size: .75rem;
+    text-align: center;
+}
+
+.consent-prompt button {
+    margin: 0 .125rem 0 .125rem;
+}

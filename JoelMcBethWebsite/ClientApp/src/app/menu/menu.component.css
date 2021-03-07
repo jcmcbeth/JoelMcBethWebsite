@@ -1,0 +1,32 @@
+:host {
+    width: 100%;
+    padding: 0;
+    display: block;
+    min-height: 0;
+}
+
+    :host .navbar-collapse {
+        padding: 4px 15px;
+    }
+
+    :host .navbar-nav {
+        display: block;
+    }
+
+    :host .navbar-link {
+        padding: 0;
+    }
+
+    :host .navbar-nav .nav-link {
+        padding: 0;
+    }
+
+.menu-group {
+    padding: 0 0 .5rem 0;
+}
+
+@media (min-width: 768px) {
+    :host .navbar-collapse {
+        display: block !important;
+    }
+}

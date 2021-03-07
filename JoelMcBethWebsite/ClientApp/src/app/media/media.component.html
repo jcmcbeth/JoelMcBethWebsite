@@ -1,0 +1,24 @@
+<h2>Media Library</h2>
+<p>Different types of media in my library.</p>
+<div class="form-group">
+    <input id="filter" type="text" class="form-control" placeholder="Search" [(ngModel)]="filterText" (keyup)="search()" />
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Media Type</th>
+            <th>Medium</th>
+            <th>Year</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of media">
+            <th>{{ item.title }}</th>
+            <th>{{ item.mediaType }}</th>
+            <th>{{ item.medium }}</th>
+            <th>{{ item.year}}</th>
+        </tr>
+    </tbody>
+</table>

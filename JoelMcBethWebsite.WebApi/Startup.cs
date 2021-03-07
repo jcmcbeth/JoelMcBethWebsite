@@ -22,7 +22,7 @@ namespace JoelMcBethWebsite.WebApi
 
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -48,13 +48,14 @@ namespace JoelMcBethWebsite.WebApi
                     this.Configuration["Camera:UserName"],
                     this.Configuration["Camera:Password"]));            
 
-            var allowedOrigins = GetAllowedOrigins();
+            var allowedOrigins = this.GetAllowedOrigins();
 
             services.AddCors(options =>
             {
                 options.AddPolicy(CorsPolicyName, policy =>
                 {
                     policy.AllowAnyHeader();
+                    policy.AllowAnyMethod();
 
                     if (allowedOrigins.Any())
                     {
@@ -78,6 +79,8 @@ namespace JoelMcBethWebsite.WebApi
             });
             services.AddTransient<TaskCountSchedulerJob>();
             services.AddHostedService<SchedulerHostedService>();
+
+            services.AddMemoryCache();
         }
 
         private string[] GetAllowedOrigins()

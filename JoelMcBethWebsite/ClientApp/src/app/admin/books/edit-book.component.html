@@ -1,0 +1,61 @@
+<h2>Edit Book</h2>
+<form #form="ngForm">
+    <div class="alert alert-danger" role="alert" *ngIf="error">
+        {{error}}
+    </div>
+
+    <div class="form-group">
+        <label>Title</label> <span class="badge badge-light">Required</span>
+        <input name="title" class="form-control col-6" [(ngModel)]="book.title" required type="text" />
+        <div class="invalid-feedback col-lg-3">Enter a valid title.</div>
+    </div>
+
+    <div class="form-group">
+        <label>ISBN 13</label> <span class="badge badge-light">Required</span>
+        <input name="isbn" class="form-control" [(ngModel)]="book.isbn13" required type="text" minlength="13" maxlength="13" />
+    </div>
+
+    <div class="form-group">
+        <label>Number of Pages</label>
+        <input name="pages" class="form-control" [(ngModel)]="book.pages" type="number" />
+    </div>
+
+    <div>
+        <!-- TODO: make component -->
+        <div class="row">
+            <label class="col">Authors</label>
+        </div>
+
+        <div class="row">
+            <div class="col form-group">
+                <input name="createAuthor" class="btn btn-secondary" type="button" value="Add" (click)="createAuthor()" />
+            </div>
+        </div>
+
+        <div class="form-row" ng-if="book.authors.length > 0">
+            <label class="col-3">First Name</label>
+            <label class="col-3">Last Name</label>
+            <label class="col-3">Middle Name</label>
+        </div>
+
+        <div *ngFor="let author of book.authors">
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <input name="firstName-{{author.id}}" class="form-control col" [(ngModel)]="author.firstName" required />
+                </div>
+                <div class="form-group col-3">
+                    <input name="lastName-{{author.id}}" class="form-control col" [(ngModel)]="author.lastName" required />
+                </div>
+                <div class="form-group col-3">
+                    <input name="middleName-{{author.id}}" class="form-control col" [(ngModel)]="author.middleName" />
+                </div>
+                <div class="form-group col">
+                    <input name="removeAuthor-{{author.id}}" class="btn btn-danger" type="button" value="Remove" (click)="removeAuthor(author)" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <button type="submit" name="saveButton" class="btn btn-primary" (click)="updateBook()" (disabled)="!form.isvalid">Save</button>
+</form>

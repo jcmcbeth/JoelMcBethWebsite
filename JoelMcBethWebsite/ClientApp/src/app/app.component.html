@@ -1,0 +1,21 @@
+<app-loading-spinner></app-loading-spinner>
+
+<nav id="top-nav" class="navbar navbar-dark flex-md-nowrap navbar-expand-md">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" ui-sref="home">JoelMcBeth.com</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</nav>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <app-menu></app-menu>
+
+        <div id="main" role="main" class="col-md-10 ml-sm-auto col-lg-11">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+<app-consent-prompt></app-consent-prompt>

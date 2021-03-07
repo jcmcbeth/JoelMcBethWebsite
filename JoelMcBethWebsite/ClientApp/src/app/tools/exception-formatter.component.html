@@ -1,0 +1,15 @@
+<div>
+    <h1>Exception Formatter</h1>
+    <p>If for whatever reason your .NET exception and stack trace isn't formatted nicely this tool will fix that. All done client side. Nothing is sent to the server.</p>
+    <form #form="ngForm" (ngSubmit)="format()">
+        <div class="form-group">
+            <label for="exception-text">Exception Text</label><span class="badge badge-light">Required</span>
+            <textarea name="exceptionTextArea" class="form-control" [(ngModel)]="exceptionText" rows="7" required autocomplete="off"></textarea>
+        </div>
+        <div>
+            <div>Formatted Exception</div>
+            <pre>{{formattedException}}</pre>
+        </div>
+        <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Format</button>
+    </form>
+</div>

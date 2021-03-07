@@ -1,6 +1,0 @@
-﻿class User {
-    id: number;
-    userName: string;
-    email: string;
-    isApproved: boolean;
-}

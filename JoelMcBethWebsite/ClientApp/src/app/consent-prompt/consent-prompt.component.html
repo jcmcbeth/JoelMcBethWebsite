@@ -1,0 +1,5 @@
+<div class="consent-prompt" *ngIf="showConsentPrompt()">
+    {{ message }}
+    <button class="btn btn-primary btn-sm" (click)="accept()">Accept</button>
+    <button class="btn btn-secondary btn-sm" (click)="decline()">Decline</button>
+</div>

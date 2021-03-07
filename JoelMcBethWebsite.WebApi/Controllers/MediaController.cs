@@ -1,13 +1,10 @@
 ﻿namespace JoelMcBethWebsite.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
     using JoelMcBethWebsite.Data;
     using JoelMcBethWebsite.Data.Models;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     [Produces("application/json")]
     [Route("Media")]

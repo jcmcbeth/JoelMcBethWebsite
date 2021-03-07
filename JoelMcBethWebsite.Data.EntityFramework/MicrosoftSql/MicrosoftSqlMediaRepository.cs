@@ -31,6 +31,12 @@
             {
                 var media = await connection.QueryAsync<Media>(query);
 
+                if (!string.IsNullOrWhiteSpace(titleSearch))
+                {
+                    media = media.Where(m =>
+                        m.Title.IndexOf(titleSearch, StringComparison.OrdinalIgnoreCase) >= 0);
+                }
+
                 return media;
             }
         }

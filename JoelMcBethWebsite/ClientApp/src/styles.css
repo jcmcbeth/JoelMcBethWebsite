@@ -1,0 +1,276 @@
+html {
+    font-size: 11pt;
+}
+
+body {
+    font-family: Consolas;
+    background: WhiteSmoke;
+}
+
+a:active, a:hover {
+    color: green;
+}
+
+a {
+    color: Green;
+    text-decoration: None;
+}
+
+h1, h2, h3, h4, h5 {
+    margin: 0;
+}
+
+h1 {   
+    margin:0 0 .25rem 0;
+    font-weight: Bold;
+    text-decoration: none;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-style: italic;
+}
+
+
+h2 {
+    font-weight: Bold;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+}
+
+h3 {
+    font-size: 1.125rem;
+    font-weight: bold;
+    font-style: italic;
+}
+
+h4 {
+    font-size: 1.125rem;
+    font-weight: bold;
+}
+
+h5 {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+pre {
+    font-family: courier new, monospace;
+}
+
+p {
+    margin: 0 0 1em 0;
+}
+
+label {
+    font-weight: bold;
+}
+
+/*
+    Top Menu
+*/
+#top-nav {
+    background: Green;
+    border-bottom: 2px solid black;
+}
+
+#top-nav .navbar-brand {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-style: italic;
+    padding: 0;
+}
+
+.navbar-dark .navbar-toggler {
+    color: rgba(255, 255, 255, .75);
+    border-color: rgba(255, 255, 255, 0.75);
+}
+
+.navbar-dark .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.75)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.alert {
+    border-radius: unset;
+    padding: 0.375rem 0.75rem;
+}
+
+/*
+ * Content
+ */
+[role="main"] {
+    background: White;
+    border-left: 1px dashed black;
+    border-bottom: 1px dashed black;
+    border-right: 1px dashed black;
+    border-top: none;
+    padding-bottom: 15px;
+    height: 100%;
+}
+
+/*
+    Input
+*/
+
+.form-control {
+    border-radius: 0;
+    border: 1px solid green;
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: green;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 128, 0, 0.25);
+}
+
+/*
+    Pagination
+*/
+
+.page-link {
+    color: green;
+    border: 0;
+}
+
+.page-link.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.page-link:hover {
+    color: green;
+    text-decoration: underline;
+    background-color: unset;
+    border: 0;
+}
+
+.page-link:focus {
+    z-index: 2;
+    box-shadow: none;
+}
+
+/**
+    buttons
+*/
+
+.btn {
+    border-radius: unset;
+}
+
+/**
+    primary button
+*/
+
+.btn-primary {
+    color: #fff;
+    background-color: green;
+    border-color: green;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: darkgreen;
+    border-color: darkgreen;
+}
+
+.btn-primary:disabled {
+    color: #fff;
+    background-color: green;
+    border-color: darkgreen;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: darkgreen;
+    border-color: darkgreen;
+}
+
+    .btn-primary:focus, .btn-primary.focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 128, 0, 0.5);
+        color: #fff;
+        background-color: darkgreen;
+        border-color: darkgreen;
+    }
+
+.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .show > .btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 128, 0, 0.5);
+}
+
+/*
+    secondary button
+*/
+
+.btn-secondary {
+    background-color: #EFEFEF;
+    border: 1px solid transparent;
+    color: black;
+}
+
+    .btn-secondary:hover {
+        color: black;
+        background-color: gainsboro;
+        border-color: gainsboro;
+    }
+
+    .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle {
+        color: black;
+        background-color: gainsboro;
+        border-color: gainsboro;
+    }
+
+    .btn-secondary:focus, .btn-secondary.focus {
+        box-shadow: 0 0 0 0.2rem rgba(0,0,0,.075);
+        color: black;
+        background-color: gainsboro;
+        border-color: gainsboro;
+    }
+
+    .btn-secondary:not(:disabled):not(.disabled):active:focus, .btn-secondary:not(:disabled):not(.disabled).active:focus, .show > .btn-secondary.dropdown-toggle:focus {
+        box-shadow: 0 0 0 0.2rem rgba(0,0,0,.075);
+    }
+
+/*
+    AngularJS
+*/
+
+input[type=text].ng-invalid.ng-dirty {
+    background-color: pink;
+}
+
+/**
+    Badges
+*/
+
+.badge-primary {
+    background-color: Green;
+}
+
+/*
+    Validation
+*/
+.error-message {
+    color: red;
+    margin-top: .5rem;
+}
+
+/*
+    Animations
+*/
+
+/* Fade */
+
+.animate-fade.ng-enter,
+.consent-prompt.ng-leave {
+    transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+
+.animate-fade.ng-enter,
+.animate-fade.ng-leave.ng-leave-active {
+    opacity: 0;
+}
+
+.animate-fade.ng-leave,
+.animate-fade.ng-enter.ng-enter-active {
+    opacity: 1;
+}
