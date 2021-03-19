@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using JoelMcBethWebsite.Data.Models;
+    using JoelMcBethWebsite.Tasks;
     using Microsoft.EntityFrameworkCore;
 
     public class JoelMcbethWebsiteDbContext : DbContext
@@ -15,6 +16,8 @@
         }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<TaskCount> TaskCounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
