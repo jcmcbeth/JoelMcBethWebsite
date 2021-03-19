@@ -46,8 +46,7 @@ namespace JoelMcBethWebsite.WebApi
                 new AmcrestHttpClient(
                     System.Net.IPAddress.Parse(this.Configuration["Camera:IPAddress"]),
                     this.Configuration["Camera:UserName"],
-                    this.Configuration["Camera:Password"]));            
-
+                    this.Configuration["Camera:Password"]));
             var allowedOrigins = this.GetAllowedOrigins();
 
             services.AddCors(options =>
@@ -68,31 +67,13 @@ namespace JoelMcBethWebsite.WebApi
 
             services.AddDbContext<JoelMcbethWebsiteDbContext>(options => options.UseSqlServer(connectionString));
 
+            services.AddMemoryCache();
+
             services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
 
-            services.AddSingleton<ITaskClient, TodoistRestTaskClient>(
-                factory => new TodoistRestTaskClient(this.Configuration["Todoist:Key"]));
-            services.AddSingleton(factory => new Schedule()
-            {
-                Interval = 60,
-                ScheduledJobType = typeof(TaskCountSchedulerJob)
-            });
-            services.AddTransient<TaskCountSchedulerJob>();
-            services.AddHostedService<SchedulerHostedService>();
-
-            services.AddMemoryCache();
-        }
-
-        private string[] GetAllowedOrigins()
-        {
-            var allowedOrigin = this.Configuration["AllowedOrigin"];
-
-            if (allowedOrigin != null)
-            {
-                return new string[] { allowedOrigin };
-            }
-
-            return new string[0];
+            AddTodoistScheduler(services);
+            
+            services.AddHostedService<SchedulerHostedService>();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -116,6 +97,38 @@ namespace JoelMcBethWebsite.WebApi
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private string[] GetAllowedOrigins()
+        {
+            var allowedOrigin = this.Configuration["AllowedOrigin"];
+
+            if (allowedOrigin != null)
+            {
+                return new string[] { allowedOrigin };
+            }
+
+            return new string[0];
+        }
+
+        private void AddTodoistScheduler(IServiceCollection services)
+        {
+            var todoistToken = this.Configuration["Todoist:Key"];
+
+            if (!string.IsNullOrWhiteSpace(todoistToken))
+            {
+                services.AddSingleton<ITaskClient, TodoistRestTaskClient>(
+                    factory => new TodoistRestTaskClient(todoistToken));
+
+                // TODO: I need to develop a better way to register and configure schedules.
+                // This should be driven by the config file.
+                services.AddSingleton(factory => new Schedule()
+                {
+                    Interval = 60,
+                    ScheduledJobType = typeof(TaskCountSchedulerJob)
+                });
+                services.AddTransient<TaskCountSchedulerJob>();
+            }
         }
     }
 }
