@@ -9,9 +9,3 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-
-:r .\Data\Books.sql
-:r .\Data\Authors.sql
-:r .\Data\BookAuthors.sql
-:r .\Data\Media.sql
-:r .\Data\BookReviews.sql
