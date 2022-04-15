@@ -66,10 +66,7 @@
   <ItemGroup>
     <Build Include="Authors.sql" />
     <Build Include="Books.sql" />
-    <None Include="Data\Books.sql" />
-    <None Include="Data\Authors.sql" />
     <Build Include="BookAuthors.sql" />
-    <None Include="Data\BookAuthors.sql" />
     <Build Include="Media.sql" />
     <Build Include="BookReviews.sql" />
     <None Include="DataLossScripts\Books.DropRatingColumn.sql" />
@@ -84,9 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="JoelMcBethWebsite.Database.publish.xml" />
-    <None Include="Data\Media.sql" />
     <None Include="Queries\Books\GetAllBooks.sql" />
-    <None Include="Data\BookReviews.sql" />
     <None Include="Queries\Books\GetAllBookReviews.sql" />
   </ItemGroup>
 </Project>
