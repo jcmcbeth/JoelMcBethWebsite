@@ -23,7 +23,7 @@ export class HashComponent {
     hash: string;
     uppercaseHash: boolean;
     window: Window;
-    @ViewChild("submissionForm", { static: false }) submissionForm: ElementRef;
+    @ViewChild("submissionForm") submissionForm: ElementRef;
 
     constructor(
         @Inject(DOCUMENT) private document: Document,
