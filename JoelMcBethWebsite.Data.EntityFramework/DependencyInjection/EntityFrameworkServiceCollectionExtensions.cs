@@ -13,7 +13,7 @@
             services.AddTransient<IMediaRepository, MicrosoftSqlMediaRepository>(s => new MicrosoftSqlMediaRepository(connectionString));
             services.AddTransient<ITaskRepository, EntityFrameworkTaskRepository>();
 
-            services.AddDbContext<JoelMcbethWebsiteDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<JoelMcbethWebsiteDbContext>(options => options.UseSqlite(connectionString));
 
             return services;
         }

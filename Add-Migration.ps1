@@ -1,0 +1,2 @@
+# Convert to powershell
+# dotnet ef migrations add Initial --project JoelMcBethWebsite.Data.EntityFramework\JoelMcBethWebsite.Data.EntityFramework.csproj --startup-project JoelMcBethWebsite.WebApi\JoelMcBethWebsite.WebApi.csproj

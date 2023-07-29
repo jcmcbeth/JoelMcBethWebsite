@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28729.10
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33712.159
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JoelMcBethWebsite", "JoelMcBethWebsite\JoelMcBethWebsite.csproj", "{0496203A-71A6-49E2-8049-0A540CD5FF49}"
 EndProject
@@ -17,14 +17,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JoelMcBethWebsite.WebApi.Te
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{28FC6C4E-2E48-4526-A0AE-78E2E4A4D80A}"
 	ProjectSection(SolutionItems) = preProject
+		Add-Migration.ps1 = Add-Migration.ps1
 		Generate-Key.ps1 = Generate-Key.ps1
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoelMcBethWebsite.WebApi", "JoelMcBethWebsite.WebApi\JoelMcBethWebsite.WebApi.csproj", "{12E51DD4-6BF5-445A-87F1-8B7EEF171EDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JoelMcBethWebsite.WebApi", "JoelMcBethWebsite.WebApi\JoelMcBethWebsite.WebApi.csproj", "{12E51DD4-6BF5-445A-87F1-8B7EEF171EDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoelMcBethWebsite.Common", "JoelMcBethWebsite.Common\JoelMcBethWebsite.Common.csproj", "{F106FEDD-3970-4FF1-A954-C45DE03FE07C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JoelMcBethWebsite.Common", "JoelMcBethWebsite.Common\JoelMcBethWebsite.Common.csproj", "{F106FEDD-3970-4FF1-A954-C45DE03FE07C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoelMcBethWebsite.Data.EntityFramework", "JoelMcBethWebsite.Data.EntityFramework\JoelMcBethWebsite.Data.EntityFramework.csproj", "{5E79944A-83BA-446D-B657-93F6AF424238}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JoelMcBethWebsite.Data.EntityFramework", "JoelMcBethWebsite.Data.EntityFramework\JoelMcBethWebsite.Data.EntityFramework.csproj", "{5E79944A-83BA-446D-B657-93F6AF424238}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

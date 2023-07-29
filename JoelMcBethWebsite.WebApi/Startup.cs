@@ -3,6 +3,7 @@ namespace JoelMcBethWebsite.WebApi
     using System.Linq;
     using Amcrest.HttpClient;
     using JoelMcBethWebsite.Authentication;
+    using JoelMcBethWebsite.Data.EntityFramework;
     using JoelMcBethWebsite.Data.EntityFramework.DependencyInjection;
     using JoelMcBethWebsite.Scheduler;
     using JoelMcBethWebsite.Tasks;
@@ -86,6 +87,13 @@ namespace JoelMcBethWebsite.WebApi
             {
                 endpoints.MapControllers();
             });
+
+            using (IServiceScope scope = app.ApplicationServices.CreateScope())
+            {
+                JoelMcbethWebsiteDbContext dbContext = scope.ServiceProvider.GetRequiredService<JoelMcbethWebsiteDbContext>();
+
+                dbContext.Database.Migrate();
+            }                
         }
 
         private string[] GetAllowedOrigins()

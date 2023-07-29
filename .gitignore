@@ -259,5 +259,8 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
+# Other
 /JoelMcBethWebsite/wwwroot/js/app.js
 /JoelMcBethWebsite/wwwroot/js/app.js.map
+/JoelMcBethWebsite.WebApi/joelmcbethwebsite.db
