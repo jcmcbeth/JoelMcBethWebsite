@@ -23,7 +23,7 @@ export class AddBookComponent {
 
             this.router.navigate(["/admin/books"]);
         }, response => {
-            this.error = response.data.error;
+            this.error = response?.data?.error ?? "An unhandled server error has occurred.";
         });
     }
 

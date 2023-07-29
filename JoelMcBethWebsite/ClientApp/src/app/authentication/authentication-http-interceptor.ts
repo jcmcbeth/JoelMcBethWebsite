@@ -33,7 +33,7 @@ export class AuthenticationHttpInterceptor implements HttpInterceptor {
                         this.authenticationService.logout();
                     }
 
-                    location.reload(true);
+                    location.reload();
                 }
 
                 return throwError(error);

@@ -3,9 +3,7 @@ namespace JoelMcBethWebsite.WebApi
     using System.Linq;
     using Amcrest.HttpClient;
     using JoelMcBethWebsite.Authentication;
-    using JoelMcBethWebsite.Data;
-    using JoelMcBethWebsite.Data.EntityFramework;
-    using JoelMcBethWebsite.Data.MicrosoftSql;
+    using JoelMcBethWebsite.Data.EntityFramework.DependencyInjection;
     using JoelMcBethWebsite.Scheduler;
     using JoelMcBethWebsite.Tasks;
     using JoelMcBethWebsite.Tasks.Todoist;
@@ -18,8 +16,6 @@ namespace JoelMcBethWebsite.WebApi
 
     public class Startup
     {
-        private const string CorsPolicyName = "WebPolicy";
-
         public Startup(IConfiguration configuration)
         {
             this.Configuration = configuration;
@@ -31,41 +27,23 @@ namespace JoelMcBethWebsite.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = this.Configuration.GetConnectionString("MainDatabase");
+            services.AddRepositories(connectionString);
 
             services.Configure<TokenSecurityOptions>(this.Configuration.GetSection("TokenAuthentication"));
 
             services.AddTokenSecurity(this.Configuration);
 
             services.AddTransient<AuthenticationManager>();
-            services.AddTransient<IBookRepository, MicrosoftSqlBookRepository>(s => new MicrosoftSqlBookRepository(connectionString));
-            services.AddTransient<IUserRepository, EntityFrameworkUserRepository>();
-            services.AddTransient<IMediaRepository, MicrosoftSqlMediaRepository>(s => new MicrosoftSqlMediaRepository(connectionString));
-            services.AddTransient<ITaskRepository, EntityFrameworkTaskRepository>();
 
             services.AddSingleton<ICameraClient, AmcrestHttpClient>(srv =>
                 new AmcrestHttpClient(
                     System.Net.IPAddress.Parse(this.Configuration["Camera:IPAddress"]),
                     this.Configuration["Camera:UserName"],
                     this.Configuration["Camera:Password"]));
-            var allowedOrigins = this.GetAllowedOrigins();
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy(CorsPolicyName, policy =>
-                {
-                    policy.AllowAnyHeader();
-                    policy.AllowAnyMethod();
+            services.AddCors();
 
-                    if (allowedOrigins.Any())
-                    {
-                        policy.WithOrigins(allowedOrigins);
-                    }
-                });
-            });
-
-            services.AddControllers();
-
-            services.AddDbContext<JoelMcbethWebsiteDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddControllers();            
 
             services.AddMemoryCache();
 
@@ -84,10 +62,21 @@ namespace JoelMcBethWebsite.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
+            var allowedOrigins = this.GetAllowedOrigins();
+            app.UseCors(options =>
+            {
+                options.AllowAnyHeader();
+                options.AllowAnyMethod();
+
+                if (allowedOrigins.Any())
+                {
+                    options.WithOrigins(allowedOrigins);
+                }
+            });
+
             app.UseHttpsRedirection();
 
-            app.UseRouting();
-            app.UseCors(CorsPolicyName);
+            app.UseRouting();            
             app.UseGlobalExceptionHandler();
 
             app.UseAuthentication();

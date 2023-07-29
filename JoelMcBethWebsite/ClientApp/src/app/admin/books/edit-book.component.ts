@@ -20,8 +20,8 @@ export class EditBookComponent implements OnInit {
     updateBook() {
         this.bookService.updateBook(this.book).subscribe(updatedBook => {
             this.book = updatedBook;
-        }, error => {
-            this.error = "Failed to update the book.";
+        }, response => {
+            this.error = response?.data?.error ?? "Failed to update the book.";
         });
     }
 
@@ -32,11 +32,9 @@ export class EditBookComponent implements OnInit {
         });
     }
 
-    private lastAuthorId = 0;
-
     createAuthor(): void {
         var author = new Author();
-        author.id = --this.lastAuthorId;
+        author.id = 0;
 
         this.book.authors.push(author);    
     }

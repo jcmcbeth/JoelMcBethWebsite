@@ -20,7 +20,7 @@
         }
 
         [HttpGet("books")]
-        public async Task<PagedEnumerable<Book>> Get(int? page, int? pageSize, BookSort? sort, SortDirection? sortDirection, string filter = null)
+        public async Task<PagedEnumerable<Book>> GetAsync(int? page, int? pageSize, BookSort? sort, SortDirection? sortDirection, string filter = null)
         {
             var criteria = new BookCriteria()
             {
@@ -35,29 +35,29 @@
         }
 
         [HttpGet(@"books/{isbn:regex(^\d{{13}}$)}")]
-        public async Task<Book> Get(string isbn)
+        public async Task<Book> GetAsync(string isbn)
         {
             return await this.books.GetBookByIsbn13Async(isbn);
         }
 
         [HttpGet(@"books/{id:int}")]
-        public async Task<Book> Get(int id)
+        public async Task<Book> GetAsync(int id)
         {
             return await this.books.GetBookByIdAsync(id);
         }
 
         [HttpPost("books")]
-        public async Task<IActionResult> Post([FromBody]Book book)
+        public async Task<IActionResult> PostAsync([FromBody] Book book)
         {
             book = await this.books.AddBookAsync(book);
 
             return this.Ok(book);
         }
 
-        [HttpPost("books")]
-        public async Task<IActionResult> Put([FromBody] Book book)
+        [HttpPut("books")]
+        public async Task<IActionResult> PutAsync([FromBody] Book book)
         {
-            // TODO: implement update book
+            book = await this.books.UpdateBookAsync(book);
 
             return this.Ok(book);
         }

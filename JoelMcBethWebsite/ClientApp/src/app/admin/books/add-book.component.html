@@ -6,18 +6,18 @@
 
     <div class="form-group">
         <label>Title</label> <span class="badge badge-light">Required</span>
-        <input class="form-control col-lg-3 col-md-4" [(ngModel)]="book.title" required type="text" />
+        <input name="title" class="form-control col-lg-3 col-md-4" [(ngModel)]="book.title" required type="text" />
         <div class="invalid-feedback col-lg-3">Enter a valid title.</div>
     </div>
 
     <div class="form-group">
         <label>ISBN 13</label> <span class="badge badge-light">Required</span>
-        <input class="form-control" [(ngModel)]="book.isbn13" required type="text" minlength="13" maxlength="13" />
+        <input name="isbn13" class="form-control" [(ngModel)]="book.isbn13" required type="text" minlength="13" maxlength="13" />
     </div>
 
     <div class="form-group">
         <label>Number of Pages</label>
-        <input class="form-control" [(ngModel)]="book.pages" type="number" />
+        <input name="pages" class="form-control" [(ngModel)]="book.pages" type="number" />
     </div>
 
     <div>
@@ -41,13 +41,13 @@
             <div class="form-row">
                 <input type="hidden" ng-model="author.id" />
                 <div class="form-group col-3">
-                    <input class="form-control col" [(ngModel)]="author.firstName" required />
+                    <input name="firstName" class="form-control col" [(ngModel)]="author.firstName" required />
                 </div>
                 <div class="form-group col-3">
-                    <input class="form-control col" [(ngModel)]="author.lastName" required />
+                    <input name="lastName" class="form-control col" [(ngModel)]="author.lastName" required />
                 </div>
                 <div class="form-group col-3">
-                    <input class="form-control col" [(ngModel)]="author.middleName" />
+                    <input name="middleName" class="form-control col" [(ngModel)]="author.middleName" />
                 </div>
                 <div class="form-group col">
                     <input class="btn btn-danger" type="button" value="Remove" (click)="removeAuthor(author)" />

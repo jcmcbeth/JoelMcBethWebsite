@@ -1,9 +1,7 @@
 ﻿namespace JoelMcBethWebsite.Data.Models
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
+    using System.Text.Json.Serialization;
 
     public class Author
     {
@@ -14,5 +12,8 @@
         public string LastName { get; set; }
 
         public string MiddleName { get; set; }
+
+        [JsonIgnore]
+        public ICollection<Book> Books { get; set; }
     }
 }

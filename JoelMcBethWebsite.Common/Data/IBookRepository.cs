@@ -1,6 +1,5 @@
 ﻿namespace JoelMcBethWebsite.Data
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using JoelMcBethWebsite.Data.Models;
 
@@ -13,5 +12,7 @@
         Task<PagedEnumerable<Book>> GetBooksAsync(BookCriteria criteria);
 
         Task<Book> AddBookAsync(Book book);
+
+        Task<Book> UpdateBookAsync(Book book);
     }
 }
