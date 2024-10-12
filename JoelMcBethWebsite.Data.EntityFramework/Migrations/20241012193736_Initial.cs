@@ -13,9 +13,9 @@ namespace JoelMcBethWebsite.Data.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    FirstName = table.Column<string>(type: "TEXT", nullable: true),
-                    LastName = table.Column<string>(type: "TEXT", nullable: true),
-                    MiddleName = table.Column<string>(type: "TEXT", nullable: true)
+                    FirstName = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
+                    LastName = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
+                    MiddleName = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -28,15 +28,31 @@ namespace JoelMcBethWebsite.Data.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Isbn13 = table.Column<string>(type: "TEXT", nullable: true),
-                    Title = table.Column<string>(type: "TEXT", nullable: true),
-                    Edition = table.Column<string>(type: "TEXT", nullable: true),
+                    Isbn13 = table.Column<string>(type: "TEXT", maxLength: 13, nullable: true),
+                    Title = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    Edition = table.Column<string>(type: "TEXT", maxLength: 64, nullable: true),
                     Pages = table.Column<int>(type: "INTEGER", nullable: true),
                     Order = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Books", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Media",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(type: "TEXT", nullable: false),
+                    MediaType = table.Column<string>(type: "TEXT", nullable: false),
+                    Medium = table.Column<string>(type: "TEXT", nullable: false),
+                    Year = table.Column<int>(type: "SMALLINT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Media", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -54,44 +70,44 @@ namespace JoelMcBethWebsite.Data.EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    UserName = table.Column<string>(type: "TEXT", nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: true),
+                    UserName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    Email = table.Column<string>(type: "TEXT", maxLength: 75, nullable: false),
                     PasswordSalt = table.Column<byte[]>(type: "BLOB", nullable: true),
                     HashedPassword = table.Column<byte[]>(type: "BLOB", nullable: true),
-                    IsApproved = table.Column<bool>(type: "INTEGER", nullable: false),
-                    FailedLoginAttempts = table.Column<int>(type: "INTEGER", nullable: false),
-                    IsLocked = table.Column<bool>(type: "INTEGER", nullable: false),
+                    IsApproved = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    FailedLoginAttempts = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 0),
+                    IsLocked = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
                     LastLoginAttempt = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "BookAuthors",
                 columns: table => new
                 {
-                    BookId = table.Column<int>(type: "INTEGER", nullable: false),
-                    AuthorId = table.Column<int>(type: "INTEGER", nullable: false)
+                    AuthorsId = table.Column<int>(type: "INTEGER", nullable: false),
+                    BooksId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookAuthors", x => new { x.AuthorId, x.BookId });
+                    table.PrimaryKey("PK_BookAuthors", x => new { x.AuthorsId, x.BooksId });
                     table.ForeignKey(
-                        name: "FK_BookAuthors_Authors_AuthorId",
-                        column: x => x.AuthorId,
+                        name: "FK_BookAuthors_Authors_AuthorsId",
+                        column: x => x.AuthorsId,
                         principalTable: "Authors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BookAuthors_Books_BookId",
-                        column: x => x.BookId,
+                        name: "FK_BookAuthors_Books_BooksId",
+                        column: x => x.BooksId,
                         principalTable: "Books",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -103,7 +119,7 @@ namespace JoelMcBethWebsite.Data.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Rating = table.Column<int>(type: "tinyint", nullable: true),
+                    Rating = table.Column<int>(type: "TINYINT", nullable: true),
                     Comments = table.Column<string>(type: "TEXT", nullable: true),
                     IsRecommended = table.Column<bool>(type: "INTEGER", nullable: true),
                     BookId = table.Column<int>(type: "INTEGER", nullable: false)
@@ -120,14 +136,19 @@ namespace JoelMcBethWebsite.Data.EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookAuthors_BookId",
+                name: "IX_BookAuthors_BooksId",
                 table: "BookAuthors",
-                column: "BookId");
+                column: "BooksId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BookReviews_BookId",
                 table: "BookReviews",
                 column: "BookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Media_Title",
+                table: "Media",
+                column: "Title");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -139,10 +160,13 @@ namespace JoelMcBethWebsite.Data.EntityFramework.Migrations
                 name: "BookReviews");
 
             migrationBuilder.DropTable(
+                name: "Media");
+
+            migrationBuilder.DropTable(
                 name: "TaskCounts");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Authors");

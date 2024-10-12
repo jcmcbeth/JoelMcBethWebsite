@@ -1,19 +1,17 @@
 ﻿namespace JoelMcBethWebsite.Data.EntityFramework
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Linq.Expressions;
     using System.Threading.Tasks;
     using JoelMcBethWebsite.Data.Models;
     using Microsoft.EntityFrameworkCore;
 
-    public class EntityFrameworkBookRepository : IBookRepository
+    public class BookRepository : IBookRepository
     {
         private readonly JoelMcbethWebsiteDbContext context;
 
-        public EntityFrameworkBookRepository(JoelMcbethWebsiteDbContext context)
+        public BookRepository(JoelMcbethWebsiteDbContext context)
         {
             this.context = context ?? throw new ArgumentNullException(nameof(context));
         }

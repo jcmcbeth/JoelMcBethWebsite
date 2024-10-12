@@ -1,4 +1,0 @@
-﻿IF COL_LENGTH('Books','Rating') IS NOT NULL
-BEGIN
-	ALTER TABLE [dbo].[Books] DROP COLUMN [Rating];
-END

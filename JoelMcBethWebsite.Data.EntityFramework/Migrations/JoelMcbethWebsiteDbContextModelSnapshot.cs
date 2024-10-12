@@ -16,6 +16,21 @@ namespace JoelMcBethWebsite.Data.EntityFramework.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.17");
 
+            modelBuilder.Entity("AuthorBook", b =>
+                {
+                    b.Property<int>("AuthorsId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("BooksId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("AuthorsId", "BooksId");
+
+                    b.HasIndex("BooksId");
+
+                    b.ToTable("BookAuthors");
+                });
+
             modelBuilder.Entity("JoelMcBethWebsite.Data.Models.Author", b =>
                 {
                     b.Property<int>("Id")
@@ -23,12 +38,15 @@ namespace JoelMcBethWebsite.Data.EntityFramework.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("FirstName")
+                        .HasMaxLength(64)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
+                        .HasMaxLength(64)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("MiddleName")
+                        .HasMaxLength(64)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -43,9 +61,11 @@ namespace JoelMcBethWebsite.Data.EntityFramework.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Edition")
+                        .HasMaxLength(64)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Isbn13")
+                        .HasMaxLength(13)
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("Order")
@@ -55,26 +75,13 @@ namespace JoelMcBethWebsite.Data.EntityFramework.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.ToTable("Books");
-                });
-
-            modelBuilder.Entity("JoelMcBethWebsite.Data.Models.BookAuthor", b =>
-                {
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("AuthorId", "BookId");
-
-                    b.HasIndex("BookId");
-
-                    b.ToTable("BookAuthors");
                 });
 
             modelBuilder.Entity("JoelMcBethWebsite.Data.Models.BookReview", b =>
@@ -93,13 +100,42 @@ namespace JoelMcBethWebsite.Data.EntityFramework.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("Rating")
-                        .HasColumnType("tinyint");
+                        .HasColumnType("TINYINT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BookId");
 
                     b.ToTable("BookReviews");
+                });
+
+            modelBuilder.Entity("JoelMcBethWebsite.Data.Models.Media", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("MediaType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Medium")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("Year")
+                        .HasColumnType("SMALLINT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Title")
+                        .HasDatabaseName("IX_Media_Title");
+
+                    b.ToTable("Media");
                 });
 
             modelBuilder.Entity("JoelMcBethWebsite.Data.Models.TaskCount", b =>
@@ -126,19 +162,27 @@ namespace JoelMcBethWebsite.Data.EntityFramework.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(75)
                         .HasColumnType("TEXT");
 
                     b.Property<int>("FailedLoginAttempts")
-                        .HasColumnType("INTEGER");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(0);
 
                     b.Property<byte[]>("HashedPassword")
                         .HasColumnType("BLOB");
 
                     b.Property<bool>("IsApproved")
-                        .HasColumnType("INTEGER");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(false);
 
                     b.Property<bool>("IsLocked")
-                        .HasColumnType("INTEGER");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(false);
 
                     b.Property<DateTime?>("LastLoginAttempt")
                         .HasColumnType("TEXT");
@@ -147,30 +191,28 @@ namespace JoelMcBethWebsite.Data.EntityFramework.Migrations
                         .HasColumnType("BLOB");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("JoelMcBethWebsite.Data.Models.BookAuthor", b =>
+            modelBuilder.Entity("AuthorBook", b =>
                 {
-                    b.HasOne("JoelMcBethWebsite.Data.Models.Author", "Author")
+                    b.HasOne("JoelMcBethWebsite.Data.Models.Author", null)
                         .WithMany()
-                        .HasForeignKey("AuthorId")
+                        .HasForeignKey("AuthorsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("JoelMcBethWebsite.Data.Models.Book", "Book")
+                    b.HasOne("JoelMcBethWebsite.Data.Models.Book", null)
                         .WithMany()
-                        .HasForeignKey("BookId")
+                        .HasForeignKey("BooksId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Author");
-
-                    b.Navigation("Book");
                 });
 
             modelBuilder.Entity("JoelMcBethWebsite.Data.Models.BookReview", b =>

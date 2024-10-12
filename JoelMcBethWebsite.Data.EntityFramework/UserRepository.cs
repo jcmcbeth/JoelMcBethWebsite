@@ -1,17 +1,16 @@
 ﻿namespace JoelMcBethWebsite.Data.EntityFramework
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using JoelMcBethWebsite.Data.Models;
     using Microsoft.EntityFrameworkCore;
 
-    public class EntityFrameworkUserRepository : IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly JoelMcbethWebsiteDbContext context;
 
-        public EntityFrameworkUserRepository(JoelMcbethWebsiteDbContext context)
+        public UserRepository(JoelMcbethWebsiteDbContext context)
         {
             this.context = context;
         }

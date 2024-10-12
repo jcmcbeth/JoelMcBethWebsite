@@ -10,13 +10,12 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.0" />
     <PackageReference Include="MSTest.TestFramework" Version="2.1.0" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\JoelMcBethWebsite.Common\JoelMcBethWebsite.Common.csproj" />
     <ProjectReference Include="..\JoelMcBethWebsite.Data.EntityFramework\JoelMcBethWebsite.Data.EntityFramework.csproj" />
-    <ProjectReference Include="..\JoelMcBethWebsite.Database\JoelMcBethWebsite.Database.sqlproj" />
   </ItemGroup>
 
   <ItemGroup>

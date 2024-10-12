@@ -1,11 +1,7 @@
 ﻿namespace JoelMcBethWebsite.Data.Models
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Text.Json.Serialization;
-    using System.Threading.Tasks;
 
     public class Book
     {
@@ -23,11 +19,11 @@
 
         public string Edition { get; set; }
 
-        public int? Pages { get; set; }
-
-        public ICollection<Author> Authors { get; set; } = new Collection<Author>();
+        public int? Pages { get; set; }        
 
         public int? Order { get; set; }
+
+        public ICollection<Author> Authors { get; set; } = new Collection<Author>();
 
         public ICollection<BookReview> Reviews { get; set; } = new List<BookReview>();
     }

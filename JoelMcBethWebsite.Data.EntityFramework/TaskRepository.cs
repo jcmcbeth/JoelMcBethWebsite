@@ -4,14 +4,12 @@
     using System.Threading;
     using System.Threading.Tasks;
     using JoelMcBethWebsite.Data.Models;
-    using JoelMcBethWebsite.Tasks;
-    using Microsoft.EntityFrameworkCore;
 
-    public class EntityFrameworkTaskRepository : ITaskRepository
+    public class TaskRepository : ITaskRepository
     {
         private readonly JoelMcbethWebsiteDbContext context;
 
-        public EntityFrameworkTaskRepository(JoelMcbethWebsiteDbContext context)
+        public TaskRepository(JoelMcbethWebsiteDbContext context)
         {
             this.context = context;
         }

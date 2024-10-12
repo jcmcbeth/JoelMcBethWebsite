@@ -2,6 +2,7 @@
 {
     using JoelMcBethWebsite.Data.Models;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Hosting;
 
     public class JoelMcbethWebsiteDbContext : DbContext
     {
@@ -20,56 +21,77 @@
 
         public DbSet<Author> Authors { get; set; }
 
+        public DbSet<Media> Media { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
-                .ToTable("User");
-
-            modelBuilder.Entity<Book>(bk =>
+            modelBuilder.Entity<User>(entity =>
             {
-                bk.HasKey(bkk => bkk.Id);
-                bk.ToTable("Books");
-                bk.HasMany(bk1 => bk1.Authors)
-                    .WithMany(bk2 => bk2.Books)
-                //.UsingEntity(ent =>
-                //{
-                //    ent.ToTable("BookAuthors");
-                //    ent.Property<int>("BookId");
-                //    ent.Property<int>("AuthorId");
-                //    ent.HasKey("BookId", "AuthorId");
+                entity.Property(ent => ent.UserName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+                entity.Property(ent => ent.Email)
+                    .IsRequired()
+                    .HasMaxLength(75);
+                entity.Property(ent => ent.IsApproved)
+                    .HasDefaultValue(false);                
+                entity.Property(ent => ent.FailedLoginAttempts)
+                    .HasDefaultValue(0);
+                entity.Property(ent => ent.IsLocked)
+                    .HasDefaultValue(false);
+                entity.Property(ent => ent.LastLoginAttempt);
+            });                
 
-                //    //ent.HasOne(typeof(Book)).WithMany().HasForeignKey("BookId");
-                //    //ent.HasOne(typeof(Author)).WithMany().HasForeignKey("AuthorId");
-                //});
-                .UsingEntity<BookAuthor>(
-                    le => le.HasOne(x => x.Author).WithMany().HasForeignKey(y => y.AuthorId),
-                    re => re.HasOne(x => x.Book).WithMany().HasForeignKey(y => y.BookId),
-                    ce => ce.ToTable("BookAuthors"));
+            modelBuilder.Entity<Media>(entity =>
+            {
+                entity.HasIndex(ent => ent.Title)
+                    .HasDatabaseName("IX_Media_Title");
 
-                //              .UsingEntity<Dictionary<string, object>>("Publications",
-                //x => x.HasOne<Book>().WithMany().HasForeignKey(nameof(Book.BookId)),
-                //y => y.HasOne<Author>().WithMany().HasForeignKey(nameof(Author.AuthorId)),
-                //z => z.ToTable("Publications"));
-                //bk.HasMany(bk1 => bk1.Authors)                    
-                //    .wi
+                entity.Property(ent => ent.Title)
+                    .IsRequired();
+                entity.Property(med => med.Year)
+                    .HasColumnType("SMALLINT");
+                entity.Property(ent => ent.MediaType)
+                    .IsRequired();                
+                entity.Property(ent => ent.Medium)
+                    .IsRequired();
             });
 
-            //modelBuilder.Entity<Book>()
-            //    .HasMany(bk => bk.Authors)
-                
+            modelBuilder.Entity<TaskCount>();
+
+            modelBuilder.Entity<Author>(entity =>
+            {
+                entity.Property(ent => ent.FirstName)
+                    .HasMaxLength(64);
+                entity.Property(ent => ent.LastName)
+                    .HasMaxLength(64);
+                entity.Property(ent => ent.MiddleName)
+                    .HasMaxLength(64);
+            });
+
+            modelBuilder.Entity<Book>(entity =>
+            {
+                entity.Property(ent => ent.Isbn13)
+                    .HasMaxLength(13);
+                entity.Property(ent => ent.Title)
+                    .HasMaxLength(128)
+                    .IsRequired();
+                entity.Property(ent => ent.Edition)
+                    .HasMaxLength(64);
+
+                entity
+                    .HasMany(ent => ent.Authors)
+                    .WithMany(ent => ent.Books)
+                    .UsingEntity(ent =>
+                    {
+                        ent.ToTable("BookAuthors");
+                    });
+            });                
 
             modelBuilder.Entity<BookReview>(br =>
             {
-                br.HasKey(bkk => bkk.Id);
-                br.Property(brp => brp.Rating).HasColumnType("tinyint");
-
-                br.ToTable("BookReviews");
-            });
-
-            modelBuilder.Entity<Author>(at =>
-            {                
-                at.ToTable("Authors");
-                
+                br.Property(brp => brp.Rating)
+                    .HasColumnType("TINYINT");
             });
         }
     }
