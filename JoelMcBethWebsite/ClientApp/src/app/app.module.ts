@@ -263,7 +263,7 @@ const routes: Routes = [
         BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
         HttpClientModule,
         FormsModule,
-        RouterModule.forRoot(routes)
+        RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: AuthenticationHttpInterceptor, multi: true },
