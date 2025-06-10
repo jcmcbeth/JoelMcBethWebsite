@@ -41,16 +41,16 @@
 <nav *ngIf="pages.length > 1">
     <ul class="pagination">
         <li class="page-item" ngClass="{ disabled: page == 1 }">
-            <a [routerLink]="" class="page-link" aria-label="Previous" (click)="selectPage(page - 1)">
+            <a [routerLink]="[]" class="page-link" aria-label="Previous" (click)="selectPage(page - 1)">
                 <span aria-hidden="true">&laquo;</span>
                 <span class="sr-only">Previous</span>
             </a>
         </li>
         <li *ngFor="let n of pages">
-            <a [routerLink]="" class="page-link" [ngClass]="{ active: page == n }" (click)="selectPage(n)">{{n}}</a>
+            <a [routerLink]="[]" class="page-link" [ngClass]="{ active: page == n }" (click)="selectPage(n)">{{n}}</a>
         </li>
         <li class="page-item" [ngClass]="{ disabled: page == pageCount }">
-            <a [routerLink]="" class="page-link" aria-label="Next" (click)="selectPage(page + 1)">
+            <a [routerLink]="[]" class="page-link" aria-label="Next" (click)="selectPage(page + 1)">
                 <span aria-hidden="true">&raquo;</span>
                 <span class="sr-only">Next</span>
             </a>
