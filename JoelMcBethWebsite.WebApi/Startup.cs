@@ -1,5 +1,6 @@
 namespace JoelMcBethWebsite.WebApi
 {
+    using System.IO;
     using System.Linq;
     using Amcrest.HttpClient;
     using JoelMcBethWebsite.Authentication;
@@ -10,6 +11,7 @@ namespace JoelMcBethWebsite.WebApi
     using JoelMcBethWebsite.Tasks.Todoist;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Data.Sqlite;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -90,6 +92,17 @@ namespace JoelMcBethWebsite.WebApi
 
             using (IServiceScope scope = app.ApplicationServices.CreateScope())
             {
+                var connectionString = this.Configuration.GetConnectionString("MainDatabase");
+                if (!string.IsNullOrWhiteSpace(connectionString))
+                {
+                    var dataSource = new SqliteConnectionStringBuilder(connectionString).DataSource;
+                    var directory = Path.GetDirectoryName(dataSource);
+                    if (!string.IsNullOrEmpty(directory))
+                    {
+                        Directory.CreateDirectory(directory);
+                    }
+                }
+
                 JoelMcbethWebsiteDbContext dbContext = scope.ServiceProvider.GetRequiredService<JoelMcbethWebsiteDbContext>();
 
                 dbContext.Database.Migrate();
