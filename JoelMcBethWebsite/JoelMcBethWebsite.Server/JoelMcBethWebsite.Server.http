@@ -1,0 +1,6 @@
+@JoelMcBethWebsite.Server_HostAddress = http://localhost:5000
+
+GET {{JoelMcBethWebsite.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
